@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login-pages.landing-page');
 });
 
 Auth::routes();
@@ -40,8 +40,15 @@ Route::prefix('student')->group(function(){
 
 });
 
+Route::prefix('employee')->group(function(){
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
+
+    Route::get('/', 'HomeController@index')->name('home');
+
+});
+
+
 
 Route::middleware('auth')->group(function (){
     // Documents
