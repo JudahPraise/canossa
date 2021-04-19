@@ -33,6 +33,9 @@ class LoginController extends Controller
         if (auth()->user()->role == 'Employee') {
             return '/home';
         }
+        else if (auth()->user()->role == 'Student') {
+            return '/student-home';
+        }
         return '/admin';
     }
 
