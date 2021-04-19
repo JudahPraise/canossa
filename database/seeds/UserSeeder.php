@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Admin;
+use App\Student;
 class UserSeeder extends Seeder
 {
     /**
@@ -11,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        Admin::create([
             'name' => 'Admin',
             'email' => 'admin@test.com',
             'password' =>  Hash::make('password'),
@@ -22,15 +24,14 @@ class UserSeeder extends Seeder
             'name' => 'Employee',
             'email' => 'employee@test.com',
             'password' => Hash::make('password'),
-            'role' => 'Employee',
+            'role' => 'Teacher',
         ]);
 
 
-        User::create([
+        Student::create([
             'name' => 'Student',
             'email' => 'student@test.com',
             'password' =>  Hash::make('password'),
-            'role' => 'Student',
         ]);
     }
 }

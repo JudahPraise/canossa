@@ -20,13 +20,30 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::prefix('admin')->group(function(){
+
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+
+    Route::get('/', 'AdminController@index')->name('admin');
+
+});
+
+Route::prefix('student')->group(function(){
+
+    Route::get('/login', 'Auth\StudentLoginController@showLoginForm')->name('student.login');
+    Route::post('/login', 'Auth\StudentLoginController@login')->name('student.login.submit');
+    Route::get('/logout', 'Auth\StudentLoginController@logout')->name('student.logout');
+
+    Route::get('/', 'StudentController@index')->name('student');
+
+});
+
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function (){
-
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/admin', 'AdminController@index')->name('admin');
-    Route::get('/student-home', 'StudentController@index')->name('student');
-
     // Documents
     Route::prefix('/document')->group(function(){
         Route::get('/', 'DocumentsController@index')->name('document.index');

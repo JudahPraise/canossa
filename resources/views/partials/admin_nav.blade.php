@@ -37,8 +37,8 @@
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+          <a class="nav-link" href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
+          <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
             @csrf
           </form>
         </li>
