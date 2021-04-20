@@ -38,8 +38,8 @@
     </ul>
 
     <ul class="navbar-nav is-desktop-down mt-0">
-      <li class="nav-item"><a class="dropdown-item nav-link " href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt px-2"></i>{{ __('Logout') }}</a></li>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+      <li class="nav-item"><a class="dropdown-item nav-link " href="{{ route('student.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt px-2"></i>{{ __('Logout') }}</a></li>
+        <form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
           @csrf
         </form>
     </ul>
