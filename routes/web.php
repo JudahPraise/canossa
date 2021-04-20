@@ -59,7 +59,6 @@ Route::prefix('student')->group(function(){
 Route::prefix('employee')->group(function(){
 
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
-
     Route::get('/', 'HomeController@index')->name('home');
 
 });
