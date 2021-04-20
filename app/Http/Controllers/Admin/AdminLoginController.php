@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Auth;
 
-class StudentLoginController extends Controller
+class AdminLoginController extends Controller
 {
     public function __construct(){
 
-        $this->middleware('guest:student', ['except' => ['logout']]);
+        $this->middleware('guest:admin', ['except' => ['logout']]);
 
     }
 
     public function showLoginForm(){
-        return view('login-pages.student');
+        return view('login-pages.admin');
     }
 
     public function login(Request $request){
@@ -27,9 +27,9 @@ class StudentLoginController extends Controller
         ]);
 
         //* Attempt to log the user in
-        if(Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             //* If successful, then redirect to their intended location
-            return redirect()->intended(route('student'));
+            return redirect()->intended(route('admin'));
         }
 
         //* If unsuccessful, redirect back to login
@@ -38,7 +38,8 @@ class StudentLoginController extends Controller
 
     public function logout()
     {
-        Auth::guard('student')->logout();
+        Auth::guard('admin')->logout();
+
         return redirect('/');
     }
 }
