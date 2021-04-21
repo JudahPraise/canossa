@@ -60,3 +60,20 @@
 .remove:hover{
     color: rgb(230, 61, 61);
 }
+
+.alert-promt{
+    width: 20%;
+    position: fixed!important;
+    right: 3rem;
+    bottom: 3rem;
+    z-index: 12;
+    background-color: rgb(44, 44, 44);
+    color: white;
+    font-size: 1rem;
+    border-radius: 1rem!important;
+}
+
+.fa-check-circle{
+    color: green;
+}
+

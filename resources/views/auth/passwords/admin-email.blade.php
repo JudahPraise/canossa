@@ -2,14 +2,14 @@
 
 @section('login')
 <div class="container">
-    <h3>Employee Reset Password</h3>
+    <h3>Admin Reset Password</h3>
     @if (session('status'))
         <p>{{ session('status') }}</p>
     @endif
 </div>
 
 <div class="continer w-100 p-lg-2">
-    <form method="POST" action="{{ route('password.email') }}">
+    <form method="POST" action="{{ route('admin.password.email') }}">
         @csrf
 
         <div class="form-group row">

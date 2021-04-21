@@ -22,9 +22,17 @@ Auth::routes();
 
 Route::prefix('admin')->group(function(){
 
-    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/login', 'Admin\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/logout', 'Admin\AdminLoginController@logout')->name('admin.logout');
+
+    Route::post('/password-confirm', 'Admin\ConfirmPasswordController@confirm')->name('admin.password.confirm.submit');
+    Route::get('/password-confirm', 'Admin\ConfirmPasswordController@showConfirmForm')->name('admin.password.confirm');
+
+    Route::post('/password-email', 'Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email'); //? Forgot Password Enter Email Submit
+    Route::get('/password-reset', 'Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request'); //? Forgot Password Enter Email Show
+    Route::post('password-reset', 'Admin\ResetPasswordController@reset')->name('admin.password.update');
+    Route::get('/password-reset/{token}', 'Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
 
     Route::get('/', 'AdminController@index')->name('admin');
 
@@ -32,9 +40,17 @@ Route::prefix('admin')->group(function(){
 
 Route::prefix('student')->group(function(){
 
-    Route::get('/login', 'Auth\StudentLoginController@showLoginForm')->name('student.login');
-    Route::post('/login', 'Auth\StudentLoginController@login')->name('student.login.submit');
-    Route::get('/logout', 'Auth\StudentLoginController@logout')->name('student.logout');
+    Route::get('/login', 'Student\StudentLoginController@showLoginForm')->name('student.login');
+    Route::post('/login', 'Student\StudentLoginController@login')->name('student.login.submit');
+    Route::get('/logout', 'Student\StudentLoginController@logout')->name('student.logout');
+
+    Route::post('/password-confirm', 'Student\ConfirmPasswordController@confirm')->name('student.password.confirm.submit');
+    Route::get('/password-confirm', 'Student\ConfirmPasswordController@showConfirmForm')->name('student.password.confirm');
+
+    Route::post('/password-email', 'Student\ForgotPasswordController@sendResetLinkEmail')->name('student.password.email');
+    Route::get('/password-reset', 'Student\ForgotPasswordController@showLinkRequestForm')->name('student.password.request');
+    Route::post('password-reset', 'Student\ResetPasswordController@reset')->name('student.password.update');
+    Route::get('/password-reset/{token}', 'Student\ResetPasswordController@showResetForm')->name('student.password.reset');
 
     Route::get('/', 'StudentController@index')->name('student');
 
@@ -43,7 +59,6 @@ Route::prefix('student')->group(function(){
 Route::prefix('employee')->group(function(){
 
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
-
     Route::get('/', 'HomeController@index')->name('home');
 
 });

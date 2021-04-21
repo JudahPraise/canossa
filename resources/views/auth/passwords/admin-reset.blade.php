@@ -2,14 +2,14 @@
 
 @section('login')
 <div class="container">
-    <h3>Employee Reset Password</h3>
+    <h3>Admin Reset Password</h3>
     @if (session('status'))
         <p>{{ session('status') }}</p>
     @endif
 </div>
 
 <div class="continer w-100 p-lg-2">
-    <form method="POST" action="{{ route('password.update') }}">
+    <form method="POST" action="{{ route('admin.password.update') }}">
         @csrf
 
         <input type="hidden" name="token" value="{{ $token }}">
