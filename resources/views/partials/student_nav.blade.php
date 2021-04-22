@@ -17,7 +17,7 @@
      </ul>  
     
     <ul class="navbar-nav">
-      <li class="nav-item"><a href="{{  route('home') }}" class="nav-link"><i class="fas fa-home px-2 is-desktop-down"></i>Home</a></li>
+      <li class="nav-item"><a href="{{  route('student') }}" class="nav-link"><i class="fas fa-home px-2 is-desktop-down"></i>Home</a></li>
     </ul>
 
     <ul class="navbar-nav is-desktop-down mt-0 mb-0">
