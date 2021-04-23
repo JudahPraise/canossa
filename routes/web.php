@@ -53,6 +53,9 @@ Route::prefix('student')->group(function(){
     Route::get('/password-reset/{token}', 'Student\ResetPasswordController@showResetForm')->name('student.password.reset');
 
     Route::get('/', 'StudentController@index')->name('student');
+    Route::get('/grade', 'StudentTour\GradeController@index')->name('grade');
+    Route::get('/schedule', 'StudentTour\ScheduleController@index')->name('schedule');
+
 
 });
 
