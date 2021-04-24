@@ -1,5 +1,5 @@
 <!-- Image and text -->
-<nav class="navbar navbar-expand-lg navbar-light" style="width: 80%;">
+<nav class="navbar navbar-expand-lg navbar-light" style="width: 100%; background-color: #e9ecef;">
   <a class="navbar-brand d-flex align-items-center"  href="{{ route('home') }}">
       <img src="{{ asset('img/circle-logo.png') }}" width="40" height="40" class="d-inline-block align-top" alt="" loading="lazy">
       <p class="ml-2 mt-2" style="font-size: 1.4rem">Canossa</p>
