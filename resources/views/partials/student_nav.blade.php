@@ -10,19 +10,14 @@
   </button>
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-
-    <ul class="navbar-nav ">
-      <li class="nav-item"><a href="#" class="nav-link" ><i class="fas fa-calendar-alt px-2"></i>Schedule</a></li>
-      <li class="nav-item"><a href="#" class="nav-link" ><i class="fas fa-chalkboard-teacher px-2"></i>Grading</a></li>
-     </ul>  
     
     <ul class="navbar-nav">
       <li class="nav-item"><a href="{{  route('student') }}" class="nav-link"><i class="fas fa-home px-2 is-desktop-down"></i>Home</a></li>
     </ul>
 
-    <ul class="navbar-nav is-desktop-down mt-0 mb-0">
-      <li class="nav-item"><a href="#" class="nav-link" ><i class="fas fa-calendar-alt px-2"></i>Schedule</a></li>
-      <li class="nav-item"><a href="#" class="nav-link" ><i class="fas fa-chalkboard-teacher px-2"></i>Grading</a></li>
+    <ul class="navbar-nav">
+      <li class="nav-item"><a href="{{ route('schedule') }}" class="nav-link" ><i class="fas fa-calendar-alt px-2 is-desktop-down"></i>Schedule</a></li>
+      <li class="nav-item"><a href="{{ route('grade') }}" class="nav-link" ><i class="fas fa-chalkboard-teacher px-2 is-desktop-down"></i>Grading</a></li>
     </ul>
 
     <ul class="navbar-nav has-dropdown is-hoverable">
@@ -30,19 +25,11 @@
       <ul class="dropdown">
         <li class="nav-item dropdown__link"><a href="#" class="nav-link" >Profile</a></li>
         <li class="nav-item dropdown__link"><a href="#" class="nav-link" >Account Settings</a></li>
-        <li class="nav-item dropdown__link is-desktop-up"><a class="dropdown-item nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt px-2 is-desktop-down is-tablet-only"></i>{{ __('Logout') }}</a></li>
+        <li class="nav-item dropdown__link"><a class="dropdown-item nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt px-2 is-desktop-down is-tablet-only"></i>{{ __('Logout') }}</a></li>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
           @csrf
         </form>
      </ul>
     </ul>
-
-    <ul class="navbar-nav is-desktop-down mt-0">
-      <li class="nav-item"><a class="dropdown-item nav-link " href="{{ route('student.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt px-2"></i>{{ __('Logout') }}</a></li>
-        <form id="logout-form" action="{{ route('student.logout') }}" method="POST" class="d-none">
-          @csrf
-        </form>
-    </ul>
-
   </div>
 </nav>

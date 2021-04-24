@@ -7,10 +7,10 @@
 </div>
 
 <div class="container-fluid d-flex flex-column align-items-center mt-3"  style="width: 100%;">
-    <h5>Home Page</h5>
-
-    <!-- show user name -->
-     <!-- <h2>{{ Auth::guard('student')->user()->name }}</h2>  -->
+    <h5 class="h3 mb-4 text-gray-800 text-center">My schedule</h5>   
 </div>
 
+
 @endsection
+
+

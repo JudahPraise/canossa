@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\StudentTour;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class ScheduleController extends Controller
 {
-    /**
+     /**
      * Create a new controller instance.
      *
      * @return void
@@ -21,9 +22,9 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    
     public function index()
     {
-        return view('student.layouts.main');
+        return view('student.layouts.schedule');
     }
- 
 }
