@@ -63,8 +63,6 @@ Route::prefix('employee')->group(function(){
 
 });
 
-
-
 Route::middleware('auth')->group(function (){
     // Documents
     Route::prefix('/document')->group(function(){
@@ -72,7 +70,6 @@ Route::middleware('auth')->group(function (){
         Route::post('/store', 'DocumentsController@store')->name('document.store');
         Route::delete('/delete{id}', 'DocumentsController@delete')->name('document.delete');
         Route::get('/download/{id}', 'DocumentsController@download')->name('document.download');
-
     });
 
 });
