@@ -36,6 +36,8 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/', 'AdminController@index')->name('admin');
 
+    
+
 });
 
 Route::prefix('student')->group(function(){
