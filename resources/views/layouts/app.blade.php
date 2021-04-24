@@ -11,7 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/sb-admin-js/sb-admin-2.min.js') }}" defer></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}" defer></script>
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}" defer></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js" defer></script>
     @yield('dropzone-js')
 
     <!-- Icons -->
@@ -26,6 +29,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbitcss/css/orbit.min.css">
+    <link href="{{ asset('css/sb-admin-css/sb-admin-2.min.css') }}" rel="stylesheet">
+
     @yield('dropzone-css')
 
     <style>
@@ -37,9 +42,9 @@
 </head>
 <body>
 
-    <main class="">
+    <main>
         @yield('content')
     </main>
-
+    
 </body>
 </html>
