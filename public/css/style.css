@@ -77,3 +77,33 @@
     color: green;
 }
 
+.grid-container {
+
+    display: grid;
+    grid-template-columns: 0.8fr 1.8fr 0.8fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      ". . .";
+      height: 100%;
+      width: 100%;
+
+}
+
+section{
+    height: 100%;
+    width: 100%;
+}
+
+.top-bar-end{
+    height: 100%;
+    width: 10%;
+}
+
+
+ion-icon{
+    font-size: 1rem;
+    color: white;
+}
+
+

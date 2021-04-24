@@ -36,6 +36,8 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/', 'AdminController@index')->name('admin');
 
+    
+
 });
 
 Route::prefix('student')->group(function(){
@@ -66,16 +68,16 @@ Route::prefix('employee')->group(function(){
 
 });
 
-
-
 Route::middleware('auth')->group(function (){
+
     // Documents
     Route::prefix('/document')->group(function(){
+
         Route::get('/', 'DocumentsController@index')->name('document.index');
         Route::post('/store', 'DocumentsController@store')->name('document.store');
         Route::delete('/delete{id}', 'DocumentsController@delete')->name('document.delete');
         Route::get('/download/{id}', 'DocumentsController@download')->name('document.download');
-
+        
     });
 
 });
