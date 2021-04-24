@@ -21,7 +21,7 @@
     
     <div class="col-lg-9 d-flex justify-content-center">
         <main role="main" class="col">
-            @yield('employee-home')
+             @yield('employee-home') 
         </main>
     </div>
 </div>

@@ -6,9 +6,10 @@
   @include('partials.student_nav')
 </div>
 
-<div class="container-fluid d-flex flex-column align-items-center mt-3"  style="width: 100%;">
+<div class="container-fluid d-flex flex-column align-items-center mt-3 border-bottom"  style="width: 95%;">
     <h5 class="h3 mb-4 text-gray-800 text-center">My Grade</h5>   
 </div>
+
 <div class="container-fluid d-flex flex-column p-5 mt-0"  style="width: 100%;">
     <label class="mr-4">Student ID: </label> <i class="text-dark font-weight-bold mr-5"></i> <br>
     <label class="mr-4">Course: </label> <i class="text-dark font-weight-bold text-uppercase"></i> <br>
@@ -36,6 +37,7 @@
     </table>
     
 </div>
+
 
 @endsection
 
