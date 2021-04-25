@@ -1,8 +1,8 @@
 
 
-<div class="modal fade" id="AddStudentModal" tabindex="-1" role="dialog" 
+<div class="modal fade mt-5" id="AddStudentModal" tabindex="-1" role="dialog" 
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog mt-5" role="document">
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-secondary">
