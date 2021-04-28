@@ -10,11 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/sb-admin-js/sb-admin-2.min.js') }}" defer></script>
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}" defer></script>
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}" defer></script>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js" defer></script>
+    <script  src="{{ asset('js/app.js') }}" defer></script>
+    <script  src="{{ asset('js/sb-admin-js/sb-admin-2.min.js') }}" defer></script>
+    <script  src="{{ asset('vendor/jquery/jquery.min.js') }}" defer></script>
+    <script  src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}" defer></script>
     @yield('dropzone-js')
 
     <!-- Icons -->
@@ -45,6 +44,6 @@
     <main>
         @yield('content')
     </main>
-    
+    <script  src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 </body>
 </html>

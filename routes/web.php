@@ -36,6 +36,18 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/', 'AdminController@index')->name('admin');
 
+    //Course Routes
+    Route::prefix('/courses')->group(function(){
+
+        Route::get('/', 'Admin\CourseController@index')->name('course.index');
+        Route::get('/course/{id}', 'Admin\CourseController@show')->name('course.show');
+
+        //Course Interacting to Subjects
+        Route::get('{id}/add-subject', 'Admin\CourseController@create')->name('course.create');
+        Route::post('/store-subject/{id}', 'Admin\CourseController@store')->name('course.store');
+        
+    });
+
 });
 
 Route::prefix('student')->group(function(){
