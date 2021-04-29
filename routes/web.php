@@ -36,9 +36,6 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/', 'AdminController@index')->name('admin');
 
-<<<<<<< HEAD
-    
-=======
     //Course Routes
     Route::prefix('/courses')->group(function(){
 
@@ -50,7 +47,6 @@ Route::prefix('admin')->group(function(){
         Route::post('/store-subject/{id}', 'Admin\CourseController@store')->name('course.store');
         
     });
->>>>>>> 8a247c8aac44b0fdfa7f1bd437dc6bc1380d8071
 
 });
 
