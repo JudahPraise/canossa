@@ -2,11 +2,18 @@
 
 namespace App;
 
+use App\Course;
 use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
     protected $fillable = [
-        'subject_code'
+        'code', 'units', 'description', 'year', 'semester'
     ];
+
+    public function course(){
+
+        return $this->belongsTo(Course::class);
+
+    }
 }

@@ -22,9 +22,20 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('course.index') }}">
+            <ion-icon name="apps"></ion-icon>
+            <span>Courses</span>
+        </a>
+    </li>
+
     <!-- Heading -->
     <div class="sidebar-heading">
+<<<<<<< HEAD
         Students
+=======
+        Grading System
+>>>>>>> 8a247c8aac44b0fdfa7f1bd437dc6bc1380d8071
     </div>
 
     <!-- Nav Item - Students Collapse Menu -->
