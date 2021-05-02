@@ -2,55 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    protected function redirectTo()
-    {
-        if (auth()->user()->role == 'Employee') {
-            return '/home';
-        }
-        else if (auth()->user()->role == 'Student') {
-            return '/student-home';
-        }
-
-        return '/admin';
-    }
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function index(){
+        
+        $employees = User::all();
+        return view('admin.manage-accounts.index', compact('employees', $employees));
+
     }
 
     /**
@@ -62,10 +32,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -75,13 +43,22 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function post(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => $data['role'],
-        ]);
+        $employee = new User();
+
+        $employee->fname = $request->input('fname');    
+        $employee->mname = $request->input('mname');    
+        $employee->lname = $request->input('lname');    
+        $employee->employee_id = $request->input('employee_id');    
+        $employee->sex = $request->input('sex');    
+        $employee->role = $request->input('role');    
+        $employee->department = $request->input('department');
+        $employee->email = $request->input('email');
+        $employee->password = Hash::make($request->input('password'));
+
+        $employee->save();
+
+        return redirect()->route('register.index');
     }
 }

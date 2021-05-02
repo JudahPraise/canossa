@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\User;
 use App\Course;
 use App\Subject;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
@@ -18,16 +19,18 @@ class CourseController extends Controller
     
     public function show($id){
 
-        $course = Course::where('id','=',$id)->with('subjects')->get();
-        // dd($course);
-        return view('admin.course.show', compact('course', $course));
+        $subjects = Subject::where('course_id','=',$id)->with('teacher')->get();
+        // dd($subjects)
+        $course = Course::where('id','=',$id)->first();
+        return view('admin.course.show', compact(['subjects', $subjects, 'course', $course]));
 
     }
 
     public function create($id){
 
         $course = Course::where('id','=',$id)->first();
-        return view('admin.course.create', compact('course', $course));
+        $teachers = User::where('role','=','Teacher')->where('department','=','College')->get();
+        return view('admin.course.create', compact(['course', $course, 'teachers', $teachers]));
         
     }
 
@@ -35,7 +38,7 @@ class CourseController extends Controller
 
     
         $subjects =[];
-        
+        // dd($request->teacher_id);
         foreach ($request->code as $item => $key) {
             $subjects[] = ([
                 'course_id' => $request->id,
@@ -44,6 +47,7 @@ class CourseController extends Controller
                 'description' => $request->description[$item],
                 'year' => $request->year,
                 'semester' => $request->semester,
+                'teacher_id' => $request->teacher_id[$item],
             ]);
         }
 

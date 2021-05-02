@@ -36,6 +36,14 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/', 'AdminController@index')->name('admin');
 
+    //Manage Accounts
+    Route::prefix('/manage-accounts')->group(function(){
+
+        Route::get('/', 'Admin\RegisterController@index')->name('register.index');
+        Route::post('/register', 'Admin\RegisterController@post')->name('register.post');
+        
+    });
+
     //Course Routes
     Route::prefix('/courses')->group(function(){
 

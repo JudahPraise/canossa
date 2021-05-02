@@ -57,11 +57,6 @@
         </a>
     </li>
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Teachers
-    </div>
-
     <!-- Nav Item - Students Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseTeacher"
@@ -77,9 +72,6 @@
         </div>
     </li>
 
-    <div class="sidebar-heading">
-        Modules
-    </div>
 
     <li class="nav-item">
         <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseSubject"
@@ -95,9 +87,25 @@
         </div>
     </li>
 
-
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+
+    <div class="sidebar-heading">
+        System
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseSystem"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <span>Manage Accounts</span>
+        </a>
+        <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" data-target="#AddSubjectModal" href="#">Student</a>
+                <a class="collapse-item" href="{{ route('register.index') }}">Employee</a>
+            </div>
+        </div>
+    </li>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

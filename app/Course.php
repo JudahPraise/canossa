@@ -16,4 +16,9 @@ class Course extends Model
         return $this->hasMany(Subject::class);
 
     }
+    public function teachers(){
+
+        return $this->hasMany(User::class);
+
+    }
 }

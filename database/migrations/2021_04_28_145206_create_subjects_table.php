@@ -22,6 +22,8 @@ class CreateSubjectsTable extends Migration
             $table->string('description');
             $table->string('year');
             $table->string('semester');
+            $table->unsignedBigInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

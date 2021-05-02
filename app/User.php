@@ -18,7 +18,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = 
-    ['name', 'email', 'password', 'role'];
+    ['fname', 'mname', 'lname', 'sex', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
+
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -37,6 +39,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function subjects(){
+        return $this->hasMany(Subject::class);
+    }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 
 
 }
