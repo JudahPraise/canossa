@@ -27,7 +27,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbitcss/css/orbit.min.css">
+    <link href="{{ asset('css/orbit-css/orbit.css') }}" rel="stylesheet" >
     <link href="{{ asset('css/sb-admin-css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     @yield('dropzone-css')
@@ -45,5 +45,7 @@
         @yield('content')
     </main>
     <script  src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="{{ asset('js/sidenav.js') }}"></script>
 </body>
 </html>

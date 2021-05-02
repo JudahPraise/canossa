@@ -2,15 +2,12 @@
 
 @section('content')
 
-@include('partials.employee_nav')
-
-
-<div class="container-fluid d-flex flex-column align-items-center mt-3"  style="width: 100%;">
-    @yield('home')
-</div>
-
-<div class="container d-flex flex-column align-items-center"  style="width: 100%;">
-    @include('partials.footer')
+<div class="d-flex" id="wrapper">
+    @include('partials.employee.side-nav')
+    <div id="page-content-wrapper">
+        @include('partials.employee.top-bar')
+        @yield('home')
+    </div>
 </div>
 
 @endsection
