@@ -27,8 +27,8 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            {{-- @include('partials.admin._footer') --}}
+            <!-- FIXME: Footer -->
+            @include('partials.admin._footer')
             <!-- End of Footer -->
 
         </div>

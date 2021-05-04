@@ -123,15 +123,34 @@ ion-icon{
 
 
 #wrapper {
-  overflow-x: hidden;
+  width: 100%;
+  overflow: hidden;
 }
   
 #sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -20rem; /*? */
+  height: 100vh;
+  margin-left: -21rem; /*? */
   transition: margin 0.25s ease-out;
 }
-  
+
+#sidebar-wrapper .sidenavs{
+  height: 63%;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar{
+  width: 5px;
+}
+
+::-webkit-scrollbar-track{
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #bbb;
+  border-radius: 10px;
+}
+
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
@@ -164,8 +183,16 @@ ion-icon{
   }
 
   #wrapper.toggled #sidebar-wrapper {
-    margin-left: -20rem; /*? */
+    margin-left: -20.5rem; /*? */
   }
+}
+
+@media only screen and (min-height: 576px){
+  .sidenavs{
+    height: 100%;
+    overflow-y: scroll;
+  }
+
 }
 
 #menu-toggle{

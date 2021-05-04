@@ -45,7 +45,7 @@
             </ul>
 
             <ul class="nav-item has-dropdown is-right is-hoverable m-0 is-desktop-up">
-                <li onclick="this.closest('.has-dropdown').classList.toggle('is-active');" class="nav-item" style="height: 2rem; list-style: none;"><a class="has-arrow nav-link" href="#">{{ Auth::user()->name }}</a></li>
+                <li onclick="this.closest('.has-dropdown').classList.toggle('is-active');" class="nav-item" style="height: 2rem; list-style: none;"><a class="has-arrow nav-link" href="#">{{ Auth::user()->fname }}</a></li>
                 <ul class="dropdown" style="height: 10rem; position: absolute">
                     <li class="nav-item dropdown__link">
                       <a href="#" class="nav-link" >Profile</a>
@@ -61,9 +61,9 @@
                   </form>
                </ul>
             </ul>
-            <ul class="nav-item has-dropdown is-left is-hoverable m-0 is-desktop-down">
+            <ul class="nav-item has-dropdown is-right is-hoverable m-0 is-desktop-down">
                 <li onclick="this.closest('.has-dropdown').classList.toggle('is-active');" class="nav-item" style="height: 2rem; list-style: none;">
-                    <a class="has-arrow nav-link" href="#">{{ Auth::user()->name }}</a>
+                    <a class="has-arrow nav-link" href="#">{{ Auth::user()->fname }}</a>
                 </li>
                 <ul class="dropdown" style="height: 10rem; position: absolute">
                     <li class="nav-item dropdown__link">
