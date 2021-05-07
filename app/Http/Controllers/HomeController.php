@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Day;
+use App\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('employee.dashboard.index');
+        $days = Day::with('schedules')->get();
+        return view('employee.dashboard.index',  compact('days', $days));
     }
 }

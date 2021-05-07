@@ -19,11 +19,9 @@
         </a>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('course.index') }}">
+        <a class="nav-link" href="#">
             <ion-icon name="apps"></ion-icon>
             <span>Courses</span>
         </a>

@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Schedule;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -40,12 +41,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function subjects(){
-        return $this->hasMany(Subject::class);
-    }
-
-    public function course(){
-        return $this->belongsTo(Course::class);
+    public function schedules(){
+        return $this->hasMany(Schedule::class);
     }
 
 

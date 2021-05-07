@@ -57,18 +57,6 @@ return [
             'provider' => 'admins',
             'hash' => false,
         ],
-
-        //? Student Guard
-        'student' => [
-            'driver' => 'session',
-            'provider' => 'students',
-        ],
-
-        'student-api' => [
-            'driver' => 'token',
-            'provider' => 'students',
-            'hash' => false,
-        ],
     ],
 
     /*
@@ -97,11 +85,6 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
-        ],
-
-        'students' => [
-            'driver' => 'eloquent',
-            'model' => App\Student::class,
         ],
 
     ],
@@ -136,12 +119,6 @@ return [
             'throttle' => 60,
         ],
 
-        'students' => [
-            'provider' => 'students',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
     ],
 
     /*

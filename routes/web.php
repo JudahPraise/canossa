@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('login-pages.landing-page');
+    return view('login-pages.employee');
 });
 
 Auth::routes();
@@ -44,38 +44,6 @@ Route::prefix('admin')->group(function(){
         
     });
 
-    //Course Routes
-    // Route::prefix('/courses')->group(function(){
-
-    //     Route::get('/', 'Admin\CourseController@index')->name('course.index');
-    //     Route::get('/course/{id}', 'Admin\CourseController@show')->name('course.show');
-
-    //     //Course Interacting to Subjects
-    //     Route::get('{id}/add-subject', 'Admin\CourseController@create')->name('course.create');
-    //     Route::post('/store-subject/{id}', 'Admin\CourseController@store')->name('course.store');
-        
-    // });
-
-});
-
-Route::prefix('student')->group(function(){
-
-    Route::get('/login', 'Student\StudentLoginController@showLoginForm')->name('student.login');
-    Route::post('/login', 'Student\StudentLoginController@login')->name('student.login.submit');
-    Route::get('/logout', 'Student\StudentLoginController@logout')->name('student.logout');
-
-    Route::post('/password-confirm', 'Student\ConfirmPasswordController@confirm')->name('student.password.confirm.submit');
-    Route::get('/password-confirm', 'Student\ConfirmPasswordController@showConfirmForm')->name('student.password.confirm');
-
-    Route::post('/password-email', 'Student\ForgotPasswordController@sendResetLinkEmail')->name('student.password.email');
-    Route::get('/password-reset', 'Student\ForgotPasswordController@showLinkRequestForm')->name('student.password.request');
-    Route::post('password-reset', 'Student\ResetPasswordController@reset')->name('student.password.update');
-    Route::get('/password-reset/{token}', 'Student\ResetPasswordController@showResetForm')->name('student.password.reset');
-
-    Route::get('/', 'StudentController@index')->name('student');
-    Route::get('/grade', 'StudentTour\GradeController@index')->name('grade');
-    Route::get('/schedule', 'StudentTour\ScheduleController@index')->name('schedule');
-
 
 });
 
@@ -87,6 +55,14 @@ Route::prefix('employee')->group(function(){
 });
 
 Route::middleware('auth')->group(function (){
+
+
+    //TODO: Schedule
+    Route::prefix('/schedule')->group(function(){
+
+        Route::get('/', 'Employee\ScheduleController@index')->name('schedule.index');
+
+    });
 
     // Documents
     Route::prefix('/document')->group(function(){

@@ -59,11 +59,5 @@ class UserSeeder extends Seeder
             'image' => ''
         ]);
 
-
-        Student::create([
-            'name' => 'Student',
-            'email' => 'student@test.com',
-            'password' =>  Hash::make('password'),
-        ]);
     }
 }
