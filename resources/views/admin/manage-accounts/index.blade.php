@@ -41,7 +41,7 @@
             @endforelse
               
           </tbody>
-      </table>
+        </table>
       </div>
 
       <!-- Modal -->

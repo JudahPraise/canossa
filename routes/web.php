@@ -52,17 +52,22 @@ Route::prefix('employee')->group(function(){
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
     Route::get('/', 'HomeController@index')->name('home');
 
-});
-
-Route::middleware('auth')->group(function (){
-
-
     //TODO: Schedule
     Route::prefix('/schedule')->group(function(){
 
         Route::get('/', 'Employee\ScheduleController@index')->name('schedule.index');
+        Route::post('/store', 'Employee\ScheduleController@store')->name('schedule.store');
+        Route::post('/update', 'Employee\ScheduleController@update')->name('schedule.update');
+        Route::delete('/delete/{id}', 'Employee\ScheduleController@delete')->name('schedule.delete');
+        Route::get('/filter/{day}', 'Employee\ScheduleController@filter')->name('schedule.filter');
+        Route::get('/filter/all', 'Employee\ScheduleController@filterAll')->name('schedule.filter-all');
 
     });
+
+});
+
+Route::middleware('auth')->group(function (){
+
 
     // Documents
     Route::prefix('/document')->group(function(){
@@ -74,4 +79,4 @@ Route::middleware('auth')->group(function (){
         
     });
 
-});
+});;

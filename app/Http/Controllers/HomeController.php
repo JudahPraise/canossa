@@ -26,7 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $days = Day::with('schedules')->get();
-        return view('employee.dashboard.index',  compact('days', $days));
+        return redirect()->route('schedule.index');
     }
 }

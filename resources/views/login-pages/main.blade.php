@@ -33,22 +33,20 @@
         </div>
       </div>
 
-      <div class="container is-dektop-up m-0 p-2" 
-      style="
-        position: fixed;
-        top: 0; 
-        right: 0; 
-        z-index: 12; 
-        max-width: 30%; 
-        height: 100vh;
-        background-color: white;
-        background: linear-gradient(
-              to right bottom,
-            rgba(255, 255, 255, 0.7),
-            rgba(255, 255, 255, 0.3)
-            );
-        backdrop-filter: blur(1rem);
-        color: black;
+      <div class="container h-100 m-0 p-2 is-desktop-up" 
+      style="position: fixed;
+      top: 0; 
+      right: 0; 
+      z-index: 12; 
+      width: 30%; 
+      background-color: white;
+      background: linear-gradient(
+            to right bottom,
+          rgba(255, 255, 255, 0.7),
+          rgba(255, 255, 255, 0.3)
+          );
+      backdrop-filter: blur(1rem);
+      color: black;
       ">
         <div class="container d-flex flex-column justify-content-center align-items-center h-100">
           <div class="container d-flex align-items-center p-2">
@@ -69,14 +67,13 @@
         </div>
       </div>
 
-      <div class="container is-tablet-only m-0 p-2" 
+      <div class="container h-100 is-tablet-only m-0 p-2" 
       style="
         position: fixed;
         top: 0; 
         right: 0; 
         z-index: 12; 
         max-width: 100%; 
-        height: 100vh;
         background-color: white;
         background: linear-gradient(
               to right bottom,
@@ -107,14 +104,13 @@
 
       </div>
 
-      <div class="container is-mobile-only m-0 p-2" 
+      <div class="container h-100 is-mobile-only m-0 p-2" 
       style="
         position: fixed;
         top: 0; 
         right: 0; 
         z-index: 12; 
         max-width: 100%; 
-        height: 100vh;
         background-color: white;
         background: linear-gradient(
               to right bottom,
