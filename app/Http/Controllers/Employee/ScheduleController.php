@@ -15,7 +15,7 @@ class ScheduleController extends Controller
 
         $days = Day::all();
         $currentDate = Carbon::now()->format( 'l' );
-        $schedules = Schedule::with('day')->where('user_id','=',Auth::user()->id)->where('day','=',$currentDate)->paginate(1);
+        $schedules = Schedule::with('day')->where('user_id','=',Auth::user()->id)->where('day','=',$currentDate)->get();
         return view('employee.dashboard.index', compact([['days', $days], ['schedules', $schedules]]));
 
     }
