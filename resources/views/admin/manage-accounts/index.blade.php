@@ -42,6 +42,7 @@
               
           </tbody>
         </table>
+        {{ $employees->links() }}
       </div>
 
       <!-- Modal -->

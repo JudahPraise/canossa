@@ -3,10 +3,9 @@
 @section('employee-home')
 
 <div class="container-fluid">
-
   <div class="row pt-5">
     <div class="col-lg-7">
-      <h4 class="font-weight-bold" style="color: black">Your Schedule</h4>
+      <h4 class="font-weight-bold" style="color: black">Your Sched</h4>
     </div>
     <div class="col-lg-5 d-flex justify-content-end align-items-start">
       <div class="form-group row mr-2">
@@ -67,6 +66,8 @@
         @endforelse
       </tbody>
     </table>
+
+    {{ $schedules->links() }}
   </div>
 
 </div>

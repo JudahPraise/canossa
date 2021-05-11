@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,8 +18,7 @@ class RegisterController extends Controller
     }
 
     public function index(){
-        
-        $employees = User::all();
+        $employees = User::paginate(10);
         return view('admin.manage-accounts.index', compact('employees', $employees));
 
     }
