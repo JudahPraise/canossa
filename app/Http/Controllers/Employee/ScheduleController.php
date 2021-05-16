@@ -14,8 +14,8 @@ class ScheduleController extends Controller
     public function index(){
 
         $days = Day::all();
-        $currentDate = Carbon::now()->format( 'l' );
-        $schedules = Schedule::with('day')->where('user_id','=',Auth::user()->id)->where('day','=',$currentDate)->get();
+        // $currentDate = Carbon::now()->format( 'l' );
+        $schedules = Schedule::with('day')->where('user_id','=',Auth::user()->id)->paginate(6);
         return view('employee.dashboard.index', compact([['days', $days], ['schedules', $schedules]]));
 
     }
@@ -27,7 +27,7 @@ class ScheduleController extends Controller
         $schedule->day = $request->input('day');
         $schedule->user_id = Auth::user()->id;
         $schedule->title = $request->input('title');
-        $schedule->time_from = $request->input('time_from');
+        $schedule->time_from = '['.$request->input('time_from').$request->input('time_to').']';
         $schedule->time_to = $request->input('time_to');
 
 
@@ -66,7 +66,11 @@ class ScheduleController extends Controller
     public function filter($day){
         
         $days = Day::all();
-        $schedules = Schedule::where('user_id','=',Auth::user()->id)->where('day','=',$day)->with('day')->get();
+        if($day == 'all'){
+            $schedules = Schedule::where('user_id','=',Auth::user()->id)->with('day')->paginate(6);
+            return view('employee.dashboard.index', compact([['days', $days], ['schedules', $schedules]])); 
+        }
+        $schedules = Schedule::where('user_id','=',Auth::user()->id)->where('day','=',$day)->with('day')->paginate(5);
         return view('employee.dashboard.index', compact([['days', $days], ['schedules', $schedules]]));
 
     }

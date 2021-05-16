@@ -202,3 +202,9 @@ ion-icon{
 #menu-toggle:hover{
   color: blue;
 }
+
+.glowing-border {
+  border: 2px solid rgb(36, 179, 0);
+  font-weight: bold;
+}
+

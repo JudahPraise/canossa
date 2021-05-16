@@ -44,6 +44,16 @@ Route::prefix('admin')->group(function(){
         
     });
 
+    //Announcements
+    Route::prefix('/announcements')->group(function(){
+
+        Route::get('/', 'Admin\AnnouncementController@index')->name('announcement.index');
+        Route::post('/store', 'Admin\AnnouncementController@store')->name('announcement.store');
+        Route::delete('/delete/{id}', 'Admin\AnnouncementController@delete')->name('announcement.delete');
+        Route::post('/update', 'Admin\AnnouncementController@update')->name('announcement.update');
+
+    });
+
 
 });
 
@@ -51,6 +61,12 @@ Route::prefix('employee')->group(function(){
 
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
     Route::get('/', 'HomeController@index')->name('home');
+
+    //Announcements
+    Route::prefix('/announcement')->group(function(){
+        Route::get('/mark-as-read/{id}', 'Employee\AnnouncementController@markAsRead')->name('announcement.markAsRead');    
+        Route::get('/mark-all-as-read', 'Employee\AnnouncementController@markAllAsRead')->name('announcement.markAllAsRead');    
+    });
 
     //TODO: Schedule
     Route::prefix('/schedule')->group(function(){

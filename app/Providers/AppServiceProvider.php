@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Announcement;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('partials.employee.top-bar', function ($view) {
+        
+            $view->with('notifications', auth()->user()->notifications);
+    
+        });
     }
 }

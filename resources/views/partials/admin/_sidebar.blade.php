@@ -14,73 +14,26 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link" href="#">
-            <ion-icon name="speedometer"></ion-icon>
             <span>Dashboard</span>
         </a>
     </li>
 
-
+    <!-- Nav Item - Announcements -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
-            <ion-icon name="apps"></ion-icon>
-            <span>Courses</span>
+        <a class="nav-link" href="{{ route('announcement.index') }}">
+            <span>Announcements</span>
         </a>
     </li>
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Grading System
-    </div>
-
-    <!-- Nav Item - Students Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseStudent"
+        <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseManage"
             aria-expanded="true" aria-controls="collapseTwo">
-            <ion-icon name="person"></ion-icon>
-            <span>Student</span>
+            <span>Manage Accounts</span>
         </a>
-        <div id="collapseStudent" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseManage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" data-toggle="modal" data-target="#AddStudentModal" href="#">New Student</a>
-                <a class="collapse-item" href="#">Search</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Sections -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <ion-icon name="people"></ion-icon>
-            <span>Sections</span>
-        </a>
-    </li>
-
-    <!-- Nav Item - Students Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseTeacher"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <ion-icon name="person"></ion-icon>
-            <span>Teacher</span>
-        </a>
-        <div id="collapseTeacher" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" data-toggle="modal" data-target="#AddTeacherModal" href="#">New Teacher</a>
-                <a class="collapse-item" href="#">Search</a>
-            </div>
-        </div>
-    </li>
-
-
-    <li class="nav-item">
-        <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseSubject"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <ion-icon name="book"></ion-icon>
-            <span>Subject</span>
-        </a>
-        <div id="collapseSubject" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" data-toggle="modal" data-target="#AddSubjectModal" href="#">New Subject</a>
-                <a class="collapse-item" href="#">Search</a>
+                <a class="collapse-item" data-target="#AddSubjectModal" href="#">Student</a>
+                <a class="collapse-item" href="{{ route('register.index') }}">Employee</a>
             </div>
         </div>
     </li>
@@ -88,22 +41,15 @@
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
-    <div class="sidebar-heading">
-        System
-    </div>
-
     <li class="nav-item">
-        <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseSystem"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <span>Manage Accounts</span>
+        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+            <span>Logout</span>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </a>
-        <div id="collapseSystem" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" data-target="#AddSubjectModal" href="#">Student</a>
-                <a class="collapse-item" href="{{ route('register.index') }}">Employee</a>
-            </div>
-        </div>
     </li>
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
