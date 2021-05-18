@@ -25,17 +25,18 @@
         </a>
     </li>
 
+    <!-- Nav Item - Announcements -->
     <li class="nav-item">
-        <a class="nav-link  collapsed" href="#" data-toggle="collapse" data-target="#collapseManage"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link" href="{{ route('message.index') }}">
+            <span>Messages</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Announcements -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('accounts.index') }}">
             <span>Manage Accounts</span>
         </a>
-        <div id="collapseManage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" data-target="#AddSubjectModal" href="#">Student</a>
-                <a class="collapse-item" href="{{ route('register.index') }}">Employee</a>
-            </div>
-        </div>
     </li>
 
     <!-- Divider -->
@@ -44,7 +45,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             <span>Logout</span>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" class="d-none">
                 @csrf
             </form>
         </a>

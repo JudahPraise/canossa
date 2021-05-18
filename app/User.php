@@ -19,8 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = 
-    ['fname', 'mname', 'lname', 'sex', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
-
+    ['name', 'sex', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
 
 
     /**
@@ -40,6 +39,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function schedules(){
         return $this->hasMany(Schedule::class);

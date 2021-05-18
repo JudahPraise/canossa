@@ -13,7 +13,7 @@
             <img src="https://orbitcss.com/img/square.png">
         </div>
         <div class="section py-0 px-3">
-            <p>{{ Auth::user()->fname }}</p>
+            <p>{{ Auth::user()->name }}</p>
             <p>{{ Auth::user()->role }} | {{ Auth::user()->department }}</p>
         </div>
     </div>

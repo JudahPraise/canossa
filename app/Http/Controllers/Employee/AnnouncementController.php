@@ -9,8 +9,6 @@ class AnnouncementController extends Controller
 {
     public function markAsRead($id){
 
-        // dd('marked');
-
         $notification = auth()->user()->notifications()->find($id);
         $notification->markAsRead();
 

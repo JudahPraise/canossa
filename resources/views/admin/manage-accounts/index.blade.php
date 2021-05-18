@@ -60,16 +60,8 @@
                 @csrf
                 <div class="form-row">
                   <div class="col-md-4 mb-3">
-                    <label for="validationDefault01">First name</label>
-                    <input type="text" name="fname" class="form-control" id="validationDefault01" required>
-                  </div>
-                  <div class="col-md-3 mb-3">
-                    <label for="validationDefault02">Middle Initial</label>
-                    <input type="text" name="mname" class="form-control" id="validationDefault02" required>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <label for="validationDefault02">Last name</label>
-                    <input type="text" name="lname" class="form-control" id="validationDefault02" required>
+                    <label for="validationDefault01">Name</label>
+                    <input type="text" name="name" class="form-control" id="validationDefault01" required>
                   </div>
                   <div class="col-md-1 mb-3">
                     <label for="validationDefault04">Gender</label>

@@ -36,24 +36,26 @@ Route::prefix('admin')->group(function(){
 
     Route::get('/', 'AdminController@index')->name('admin');
 
-    //Manage Accounts
-    Route::prefix('/manage-accounts')->group(function(){
-
-        Route::get('/', 'Admin\RegisterController@index')->name('register.index');
-        Route::post('/register', 'Admin\RegisterController@post')->name('register.post');
-        
-    });
 
     //Announcements
     Route::prefix('/announcements')->group(function(){
-
         Route::get('/', 'Admin\AnnouncementController@index')->name('announcement.index');
         Route::post('/store', 'Admin\AnnouncementController@store')->name('announcement.store');
         Route::delete('/delete/{id}', 'Admin\AnnouncementController@delete')->name('announcement.delete');
         Route::post('/update', 'Admin\AnnouncementController@update')->name('announcement.update');
-
     });
 
+    //Manage Accounts
+    Route::prefix('/manage-accounts')->group(function(){
+        Route::get('/', 'Admin\RegisterController@index')->name('accounts.index');
+        Route::post('/register', 'Admin\RegisterController@post')->name('register.post');
+    });
+
+    //Messages
+    Route::prefix('/messages')->group(function(){
+        Route::get('/', 'Admin\MessageController@index')->name('message.index');
+        Route::post('/send', 'MessageController@send')->name('send');
+    });
 
 });
 
@@ -61,6 +63,7 @@ Route::prefix('employee')->group(function(){
 
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
     Route::get('/', 'HomeController@index')->name('home');
+    Route::post('/send', 'MessageController@send')->name('employee.send');
 
     //Announcements
     Route::prefix('/announcement')->group(function(){

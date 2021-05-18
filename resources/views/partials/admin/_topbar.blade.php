@@ -12,7 +12,7 @@
             <div class="dropdown is-right" style="position: absolute;">
                 <li class="dropdown__link"><a href="#">Account Settings</a></li>
                 <li class="dropdown__link"><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" class="d-none">
                     @csrf
                 </form>
             </div>
@@ -36,8 +36,8 @@
                 <a href="#">Admin</a>
                 <div class="dropdown" style="position: absolute; left: 0">
                     <li class="dropdown__link"><a href="#">Account Settings</a></li>
-                    <li class="dropdown__link"><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    <li class="dropdown__link"><a href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" class="d-none">
                         @csrf
                     </form>
                 </div>

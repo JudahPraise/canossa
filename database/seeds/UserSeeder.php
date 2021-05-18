@@ -21,9 +21,7 @@ class UserSeeder extends Seeder
         ]);
         
         User::create([
-            'fname' => 'Employee1',
-            'mname' => 'T',
-            'lname' => 'Sample',
+            'name' => 'Employee1',
             'sex' => 'Male',
             'employee_id' => '2018-00001-CL-0',
             'email' => 'employee1@test.com',
@@ -34,9 +32,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'fname' => 'Employee2',
-            'mname' => 'S',
-            'lname' => 'Example',
+            'name' => 'Employee2',
             'sex' => 'Male',
             'employee_id' => '2018-00001-CL-0',
             'email' => 'employee2@test.com',
@@ -47,9 +43,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'fname' => 'Employee3',
-            'mname' => 'Y',
-            'lname' => 'Test',
+            'name' => 'Employee3',
             'sex' => 'Male',
             'employee_id' => '2018-00001-CL-0',
             'email' => 'employee3@test.com',

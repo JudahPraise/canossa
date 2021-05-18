@@ -11,6 +11,8 @@ class AnnouncementNotification extends Notification
 {
     use Queueable;
 
+    protected $announcement;
+
     /**
      * Create a new notification instance.
      *
@@ -41,7 +43,15 @@ class AnnouncementNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'announcement' => $this->announcement,
+            'announcement_title' => $this->announcement->announcement_title,
+            'affected_employees' => $this->announcement->affected_employees,
+            'date_from' => $this->announcement->date_from,
+            'time_from' => $this->announcement->time_from,
+            'date_to' => $this->announcement->date_to,
+            'time_to' => $this->announcement->time_to,
+            'announcement_description' => $this->announcement->announcement_description,
+            'link' => $this->announcement->link,
+            'attachment' => $this->announcement->attachment,
         ];
     }
 }

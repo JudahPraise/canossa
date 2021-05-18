@@ -11,12 +11,14 @@ class MessageNotification extends Notification
 {
     use Queueable;
 
+    protected $message;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message)
     {
         $this->message = $message;
     }
@@ -41,7 +43,9 @@ class MessageNotification extends Notification
      public function toDatabase($notifiable)
      {
          return [
-             'message' => $this->message,
+             'subject' => $this->message->subject,
+             'message' => $this->message->message,
+             'attachment' => $this->message->attachment,
          ];
      }
 }

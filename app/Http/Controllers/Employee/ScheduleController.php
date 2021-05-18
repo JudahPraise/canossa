@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Day;
+use App\User;
 use App\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -12,11 +13,10 @@ use Illuminate\Support\Facades\Auth;
 class ScheduleController extends Controller
 {
     public function index(){
-
         $days = Day::all();
-        // $currentDate = Carbon::now()->format( 'l' );
+        $users = User::all();
         $schedules = Schedule::with('day')->where('user_id','=',Auth::user()->id)->paginate(6);
-        return view('employee.dashboard.index', compact([['days', $days], ['schedules', $schedules]]));
+        return view('employee.dashboard.index', compact([['days', $days], ['schedules', $schedules], ['users', $users]]));
 
     }
 
