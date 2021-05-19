@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\User;
 use App\Announcement;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
             
             $view->with('users', User::all());
 
+        });
+
+        view()->composer('admin.messages.index', function($view){
+            //
         });
     }
 }

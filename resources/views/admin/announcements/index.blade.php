@@ -27,7 +27,7 @@
                             <div class="row w-100">
                                 <div class="col-md-9">
                                     <h4 class="btn-link font-weight-bold" style="color: black" >{{ $announcement->announcement_title }}</h4>
-                                    <span class="btn-link" data-toggle="collapse" data-target="#collapse-{{ $announcement->id }}" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer">Show more...</span>
+                                    <span class="btn-link" data-toggle="collapse" data-target="#collapse-{{ $loop->index }}"" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer">Show more...</span>
                                     <a href="" class="ann-data" data-toggle="modal" data-target="#editModal"
                                     data-id="{{ $announcement->id }}"
                                     data-title="{{ $announcement->announcement_title }}"
@@ -54,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div id="collapse-{{ $announcement->id }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div id="collapse-{{ $loop->index }}"" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                       <div class="card-body">
                         <div class="row p-2 mb-2">
                             <div class="col-md-6">

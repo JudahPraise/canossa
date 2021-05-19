@@ -187,14 +187,6 @@ ion-icon{
   }
 }
 
-@media only screen and (min-height: 576px){
-  .sidenavs{
-    height: 100%;
-    overflow-y: scroll;
-  }
-
-}
-
 #menu-toggle{
   font-size: 1.5rem; 
   color: black
@@ -208,3 +200,33 @@ ion-icon{
   font-weight: bold;
 }
 
+.overlay{
+  position: absolute;
+  top: 10.5vh;
+  left: 0.4%;
+}
+
+.wrapper:hover .overlay{
+  background-color: rgba(187, 187, 187, 0.281);
+  color: white;
+  opacity: 1;
+}
+
+
+.message-action{
+  opacity: 0;
+}
+
+.message-item:hover .message-action{
+
+  opacity: 1;
+
+}
+
+@media only screen and (min-height: 576px){
+  .sidenavs{
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+}

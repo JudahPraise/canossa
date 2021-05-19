@@ -43,6 +43,8 @@ class MessageNotification extends Notification
      public function toDatabase($notifiable)
      {
          return [
+             'sender' => $this->message->sender,
+             'sender_image' => $this->message->sender_image,
              'subject' => $this->message->subject,
              'message' => $this->message->message,
              'attachment' => $this->message->attachment,
