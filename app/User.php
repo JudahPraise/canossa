@@ -45,5 +45,19 @@ class User extends Authenticatable
         return $this->hasMany(Schedule::class);
     }
 
+    public function personal()
+    {
+        return $this->hasOne(PersonalInformation::class);
+    }
+    
+    public function family()
+    {
+        return $this->hasOne(FamilyBackground::class);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Children::class);
+    }
 
 }

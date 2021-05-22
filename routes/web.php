@@ -79,6 +79,20 @@ Route::prefix('employee')->group(function(){
     //Portfolio
     Route::prefix('/portfolio')->group(function(){
         Route::get('/index/{view}', 'Employee\PortfolioController@index')->name('portfolio.index');
+        //Personal-Information
+        Route::prefix('/personal-information')->group(function(){
+            Route::get('/', 'Employee\Portfolio\PersonalInfoController@index')->name('personal.index');
+            Route::get('/create', 'Employee\Portfolio\PersonalInfoController@create')->name('personal.create');
+            Route::get('/edit/{id}', 'Employee\Portfolio\PersonalInfoController@edit')->name('personal.edit');
+        });
+        //Family Background
+        Route::prefix('/family-background')->group(function(){
+            Route::get('/index/{view}', 'Employee\Portfolio\Family\MainController@index')->name('family.index');
+        });
+        //Educational Background
+        Route::prefix('/educational-background')->group(function(){
+            Route::get('/index/{view}', 'Employee\Portfolio\Educational\MainController@index')->name('educ.index');
+        });
     }); 
 
 });

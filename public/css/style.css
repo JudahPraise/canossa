@@ -109,8 +109,16 @@ ion-icon{
 .neu-effect{
     border-radius: 0.8rem;
     background: #ffffff;
-    box-shadow:  7px 7px 14px #d1d1d1,
-                 -7px -7px 14px #ffffff;
+    box-shadow:  6px 6px 12px #cfcfcf,
+                 -6px -6px 12px #ffffff;
+}
+
+.neu-effect-inset{
+    border-radius: 0.8rem;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow:  6px 6px 12px #dedede,
+             -6px -6px 12px #ffffff;
+
 }
 
 .animation{
