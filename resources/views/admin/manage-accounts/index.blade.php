@@ -24,7 +24,7 @@
               <tr class="border">
                 <th scope="row">{{ $employee->id }}</th>
                 <td>{{ $employee->employee_id }}</td>
-                <td>{{ $employee->lname.','.' '.$employee->fname.' '.' '.$employee->mname.'.' }}</td>
+                <td>{{ $employee->name}}</td>
                 @if (!empty($employee->department))
                   <td>{{ $employee->role.' '.'|'.' '.$employee->department }}</td>
                 @else

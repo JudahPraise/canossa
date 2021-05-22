@@ -10,13 +10,7 @@ class Children extends Model
         'family_id' ,'name', 'date_of_birth',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function family()
-    {
-        return $this->belongsTo(FamilyBackground::class);
+    public function family(){
+        return $this->belongsTo(Family::class);
     }
 }

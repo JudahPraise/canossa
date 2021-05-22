@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Employee\Portfolio;
 
-use App\PersonalInformation;
+use App\WorkExperience;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class PersonalInfoController extends Controller
+class WorkExperienceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,11 @@ class PersonalInfoController extends Controller
      */
     public function index()
     {
-        $personals = PersonalInformation::where('user_id','=',Auth::user()->id)->first();
-        if($personals === null){
-            return view('employee.portfolio.personal-information.empty', compact('personals', $personals));
+        $experiences = WorkExperience::where('user_id','=',Auth::user()->id)->first();
+        if($experiences === null){
+            return view('employee.portfolio.work-experience.empty', compact('experiences', $experiences));
         }else{
-            return view('employee.portfolio.personal-information.show', compact('personals', $personals));
+            return view('employee.portfolio.work-experience.show', compact('experiences', $experiences));
         }
     }
 
@@ -31,7 +31,7 @@ class PersonalInfoController extends Controller
      */
     public function create()
     {
-        return view('employee.portfolio.personal-information.create');
+        return view('employee.portfolio.work-experience.create');
     }
 
     /**
@@ -64,9 +64,8 @@ class PersonalInfoController extends Controller
      */
     public function edit($id)
     {
-        $personals = PersonalInformation::where('user_id','=',Auth::user()->id)->first();
-        dd($personals);
-        return view('employee.portfolio.personal-information.edit', compact('personals', $personals));
+        $experiences = WorkExperience::where('user_id','=',Auth::user()->id)->first();
+        return view('employee.portfolio.work-experience.show', compact('experiences', $experiences));
     }
 
     /**

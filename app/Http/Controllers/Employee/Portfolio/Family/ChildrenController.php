@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Employee\Portfolio;
+namespace App\Http\Controllers\Employee\Portfolio\Family;
 
-use App\PersonalInformation;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
-class PersonalInfoController extends Controller
+class ChildrenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +14,7 @@ class PersonalInfoController extends Controller
      */
     public function index()
     {
-        $personals = PersonalInformation::where('user_id','=',Auth::user()->id)->first();
-        if($personals === null){
-            return view('employee.portfolio.personal-information.empty', compact('personals', $personals));
-        }else{
-            return view('employee.portfolio.personal-information.show', compact('personals', $personals));
-        }
+        //
     }
 
     /**
@@ -31,7 +24,7 @@ class PersonalInfoController extends Controller
      */
     public function create()
     {
-        return view('employee.portfolio.personal-information.create');
+        //
     }
 
     /**
@@ -64,9 +57,7 @@ class PersonalInfoController extends Controller
      */
     public function edit($id)
     {
-        $personals = PersonalInformation::where('user_id','=',Auth::user()->id)->first();
-        dd($personals);
-        return view('employee.portfolio.personal-information.edit', compact('personals', $personals));
+        //
     }
 
     /**

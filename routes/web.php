@@ -67,7 +67,6 @@ Route::prefix('employee')->group(function(){
 
     //Schedule
     Route::prefix('/schedule')->group(function(){
-
         Route::get('/', 'Employee\ScheduleController@index')->name('schedule.index');
         Route::post('/store', 'Employee\ScheduleController@store')->name('schedule.store');
         Route::post('/update', 'Employee\ScheduleController@update')->name('schedule.update');
@@ -92,6 +91,24 @@ Route::prefix('employee')->group(function(){
         //Educational Background
         Route::prefix('/educational-background')->group(function(){
             Route::get('/index/{view}', 'Employee\Portfolio\Educational\MainController@index')->name('educ.index');
+        });
+        //Work Experience
+        Route::prefix('/work-experience')->group(function(){
+            Route::get('/', 'Employee\Portfolio\WorkExperienceController@index')->name('work.index');
+            Route::get('/edit/{id}', 'Employee\Portfolio\WorkExperienceController@edit')->name('work.edit');
+            Route::get('/create', 'Employee\Portfolio\WorkExperienceController@create')->name('work.create');
+        });
+        //Training Program
+        Route::prefix('/training-program')->group(function(){
+            Route::get('/', 'Employee\Portfolio\TrainingProgramController@index')->name('training.index');
+            Route::get('/edit/{id}', 'Employee\Portfolio\TrainingProgramController@edit')->name('training.edit');
+            Route::get('/create', 'Employee\Portfolio\TrainingProgramController@create')->name('training.create');
+        });
+        //Voluntary Work
+        Route::prefix('/voluntary-work')->group(function(){
+            Route::get('/', 'Employee\Portfolio\VoluntaryWorksController@index')->name('voluntary.index');
+            Route::get('/edit/{id}', 'Employee\Portfolio\VoluntaryWorksController@edit')->name('voluntary.edit');
+            Route::get('/create', 'Employee\Portfolio\VoluntaryWorksController@create')->name('voluntary.create');
         });
     }); 
 

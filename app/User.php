@@ -52,12 +52,27 @@ class User extends Authenticatable
     
     public function family()
     {
-        return $this->hasOne(FamilyBackground::class);
+        return $this->hasOne(Family::class);
     }
 
-    public function children()
+    public function experiences()
     {
-        return $this->hasMany(Children::class);
+        return $this->hasMany(Experience::class);
+    }
+
+    public function education()
+    {
+        return $this->hasOne(EducationalBackground::class);
+    }
+
+    public function trainings()
+    {
+        return $this->hasMany(TrainingProgram::class);
+    }
+
+    public function voluntary_works()
+    {
+        return $this->hasMany(VoluntaryWork::class);
     }
 
 }

@@ -57,6 +57,20 @@ class RegisterController extends Controller
 
         $employee->save();
 
-        return redirect()->route('register.index');
+        $employee->family()->create([
+            'user_id' => $employee->id,
+            'family_name' => $employee->name,
+        ]);
+
+        $employee->education()->create([
+            'user_id' => $employee->id,
+            'name' => $employee->name,
+            'elementary' => null,
+            'secondary' => null,
+            'college' => null,
+            'graduate_study' => null
+        ]);
+
+        return redirect()->route('accounts.index');
     }
 }

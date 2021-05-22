@@ -48,122 +48,73 @@
                 </div>
             </div>
             <div class="col mb-4">
-               <div class="card has-no-shadow">
-                    <a href="{{ route('educ.index', 'card') }}" class="card__image">
-                      <img src="{{ asset('img/for-portfolio/Mathematics-pana.svg') }}" alt="">
+             <div class="card has-no-shadow">
+                  <a href="{{ route('educ.index', 'card') }}" class="card__image">
+                    <img src="{{ asset('img/for-portfolio/Mathematics-pana.svg') }}" alt="">
+                  </a>
+                  <div class="card__content">
+                    <p class="grid has-no-col-padding has-text-light-grey">
+                      <small class="column">
+                        Updated at 3 mins ago
+                      </small>
+                    </p>
+                    <a href="{{ route('educ.index', 'card') }}" class="is-hover-underline has-text-black">
+                      <h5 style="font-weight: bold">Educational Background</h5>
                     </a>
-                    <div class="card__content">
-                      <p class="grid has-no-col-padding has-text-light-grey">
-                        <small class="column">
-                          Updated at 3 mins ago
-                        </small>
-                      </p>
-                      <a href="{{ route('educ.index', 'card') }}" class="is-hover-underline has-text-black">
-                        <h5 style="font-weight: bold">Educational Background</h5>
-                      </a>
-                    </div>
-                </div>
+                  </div>
+              </div>
             </div>
             <div class="col mb-4">
-                <div class="card has-no-shadow">
-                    <a href="#" class="card__image">
-                      <svg width="100%" height="100%" viewBox="0 0 100 60" class="has-bg-light"></svg>
-                    </a>
-                    <div class="card__content">
-                      <p class="grid has-no-col-padding has-text-light-grey">
-                        <small class="column">
-                          by Rhys Hall - September 29, 2019
-                        </small>
-                        <small class="column is-shrink">
-                          <i class="far fa-comments"></i> 2
-                        </small>
-                      </p>
-                      <a href="#" class="is-hover-underline has-text-black">
-                        <h5>Some wonderful photos of ducks I took at the park</h5>
-                      </a>
-                    </div>
+              <div class="card has-no-shadow">
+                <a href="{{ route('work.index') }}" class="card__image">
+                  <img src="{{ asset('img/for-portfolio/experience.png') }}" alt="">
+                </a>
+                <div class="card__content">
+                  <p class="grid has-no-col-padding has-text-light-grey">
+                    <small class="column">
+                      Updated at 3 mins ago
+                    </small>
+                  </p>
+                  <a href="{{ route('educ.index', 'card') }}" class="is-hover-underline has-text-black">
+                    <h5 style="font-weight: bold">Work Experience</h5>
+                  </a>
                 </div>
+              </div>
             </div>
             <div class="col mb-4">
-                <div class="card has-no-shadow">
-                    <a href="#" class="card__image">
-                      <svg width="100%" height="100%" viewBox="0 0 100 60" class="has-bg-light"></svg>
-                    </a>
-                    <div class="card__content">
-                      <p class="grid has-no-col-padding has-text-light-grey">
-                        <small class="column">
-                          by Rhys Hall - September 29, 2019
-                        </small>
-                        <small class="column is-shrink">
-                          <i class="far fa-comments"></i> 2
-                        </small>
-                      </p>
-                      <a href="#" class="is-hover-underline has-text-black">
-                        <h5>Some wonderful photos of ducks I took at the park</h5>
-                      </a>
-                    </div>
+              <div class="card has-no-shadow">
+                <a href="{{ route('training.index') }}" class="card__image">
+                  <img src="{{ asset('img/for-portfolio/trainings.svg') }}" alt="">
+                </a>
+                <div class="card__content">
+                  <p class="grid has-no-col-padding has-text-light-grey">
+                    <small class="column">
+                      Updated at 3 mins ago
+                    </small>
+                  </p>
+                  <a href="{{ route('training.index') }}" class="is-hover-underline has-text-black">
+                    <h5 style="font-weight: bold">Training Programs</h5>
+                  </a>
                 </div>
+              </div>
             </div>
-            <div class="col mb-4">
-                <div class="card has-no-shadow">
-                    <a href="#" class="card__image">
-                      <svg width="100%" height="100%" viewBox="0 0 100 60" class="has-bg-light"></svg>
-                    </a>
-                    <div class="card__content">
-                      <p class="grid has-no-col-padding has-text-light-grey">
-                        <small class="column">
-                          by Rhys Hall - September 29, 2019
-                        </small>
-                        <small class="column is-shrink">
-                          <i class="far fa-comments"></i> 2
-                        </small>
-                      </p>
-                      <a href="#" class="is-hover-underline has-text-black">
-                        <h5>Some wonderful photos of ducks I took at the park</h5>
-                      </a>
-                    </div>
-                </div>
+          <div class="col mb-4">
+            <div class="card has-no-shadow">
+              <a href="{{ route('voluntary.index') }}" class="card__image">
+                <img src="{{ asset('img/for-portfolio/volunteer.png') }}" alt="">
+              </a>
+              <div class="card__content">
+                <p class="grid has-no-col-padding has-text-light-grey">
+                  <small class="column">
+                    Updated at 3 mins ago
+                  </small>
+                </p>
+                <a href="{{ route('educ.index', 'card') }}" class="is-hover-underline has-text-black">
+                  <h5 style="font-weight: bold">Voluntary Works</h5>
+                </a>
+              </div>
             </div>
-            <div class="col mb-4">
-                <div class="card has-no-shadow">
-                    <a href="#" class="card__image">
-                      <svg width="100%" height="100%" viewBox="0 0 100 60" class="has-bg-light"></svg>
-                    </a>
-                    <div class="card__content">
-                      <p class="grid has-no-col-padding has-text-light-grey">
-                        <small class="column">
-                          by Rhys Hall - September 29, 2019
-                        </small>
-                        <small class="column is-shrink">
-                          <i class="far fa-comments"></i> 2
-                        </small>
-                      </p>
-                      <a href="#" class="is-hover-underline has-text-black">
-                        <h5>Some wonderful photos of ducks I took at the park</h5>
-                      </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="card has-no-shadow">
-                    <a href="#" class="card__image">
-                      <svg width="100%" height="100%" viewBox="0 0 100 60" class="has-bg-light"></svg>
-                    </a>
-                    <div class="card__content">
-                      <p class="grid has-no-col-padding has-text-light-grey">
-                        <small class="column">
-                          by Rhys Hall - September 29, 2019
-                        </small>
-                        <small class="column is-shrink">
-                          <i class="far fa-comments"></i> 2
-                        </small>
-                      </p>
-                      <a href="#" class="is-hover-underline has-text-black">
-                        <h5>Some wonderful photos of ducks I took at the park</h5>
-                      </a>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
     </div>
 @endsection
