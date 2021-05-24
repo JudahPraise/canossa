@@ -12,46 +12,68 @@
             <a href="{{ route('family.index', 'list') }}" class="neu-effect d-flex justify-content-center align-items-center text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-list" style="font-size: 1.4rem"></i></a>
         </div>
       </div>
-        <a class="panel mb-3 mt-3 text-decoration-none has-text-black" href="{{ route('personal.index') }}">
-            <div class="media d-flex align-items-center">
-              <div class="media__left">
-                <div class="image is-small-square">
-                  <img src="{{ asset('img/for-family/spouse.png') }}">
-                </div>
-              </div>
-              <div class="media__content d-flex flex-column">
-                <h5 style="font-weight: bold">Spouse</h5>
-                <small style="text-muted" style="font-size: 1rem">updated at 27m ago</small>
-              </div>
+      <a class="panel mb-3 mt-3 p-0 text-decoration-none has-text-black" style="position: relative" href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.show', Auth::user()->id) : route('spouse.create') }}">
+        @if (!empty(auth()->user()->personal()->civil_status))
+          @if (auth()->user()->personal()->civil_status === 'Single')
+            <div class="stack-top-list">
+              <span class="d-flex flex-column align-items-center">
+                <span><i class="fas fa-lock mb-3" style="color: white; font-size: 2rem"></i></span>
+                <small style="color: white; font-size: .8rem">You're civil status is {{ auth()->user()->personal()->civil_status }}</small>
+              </span>
             </div>
-        </a>
-        <a class="panel mb-3 mt-3 text-decoration-none has-text-black">
-            <div class="media d-flex align-items-center">
-              <div class="media__left">
-                <div class="image is-small-square">
-                  <img src="{{ asset('img/for-family/children.png') }}">
-                </div>
-              </div>
-              <div class="media__content d-flex flex-column">
-                <h5 style="font-weight: bold">Children</h5>
-                <small style="text-muted" style="font-size: 1rem">updated at 27m ago</small>
-              </div>
+          @endif
+        @endif
+        <div class="media d-flex align-items-center">
+          <div class="media__left">
+            <div class="image is-small-square">
+              <img src="{{ asset('img/for-family/spouse.png') }}">
             </div>
-        </a>
-        <a class="panel mb-3 mt-3 text-decoration-none has-text-black">
+          </div>
+          <div class="media__content d-flex flex-column">
+            <h5 style="font-weight: bold">Spouse</h5>
+            <small style="text-muted" style="font-size: 1rem">
+              @if (!empty(auth()->user()->family->spouse))
+                Updated at {{ auth()->user()->family->spouse->created_at->diffForHumans() }}
+              @else
+                No Data
+              @endif
+            </small>
+          </div>
+        </div>
+      </a>
+      <a class="panel mb-3 mt-3 p-0 text-decoration-none has-text-black">
           <div class="media d-flex align-items-center">
             <div class="media__left">
               <div class="image is-small-square">
-                <img src="{{ asset('img/for-family/father.png') }}">
+                <img src="{{ asset('img/for-family/children.png') }}">
               </div>
             </div>
             <div class="media__content d-flex flex-column">
-              <h5 style="font-weight: bold">Father</h5>
-              <small style="text-muted" style="font-size: 1rem">updated at 27m ago</small>
+              <h5 style="font-weight: bold">Children</h5>
+              <small style="text-muted" style="font-size: 1rem">No Data</small>
             </div>
           </div>
       </a>
-      <a class="panel mb-3 mt-3 text-decoration-none has-text-black">
+      <a class="panel mb-3 mt-3 p-0 text-decoration-none has-text-black" href="{{ !empty(auth()->user()->family->father) ? route('father.show', Auth::user()->id) : route('father.create') }}">
+        <div class="media d-flex align-items-center">
+          <div class="media__left">
+            <div class="image is-small-square">
+              <img src="{{ asset('img/for-family/father.png') }}">
+            </div>
+          </div>
+          <div class="media__content d-flex flex-column">
+            <h5 style="font-weight: bold">Father</h5>
+            <small style="text-muted" style="font-size: 1rem">
+              @if (!empty(auth()->user()->family->father))
+                Updated at {{ auth()->user()->family->father->created_at->diffForHumans() }}
+              @else
+                No Data
+              @endif
+            </small>
+          </div>
+        </div>
+      </a>
+      <a class="panel mb-3 mt-3 p-0 text-decoration-none has-text-black" href="{{ !empty(auth()->user()->family->mother) ? route('mother.show', Auth::user()->id) : route('mother.create') }}">
         <div class="media d-flex align-items-center">
           <div class="media__left">
             <div class="image is-small-square">
@@ -60,7 +82,13 @@
           </div>
           <div class="media__content d-flex flex-column">
             <h5 style="font-weight: bold">Mother</h5>
-            <small style="text-muted" style="font-size: 1rem">updated at 27m ago</small>
+            <small style="text-muted" style="font-size: 1rem">
+              @if (!empty(auth()->user()->family->mother))
+                Updated at {{ auth()->user()->family->mother->created_at->diffForHumans() }}
+              @else
+                No Data
+              @endif
+            </small>
           </div>
         </div>
     </a>

@@ -82,11 +82,37 @@ Route::prefix('employee')->group(function(){
         Route::prefix('/personal-information')->group(function(){
             Route::get('/', 'Employee\Portfolio\PersonalInfoController@index')->name('personal.index');
             Route::get('/create', 'Employee\Portfolio\PersonalInfoController@create')->name('personal.create');
+            Route::post('/create/post', 'Employee\Portfolio\PersonalInfoController@store')->name('personal.post');
             Route::get('/edit/{id}', 'Employee\Portfolio\PersonalInfoController@edit')->name('personal.edit');
+            Route::put('/edit/update/{id}', 'Employee\Portfolio\PersonalInfoController@update')->name('personal.update');
         });
         //Family Background
         Route::prefix('/family-background')->group(function(){
             Route::get('/index/{view}', 'Employee\Portfolio\Family\MainController@index')->name('family.index');
+            //Spouse
+            Route::prefix('/spouse')->group(function(){
+                Route::get('/create', 'Employee\Portfolio\Family\SpouseController@create')->name('spouse.create');
+                Route::post('/store', 'Employee\Portfolio\Family\SpouseController@store')->name('spouse.store');
+                Route::get('/show/{id}', 'Employee\Portfolio\Family\SpouseController@show')->name('spouse.show');
+                Route::get('/edit/{id}', 'Employee\Portfolio\Family\SpouseController@edit')->name('spouse.edit');
+                Route::put('/update/{id}', 'Employee\Portfolio\Family\SpouseController@update')->name('spouse.update');
+            });
+            //Mother
+            Route::prefix('/mother')->group(function(){
+                Route::get('/create', 'Employee\Portfolio\Family\MotherController@create')->name('mother.create');
+                Route::post('/store', 'Employee\Portfolio\Family\MotherController@store')->name('mother.store');
+                Route::get('/show/{id}', 'Employee\Portfolio\Family\MotherController@show')->name('mother.show');
+                Route::get('/edit/{id}', 'Employee\Portfolio\Family\MotherController@edit')->name('mother.edit');
+                Route::put('/update/{id}', 'Employee\Portfolio\Family\MotherController@update')->name('mother.update');
+            });
+            //Father
+            Route::prefix('/father')->group(function(){
+                Route::get('/create', 'Employee\Portfolio\Family\FatherController@create')->name('father.create');
+                Route::post('/store', 'Employee\Portfolio\Family\FatherController@store')->name('father.store');
+                Route::get('/show/{id}', 'Employee\Portfolio\Family\FatherController@show')->name('father.show');
+                Route::get('/edit/{id}', 'Employee\Portfolio\Family\FatherController@edit')->name('father.edit');
+                Route::put('/update/{id}', 'Employee\Portfolio\Family\FatherController@update')->name('father.update');
+            });
         });
         //Educational Background
         Route::prefix('/educational-background')->group(function(){

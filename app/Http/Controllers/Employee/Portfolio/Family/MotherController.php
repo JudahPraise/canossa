@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Employee\Portfolio\Family;
 
-use App\Http\Controllers\Controller;
+use App\Family;
+use App\Mother;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MotherController extends Controller
 {
@@ -24,7 +27,7 @@ class MotherController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.portfolio.family-background.mother.create');
     }
 
     /**
@@ -35,7 +38,18 @@ class MotherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mother = Mother::create([
+            'family_id' => Auth::user()->family->id,
+            'surname' => $request->surname,
+            'firstname' => $request->firstname,
+            'middlename' => $request->middlename,
+            'occupation' => $request->occupation,
+            'employer_business_name' => $request->employer_business_name,
+            'business_address' => $request->business_address,
+            'tel_no' => $request->tel_no,
+        ]);
+
+        return redirect()->route('family.index', 'card');
     }
 
     /**
@@ -46,7 +60,9 @@ class MotherController extends Controller
      */
     public function show($id)
     {
-        //
+        $family = Family::where('user_id','=',$id)->with('mother')->first();
+        $mother = $family->mother->first();
+        return view('employee.portfolio.family-background.mother.show', compact('mother'));
     }
 
     /**
@@ -57,7 +73,9 @@ class MotherController extends Controller
      */
     public function edit($id)
     {
-        //
+        $family = Family::where('user_id','=',$id)->with('mother')->first();
+        $mother = $family->mother->first();
+        return view('employee.portfolio.family-background.mother.edit', compact('mother'));
     }
 
     /**
@@ -69,7 +87,18 @@ class MotherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mother = Mother::where('family_id','=',$id)->update([
+            'family_id' => Auth::user()->family->id,
+            'surname' => $request->surname,
+            'firstname' => $request->firstname,
+            'middlename' => $request->middlename,
+            'occupation' => $request->occupation,
+            'employer_business_name' => $request->employer_business_name,
+            'business_address' => $request->business_address,
+            'tel_no' => $request->tel_no
+        ]);
+
+        return redirect()->route('mother.show', Auth::user()->id);
     }
 
     /**

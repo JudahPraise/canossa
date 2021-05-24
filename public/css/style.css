@@ -238,3 +238,32 @@ box-shadow:  6px 6px 12px #dedede,
   }
 
 }
+
+.stack-top{
+  height: 100%;
+  width: 94%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 4;
+  opacity: 1;
+  background: rgba(39, 42, 43, 0.52);
+  transition: opacity 200ms ease-in-out;
+  border-radius: 4px;
+}
+
+.stack-top-list{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 4;
+  opacity: 1;
+  background: rgba(39, 42, 43, 0.52);
+  transition: opacity 200ms ease-in-out;
+  border-radius: 4px;
+}
+

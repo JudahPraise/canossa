@@ -35,5 +35,12 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('admin.messages.index', function($view){
             //
         });
+
+        // view()->composer('partials.employee.top-bar', function ($view) {
+            
+        //    dd(auth()->user()->setFamily());
+
+        // });
+
     }
 }

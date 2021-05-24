@@ -2,7 +2,10 @@
 
 namespace App;
 
+use App\Family;
 use App\Schedule;
+use App\PersonalInformation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,12 +50,17 @@ class User extends Authenticatable
 
     public function personal()
     {
-        return $this->hasOne(PersonalInformation::class);
+        return $this->hasOne(PersonalInformation::class)->first();
+    }
+
+    public function setFamily()
+    {
+        return $this->hasOne(Family::class);
     }
     
     public function family()
     {
-        return $this->hasOne(Family::class);
+        return $this->hasOne(Family::class, 'user_id');
     }
 
     public function experiences()

@@ -16,6 +16,6 @@ class Father extends Model
     }
 
     public function family(){
-        return $this->belongsTo(Family::class);
+        return $this->belongsTo(Family::class, 'id');
     }
 }

@@ -13,22 +13,36 @@
         </div>
       </div>
         <div class="row row-cols-2 row-cols-md-4 mt-3">
-          <div class="col mb-4">
-              <div class="card has-no-shadow">
-                  <a href="#" class="card__image">
-                    <img src="{{ asset('img/for-family/spouse.png') }}">
-                  </a>
-                  <div class="card__content">
-                    <p class="grid has-no-col-padding has-text-light-grey">
-                      <small class="column">
-                        Updated at 3 mins ago
-                      </small>
-                    </p>
-                    <a href="#" class="is-hover-underline has-text-black">
-                      <h5 style="font-weight: bold">Spouse</h5>
-                    </a>
-                  </div>
+          <div class="col mb-4 box">
+            @if (!empty(auth()->user()->personal()->civil_status))
+              @if (auth()->user()->personal()->civil_status === 'Single')
+                <div class="stack-top">
+                  <span class="d-flex flex-column align-items-center">
+                    <span><i class="fas fa-lock mb-3" style="color: white; font-size: 3rem"></i></span>
+                    <small class="mb-3" style="color: white; font-size: 1rem">You're civil status is {{ auth()->user()->personal()->civil_status }}</small>
+                  </span>
+                </div>
+              @endif
+            @endif
+            <div class="card has-no-shadow">
+              <a href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.show', Auth::user()->id) : route('spouse.create') }}" class="card__image">
+                <img src="{{ asset('img/for-family/spouse.png') }}">
+              </a>
+              <div class="card__content">
+                <p class="grid has-no-col-padding has-text-grey">
+                  <small class="column">
+                      @if (!empty(auth()->user()->family->spouse))
+                        Updated at {{ auth()->user()->family->spouse->created_at->diffForHumans() }}
+                      @else
+                        No Data
+                      @endif
+                  </small>
+                </p>
+                <a href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.show', Auth::user()->id) : route('spouse.create') }}" class="is-hover-underline has-text-black">
+                  <h5 style="font-weight: bold">Spouse</h5>
+                </a>
               </div>
+            </div>  
           </div>
           <div class="col mb-4">
               <div class="card has-no-shadow">
@@ -36,10 +50,8 @@
                     <img src="{{ asset('img/for-family/children.png') }}">
                   </a>
                   <div class="card__content">
-                    <p class="grid has-no-col-padding has-text-light-grey">
-                      <small class="column">
-                        Updated at 3 mins ago
-                      </small>
+                    <p class="grid has-no-col-padding has-text-grey">
+                      <small class="column">No Data</small>
                     </p>
                     <a href="#" class="is-hover-underline has-text-black">
                       <h5 style="font-weight: bold">Children</h5>
@@ -49,16 +61,20 @@
           </div>
           <div class="col mb-4">
              <div class="card has-no-shadow">
-                  <a href="#" class="card__image">
+                  <a href="{{ !empty(auth()->user()->family->father) ? route('father.show', Auth::user()->id) : route('father.create') }}" class="card__image">
                     <img src="{{ asset('img/for-family/father.png') }}">
                   </a>
                   <div class="card__content">
-                    <p class="grid has-no-col-padding has-text-light-grey">
+                    <p class="grid has-no-col-padding has-text-grey">
                       <small class="column">
-                        Updated at 3 mins ago
+                        @if (!empty(auth()->user()->family->father))
+                          Updated at {{ auth()->user()->family->father->created_at->diffForHumans() }}
+                        @else
+                          No Data
+                        @endif
                       </small>
                     </p>
-                    <a href="#" class="is-hover-underline has-text-black">
+                    <a href="{{ !empty(auth()->user()->family->father) ? route('father.show', Auth::user()->id) : route('father.create') }}" class="is-hover-underline has-text-black">
                       <h5 style="font-weight: bold">Father</h5>
                     </a>
                   </div>
@@ -66,16 +82,20 @@
           </div>
           <div class="col mb-4">
               <div class="card has-no-shadow">
-                <a href="#" class="card__image">
+                <a href="{{ !empty(auth()->user()->family->mother) ? route('mother.show', Auth::user()->id) : route('mother.create') }}" class="card__image">
                   <img src="{{ asset('img/for-family/mother.png') }}">
                 </a>
                 <div class="card__content">
-                  <p class="grid has-no-col-padding has-text-light-grey">
+                  <p class="grid has-no-col-padding has-text-grey">
                     <small class="column">
-                      Updated at 3 mins ago
+                      @if (!empty(auth()->user()->family->mother))
+                        Updated at {{ auth()->user()->family->mother->created_at->diffForHumans() }}
+                      @else
+                        No Data
+                      @endif
                     </small>
                   </p>
-                  <a href="#" class="is-hover-underline has-text-black">
+                  <a href="{{ !empty(auth()->user()->family->mother) ? route('mother.show', Auth::user()->id) : route('mother.create') }}" class="is-hover-underline has-text-black">
                     <h5 style="font-weight: bold">Mother</h5>
                   </a>
                 </div>

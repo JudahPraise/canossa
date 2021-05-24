@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Employee\Portfolio\Family;
 
-use App\Http\Controllers\Controller;
+use App\Family;
+use App\Father;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class FatherController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -24,7 +28,7 @@ class FatherController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.portfolio.family-background.father.create');
     }
 
     /**
@@ -35,7 +39,18 @@ class FatherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $father = Father::create([
+            'family_id' => Auth::user()->family->id,
+            'surname' => $request->surname,
+            'firstname' => $request->firstname,
+            'middlename' => $request->middlename,
+            'occupation' => $request->occupation,
+            'employer_business_name' => $request->employer_business_name,
+            'business_address' => $request->business_address,
+            'tel_no' => $request->tel_no,
+        ]);
+
+        return redirect()->route('family.index', 'card');
     }
 
     /**
@@ -46,7 +61,9 @@ class FatherController extends Controller
      */
     public function show($id)
     {
-        //
+        $family = Family::where('user_id','=',$id)->with('father')->first();
+        $father = $family->father->first();
+        return view('employee.portfolio.family-background.father.show', compact('father'));
     }
 
     /**
@@ -57,7 +74,9 @@ class FatherController extends Controller
      */
     public function edit($id)
     {
-        //
+        $family = Family::where('user_id','=',$id)->with('father')->first();
+        $father = $family->father->first();
+        return view('employee.portfolio.family-background.father.edit', compact('father'));
     }
 
     /**
@@ -69,7 +88,22 @@ class FatherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $father = Father::where('family_id','=',$id)->update([
+            'family_id' => Auth::user()->family->id,
+            'surname' => $request->surname,
+            'firstname' => $request->firstname,
+            'middlename' => $request->middlename,
+            'occupation' => $request->occupation,
+            'employer_business_name' => $request->employer_business_name,
+            'business_address' => $request->business_address,
+            'tel_no' => $request->tel_no
+        ]);
+
+        $family = Family::where('id','=',$id)->update([
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('father.show', Auth::user()->id);
     }
 
     /**

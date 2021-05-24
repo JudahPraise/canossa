@@ -18,6 +18,7 @@ class CreateFamiliesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('family_name');
+            // $table->boolean('isFilled')->default(0);
             $table->timestamps();
         });
     }

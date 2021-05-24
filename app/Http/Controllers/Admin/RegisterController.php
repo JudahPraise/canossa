@@ -57,7 +57,7 @@ class RegisterController extends Controller
 
         $employee->save();
 
-        $employee->family()->create([
+        $employee->setFamily()->create([
             'user_id' => $employee->id,
             'family_name' => $employee->name,
         ]);

@@ -19,9 +19,13 @@
                       <img src="{{ asset('img/for-portfolio/Personal site-cuate.svg') }}" alt="">
                     </a>
                     <div class="card__content">
-                      <p class="grid has-no-col-padding has-text-light-grey">
+                      <p class="grid has-no-col-padding has-text-grey">
                         <small class="column">
-                          Updated at 3 mins ago
+                          @if (!empty(auth()->user()->personal()))
+                            Updated at {{ auth()->user()->personal()->updated_at->diffForHumans() }}
+                          @else
+                            No data yet
+                          @endif
                         </small>
                       </p>
                       <a href="{{ route('personal.index') }}" class="is-hover-underline has-text-black">
@@ -36,9 +40,13 @@
                       <img src="{{ asset('img/for-portfolio/Family-cuate.svg') }}" alt="">
                     </a>
                     <div class="card__content">
-                      <p class="grid has-no-col-padding has-text-light-grey">
+                      <p class="grid has-no-col-padding has-text-grey">
                         <small class="column">
-                          Updated at 3 mins ago
+                          @if (!empty(auth()->user()->family))
+                            Updated at {{ auth()->user()->family->updated_at->diffForHumans() }}
+                          @else
+                            No data yet
+                          @endif
                         </small>
                       </p>
                       <a href="{{ route('family.index', 'card') }}" class="is-hover-underline has-text-black">
@@ -75,7 +83,7 @@
                       Updated at 3 mins ago
                     </small>
                   </p>
-                  <a href="{{ route('educ.index', 'card') }}" class="is-hover-underline has-text-black">
+                  <a href="{{ route('work.index') }}" class="is-hover-underline has-text-black">
                     <h5 style="font-weight: bold">Work Experience</h5>
                   </a>
                 </div>

@@ -20,7 +20,13 @@
           </div>
           <div class="media__content d-flex flex-column">
               <strong style="font-size: 1.5rem">Personal Information</strong>
-              <small style="text-muted" style="font-size: 1rem">updated at 27m ago</small>
+              <small style="text-muted" style="font-size: 1rem">
+                @if (!empty(auth()->user()->personal()))
+                  Updated at {{ auth()->user()->personal()->created_at->diffForHumans() }}
+                @else
+                  No data yet
+                @endif
+              </small>
           </div>
         </div>
       </a>
@@ -33,7 +39,13 @@
           </div>
           <div class="media__content d-flex flex-column">
               <strong style="font-size: 1.5rem">Family Background</strong>
-              <small style="text-muted" style="font-size: 1rem">updated at 27m ago</small>
+              <small style="text-muted" style="font-size: 1rem">
+                  @if (!empty(auth()->user()->family))
+                    Updated at {{ auth()->user()->family->updated_at->diffForHumans() }}
+                  @else
+                    No data yet
+                  @endif
+              </small>
           </div>
         </div>
       </a>
