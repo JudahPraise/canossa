@@ -2,13 +2,14 @@
 
 @section('portfolio')
 
-<div class="container-fluid">
+<div class="container-fluid cont">
 
     <div class="row">
         @yield('family')
-    </div>
+    </div>  
 
-    @if(url()->current() === route('family.index', 'card') || url()->current() === route('family.index', 'list'))
+    <div class="container-fluid">
+        @if(url()->current() === route('family.index', 'card') || url()->current() === route('family.index', 'list'))
         <div class="row row-cols-1 row-cols-md-2 mt-3">
             <div class="col mb-3 d-flex flex-column">
                 <strong style="color: black; font-size: 1.5rem">Spouse</strong>
@@ -61,32 +62,21 @@
                 </div>
                 <hr>
                 <strong style="color: black; font-size: 1.5rem">Children</strong>
-                <div class="row row-cols-1 row-cols-md-2 mt-3">
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">Name</strong>
-                        <strong style="color: black; font-size: 1.3rem">Not Set</strong>
+                @forelse ($children as $child)
+                    <div class="row row-cols-1 row-cols-md-2 mt-3">
+                        <div class="col mb-3 d-flex flex-column">
+                            <strong style="font-size: 1rem">Name</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ $child->name }}</strong>
+                        </div>
+                        <div class="col mb-3 d-flex flex-column">
+                            <strong style="font-size: 1rem">Date of birth</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ $child->date_of_birth }}</strong>
+                        </div>
                     </div>
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">Occupation</strong>
-                        <strong style="color: black; font-size: 1.3rem">Not Set</strong>
-                    </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-2">
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">Employer business name</strong>
-                        <strong style="color: black; font-size: 1.3rem">Not Set</strong>
-                    </div>
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">Business address</strong>
-                        <strong style="color: black; font-size: 1.3rem">Not Set</strong>
-                    </div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-1">
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">Telephone number</strong>
-                        <strong style="color: black; font-size: 1.3rem">Not Set</strong>
-                    </div>
-                </div>
+                @empty
+                    
+                @endforelse
+                {{ $children->links() }}
             </div>
             <div class="col mb-3 d-flex flex-column">
                 <strong style="color: black; font-size: 1.5rem">Mother</strong>
@@ -189,6 +179,7 @@
             </div>
         </div>
     @endif
-    
+    </div>
+
 </div>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee\Portfolio\Family;
 use App\Family;
 use App\Mother;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +48,10 @@ class MotherController extends Controller
             'employer_business_name' => $request->employer_business_name,
             'business_address' => $request->business_address,
             'tel_no' => $request->tel_no,
+        ]);
+
+        $family = Family::where('id','=',Auth::user()->family->id)->update([
+            'updated_at' => Carbon::now()
         ]);
 
         return redirect()->route('family.index', 'card');
@@ -98,6 +103,10 @@ class MotherController extends Controller
             'tel_no' => $request->tel_no
         ]);
 
+        $family = Family::where('id','=',Auth::user()->family->id)->update([
+            'updated_at' => Carbon::now()
+        ]);
+        
         return redirect()->route('mother.show', Auth::user()->id);
     }
 

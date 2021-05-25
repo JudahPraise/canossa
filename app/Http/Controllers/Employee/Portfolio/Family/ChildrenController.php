@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Employee\Portfolio\Family;
 
-use App\Http\Controllers\Controller;
+use App\Family;
+use App\Children;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ChildrenController extends Controller
 {
@@ -24,7 +28,7 @@ class ChildrenController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.portfolio.family-background.children.create');
     }
 
     /**
@@ -35,7 +39,25 @@ class ChildrenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $children =[];
+
+        foreach ($request->name as $item => $key) {
+            $children[] = ([
+                'family_id' => Auth::user()->family->id,
+                'name' => $request->name[$item],
+                'date_of_birth' => $request->date_of_birth[$item],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        Children::insert($children);
+
+        $family = Family::where('id','=',Auth::user()->family->id)->update([
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('children.show', Auth::user()->id);
     }
 
     /**
@@ -46,7 +68,10 @@ class ChildrenController extends Controller
      */
     public function show($id)
     {
-        //
+        $family = Family::where('user_id','=',$id)->with('children')->get();
+        $children = $family->first()->children;
+        // dd($children);
+        return view('employee.portfolio.family-background.children.show', compact('children'));
     }
 
     /**
@@ -57,7 +82,9 @@ class ChildrenController extends Controller
      */
     public function edit($id)
     {
-        //
+        $family = Family::where('user_id','=',$id)->with('children')->get();
+        $children = $family->first()->children;
+        return view('employee.portfolio.family-background.children.edit', compact('children'));
     }
 
     /**
@@ -69,7 +96,19 @@ class ChildrenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Children::where('id','=',$id)->first()->update([
+            'family_id' => Auth::user()->family->id,
+            'name' => $request->name,
+            'date_of_birth' => $request->date_of_birth,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        
+        $family = Family::where('id','=',Auth::user()->family->id)->update([
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('children.show', Auth::user()->id);
     }
 
     /**
@@ -80,6 +119,7 @@ class ChildrenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $child = Children::where('id', $id)->first()->delete();
+        return redirect()->route('children.show', Auth::user()->id);
     }
 }

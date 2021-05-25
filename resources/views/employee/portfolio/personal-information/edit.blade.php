@@ -2,7 +2,7 @@
 
 @section('personal')
 
-<div class="container-fluid">
+<div class="container-fluid pb-lg-5" style="padding-bottom: 20rem">
     <form id="form" action="{{ route('personal.update', $personal->user_id) }}" method="POST">
         @method('PUT')
         @csrf

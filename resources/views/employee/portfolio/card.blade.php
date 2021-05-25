@@ -1,7 +1,7 @@
 @extends('employee.portfolio.index')
 
 @section('portfolio')
-    <div class="container-fluid p-0 ">
+    <div class="container-fluid pl-4 pr-3 cont-long">
       <div class="row pt-5">
         <div class="col-6 d-flex align-items-center" style="height: 4rem;">
           <h3 class="font-weight-bold" style="color: black">Portfolio</h3>

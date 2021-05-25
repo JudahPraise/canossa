@@ -50,6 +50,10 @@ class FatherController extends Controller
             'tel_no' => $request->tel_no,
         ]);
 
+        $family = Family::where('id','=',Auth::user()->family->id)->update([
+            'updated_at' => Carbon::now()
+        ]);
+        
         return redirect()->route('family.index', 'card');
     }
 
@@ -99,7 +103,7 @@ class FatherController extends Controller
             'tel_no' => $request->tel_no
         ]);
 
-        $family = Family::where('id','=',$id)->update([
+        $family = Family::where('id','=',Auth::user()->family->id)->update([
             'updated_at' => Carbon::now()
         ]);
 

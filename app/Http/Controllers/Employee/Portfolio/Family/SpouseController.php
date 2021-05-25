@@ -48,7 +48,11 @@ class SpouseController extends Controller
             'business_address' => $request->business_address,
             'tel_no' => $request->tel_no,
         ]);
-
+        
+        $family = Family::where('id','=',Auth::user()->family->id)->update([
+            'updated_at' => Carbon::now()
+        ]);
+        
         return redirect()->route('family.index', 'card');
     }
 
@@ -96,6 +100,10 @@ class SpouseController extends Controller
             'employer_business_name' => $request->employer_business_name,
             'business_address' => $request->business_address,
             'tel_no' => $request->tel_no
+        ]);
+
+        $family = Family::where('id','=',Auth::user()->family->id)->update([
+            'updated_at' => Carbon::now()
         ]);
 
         return redirect()->route('spouse.show', Auth::user()->id);

@@ -56,9 +56,7 @@ class ScheduleController extends Controller
 
     public function delete($id){
 
-        $schedule = Schedule::where('id','=',$id)->first();
-        $schedule->delete();
-
+        $schedule = Schedule::where('id','=',$id)->first()->delete();
         return redirect()->route('schedule.index');
 
     }

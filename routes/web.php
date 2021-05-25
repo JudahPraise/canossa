@@ -113,6 +113,15 @@ Route::prefix('employee')->group(function(){
                 Route::get('/edit/{id}', 'Employee\Portfolio\Family\FatherController@edit')->name('father.edit');
                 Route::put('/update/{id}', 'Employee\Portfolio\Family\FatherController@update')->name('father.update');
             });
+            //Children
+            Route::prefix('/children')->group(function(){
+                Route::get('/create', 'Employee\Portfolio\Family\ChildrenController@create')->name('children.create');
+                Route::post('/store', 'Employee\Portfolio\Family\ChildrenController@store')->name('children.store');
+                Route::get('/show/{id}', 'Employee\Portfolio\Family\ChildrenController@show')->name('children.show');
+                Route::get('/edit/{id}', 'Employee\Portfolio\Family\ChildrenController@edit')->name('children.edit');
+                Route::put('/update/{id}', 'Employee\Portfolio\Family\ChildrenController@update')->name('children.update');
+                Route::delete('/destroy/{id}', 'Employee\Portfolio\Family\ChildrenController@destroy')->name('children.destroy');
+            });
         });
         //Educational Background
         Route::prefix('/educational-background')->group(function(){

@@ -2,7 +2,7 @@
 
 @section('personal')
 
-<div class="container-fluid">
+<div class="container-fluid cont">
     <div class="row">
         <strong style="font-weight: bold; color: black; font-size: 2.8rem">{{ $personal->fullName() }}</strong>
     </div>

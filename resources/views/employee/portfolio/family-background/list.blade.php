@@ -1,7 +1,7 @@
 @extends('employee.portfolio.family-background.index')
 
 @section('family')
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 cont">
       <div class="row pt-5">
         <div class="col-6 d-flex align-items-center" style="height: 4rem;">
           <h3 class="font-weight-bold" style="color: black">Family Background</h3>
@@ -41,7 +41,7 @@
           </div>
         </div>
       </a>
-      <a class="panel mb-3 mt-3 p-0 text-decoration-none has-text-black">
+      <a class="panel mb-3 mt-3 p-0 text-decoration-none has-text-black" href="{{ !empty(auth()->user()->family->children->first()) ? route('children.show', Auth::user()->id) : route('children.create') }}">
           <div class="media d-flex align-items-center">
             <div class="media__left">
               <div class="image is-small-square">
@@ -50,11 +50,17 @@
             </div>
             <div class="media__content d-flex flex-column">
               <h5 style="font-weight: bold">Children</h5>
-              <small style="text-muted" style="font-size: 1rem">No Data</small>
+              <small style="text-muted" style="font-size: 1rem">
+                @if (!empty(auth()->user()->family->children->first()->created_at))
+                Updated at {{ auth()->user()->family->children->first()->created_at->diffForhumans() }}
+                @else
+                  No Data
+                @endif
+              </small>
             </div>
           </div>
       </a>
-      <a class="panel mb-3 mt-3 p-0 text-decoration-none has-text-black" href="{{ !empty(auth()->user()->family->father) ? route('father.show', Auth::user()->id) : route('father.create') }}">
+      <a class="panel mb-3 mt-3 p-0 text-decoration-none has-text-black" href="{{ !empty(auth()->user()->family->father->first()) ? route('father.show', Auth::user()->id) : route('father.create') }}">
         <div class="media d-flex align-items-center">
           <div class="media__left">
             <div class="image is-small-square">

@@ -116,7 +116,7 @@ ion-icon{
 .neu-effect-inset{
     border-radius: 0.8rem;
     background: linear-gradient(145deg, #e6e6e6, #ffffff);
-box-shadow:  6px 6px 12px #dedede,
+  box-shadow:  6px 6px 12px #dedede,
              -6px -6px 12px #ffffff;
 
 }
@@ -132,13 +132,14 @@ box-shadow:  6px 6px 12px #dedede,
 
 #wrapper {
   width: 100%;
-  overflow: hidden;
+  position: absolute;
 }
   
 #sidebar-wrapper {
   height: 100vh;
   margin-left: -21rem; /*? */
   transition: margin 0.25s ease-out;
+  /* position: fixed; */
 }
 
 #sidebar-wrapper .sidenavs{
@@ -266,4 +267,5 @@ box-shadow:  6px 6px 12px #dedede,
   transition: opacity 200ms ease-in-out;
   border-radius: 4px;
 }
+
 

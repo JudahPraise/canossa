@@ -1,7 +1,7 @@
 @extends('employee.portfolio.family-background.index')
 
 @section('family')
-    <div class="container-fluid p-0 ">
+    <div class="container-fluid pl-4">
       <div class="row pt-5">
         <div class="col-6 d-flex align-items-center" style="height: 4rem;">
           <h3 class="font-weight-bold" style="color: black">Family Background</h3>
@@ -46,14 +46,20 @@
           </div>
           <div class="col mb-4">
               <div class="card has-no-shadow">
-                  <a href="#" class="card__image">
+                  <a href="{{ !empty(auth()->user()->family->children->first()) ? route('children.show', Auth::user()->id) : route('children.create') }}" class="card__image">
                     <img src="{{ asset('img/for-family/children.png') }}">
                   </a>
                   <div class="card__content">
                     <p class="grid has-no-col-padding has-text-grey">
-                      <small class="column">No Data</small>
+                      <small class="column">
+                        @if (!empty(auth()->user()->family->children->first()->created_at))
+                          Updated at {{ auth()->user()->family->children->first()->created_at->diffForhumans() }}
+                        @else
+                          No Data
+                        @endif
+                      </small>
                     </p>
-                    <a href="#" class="is-hover-underline has-text-black">
+                    <a href="{{ !empty(auth()->user()->family->children->first()) ? route('children.show', Auth::user()->id) : route('children.create') }}" class="is-hover-underline has-text-black">
                       <h5 style="font-weight: bold">Children</h5>
                     </a>
                   </div>

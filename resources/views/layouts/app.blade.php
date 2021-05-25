@@ -43,6 +43,7 @@
     <main>
         @yield('content')
     </main>
+    
     <script  src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="{{ asset('js/sidenav.js') }}"></script>

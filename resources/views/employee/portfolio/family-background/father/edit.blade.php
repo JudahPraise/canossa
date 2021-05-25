@@ -2,7 +2,7 @@
 
 @section('father')
     <div class="container-fluid">
-        <form action="{{ route('father.update', Auth::user()->id) }}" method="POST">
+        <form action="{{ route('father.update', Auth::user()->family->id) }}" method="POST">
             @method('PUT')
             @csrf
             <div class="form-row">

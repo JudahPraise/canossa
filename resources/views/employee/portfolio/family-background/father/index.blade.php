@@ -2,7 +2,7 @@
 
 @section('family')
 
-<div class="container-fluid">
+<div class="container-fluid cont">
     <div class="row pt-5 mb-3">
         <div class="col-6 d-flex align-items-center" style="height: 4rem;">
           <h3 class="font-weight-bold" style="color: black">Father</h3>

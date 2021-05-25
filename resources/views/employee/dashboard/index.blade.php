@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-md btn-success" data-toggle="modal" data-target="#createModal">Add Schedule</button>
+      <button class="btn btn-md btn-success" data-toggle="modal" data-target="#schedule">Add Schedule</button>
     </div>
   </div>
 
@@ -30,38 +30,39 @@
     <table class="table table-striped table-hover table-borderless">
       <thead>
         <tr class="border" style="color: black">
-          <th scope="col">Title</th>
-          <th scope="col">Day</th>
-          <th scope="col">Time</th>
-          <th scope="col">Action</th>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         @forelse ($schedules as $schedule)
-        <tr class="{{ $schedule->day == Carbon\Carbon::now()->format( 'l' ) ? 'glowing-border' : 'border'}}" style="color: black;">
-          <th scope="row">{{ $schedule->title }}</th>
-          @if ($schedule->day == Carbon\Carbon::now()->format( 'l' ))
-          <td>Today</td>
-          @else
-          <td>{{ $schedule->day }}</td>
-          @endif
-          <td>{{ $schedule->time_from.' '.'-'.' '.$schedule->time_to }}</td>
-          <td>
-            <a href="" class="sched" 
-            data-schedid="{{ $schedule->id }}"
-            data-schedtitle="{{ $schedule->title }}"
-            data-schedday="{{ $schedule->day }}"
-            data-schedtimefrom="{{ $schedule->time_from }}"
-            data-schedtimeto="{{ $schedule->time_to }}"
-            data-toggle="modal" data-target="#editModal"><i class="fas fa-edit text-primary px-3" style="font-size: 1.5rem"></i></a>
-            <a href="" onclick="event.preventDefault();
-            document.getElementById('delete').submit();"><i class="fas fa-trash-alt text-danger" style="font-size: 1.5rem"></i></a>
-            <form action="{{ route('schedule.delete', $schedule->id) }}" method="POST" id='delete'>
-              @csrf
-              @method('DELETE')
-            </form>
-          </td>
-        </tr>
+          <tr class="{{ $schedule->day == Carbon\Carbon::now()->format( 'l' ) ? 'glowing-border' : 'border'}}" style="color: black;">
+            <th>{{ $schedule->id }}</th>  
+            <th>{{ $schedule->title }}</th>  
+            @if ($schedule->day == Carbon\Carbon::now()->format( 'l' ))
+            <td>Today</td>
+            @else
+            <td>{{ $schedule->day }}</td>
+            @endif
+            <td>{{ $schedule->time_from.' '.'-'.' '.$schedule->time_to }}</td>
+            <td class="d-flex">
+              <a href="" class="sched" 
+              data-schedid="{{ $schedule->id }}"
+              data-schedtitle="{{ $schedule->title }}"
+              data-schedday="{{ $schedule->day }}"
+              data-schedtimefrom="{{ $schedule->time_from }}"
+              data-schedtimeto="{{ $schedule->time_to }}"
+              data-toggle="modal" data-target="#editModal"><i class="fas fa-edit text-primary px-3" style="font-size: 1.5rem"></i></a>
+              <form action="{{ route('schedule.delete', $schedule->id) }}" method="POST" id='delete'>
+                @method('DELETE')
+                @csrf
+                  <button type="submit" style="border: 0; padding: 0; margin: 0;"><i class="fas fa-trash-alt text-danger" style="font-size: 1.5rem"></i></button>
+              </form>
+            </td>
+          </tr>
         @empty
           <tr>
             <td class="text-center" colspan="4">You do not have schedule</td>
@@ -76,7 +77,7 @@
 
 
 <!-- Create Modal -->
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="schedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
