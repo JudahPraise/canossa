@@ -66,7 +66,7 @@
             </div>
           @endif
            <div class="card has-no-shadow">
-                <a href="#" class="card__image">
+                <a href="{{ !empty(auth()->user()->education->col ) ? route('educ.show', Auth::user()->id) : route('col.create') }}" class="card__image">
                   <img src="{{ asset('img/for-educ/college.png') }}">
                 </a>
                 <div class="card__content">
@@ -75,7 +75,7 @@
                       Updated at 3 mins ago
                     </small>
                   </p>
-                  <a href="#" class="is-hover-underline has-text-black">
+                  <a href="{{ !empty(auth()->user()->education->col ) ? route('educ.show', Auth::user()->id) : route('col.create') }}" class="is-hover-underline has-text-black">
                     <h5 style="font-weight: bold">College</h5>
                   </a>
                 </div>

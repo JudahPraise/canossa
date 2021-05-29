@@ -107,6 +107,10 @@
                 <strong style="font-size: 1rem">Name of school</strong>
                 <strong style="color: black; font-size: 1.3rem">{{ $education->col->name_of_school }}</strong>
             </div>
+            <div class="col mb-3 d-flex flex-column">
+                <strong style="font-size: 1rem">Course</strong>
+                <strong style="color: black; font-size: 1.3rem">{{ $education->col->course_degree }}</strong>
+            </div>
             @if(!empty($education->col->level_units_earned))
                 <div class="col mb-3 d-flex flex-column">
                     <strong style="font-size: 1rem">Level units earned</strong>
@@ -133,15 +137,15 @@
             <strong style="font-weight: bold; color: black; font-size: 1.5rem">Graduate Studies</strong>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
-            <form action="{{ !empty(auth()->user()->education->grad) ? route('grad.delete', $education->grad->id) : '#' }}" method="POST">
+            <form action="{{ !empty(auth()->user()->education->grad->first()) ? route('grad.delete', $education->grad->id) : '#' }}" method="POST">
                 @method('DELETE')
                 @csrf
                 <button type="submit" class="neu-effect d-flex justify-content-center align-items-center text-decoration-none py-2 px-2" style="display:inline-block; border: 0; width: 2.6rem; height: 2.6rem"><i class="fas fa-trash text-danger" style="font-size: 1.6rem"></i></button>
             </form>
-            <a href="{{ !empty(auth()->user()->education->grad) ? route('grad.edit', $education->grad->id ) : '#' }}" class="neu-effect ml-2 d-flex justify-content-center align-items-center text-decoration-none py-2 px-2" style="display:inline-block;"><i class="fas fa-edit" style="font-size: 1.6rem"></i></a>
+            <a href="{{ !empty(auth()->user()->education->grad->first()) ? route('grad.edit', $education->grad->id ) : '#' }}" class="neu-effect ml-2 d-flex justify-content-center align-items-center text-decoration-none py-2 px-2" style="display:inline-block;"><i class="fas fa-edit" style="font-size: 1.6rem"></i></a>
         </div>
     </div>
-    @if (!empty(auth()->user()->education->grad))
+    @if (!empty(auth()->user()->education->grad->first()))
         <div class="row row-cols-2 row-cols-md-4 mt-3">
             <div class="col mb-3 d-flex flex-column">
                 <strong style="font-size: 1rem">Name of school</strong>

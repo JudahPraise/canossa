@@ -38,7 +38,7 @@
               </div>
             </div>
         </a>
-        <a class="panel mb-3 mt-3 text-decoration-none has-text-black">
+        <a class="panel mb-3 mt-3 text-decoration-none has-text-black" href="{{ !empty(auth()->user()->education->col ) ? route('educ.show', Auth::user()->id) : route('col.create') }}">
           <div class="media d-flex align-items-center">
             <div class="media__left">
               <div class="image is-small-square">
