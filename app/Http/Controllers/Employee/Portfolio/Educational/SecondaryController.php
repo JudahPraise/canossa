@@ -52,7 +52,7 @@ class SecondaryController extends Controller
             'secondary' => true
         ]);
 
-        return redirect()->route('educ.index', 'card');
+        return redirect()->route('educ.show', Auth::user()->id);
     }
 
     /**
@@ -74,7 +74,8 @@ class SecondaryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $secondary = Secondary::where('id','=',$id)->first();
+        return view('employee.portfolio.educational-background.secondary.edit', compact('secondary'));
     }
 
     /**
@@ -86,7 +87,20 @@ class SecondaryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Secondary::where('id','=',$id)->update([
+            'educ_id' => Auth::user()->education->id,
+            'name_of_school' => $request->name_of_school,
+            'level_units_earned' => $request->level_units_earned,
+            'graduated_date_from' => $request->graduated_date_from,
+            'graduated_date_to' => $request->graduated_date_to,
+            'academic_reward' => $request->academic_reward,
+        ]);
+
+        EducationalBackground::where('user_id','=',Auth::user()->id)->update([
+            'secondary' => true
+        ]);
+
+        return redirect()->route('educ.show', Auth::user()->id);
     }
 
     /**
@@ -97,6 +111,9 @@ class SecondaryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $secondary = Secondary::where('id','=',$id)->first();
+        $secondary->delete();
+        
+        return redirect()->back();
     }
 }

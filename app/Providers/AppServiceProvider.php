@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
 
         // view()->composer('partials.employee.top-bar', function ($view) {
             
-        //    dd(auth()->user()->education->col);
+        //     dd(auth()->user()->education->grad->first());
 
         // });
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee\Portfolio\Family;
 use App\Family;
 use App\Spouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +40,7 @@ class SpouseController extends Controller
     public function store(Request $request)
     {
         $spouse = Spouse::create([
-            'family_id' => Auth::user()->family()->id,
+            'family_id' => Auth::user()->family->id,
             'surname' => $request->surname,
             'firstname' => $request->firstname,
             'middlename' => $request->middlename,

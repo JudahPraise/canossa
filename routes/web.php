@@ -137,12 +137,23 @@ Route::prefix('employee')->group(function(){
             Route::prefix('/sec')->group(function(){
                 Route::get('/create', 'Employee\Portfolio\Educational\SecondaryController@create')->name('sec.create');
                 Route::post('/store', 'Employee\Portfolio\Educational\SecondaryController@store')->name('sec.store');
+                Route::get('/edit/{id}', 'Employee\Portfolio\Educational\SecondaryController@edit')->name('sec.edit');
+                Route::put('/update/{id}', 'Employee\Portfolio\Educational\SecondaryController@update')->name('sec.update');
+                Route::delete('/delete/{id}', 'Employee\Portfolio\Educational\SecondaryController@destroy')->name('sec.delete');
             });
             Route::prefix('/col')->group(function(){
-                //
+                Route::get('/create', 'Employee\Portfolio\Educational\CollegeController@create')->name('col.create');
+                Route::post('/store', 'Employee\Portfolio\Educational\CollegeController@store')->name('col.store');
+                Route::get('/edit/{id}', 'Employee\Portfolio\Educational\CollegeController@edit')->name('col.edit');
+                Route::put('/update/{id}', 'Employee\Portfolio\Educational\CollegeController@update')->name('col.update');
+                Route::delete('/delete/{id}', 'Employee\Portfolio\Educational\CollegeController@destroy')->name('col.delete');
             });
             Route::prefix('/grad')->group(function(){
-                //
+                Route::get('/create', 'Employee\Portfolio\Educational\GraduateStudyController@create')->name('grad.create');
+                Route::post('/store', 'Employee\Portfolio\Educational\GraduateStudyController@store')->name('grad.store');
+                Route::get('/edit/{id}', 'Employee\Portfolio\Educational\GraduateStudyController@edit')->name('grad.edit');
+                Route::put('/update/{id}', 'Employee\Portfolio\Educational\GraduateStudyController@update')->name('grad.update');
+                Route::delete('/delete/{id}', 'Employee\Portfolio\Educational\GraduateStudyController@destroy')->name('grad.delete');
             });
         });
         //Work Experience

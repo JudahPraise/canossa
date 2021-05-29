@@ -25,6 +25,6 @@ class EducationalBackground extends Model
     }
 
     public function grad(){
-        return $this->hasOne(GraduateStudy::class, 'educ_id');
+        return $this->hasMany(GraduateStudy::class, 'educ_id');
     }
 }

@@ -16,7 +16,7 @@
       <div class="row row-cols-2 row-cols-md-4 mt-3">
         <div class="col mb-4">
             <div class="card has-no-shadow">
-                <a href="{{ route('elem.create') }}" class="card__image">
+                <a href="{{ !empty(auth()->user()->education->elem ) ? route('educ.show', Auth::user()->id) : route('elem.create') }}" class="card__image">
                   <img src="{{ asset('img/for-educ/elementary.png') }}">
                 </a>
                 <div class="card__content">
@@ -25,7 +25,7 @@
                       Updated at 3 mins ago
                     </small>
                   </p>
-                  <a href="{{ route('elem.create') }}" class="is-hover-underline has-text-black">
+                  <a href="{{ !empty(auth()->user()->education->elem ) ? route('educ.show', Auth::user()->id) : route('elem.create') }}" class="is-hover-underline has-text-black">
                     <h5 style="font-weight: bold">Elementary</h5>
                   </a>
                 </div>
@@ -41,7 +41,7 @@
                 </div>
             @endif
             <div class="card has-no-shadow">
-                <a href="{{ route('sec.create') }}" class="card__image">
+                <a href="{{ !empty(auth()->user()->education->sec ) ? route('educ.show', Auth::user()->id) : route('sec.create') }}" class="card__image">
                   <img src="{{ asset('img/for-educ/secondary.png') }}">
                 </a>
                 <div class="card__content">
@@ -50,7 +50,7 @@
                       Updated at 3 mins ago
                     </small>
                   </p>
-                  <a href="{{ route('sec.create') }}" class="is-hover-underline has-text-black">
+                  <a href="{{ !empty(auth()->user()->education->sec ) ? route('educ.show', Auth::user()->id) : route('sec.create') }}" class="is-hover-underline has-text-black">
                     <h5 style="font-weight: bold">Secondary</h5>
                   </a>
                 </div>
