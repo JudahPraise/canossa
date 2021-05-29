@@ -41,7 +41,7 @@ class ScheduleController extends Controller
 
         $schedule = Schedule::where('id','=',$request->input('id'))->first();
 
-        $schedule->day_id = $request->input('day_id');
+        $schedule->day = $request->input('day');
         $schedule->user_id = Auth::user()->id;
         $schedule->title = $request->input('title');
         $schedule->time_from = $request->input('time_from');

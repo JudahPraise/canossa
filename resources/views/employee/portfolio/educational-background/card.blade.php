@@ -16,7 +16,7 @@
       <div class="row row-cols-2 row-cols-md-4 mt-3">
         <div class="col mb-4">
             <div class="card has-no-shadow">
-                <a href="#" class="card__image">
+                <a href="{{ route('elem.create') }}" class="card__image">
                   <img src="{{ asset('img/for-educ/elementary.png') }}">
                 </a>
                 <div class="card__content">
@@ -25,15 +25,23 @@
                       Updated at 3 mins ago
                     </small>
                   </p>
-                  <a href="#" class="is-hover-underline has-text-black">
+                  <a href="{{ route('elem.create') }}" class="is-hover-underline has-text-black">
                     <h5 style="font-weight: bold">Elementary</h5>
                   </a>
                 </div>
             </div>
         </div>
         <div class="col mb-4">
+            @if (empty(auth()->user()->education->elementary))
+                <div class="stack-top">
+                  <span class="d-flex flex-column align-items-center">
+                    <span><i class="fas fa-lock mb-3" style="color: white; font-size: 3rem"></i></span>
+                    {{-- <small class="mb-3" style="color: white; font-size: 1rem">You're civil status is {{ auth()->user()->personal()->civil_status }}</small> --}}
+                  </span>
+                </div>
+            @endif
             <div class="card has-no-shadow">
-                <a href="#" class="card__image">
+                <a href="{{ route('sec.create') }}" class="card__image">
                   <img src="{{ asset('img/for-educ/secondary.png') }}">
                 </a>
                 <div class="card__content">
@@ -42,13 +50,21 @@
                       Updated at 3 mins ago
                     </small>
                   </p>
-                  <a href="#" class="is-hover-underline has-text-black">
+                  <a href="{{ route('sec.create') }}" class="is-hover-underline has-text-black">
                     <h5 style="font-weight: bold">Secondary</h5>
                   </a>
                 </div>
             </div>
         </div>
         <div class="col mb-4">
+          @if (empty(auth()->user()->education->secondary))
+            <div class="stack-top">
+              <span class="d-flex flex-column align-items-center">
+                <span><i class="fas fa-lock mb-3" style="color: white; font-size: 3rem"></i></span>
+                {{-- <small class="mb-3" style="color: white; font-size: 1rem">You're civil status is {{ auth()->user()->personal()->civil_status }}</small> --}}
+              </span>
+            </div>
+          @endif
            <div class="card has-no-shadow">
                 <a href="#" class="card__image">
                   <img src="{{ asset('img/for-educ/college.png') }}">
@@ -66,6 +82,14 @@
             </div>
         </div>
         <div class="col mb-4">
+          @if (empty(auth()->user()->education->college))
+            <div class="stack-top">
+              <span class="d-flex flex-column align-items-center">
+                <span><i class="fas fa-lock mb-3" style="color: white; font-size: 3rem"></i></span>
+                {{-- <small class="mb-3" style="color: white; font-size: 1rem">You're civil status is {{ auth()->user()->personal()->civil_status }}</small> --}}
+              </span>
+            </div>
+          @endif
             <div class="card has-no-shadow">
               <a href="#" class="card__image">
                 <img src="{{ asset('img/for-educ/graduatestudy.png') }}">

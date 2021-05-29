@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Employee\Portfolio\Educational;
 
-use App\Http\Controllers\Controller;
+use App\Secondary;
 use Illuminate\Http\Request;
+use App\EducationalBackground;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SecondaryController extends Controller
 {
@@ -24,7 +27,8 @@ class SecondaryController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.portfolio.educational-background.secondary.create');
+        
     }
 
     /**
@@ -35,7 +39,20 @@ class SecondaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Secondary::create([
+            'educ_id' => Auth::user()->education->id,
+            'name_of_school' => $request->name_of_school,
+            'level_units_earned' => $request->level_units_earned,
+            'graduated_date_from' => $request->graduated_date_from,
+            'graduated_date_to' => $request->graduated_date_to,
+            'academic_reward' => $request->academic_reward,
+        ]);
+
+        EducationalBackground::where('user_id','=',Auth::user()->id)->update([
+            'secondary' => true
+        ]);
+
+        return redirect()->route('educ.index', 'card');
     }
 
     /**

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Employee\Portfolio\Educational;
 
-use App\Http\Controllers\Controller;
+use App\Elementary;
 use Illuminate\Http\Request;
+use App\EducationalBackground;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ElementaryController extends Controller
 {
@@ -14,7 +17,7 @@ class ElementaryController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +27,7 @@ class ElementaryController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.portfolio.educational-background.elementary.create');
     }
 
     /**
@@ -35,7 +38,20 @@ class ElementaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Elementary::create([
+            'educ_id' => Auth::user()->education->id,
+            'name_of_school' => $request->name_of_school,
+            'level_units_earned' => $request->level_units_earned,
+            'graduated_date_from' => $request->graduated_date_from,
+            'graduated_date_to' => $request->graduated_date_to,
+            'academic_reward' => $request->academic_reward,
+        ]);
+
+        EducationalBackground::where('user_id','=',Auth::user()->id)->update([
+            'elementary' => true
+        ]);
+
+        return redirect()->route('educ.show', Auth::user()->id);
     }
 
     /**
@@ -57,7 +73,8 @@ class ElementaryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $elementary = Elementary::where('id','=',$id)->first();
+        return view('employee.portfolio.educational-background.elementary.edit', compact('elementary'));
     }
 
     /**
@@ -69,7 +86,20 @@ class ElementaryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Elementary::where('id','=',$id)->update([
+            'educ_id' => Auth::user()->education->id,
+            'name_of_school' => $request->name_of_school,
+            'level_units_earned' => $request->level_units_earned,
+            'graduated_date_from' => $request->graduated_date_from,
+            'graduated_date_to' => $request->graduated_date_to,
+            'academic_reward' => $request->academic_reward,
+        ]);
+
+        EducationalBackground::where('user_id','=',Auth::user()->id)->update([
+            'elementary' => true
+        ]);
+
+        return redirect()->route('educ.show', Auth::user()->id);
     }
 
     /**
@@ -80,6 +110,9 @@ class ElementaryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $elementary = Elementary::where('id','=',$id)->first();
+        $elementary->delete();
+        
+        return redirect()->back();
     }
 }

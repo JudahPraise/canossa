@@ -12,7 +12,7 @@
             <a href="{{ route('educ.index', 'list') }}" class="neu-effect d-flex justify-content-center align-items-center text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-list" style="font-size: 1.4rem"></i></a>
         </div>
       </div>
-        <a class="panel mb-3 mt-3 text-decoration-none has-text-black" href="#">
+        <a class="panel mb-3 mt-3 text-decoration-none has-text-black" href="{{ route('elem.create') }}">
             <div class="media d-flex align-items-center">
               <div class="media__left">
                 <div class="image is-small-square">
@@ -25,7 +25,7 @@
               </div>
             </div>
         </a>
-        <a class="panel mb-3 mt-3 text-decoration-none has-text-black">
+        <a class="panel mb-3 mt-3 text-decoration-none has-text-black" href="{{ route('sec.create') }}">
             <div class="media d-flex align-items-center">
               <div class="media__left">
                 <div class="image is-small-square">

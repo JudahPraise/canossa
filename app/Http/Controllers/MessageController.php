@@ -81,7 +81,15 @@ class MessageController extends Controller
             $message->attachment = $filename;
         }
 
-        $employee = User::where('name','=',$message->send_to)->first();
+        if($request->filled('send_to')){
+
+            if($request->send_to === 'Admin'){
+                $employee = Admin::all();
+            }else{
+                $employee = User::where('name','=',$message->send_to)->first();
+            }
+
+        }
 
         $message->save();
         Notification::send($employee, new MessageNotification(Message::latest('id')->first()));

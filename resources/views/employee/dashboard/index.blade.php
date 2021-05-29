@@ -30,7 +30,6 @@
     <table class="table table-striped table-hover table-borderless">
       <thead>
         <tr class="border" style="color: black">
-          <th>ID</th>
           <th>Title</th>
           <th>Day</th>
           <th>Time</th>
@@ -39,8 +38,7 @@
       </thead>
       <tbody>
         @forelse ($schedules as $schedule)
-          <tr class="{{ $schedule->day == Carbon\Carbon::now()->format( 'l' ) ? 'glowing-border' : 'border'}}" style="color: black;">
-            <th>{{ $schedule->id }}</th>  
+          <tr class="{{ $schedule->day == Carbon\Carbon::now()->format( 'l' ) ? 'glowing-border' : 'border'}}" style="color: black;"> 
             <th>{{ $schedule->title }}</th>  
             @if ($schedule->day == Carbon\Carbon::now()->format( 'l' ))
             <td>Today</td>

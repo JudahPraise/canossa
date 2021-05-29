@@ -126,6 +126,24 @@ Route::prefix('employee')->group(function(){
         //Educational Background
         Route::prefix('/educational-background')->group(function(){
             Route::get('/index/{view}', 'Employee\Portfolio\Educational\MainController@index')->name('educ.index');
+            Route::get('show/{id}', 'Employee\Portfolio\Educational\MainController@show')->name('educ.show');
+            Route::prefix('/elem')->group(function(){
+                Route::get('/create', 'Employee\Portfolio\Educational\ElementaryController@create')->name('elem.create');
+                Route::post('/store', 'Employee\Portfolio\Educational\ElementaryController@store')->name('elem.store');
+                Route::get('/edit/{id}', 'Employee\Portfolio\Educational\ElementaryController@edit')->name('elem.edit');
+                Route::put('/update/{id}', 'Employee\Portfolio\Educational\ElementaryController@update')->name('elem.update');
+                Route::delete('/delete/{id}', 'Employee\Portfolio\Educational\ElementaryController@destroy')->name('elem.delete');
+            });
+            Route::prefix('/sec')->group(function(){
+                Route::get('/create', 'Employee\Portfolio\Educational\SecondaryController@create')->name('sec.create');
+                Route::post('/store', 'Employee\Portfolio\Educational\SecondaryController@store')->name('sec.store');
+            });
+            Route::prefix('/col')->group(function(){
+                //
+            });
+            Route::prefix('/grad')->group(function(){
+                //
+            });
         });
         //Work Experience
         Route::prefix('/work-experience')->group(function(){

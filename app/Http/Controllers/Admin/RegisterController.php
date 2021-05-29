@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Validator;
 class RegisterController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
     public function index(){
         $employees = User::paginate(10);
         return view('admin.manage-accounts.index', compact('employees', $employees));

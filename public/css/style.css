@@ -136,7 +136,7 @@ ion-icon{
 }
   
 #sidebar-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   margin-left: -21rem; /*? */
   transition: margin 0.25s ease-out;
   /* position: fixed; */
@@ -268,4 +268,23 @@ ion-icon{
   border-radius: 4px;
 }
 
+.test-box{  
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: red;
+}
 
+.test-box:hover{  
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.test-box:active{  
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: yellow;
+}

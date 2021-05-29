@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
 
         // view()->composer('partials.employee.top-bar', function ($view) {
             
-        //    dd(auth()->user()->family->children->first()->created_at->diffForhumans());
+        //    dd(auth()->user()->education->col);
 
         // });
 
