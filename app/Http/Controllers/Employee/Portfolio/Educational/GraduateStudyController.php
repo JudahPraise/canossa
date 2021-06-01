@@ -24,7 +24,7 @@ class GraduateStudyController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.portfolio.educational-background.graduate-study.create');
     }
 
     /**
@@ -35,7 +35,29 @@ class GraduateStudyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $graduate_studies = [];
+
+        foreach($request->name_of_school as $item => $key){
+            $graduate_studies[] = ([
+                'educ_id'=> Auth::user()->education->id,
+                'name_of_school'=> $request->name_of_school[$item],
+                'level'=> $request->level[$item],
+                'course'=> $request->course[$item],
+                'degree'=> $request->degree[$item],
+                'level_units_earned'=> $request->level_units_earned[$item],
+                'graduated_date_from'=> $request->graduated_date_from[$item],
+                'graduated_date_to'=> $request->graduated_date_to[$item],
+                'academic_reward'=> $request->academic_reward[$item],
+            ]);
+        }
+
+        GraduateStudy::insert($graduate_studies);
+
+        EducationalBackground::where('user_id','=',Auth::user()->id)->update([
+            'graduate_study' => true
+        ]);
+
+        return redirect()->route('educ.show', Auth::user()->id);
     }
 
     /**
@@ -69,7 +91,33 @@ class GraduateStudyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+
+        GraduateStudy::where('educ_id','=',$id)->delete();
+
+        $graduate_studies = [];
+
+        foreach($request->name_of_school as $item => $key){
+            $graduate_studies[] = ([
+                'educ_id'=> Auth::user()->education->id,
+                'name_of_school'=> $request->name_of_school[$item],
+                'level'=> $request->level[$item],
+                'course'=> $request->course[$item],
+                'degree'=> $request->degree[$item],
+                'level_units_earned'=> $request->level_units_earned[$item],
+                'graduated_date_from'=> $request->graduated_date_from[$item],
+                'graduated_date_to'=> $request->graduated_date_to[$item],
+                'academic_reward'=> $request->academic_reward[$item],
+            ]);
+        }
+
+        GraduateStudy::insert($graduate_studies);
+
+        EducationalBackground::where('user_id','=',Auth::user()->id)->update([
+            'graduate_study' => true
+        ]);
+
+        return redirect()->route('educ.show', Auth::user()->id);
     }
 
     /**

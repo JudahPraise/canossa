@@ -29,6 +29,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/orbit-css/orbit.css') }}" rel="stylesheet" >
     <link href="{{ asset('css/sb-admin-css/sb-admin-2.min.css') }}" rel="stylesheet">
+    
     @yield('dropzone-css')
 
     <style>
