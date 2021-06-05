@@ -1,57 +1,55 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion m-0 d-flex" id="accordionSidebar">
-
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-icon">
-            <img src="{{ asset('img/circle-logo.png') }}" alt="..." class="rounded-circle mr-2" height="40" width="40">
-        </div>
-        <div class="sidebar-brand-text mx-2">{{ config('app.name') }}</div>
-    </a>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item p-2">
-        <a class="nav-link" href="#">
-            <span>Dashboard</span>
-        </a>
+  <div class="c-sidebar-brand d-lg-down-none">     
+      <div class="c-sidebar-brand-full">
+        <h5 class="text-white">Canossa</h5>
+      </div>
+      <div class="c-sidebar-brand-minimized" style="background: none">
+        <img src="{{ asset('img/circle-logo.png') }}" width="46" height="46" alt="Canossa Logo">
+      </div>
+  </div>
+  <ul class="c-sidebar-nav m-0">
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('admin') }}">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-speedometer') }}"></use>
+        </svg>
+        Dashboard
+      </a>
     </li>
-
-    <!-- Nav Item - Announcements -->
-    <li class="nav-item p-2">
-        <a class="nav-link" href="{{ route('announcement.index') }}">
-            <span>Announcements</span>
-        </a>
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('message.index') }}">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-envelope-closed') }}"></use>
+        </svg>
+        Messages
+        <span class="badge badge-info">45</span>
+      </a>
     </li>
-
-    <!-- Nav Item - Announcements -->
-    <li class="nav-item p-2">
-        <a class="nav-link" href="{{ route('message.index') }}">
-            <span>Messages</span>
-        </a>
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="typography.html">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-bell') }}"></use>
+        </svg>
+        Announcements
+      </a>
     </li>
-
-    <!-- Nav Item - Announcements -->
-    <li class="nav-item p-2">
-        <a class="nav-link" href="{{ route('accounts.index') }}">
-            <span>Manage Accounts</span>
-        </a>
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('accounts.index') }}">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-people') }}"></use>
+        </svg>
+        Manage Accounts
+      </a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <li class="nav-item p-2">
-        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-            <span>Logout</span>
-            <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" class="d-none">
-                @csrf
-            </form>
-        </a>
+    <li class="c-sidebar-nav-item mt-auto">
+      <a class="c-sidebar-nav-link c-sidebar-nav-link-danger" href="{{ route('admin.logout') }}">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
+        </svg>
+        Logout
+      </a>
     </li>
+  </ul>
 
-</ul>
-
-@include('partials.admin._newstudent')
-@include('partials.admin._newsubject')
+  <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>  
+  
+</div>

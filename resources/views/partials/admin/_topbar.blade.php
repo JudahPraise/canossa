@@ -1,48 +1,35 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-    <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-        <i class="fa fa-bars"></i>
-    </button>
-    
-    <div class="container is-mobile-only" style="width: 40%; margin-left: 10rem" id="sidebarToggleTop" >
-        <div class="has-dropdown has-arrow is-hoverable is-right d-flex align-items-center" style="width: 250px">
-            <img src="{{ asset('img/circle-logo.png') }}" alt="..." class="rounded-circle mr-2" height="40" width="40">
-            <a href="#">Admin</a>
-            <div class="dropdown is-right" style="position: absolute;">
-                <li class="dropdown__link"><a href="#">Account Settings</a></li>
-                <li class="dropdown__link"><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
-                <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" class="d-none">
-                    @csrf
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Topbar Search -->
-    <div class="grid-container is-desktop-up">
-        <section  class="d-flex align-items-center justify-content-start">
-            <span>Subjects/Units</span>
-        </section>
-        <section class="d-flex align-items-center">
-            <form class="form-inline w-100">
-                <input class="form-control mr-sm-2 w-100" type="search" placeholder="Search" aria-label="Search">
-                {{-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> --}}
-              </form>
-        </section>
-        <section class="d-flex align-items-center justify-content-center">
-            <img src="{{ asset('img/circle-logo.png') }}" alt="..." class="rounded-circle mr-2" height="40" width="40">
-            <div class="has-dropdown has-arrow is-hoverable">
-                <a href="#">Admin</a>
-                <div class="dropdown" style="position: absolute; left: 0">
-                    <li class="dropdown__link"><a href="#">Account Settings</a></li>
-                    <li class="dropdown__link"><a href="{{ route('admin.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>
-                    <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" class="d-none">
-                        @csrf
-                    </form>
-                </div>
-            </div>
-        </section>
-    </div>
-
-</nav>
+<div class="c-wrapper">
+  <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+    <button class="c-header-toggler c-class-toggler d-lg-none mr-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show"><span class="c-header-toggler-icon"></span></button><a class="c-header-brand d-sm-none" href="#"><img class="c-header-brand" src="{{ url('/assets/brand/coreui-base.svg')}}" width="97" height="46" alt="CoreUI Logo"></a>
+    <button class="c-header-toggler c-class-toggler ml-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true"><span class="c-header-toggler-icon"></span></button>
+      <ul class="c-header-nav ml-auto mr-4">
+        <li class="c-header-nav-item dropdown">
+          <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="c-avatar"><img class="c-avatar-img" src="{{ asset('core-ui/assets/img/avatars/6.jpg') }}" alt="user@email.com"></div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right pt-0">
+            <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
+            <a class="dropdown-item" href="#">
+              <svg class="c-icon mr-2">
+                <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-bell"></use>
+              </svg> Updates<span class="badge badge-info ml-auto">42</span>
+            </a>
+            <a class="dropdown-item" href="#">
+              <svg class="c-icon mr-2">
+                <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-envelope-open"></use>
+              </svg> Messages<span class="badge badge-success ml-auto">42</span>
+            </a>
+            <a class="dropdown-item" href="#">
+              <svg class="c-icon mr-2">
+                <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-task"></use>
+              </svg> Tasks<span class="badge badge-danger ml-auto">42</span>
+            </a>
+            <a class="dropdown-item" href="#">
+              <svg class="c-icon mr-2">
+                <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-comment-square"></use>
+              </svg>Comments<span class="badge badge-warning ml-auto">42</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </header>

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Employee\Portfolio\Educational;
 
-use App\Http\Controllers\Controller;
+use App\GraduateStudy;
 use Illuminate\Http\Request;
+use App\EducationalBackground;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class GraduateStudyController extends Controller
 {
@@ -41,12 +44,10 @@ class GraduateStudyController extends Controller
             $graduate_studies[] = ([
                 'educ_id'=> Auth::user()->education->id,
                 'name_of_school'=> $request->name_of_school[$item],
-                'level'=> $request->level[$item],
                 'course'=> $request->course[$item],
                 'degree'=> $request->degree[$item],
                 'level_units_earned'=> $request->level_units_earned[$item],
-                'graduated_date_from'=> $request->graduated_date_from[$item],
-                'graduated_date_to'=> $request->graduated_date_to[$item],
+                'sy_graduated'=> $request->sy_graduated[$item],
                 'academic_reward'=> $request->academic_reward[$item],
             ]);
         }
@@ -79,7 +80,8 @@ class GraduateStudyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $grad = GraduateStudy::where('educ_id','=',$id)->get();
+        return view('employee.portfolio.educational-background.graduate-study.edit', compact('grad'));
     }
 
     /**
@@ -91,8 +93,6 @@ class GraduateStudyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-
         GraduateStudy::where('educ_id','=',$id)->delete();
 
         $graduate_studies = [];
@@ -101,12 +101,10 @@ class GraduateStudyController extends Controller
             $graduate_studies[] = ([
                 'educ_id'=> Auth::user()->education->id,
                 'name_of_school'=> $request->name_of_school[$item],
-                'level'=> $request->level[$item],
                 'course'=> $request->course[$item],
                 'degree'=> $request->degree[$item],
                 'level_units_earned'=> $request->level_units_earned[$item],
-                'graduated_date_from'=> $request->graduated_date_from[$item],
-                'graduated_date_to'=> $request->graduated_date_to[$item],
+                'sy_graduated'=> $request->sy_graduated[$item],
                 'academic_reward'=> $request->academic_reward[$item],
             ]);
         }

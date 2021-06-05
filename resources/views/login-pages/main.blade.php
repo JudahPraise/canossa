@@ -149,3 +149,6 @@
 </script>
 @endsection
 
+@section('css')
+  <link href="{{ asset('css/orbit-css/orbit.css') }}" rel="stylesheet" >
+@endsection

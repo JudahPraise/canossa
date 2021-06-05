@@ -26,15 +26,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('partials.employee.top-bar', function ($view) {
+        view()->composer('employee.layouts.home', function ($view) {
             
             $view->with('users', User::all());
 
         });
 
-        view()->composer('admin.messages.index', function($view){
-            //
-        });
+        // view()->composer('admin.messages.index', function($view){
+            
+        // });
 
         // view()->composer('partials.employee.top-bar', function ($view) {
             

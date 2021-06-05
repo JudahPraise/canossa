@@ -2,12 +2,22 @@
 
 @section('content')
 
-<div class="d-flex" id="wrapper">
-    @include('partials.employee.side-nav')
-    <div id="page-content-wrapper">
-        @include('partials.employee.top-bar')
-        @yield('home')
-    </div>
+<div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+
+  @include('partials.employee._sidebar')
+  @include('partials.employee._topbar')
+  
+  <div class="c-body">
+
+    <main class="c-main">
+
+      @yield('home') 
+
+    </main>
+
+  </div>
+
 </div>
+
 
 @endsection

@@ -23,8 +23,7 @@ class CreateCollegesTable extends Migration
             // $table->date('period_date_to');
             $table->string('course_degree');
             $table->string('level_units_earned')->nullable();
-            $table->date('graduated_date_from')->nullable();
-            $table->date('graduated_date_to')->nullable();
+            $table->string('sy_graduated')->nullable();
             $table->string('academic_reward')->nullable();
             $table->timestamps();
         });

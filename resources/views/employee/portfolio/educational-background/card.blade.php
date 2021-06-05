@@ -1,15 +1,15 @@
 @extends('employee.portfolio.educational-background.index')
 
 @section('educ')
-    <div class="container-fluid p-0 ">
-      <div class="row pt-5">
+    <div class="container-fluid">
+      <div class="row">
         <div class="col-6 d-flex align-items-center" style="height: 4rem;">
           <h3 class="font-weight-bold" style="color: black">Educational Background</h3>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center" style="height: 4rem;">
-          <a href="{{ route('portfolio.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none py-2 px-3" style="display:inline-block; "><i class="fas fa-caret-left" style="font-size: 1.6rem"></i></a>
-            <a href="{{ route('educ.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-large" style="font-size: 1.4rem"></i></a>
-            <a href="{{ route('educ.index', 'list') }}" class="neu-effect d-flex justify-content-center align-items-center text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-list" style="font-size: 1.4rem"></i></a>
+          <a href="{{ route('portfolio.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none py-2 px-3" style="display:inline-block; "><i class="fas fa-caret-left text-primary" style="font-size: 1.6rem"></i></a>
+            <a href="{{ route('educ.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-large text-primary" style="font-size: 1.4rem"></i></a>
+            <a href="{{ route('educ.index', 'list') }}" class="neu-effect d-flex justify-content-center align-items-center text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-list text-primary" style="font-size: 1.4rem"></i></a>
         </div>
       </div>
       
@@ -91,7 +91,7 @@
             </div>
           @endif
             <div class="card has-no-shadow">
-              <a href="#" class="card__image">
+              <a href="{{ !empty(auth()->user()->education()->grad ) ? route('educ.show', Auth::user()->id) : route('grad.create') }}" class="card__image">
                 <img src="{{ asset('img/for-educ/graduatestudy.png') }}">
               </a>
               <div class="card__content">
@@ -100,7 +100,7 @@
                     Updated at 3 mins ago
                   </small>
                 </p>
-                <a href="#" class="is-hover-underline has-text-black">
+                <a href="{{ !empty(auth()->user()->education()->grad ) ? route('educ.show', Auth::user()->id) : route('grad.create') }}" class="is-hover-underline has-text-black">
                   <h5 style="font-weight: bold">Graduate Studies</h5>
                 </a>
               </div>

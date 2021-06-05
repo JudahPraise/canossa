@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
 @section('home')
 
@@ -13,7 +13,6 @@
           </button>
       </div>
     </div>
-
     <!-- List -->
     <div id="accordion">
       @forelse (Auth::guard('admin')->user()->notifications as $notification)

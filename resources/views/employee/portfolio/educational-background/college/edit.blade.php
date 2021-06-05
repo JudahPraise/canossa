@@ -22,22 +22,15 @@
           <input type="text" class="form-control" name="level_units_earned" value="{{ $college->level_units_earned }}" id="level_units_earned" >  
         </div>
       </div>
-      <strong>School year graduated</strong> 
       <div class="form-row">
         <div class="col-md-6 mb-3">
-          <label for="graduated_date_from">From</label>
-          <input type="date" class="form-control" name="graduated_date_from" value="{{ $college->graduated_date_from }}" id="graduated_date_from" >
+          <label for="sy_graduated">School year graduated</label>
+          <input type="text" class="form-control" name="sy_graduated" value="{{ $secondary->sy_graduated }}" id="sy_graduated" placeholder="From - To">
         </div>
         <div class="col-md-6 mb-3">
-          <label for="graduated_date_to">To</label>
-          <input type="date" class="form-control" name="graduated_date_to" value="{{ $college->graduated_date_to }}" id="graduated_date_to" >
+          <label for="academic_reward">Academic reward</label>
+          <input type="text" class="form-control" name="academic_reward" value="{{ $college->academic_reward }}" id="academic_reward" >
         </div>
-      </div>
-      <div class="form-row">
-          <div class="col-md-12 mb-3">
-            <label for="academic_reward">Academic reward</label>
-            <input type="text" class="form-control" name="academic_reward" value="{{ $college->academic_reward }}" id="academic_reward" >
-          </div>
       </div>
       <button type="submit" value="Submit Form" class="btn btn-sm btn-primary mb-3">Submit</button>
   </form>

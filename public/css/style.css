@@ -288,3 +288,7 @@ ion-icon{
   border-radius: 50%;
   background-color: yellow;
 }
+
+.modal-backdrop {
+  z-index: 1!important;
+}

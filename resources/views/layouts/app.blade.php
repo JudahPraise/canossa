@@ -16,8 +16,10 @@
     <script  src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}" defer></script>
     @yield('dropzone-js')
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <!-- Icons-->
+    <link href="{{ asset('core-ui/css/free.min.css') }}" rel="stylesheet"> <!-- core-ui icons -->
+    <link href="{{ asset('core-ui/css/flag-icon.min.css') }}" rel="stylesheet"> <!-- core-ui icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"> <!-- fontawesome icons -->
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -27,26 +29,38 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/orbit-css/orbit.css') }}" rel="stylesheet" >
-    <link href="{{ asset('css/sb-admin-css/sb-admin-2.min.css') }}" rel="stylesheet">
-    
+
+    <!-- core-ui style-->
+    <link href="{{ asset('core-ui/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('core-ui/css/coreui-chartjs.css') }}" rel="stylesheet">
+
     @yield('dropzone-css')
+    @yield('css')
 
     <style>
+
         *{
             font-family: 'Poppins', sans-serif;
         }
+
     </style>
     
 </head>
-<body>
+<body class="p-0">
 
-    <main>
+    <main class="c-app bg-white">
+
         @yield('content')
+
     </main>
     
-    <script  src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="{{ asset('js/sidenav.js') }}"></script>
+    <!-- CoreUI and necessary plugins-->
+    <script src="{{ asset('core-ui/js/coreui.bundle.min.js') }}"></script>
+    <script src="{{ asset('core-ui/js/coreui-utils.js') }}"></script>
+    <script src="{{ asset('material/assets/js/core/jquery.min.js') }}" type="text/javascript"></script>
+    {{-- <script src="{{ asset('js/sidenav.js') }}"></script> --}}
+
+    @yield('js')
+
 </body>
 </html>

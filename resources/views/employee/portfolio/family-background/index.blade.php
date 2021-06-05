@@ -10,7 +10,7 @@
 
     <div class="container-fluid">
         @if(url()->current() === route('family.index', 'card') || url()->current() === route('family.index', 'list'))
-        <div class="row row-cols-1 row-cols-md-2 mt-3">
+        <div class="row row-cols-1 row-cols-md-2 px-3">
             <div class="col mb-3 d-flex flex-column">
                 <strong style="color: black; font-size: 1.5rem">Spouse</strong>
                 <div class="row row-cols-1 row-cols-md-2 mt-3">

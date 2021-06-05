@@ -44,8 +44,7 @@ class CollegeController extends Controller
             'level' => 'college',
             'course_degree' => $request->course_degree,
             'level_units_earned' => $request->level_units_earned,
-            'graduated_date_from' => $request->graduated_date_from,
-            'graduated_date_to' => $request->graduated_date_to,
+            'sy_graduated' => $request->sy_graduated,
             'academic_reward' => $request->academic_reward
         ]);
 
@@ -94,8 +93,7 @@ class CollegeController extends Controller
             'level' => 'college',
             'course_degree' => $request->course_degree,
             'level_units_earned' => $request->level_units_earned,
-            'graduated_date_from' => $request->graduated_date_from,
-            'graduated_date_to' => $request->graduated_date_to,
+            'sy_graduated' => $request->sy_graduated,
             'academic_reward' => $request->academic_reward
         ]);
 

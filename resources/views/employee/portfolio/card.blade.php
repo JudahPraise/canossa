@@ -2,23 +2,23 @@
 
 @section('portfolio')
     <div class="container-fluid pl-4 pr-3 cont-long">
-      <div class="row pt-5">
+      <div class="row">
         <div class="col-6 d-flex align-items-center" style="height: 4rem;">
           <h3 class="font-weight-bold" style="color: black">Portfolio</h3>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center" style="height: 4rem;">
-            <a href="{{ route('portfolio.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-large" style="font-size: 1.4rem"></i></a>
-            <a href="{{ route('portfolio.index', 'list') }}" class="neu-effect d-flex justify-content-center align-items-center text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-list" style="font-size: 1.4rem"></i></a>
+            <a href="{{ route('portfolio.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-large text-primary" style="font-size: 1.4rem"></i></a>
+            <a href="{{ route('portfolio.index', 'list') }}" class="neu-effect d-flex justify-content-center align-items-center text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-list text-primary" style="font-size: 1.4rem"></i></a>
         </div>
       </div>
       
         <div class="row row-cols-2 row-cols-md-4 mt-3">
             <div class="col mb-4">
-                <div class="card has-no-shadow">
+                <div class="card has-no-shadow bg-gradient-white">
                     <a href="{{ route('personal.index') }}" class="card__image">
-                      <img src="{{ asset('img/for-portfolio/Personal site-cuate.svg') }}" alt="">
+                      <img class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/Personal site-cuate.svg') }}" alt="">
                     </a>
-                    <div class="card__content">
+                    <div class="card-body">
                       <p class="grid has-no-col-padding has-text-grey">
                         <small class="column">
                           @if (!empty(auth()->user()->personal()))
@@ -35,11 +35,11 @@
                 </div>
             </div>
             <div class="col mb-4">
-                <div class="card has-no-shadow">
+                <div class="card has-no-shadow bg-gradient-white">
                     <a href="{{ route('family.index', 'card') }}" class="card__image">
-                      <img src="{{ asset('img/for-portfolio/Family-cuate.svg') }}" alt="">
+                      <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/Family-cuate.svg') }}" alt="">
                     </a>
-                    <div class="card__content">
+                    <div class="card-body">
                       <p class="grid has-no-col-padding has-text-grey">
                         <small class="column">
                           @if (!empty(auth()->user()->family))
@@ -56,11 +56,11 @@
                 </div>
             </div>
             <div class="col mb-4">
-             <div class="card has-no-shadow">
+             <div class="card has-no-shadow bg-gradient-white">
                   <a href="{{ route('educ.index', 'card') }}" class="card__image">
-                    <img src="{{ asset('img/for-portfolio/Mathematics-pana.svg') }}" alt="">
+                    <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/Mathematics-pana.svg') }}" alt="">
                   </a>
-                  <div class="card__content">
+                  <div class="card-body">
                     <p class="grid has-no-col-padding has-text-light-grey">
                       <small class="column">
                         Updated at 3 mins ago
@@ -73,11 +73,11 @@
               </div>
             </div>
             <div class="col mb-4">
-              <div class="card has-no-shadow">
+              <div class="card has-no-shadow bg-gradient-white">
                 <a href="{{ route('work.index') }}" class="card__image">
-                  <img src="{{ asset('img/for-portfolio/experience.png') }}" alt="">
+                  <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/experience.png') }}" alt="">
                 </a>
-                <div class="card__content">
+                <div class="card-body">
                   <p class="grid has-no-col-padding has-text-light-grey">
                     <small class="column">
                       Updated at 3 mins ago
@@ -90,11 +90,11 @@
               </div>
             </div>
             <div class="col mb-4">
-              <div class="card has-no-shadow">
+              <div class="card has-no-shadow bg-gradient-white">
                 <a href="{{ route('training.index') }}" class="card__image">
-                  <img src="{{ asset('img/for-portfolio/trainings.svg') }}" alt="">
+                  <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/trainings.svg') }}" alt="">
                 </a>
-                <div class="card__content">
+                <div class="card-body">
                   <p class="grid has-no-col-padding has-text-light-grey">
                     <small class="column">
                       Updated at 3 mins ago
@@ -107,11 +107,11 @@
               </div>
             </div>
           <div class="col mb-4">
-            <div class="card has-no-shadow">
+            <div class="card has-no-shadow bg-gradient-white">
               <a href="{{ route('voluntary.index') }}" class="card__image">
-                <img src="{{ asset('img/for-portfolio/volunteer.png') }}" alt="">
+                <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/volunteer.png') }}" alt="">
               </a>
-              <div class="card__content">
+              <div class="card-body">
                 <p class="grid has-no-col-padding has-text-light-grey">
                   <small class="column">
                     Updated at 3 mins ago
