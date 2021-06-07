@@ -18,9 +18,9 @@ class VoluntaryWorksController extends Controller
     {
         $voluntary = VoluntaryWork::where('user_id','=',Auth::user()->id)->first();
         if($voluntary === null){
-            return view('employee.portfolio.voluntary-work.empty', compact('voluntary', $voluntary));
+            return view('employee.portfolio.voluntary-work.empty');
         }else{
-            return view('employee.portfolio.voluntary-work.show', compact('voluntary', $voluntary));
+            return redirect()->route('voluntary.show', Auth::user()->id);
         }
     }
 
@@ -42,7 +42,21 @@ class VoluntaryWorksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $voluntaries = [];
+
+        foreach($request->name_address as $item => $key){
+            $voluntaries[] = ([
+                'user_id' => Auth::user()->id,
+                'name_address' => $request->name_address[$item],
+                'duration' => $request->duration[$item],
+                'no_hours' => $request->no_hours[$item],
+                'position' => $request->position[$item],
+            ]);
+        }
+
+        VoluntaryWork::insert($voluntaries);
+
+        return redirect()->route('voluntary.show', Auth::user()->id);
     }
 
     /**
@@ -53,7 +67,8 @@ class VoluntaryWorksController extends Controller
      */
     public function show($id)
     {
-        //
+        $voluntaries = VoluntaryWork::where('user_id','=',$id)->get();
+        return view('employee.portfolio.voluntary-work.show', compact('voluntaries'));
     }
 
     /**
@@ -64,9 +79,8 @@ class VoluntaryWorksController extends Controller
      */
     public function edit($id)
     {
-        $voluntary = VoluntaryWork::where('user_id','=',Auth::user()->id)->first();
-        dd($voluntary);
-        return view('employee.portfolio.voluntary-work.edit', compact('voluntary', $voluntary));
+        $voluntaries = VoluntaryWork::where('user_id','=',$id)->get();
+        return view('employee.portfolio.voluntary-work.edit', compact('voluntaries'));
     }
 
     /**
@@ -78,7 +92,23 @@ class VoluntaryWorksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        VoluntaryWork::where('user_id','=',$id)->delete();
+
+        $voluntaries = [];
+
+        foreach($request->name_address as $item => $key){
+            $voluntaries[] = ([
+                'user_id' => Auth::user()->id,
+                'name_address' => $request->name_address[$item],
+                'duration' => $request->duration[$item],
+                'no_hours' => $request->no_hours[$item],
+                'position' => $request->position[$item],
+            ]);
+        }
+
+        VoluntaryWork::insert($voluntaries);
+
+        return redirect()->route('voluntary.show', Auth::user()->id);
     }
 
     /**
@@ -89,6 +119,7 @@ class VoluntaryWorksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        VoluntaryWork::where('id','=',$id)->delete();
+        return redirect()->back();
     }
 }

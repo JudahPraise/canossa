@@ -18,8 +18,7 @@ class CreateVoluntaryWorksTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->mediumText('name_address');
-            $table->date('date_from');
-            $table->date('date_to');
+            $table->string('duration');
             $table->string('no_hours');
             $table->string('position');
             $table->timestamps();

@@ -181,8 +181,12 @@ Route::prefix('employee')->group(function(){
             Route::get('/', 'Employee\Portfolio\VoluntaryWorksController@index')->name('voluntary.index');
             Route::get('/edit/{id}', 'Employee\Portfolio\VoluntaryWorksController@edit')->name('voluntary.edit');
             Route::get('/create', 'Employee\Portfolio\VoluntaryWorksController@create')->name('voluntary.create');
+            Route::post('/store', 'Employee\Portfolio\VoluntaryWorksController@store')->name('voluntary.store');
+            Route::get('/show/{id}', 'Employee\Portfolio\VoluntaryWorksController@show')->name('voluntary.show');
+            Route::put('/update/{id}', 'Employee\Portfolio\VoluntaryWorksController@update')->name('voluntary.update');
+            Route::delete('/delete/{id}', 'Employee\Portfolio\VoluntaryWorksController@destroy')->name('voluntary.delete');
         });
-         // Documents
+        // Documents
         Route::prefix('/document')->group(function(){
             Route::get('/', 'DocumentsController@index')->name('document.index');
             Route::post('/store', 'DocumentsController@store')->name('document.store');
@@ -190,7 +194,7 @@ Route::prefix('employee')->group(function(){
             Route::get('/download/{id}', 'DocumentsController@download')->name('document.download'); 
         });
     });
-    
+    //Profile
     Route::prefix('profile')->group(function(){
         Route::get('/index', 'Employee\ProfileController@index')->name('profile.index');
     });

@@ -13,9 +13,9 @@
 @section('portfolio')
 
 <div class="container-fluid">
-    <div class="row w-100">
+    <div class="row">
         <div class="col-6 d-flex align-items-center" style="height: 4rem;">
-          <h3 class="font-weight-bold" style="color: black">Work Experience</h3>
+          <h2 class="font-weight-bold" style="color: black">Work Experience</h2>
         </div>
         <div class="col-6 d-flex justify-content-end align-items-center" style="height: 4rem;">
             <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-icon btn-secondary btn-sm" type="button">
@@ -30,7 +30,7 @@
         </div>
     </div>
     
-    <div class="row w-100">
+    <div class="row">
         @yield('work')
     </div>
 

@@ -744,35 +744,35 @@
                                 <div class="row d-flex justify-content-between">
                                     <h6 class="heading-small text-muted mb-4 ml-3">Training Programs</h6>
                                     <div class="d-flex flex-row align-items-center">
-                                        <a href="{{ route('training.create') }}" class="btn btn-icon btn-success btn-sm" type="submit">
+                                        <a href="{{ route('voluntary.create') }}" class="btn btn-icon btn-success btn-sm" type="submit">
                                             <span class="btn-inner--icon text-white"><i class="fas fa-plus"></i></span>
                                         </a>
-                                        <a href="{{ !empty(auth()->user()->trainings) ? route('training.edit', Auth::user()->id) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
+                                        <a href="{{ !empty(auth()->user()->voluntary_works) ? route('voluntary.edit', Auth::user()->id) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
                                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                         </a>
                                     </div>
                                 </div>
                                 @if (!empty(auth()->user()->trainings->first()))
-                                    @foreach ($employee->trainings as $training)
+                                    @foreach ($employee->voluntary_works as $voluntary)
                                         <div class="row row-cols-2 row-cols-md-5 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
-                                                <strong style="font-size: 1rem">Title</strong>
-                                                <strong style="color: black; font-size: 1rem">{{ $training->training_title }}</strong>
+                                                <strong style="font-size: 1rem">NAME OF ORGANIZATION</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $voluntary->name_address }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <strong style="font-size: 1rem">Date</strong>
-                                                <strong style="color: black; font-size: 1rem">{{ $training->training_date }}</strong>
+                                                <strong style="font-size: 1rem">PERIOD OF ATTENDANCE</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $voluntary->duration }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <strong style="font-size: 1rem">Sponsor</strong>
-                                                <strong style="color: black; font-size: 1rem">{{ $training->training_sponsor }}</strong>
+                                                <strong style="font-size: 1rem">NUMBER OF HOURS</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $voluntary->no_hours }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <strong style="font-size: 1rem">Certificate</strong>
-                                                <strong style="color: black; font-size: 1rem">{{ $training->training_certificate }}</strong>
+                                                <strong style="font-size: 1rem">NATURE OF WORK</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $voluntary->position }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex align-items-center">
-                                                <form  class="mr-2" action="{{ route('work.delete', $training->id) }}" method="POST">
+                                                <form  class="mr-2" action="{{ route('voluntary.delete', $voluntary->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
                                                     <button class="btn btn-icon btn-danger btn-sm" type="submit">
