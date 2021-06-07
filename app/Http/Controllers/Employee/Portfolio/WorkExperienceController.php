@@ -20,7 +20,7 @@ class WorkExperienceController extends Controller
         if($experiences === null){
             return view('employee.portfolio.work-experience.empty');
         }else{
-            return redirect()->route('work.show');
+            return redirect()->route('work.show', Auth::user()->id);
         }
     }
 
@@ -45,7 +45,7 @@ class WorkExperienceController extends Controller
 
         $experiences = [];
 
-        foreach($experiences->duration as $item => $key){
+        foreach($request->duration as $item => $key){
             $experiences[] = ([
                 'user_id' => Auth::user()->id,
                 'duration' => $request->duration[$item],
@@ -67,7 +67,7 @@ class WorkExperienceController extends Controller
      */
     public function show($id)
     {
-        $experiences = WorkExperience::where('id','=',id)->get();
+        $experiences = WorkExperience::where('user_id','=',$id)->get();
         return view('employee.portfolio.work-experience.show', compact('experiences'));
     }
 
@@ -79,8 +79,8 @@ class WorkExperienceController extends Controller
      */
     public function edit($id)
     {
-        $experience = WorkExperience::where('id','=',$id)->first();
-        return view('employee.portfolio.work-experience.edit', compact('experience'));
+        $experiences = WorkExperience::where('user_id','=',$id)->get();
+        return view('employee.portfolio.work-experience.edit', compact('experiences'));
     }
 
     /**
@@ -92,12 +92,20 @@ class WorkExperienceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        WorkExperience::where('id','=',$id)->update([
-            'user_id' => Auth::user()->id,
-            'duration' => $request->duration,
-            'work_description' => $request->work_description,
-            'work_place' => $request->work_place,
-        ]);
+        WorkExperience::where('user_id','=',$id)->delete();
+
+        $experiences = [];
+
+        foreach($request->duration as $item => $key){
+            $experiences[] = ([
+                'user_id' => Auth::user()->id,
+                'duration' => $request->duration[$item],
+                'work_description' => $request->work_description[$item],
+                'work_place' => $request->work_place[$item],
+            ]);
+        }
+
+        WorkExperience::insert($experiences);
 
         return redirect()->route('work.show', Auth::user()->id);
     }
@@ -110,6 +118,7 @@ class WorkExperienceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        WorkExperience::where('id','=',$id)->delete();
+        return redirect()->back();
     }
 }

@@ -36,9 +36,9 @@ class AppServiceProvider extends ServiceProvider
             
         // });
 
-        // view()->composer('partials.employee.top-bar', function ($view) {
+        // view()->composer('partials.employee._topbar', function ($view) {
             
-        //     dd(auth()->user()->education->grad->first());
+        //     dd(auth()->user()->experiences->first());
 
         // });
 

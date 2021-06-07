@@ -51,51 +51,80 @@
                   <a href="#" class="btn btn-sm btn-default float-right">Message</a>
                 </div>
               </div>
-              <div class="card-body pt-0">
-                <div class="row">
-                  <div class="col">
-                    <div class="card-profile-stats d-flex justify-content-center">
-                      <div>
-                        <span class="heading">22</span>
-                        <span class="description">Friends</span>
-                      </div>
-                      <div>
-                        <span class="heading">10</span>
-                        <span class="description">Photos</span>
-                      </div>
-                      <div>
-                        <span class="heading">89</span>
-                        <span class="description">Comments</span>
-                      </div>
+                <div class="card-body pt-0">
+                  <div class="row">
+                        <div class="col">
+                            <div class="card-profile-stats d-flex justify-content-center">
+                                <div class="text-center">
+                                  <h5 class="h3">
+                                      {{ $employee->personal->fullName() }}
+                                    </h5>
+                                    <div class="h5 font-weight-300">
+                                        <i class="ni location_pin mr-2"></i>{{ $employee->personal->address }}
+                                    </div>
+                                    <div class="h5 mt-4">
+                                        <i class="ni business_briefcase-24 mr-2"></i>{{ auth()->user()->role }}
+                                    </div>
+                                    <div>
+                                        <i class="ni education_hat mr-2"></i>{{ auth()->user()->department }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header border-0">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h3 class="mb-0">Documents</h3>
+                    </div>
+                    <div class="col text-right">
+                      <a href="#!" class="btn btn-sm btn-primary">See all</a>
                     </div>
                   </div>
                 </div>
-                <div class="text-center">
-                  <h5 class="h3">
-                    {{ $employee->personal->fullName() }}
-                  </h5>
-                  <div class="h5 font-weight-300">
-                    <i class="ni location_pin mr-2"></i>Bucharest, Romania
-                  </div>
-                  <div class="h5 mt-4">
-                    <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                  </div>
-                  <div>
-                    <i class="ni education_hat mr-2"></i>University of Computer Science
-                  </div>
+                <div class="table-responsive">
+                  <!-- Projects table -->
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Document</th>
+                        <th scope="col">Type</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">
+                          Birth Certificate
+                        </th>
+                        <td>
+                          pdf
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <span class="mr-2">Updated at 2 mins ago</span>
+                          </div>
+                        </td>
+                        <td>
+                            <a class="btn btn-icon btn-success btn-sm" type="submit">
+                                <span class="btn-inner--icon text-white"><i class="fas fa-download"></i></span>
+                            </a>
+                        </td>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-            </div>
           </div>
             <div class="col-xl-8 order-xl-1">
                 <div class="card">
                     <div class="card-header">
                           <div class="row align-items-center">
                             <div class="col-8">
-                              <h3 class="mb-0">Edit profile </h3>
-                            </div>
-                            <div class="col-4 text-right">
-                              <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                              <h3 class="mb-0">Profile </h3>
                             </div>
                           </div>
                     </div>
@@ -104,10 +133,10 @@
                         <div class="row d-flex justify-content-between">
                             <h6 class="heading-small text-muted mb-4 ml-3">Personal information</h6>
                             <div>
-                                <button class="btn btn-icon btn-danger" type="button">
+                                <button class="btn btn-icon btn-danger btn-sm" type="button">
                                     <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                 </button>
-                                <a  href="{{ route('personal.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->personal()) ? '' : ' btn-disabled' }} class="btn btn-icon btn-info" type="button">
+                                <a  href="{{ route('personal.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->personal()) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
                                     <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                 </a>
                             </div>
@@ -214,10 +243,10 @@
                             <div class="row d-flex justify-content-between">
                                 <h6 class="heading-small text-muted mb-4 ml-3">Spouse</h6>
                                 <div>
-                                    <button class="btn btn-icon btn-danger" type="button">
+                                    <button class="btn btn-icon btn-danger btn-sm" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                     </button>
-                                    <a  href="{{ route('spouse.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->spouse) ? '' : ' btn-disabled' }} class="btn btn-icon btn-info" type="button">
+                                    <a  href="{{ route('spouse.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->spouse) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                     </a>
                                 </div>
@@ -272,10 +301,10 @@
                             <div class="row d-flex justify-content-between">
                                 <h6 class="heading-small text-muted mb-4 ml-3">Children</h6>
                                 <div>
-                                    <button class="btn btn-icon btn-danger" type="button">
+                                    <button class="btn btn-icon btn-danger btn-sm" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                     </button>
-                                    <a  href="{{ route('children.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->children) ? '' : ' btn-disabled' }} class="btn btn-icon btn-info" type="button">
+                                    <a  href="{{ route('children.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->children) ? '' : ' btn-disabled' }} class="btn  btn-sm btn-icon btn-info" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                     </a>
                                 </div>
@@ -298,10 +327,10 @@
                             <div class="row d-flex justify-content-between">
                                 <h6 class="heading-small text-muted mb-4 ml-3">Mother</h6>
                                 <div>
-                                    <button class="btn btn-icon btn-danger" type="button">
+                                    <button class="btn btn-icon btn-danger btn-sm" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                     </button>
-                                    <a  href="{{ route('mother.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->mother) ? '' : ' btn-disabled' }} class="btn btn-icon btn-info" type="button">
+                                    <a  href="{{ route('mother.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->mother) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                     </a>
                                 </div>
@@ -357,10 +386,10 @@
                             <div class="row d-flex justify-content-between">
                                 <h6 class="heading-small text-muted mb-4 ml-3">Father</h6>
                                 <div>
-                                    <button class="btn btn-icon btn-danger" type="button">
+                                    <button class="btn btn-icon btn-danger btn-sm" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                     </button>
-                                    <a  href="{{ route('father.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->father) ? '' : ' btn-disabled' }} class="btn btn-icon btn-info" type="button">
+                                    <a  href="{{ route('father.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->father) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
                                         <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                     </a>
                                 </div>
@@ -423,11 +452,11 @@
                                         <form class="mr-2" action="{{ !empty(auth()->user()->education->elem) ? route('elem.delete', $educ->elem->id) : '#' }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-icon btn-danger" type="submit">
+                                            <button class="btn btn-icon btn-danger btn-sm" type="submit">
                                                 <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                             </button>
                                         </form>
-                                        <a  href="{{ route('father.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->father) ? '' : ' btn-disabled' }} class="btn btn-icon btn-info" type="button">
+                                        <a  href="{{ route('father.edit', Auth::user()->id) }}" {{ !empty(auth()->user()->family->father) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
                                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                         </a>
                                     </div>
@@ -468,11 +497,11 @@
                                         <form class="mr-2" action="{{ !empty(auth()->user()->education->sec) ? route('sec.delete', $educ->sec->id) : "#" }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-icon btn-danger" type="submit">
+                                            <button class="btn btn-icon btn-danger btn-sm" type="submit">
                                                 <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                             </button>
                                         </form>
-                                        <a href="{{  !empty(auth()->user()->education->sec) ? route('sec.edit', $educ->sec->id ) : '#' }}" class="btn btn-icon btn-info" type="button">
+                                        <a href="{{  !empty(auth()->user()->education->sec) ? route('sec.edit', $educ->sec->id ) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
                                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                         </a>
                                     </div>
@@ -513,11 +542,11 @@
                                         <form  class="mr-2" action="{{ !empty(auth()->user()->education->col) ? route('col.delete', $educ->col->id) : '#' }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-icon btn-danger" type="submit">
+                                            <button class="btn btn-icon btn-danger btn-sm" type="submit">
                                                 <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                             </button>
                                         </form>
-                                        <a href="{{ !empty(auth()->user()->education->col) ? route('col.edit', $educ->col->id ) : '#' }}" class="btn btn-icon btn-info" type="button">
+                                        <a href="{{ !empty(auth()->user()->education->col) ? route('col.edit', $educ->col->id ) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
                                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                         </a>
                                     </div>
@@ -562,11 +591,11 @@
                                         <form  class="mr-2" action="{{ !empty(auth()->user()->education->grad->first()) ? route('grad.delete', auth()->user()->education->id) : '#' }}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-icon btn-danger" type="submit">
+                                            <button class="btn btn-icon btn-danger btn-sm" type="submit">
                                                 <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                                             </button>
                                         </form>
-                                        <a href="{{ !empty(auth()->user()->education->grad->first()) ? route('grad.edit', auth()->user()->education->id ) : '#' }}" class="btn btn-icon btn-info" type="button">
+                                        <a href="{{ !empty(auth()->user()->education->grad->first()) ? route('grad.edit', auth()->user()->education->id ) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
                                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                         </a>
                                     </div>
@@ -610,11 +639,154 @@
                                     </div>
                                 @endif
                             </div>
-                            {{-- Educational background --}}
+                            {{-- Work Experience --}}
                             <hr class="my-4" />
-                            {{-- Elementary --}}
                             <div class="pl-lg-2">
-                                <h6 class="heading-small text-muted">Work Experience</h6>
+                                <div class="row d-flex justify-content-between">
+                                    <h6 class="heading-small text-muted mb-4 ml-3">Work Experience</h6>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <a href="{{ route('work.create') }}" class="btn btn-icon btn-success btn-sm" type="submit">
+                                            <span class="btn-inner--icon text-white"><i class="fas fa-plus"></i></span>
+                                        </a>
+                                        <a href="{{ !empty(auth()->user()->experiences) ? route('work.edit', Auth::user()->id) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
+                                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                @if (!empty(auth()->user()->experiences->first()))
+                                    @foreach ($employee->experiences as $experience)
+                                        <div class="row row-cols-2 row-cols-md-5 mt-3">
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Duration</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $experience->duration }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Work Description</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $experience->work_description }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Work Place</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $experience->work_place }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <form  class="mr-2" action="{{ route('work.delete', $experience->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn btn-icon btn-danger btn-sm" type="submit">
+                                                        <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="col-md-12 d-flex justify-content-center p-5">
+                                        <strong class="text-muted font-italic text-center">No data</strong>
+                                    </div>
+                                @endif
+                            </div>
+                            {{-- Training Programs --}}
+                            <hr class="my-4" />
+                            <div class="pl-lg-2">
+                                <div class="row d-flex justify-content-between">
+                                    <h6 class="heading-small text-muted mb-4 ml-3">Training Programs</h6>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <a href="{{ route('training.create') }}" class="btn btn-icon btn-success btn-sm" type="submit">
+                                            <span class="btn-inner--icon text-white"><i class="fas fa-plus"></i></span>
+                                        </a>
+                                        <a href="{{ !empty(auth()->user()->trainings) ? route('training.edit', Auth::user()->id) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
+                                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                @if (!empty(auth()->user()->trainings->first()))
+                                    @foreach ($employee->trainings as $training)
+                                        <div class="row row-cols-2 row-cols-md-5 mt-3">
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Title</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $training->training_title }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Date</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $training->training_date }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Sponsor</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $training->training_sponsor }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Certificate</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $training->training_certificate }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex align-items-center">
+                                                <form  class="mr-2" action="{{ route('work.delete', $training->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn btn-icon btn-danger btn-sm" type="submit">
+                                                        <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
+                                                    </button>
+                                                </form>
+                                                <a class="btn btn-icon btn-success btn-sm" type="submit">
+                                                    <span class="btn-inner--icon text-white"><i class="fas fa-download"></i></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="col-md-12 d-flex justify-content-center p-5">
+                                        <strong class="text-muted font-italic text-center">No data</strong>
+                                    </div>
+                                @endif
+                            </div>
+                            {{-- Voluntary Works --}}
+                            <hr class="my-4" />
+                            <div class="pl-lg-2">
+                                <div class="row d-flex justify-content-between">
+                                    <h6 class="heading-small text-muted mb-4 ml-3">Training Programs</h6>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <a href="{{ route('training.create') }}" class="btn btn-icon btn-success btn-sm" type="submit">
+                                            <span class="btn-inner--icon text-white"><i class="fas fa-plus"></i></span>
+                                        </a>
+                                        <a href="{{ !empty(auth()->user()->trainings) ? route('training.edit', Auth::user()->id) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
+                                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+                                @if (!empty(auth()->user()->trainings->first()))
+                                    @foreach ($employee->trainings as $training)
+                                        <div class="row row-cols-2 row-cols-md-5 mt-3">
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Title</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $training->training_title }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Date</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $training->training_date }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Sponsor</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $training->training_sponsor }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex flex-column">
+                                                <strong style="font-size: 1rem">Certificate</strong>
+                                                <strong style="color: black; font-size: 1rem">{{ $training->training_certificate }}</strong>
+                                            </div>
+                                            <div class="col mb-3 d-flex align-items-center">
+                                                <form  class="mr-2" action="{{ route('work.delete', $training->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn btn-icon btn-danger btn-sm" type="submit">
+                                                        <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="col-md-12 d-flex justify-content-center p-5">
+                                        <strong class="text-muted font-italic text-center">No data</strong>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

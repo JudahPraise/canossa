@@ -32,7 +32,7 @@
     </a>
   </li>
   <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="#">
+    <a class="c-sidebar-nav-link" href="{{ route('document.index') }}">
       <svg class="c-sidebar-nav-icon">
         <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-folder-open') }}"></use>
       </svg>

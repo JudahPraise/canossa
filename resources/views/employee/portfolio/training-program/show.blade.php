@@ -34,6 +34,9 @@
                   <td>{{ $training->training_sponsor }}</td>
                   <td>{{ $training->training_certificate }}</td>
                   <td class="d-flex">
+                    <a class="btn btn-icon btn-success btn-sm" type="submit">
+                      <span class="btn-inner--icon text-white"><i class="fas fa-download"></i></span>
+                    </a>
                     <form  class="mr-2" action="{{ route('training.delete', $training->id) }}" method="POST">
                       @method('DELETE')
                       @csrf

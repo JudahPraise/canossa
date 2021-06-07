@@ -62,13 +62,14 @@
     </div>
   </div>
 
-  {{-- <form action="{{ route('document.store') }}" class="dropzone w-100 h-50 d-flex flex-column justify-content-center align-items-center" method="POST" enctype="multipart/form-data" style="border: 2px dashed gray; ">
+  <form action="{{ route('document.store') }}" class="dropzone w-100 h-50 d-flex flex-column justify-content-center align-items-center" method="POST" enctype="multipart/form-data" style="border: 2px dashed gray; ">
     @csrf
     <i class="fas fa-folder-open" style="font-size: 5rem"></i>
     <div class="fallback">
       <input name="file" type="file" multiple />
     </div>
-  </form> --}}
+  </form>
+  
 </div>
 
 
