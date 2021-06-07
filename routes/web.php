@@ -174,7 +174,11 @@ Route::prefix('employee')->group(function(){
             Route::get('/edit/{id}', 'Employee\Portfolio\VoluntaryWorksController@edit')->name('voluntary.edit');
             Route::get('/create', 'Employee\Portfolio\VoluntaryWorksController@create')->name('voluntary.create');
         });
-    }); 
+    });
+    
+    Route::prefix('profile')->group(function(){
+        Route::get('/index', 'Employee\ProfileController@index')->name('profile.index');
+    });
 
 });
 

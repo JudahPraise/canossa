@@ -22,7 +22,7 @@
                       <p class="grid has-no-col-padding has-text-grey">
                         <small class="column">
                           @if (!empty(auth()->user()->personal()))
-                            Updated at {{ auth()->user()->personal()->updated_at->diffForHumans() }}
+                            Updated at {{ auth()->user()->personal->updated_at->diffForHumans() }}
                           @else
                             No data yet
                           @endif

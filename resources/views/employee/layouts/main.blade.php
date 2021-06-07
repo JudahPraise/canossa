@@ -9,7 +9,7 @@
   
   <div class="c-body">
 
-    <main class="c-main">
+    <main class="c-main pt-0">
 
       @yield('home') 
 

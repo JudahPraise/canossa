@@ -24,7 +24,7 @@
     </a>
   </li>
   <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="{{-- route('profile.index') --}}">
+    <a class="c-sidebar-nav-link" href="{{ route('profile.index') }}">
       <svg class="c-sidebar-nav-icon">
         <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-user') }}"></use>
       </svg>

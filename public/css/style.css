@@ -292,3 +292,11 @@ ion-icon{
 .modal-backdrop {
   z-index: 1!important;
 }
+
+.profile-header{
+  height: 30vh; 
+  background-image: url(../img/canossa.jpg); 
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+}

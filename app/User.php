@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function personal()
     {
-        return $this->hasOne(PersonalInformation::class)->first();
+        return $this->hasOne(PersonalInformation::class);
     }
 
     public function setFamily()

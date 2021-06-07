@@ -42,8 +42,15 @@ class TrainingProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        TrainingProgram::create([
+            'training_date' => $request->training_date,
+            'training_title' => $request->training_title,
+            'training_sponsor' => $request->training_sponsor,
+            'training_certificate' => $request->training_certificate,
+        ]);
+
+        return redirect()->route('profile.index');
+    }   
 
     /**
      * Display the specified resource.
@@ -65,8 +72,8 @@ class TrainingProgramController extends Controller
     public function edit($id)
     {
         $trainings = TrainingProgram::where('user_id','=',Auth::user()->id)->first();
-        dd($trainings);
-        return view('employee.portfolio.training-program.edit', compact('trainings', $trainings));
+        // dd($trainings);
+        return view('employee.portfolio.training-program.edit', compact('trainings'));
     }
 
     /**
@@ -78,7 +85,14 @@ class TrainingProgramController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        TrainingProgram::where('id','=',$id)->update([
+            'training_date' => $request->training_date,
+            'training_title' => $request->training_title,
+            'training_sponsor' => $request->training_sponsor,
+            'training_certificate' => $request->training_certificate,
+        ]);
+
+        return redirect()->route('profile.index');
     }
 
     /**
