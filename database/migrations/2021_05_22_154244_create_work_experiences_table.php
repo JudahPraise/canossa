@@ -17,8 +17,7 @@ class CreateWorkExperiencesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->date('date_from');
-            $table->date('date_to');
+            $table->string('duration');
             $table->longText('work_description');
             $table->string('work_place');
             $table->timestamps();

@@ -161,12 +161,18 @@ Route::prefix('employee')->group(function(){
             Route::get('/', 'Employee\Portfolio\WorkExperienceController@index')->name('work.index');
             Route::get('/edit/{id}', 'Employee\Portfolio\WorkExperienceController@edit')->name('work.edit');
             Route::get('/create', 'Employee\Portfolio\WorkExperienceController@create')->name('work.create');
+            Route::post('/store', 'Employee\Portfolio\WorkExperienceController@store')->name('work.store');
+            Route::get('/show/{id}', 'Employee\Portfolio\WorkExperienceController@show')->name('work.show');
         });
         //Training Program
         Route::prefix('/training-program')->group(function(){
             Route::get('/', 'Employee\Portfolio\TrainingProgramController@index')->name('training.index');
             Route::get('/edit/{id}', 'Employee\Portfolio\TrainingProgramController@edit')->name('training.edit');
             Route::get('/create', 'Employee\Portfolio\TrainingProgramController@create')->name('training.create');
+            Route::post('/store', 'Employee\Portfolio\TrainingProgramController@store')->name('training.store');
+            Route::get('/show/{id}', 'Employee\Portfolio\TrainingProgramController@show')->name('training.show');
+            Route::put('/update/{id}', 'Employee\Portfolio\TrainingProgramController@update')->name('training.update');
+            Route::delete('/delete/{id}', 'Employee\Portfolio\TrainingProgramController@destroy')->name('training.delete');
         });
         //Voluntary Work
         Route::prefix('/voluntary-work')->group(function(){

@@ -18,9 +18,9 @@ class WorkExperienceController extends Controller
     {
         $experiences = WorkExperience::where('user_id','=',Auth::user()->id)->first();
         if($experiences === null){
-            return view('employee.portfolio.work-experience.empty', compact('experiences', $experiences));
+            return view('employee.portfolio.work-experience.empty');
         }else{
-            return view('employee.portfolio.work-experience.show', compact('experiences', $experiences));
+            return redirect()->route('work.show');
         }
     }
 
@@ -42,7 +42,21 @@ class WorkExperienceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $experiences = [];
+
+        foreach($experiences->duration as $item => $key){
+            $experiences[] = ([
+                'user_id' => Auth::user()->id,
+                'duration' => $request->duration[$item],
+                'work_description' => $request->work_description[$item],
+                'work_place' => $request->work_place[$item],
+            ]);
+        }
+
+        WorkExperience::insert($experiences);
+
+        return redirect()->route('work.show', Auth::user()->id);
     }
 
     /**
@@ -53,7 +67,8 @@ class WorkExperienceController extends Controller
      */
     public function show($id)
     {
-        //
+        $experiences = WorkExperience::where('id','=',id)->get();
+        return view('employee.portfolio.work-experience.show', compact('experiences'));
     }
 
     /**
@@ -64,8 +79,8 @@ class WorkExperienceController extends Controller
      */
     public function edit($id)
     {
-        $experiences = WorkExperience::where('user_id','=',Auth::user()->id)->first();
-        return view('employee.portfolio.work-experience.show', compact('experiences', $experiences));
+        $experience = WorkExperience::where('id','=',$id)->first();
+        return view('employee.portfolio.work-experience.edit', compact('experience'));
     }
 
     /**
@@ -77,7 +92,14 @@ class WorkExperienceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        WorkExperience::where('id','=',$id)->update([
+            'user_id' => Auth::user()->id,
+            'duration' => $request->duration,
+            'work_description' => $request->work_description,
+            'work_place' => $request->work_place,
+        ]);
+
+        return redirect()->route('work.show', Auth::user()->id);
     }
 
     /**

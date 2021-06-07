@@ -28,11 +28,9 @@ class DocumentsController extends Controller
 
             $file = $request->file('file');
             $filename = $file->getClientOriginalName();
-            $extension = $file->getClientOriginalExtension();
             $request->file->storeAs('documents', $filename, 'public');
             $document->file = $filename;
             $document->extension = $extension;
-           
         }
         
         $document->save();
