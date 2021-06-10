@@ -8853,8 +8853,8 @@ html:not([dir="rtl"]) .list-group {
 .list-group-item-action:focus {
   z-index: 1;
   text-decoration: none;
-  color: #768192;
-  background-color: #ebedef;
+  color: white;
+  background-color: #321fdb;
 }
 
 .list-group-item-action:active {

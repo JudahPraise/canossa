@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::prefix('admin')->group(function(){
+Route::middleware('auth')->prefix('admin')->group(function(){
     Route::get('/login', 'Admin\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'Admin\AdminLoginController@logout')->name('admin.logout');
@@ -49,10 +49,15 @@ Route::prefix('admin')->group(function(){
         Route::get('/', 'Admin\MessageController@index')->name('message.index');
         Route::post('/send', 'MessageController@send')->name('send');
     });
+    //Employees
+    Route::prefix('/employees')->group(function(){
+        Route::get('/', 'Admin\EmployeesController@index')->name('employees');
+        Route::get('/{id}', 'Admin\EmployeesController@show')->name('employee.show');
+    });
 
 });
 
-Route::prefix('employee')->group(function(){
+Route::middleware('auth')->prefix('employee')->group(function(){
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
     Route::get('/', 'HomeController@index')->name('home');
     Route::post('/send', 'MessageController@send')->name('employee.send');
@@ -190,6 +195,7 @@ Route::prefix('employee')->group(function(){
         Route::prefix('/document')->group(function(){
             Route::get('/', 'DocumentsController@index')->name('document.index');
             Route::post('/store', 'DocumentsController@store')->name('document.store');
+            Route::put('/update/{id}', 'DocumentsController@update')->name('document.update');
             Route::delete('/delete{id}', 'DocumentsController@delete')->name('document.delete');
             Route::get('/download/{id}', 'DocumentsController@download')->name('document.download'); 
         });
@@ -199,14 +205,4 @@ Route::prefix('employee')->group(function(){
         Route::get('/index', 'Employee\ProfileController@index')->name('profile.index');
     });
 
-});
-
-Route::middleware('auth')->group(function (){
-    // Documents
-    Route::prefix('/document')->group(function(){
-        Route::get('/', 'DocumentsController@index')->name('document.index');
-        Route::post('/store', 'DocumentsController@store')->name('document.store');
-        Route::delete('/delete{id}', 'DocumentsController@delete')->name('document.delete');
-        Route::get('/download/{id}', 'DocumentsController@download')->name('document.download'); 
-    });
 });

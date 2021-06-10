@@ -13,8 +13,8 @@ class ProfileController extends Controller
 {
     public function index(){
         
-        $employee = User::where('id','=',Auth::user()->id)->with('personal', 'experiences', 'trainings', 'voluntary_works')->first();
-        // dd($employee->experiences);
+        $employee = User::where('id','=',Auth::user()->id)->with('personal', 'experiences', 'trainings', 'voluntary_works', 'documents')->first();
+        // dd($employee->documents);
         $family = Family::where('user_id','=',$employee->id)->with('spouse', 'father', 'mother', 'children')->first();
         $educ = EducationalBackground::where('user_id','=',$employee->id)->with('elem', 'sec', 'col', 'col')->first();
         // dd($educ->elem);

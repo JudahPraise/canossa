@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Family;
+use App\Document;
 use App\Schedule;
 use App\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function documents(){
+        return $this->hasMany(Document::class);
+    }
 
     public function schedules(){
         return $this->hasMany(Schedule::class);

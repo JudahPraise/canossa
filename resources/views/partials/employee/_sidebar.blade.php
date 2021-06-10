@@ -37,7 +37,6 @@
         <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-folder-open') }}"></use>
       </svg>
       Documents
-      <span class="badge badge-info">45</span>
     </a>
   </li>
   <li class="c-sidebar-nav-item">

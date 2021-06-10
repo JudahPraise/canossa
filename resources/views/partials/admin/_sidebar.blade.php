@@ -16,6 +16,14 @@
       </a>
     </li>
     <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('employee.show', '1') }}">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-user') }}"></use>
+        </svg>
+        Employees
+      </a>
+    </li>
+    <li class="c-sidebar-nav-item">
       <a class="c-sidebar-nav-link" href="{{ route('message.index') }}">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-envelope-closed') }}"></use>
@@ -25,7 +33,7 @@
       </a>
     </li>
     <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="typography.html">
+      <a class="c-sidebar-nav-link" href="{{ route('announcement.index') }}">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-bell') }}"></use>
         </svg>

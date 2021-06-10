@@ -80,9 +80,6 @@
                     <div class="col">
                       <h3 class="mb-0">Documents</h3>
                     </div>
-                    <div class="col text-right">
-                      <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                    </div>
                   </div>
                 </div>
                 <div class="table-responsive">
@@ -91,29 +88,32 @@
                     <thead class="thead-light">
                       <tr>
                         <th scope="col">Document</th>
-                        <th scope="col">Type</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <th scope="col">Updated</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">
-                          Birth Certificate
-                        </th>
-                        <td>
-                          pdf
-                        </td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <span class="mr-2">Updated at 2 mins ago</span>
-                          </div>
-                        </td>
-                        <td>
-                            <a class="btn btn-icon btn-success btn-sm" type="submit">
-                                <span class="btn-inner--icon text-white"><i class="fas fa-download"></i></span>
-                            </a>
-                        </td>
+                        @forelse ($employee->documents as $document)
+                            <tr>
+                                <th scope="row">
+                                  {{ $document->file }}
+                                </th>
+                                <td>
+                                  <div class="d-flex align-items-center">
+                                    <span class="mr-2">{{ $document->updated_at->diffForHumans() }}</span>
+                                  </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-icon btn-success btn-sm" type="submit">
+                                        <span class="btn-inner--icon text-white"><i class="fas fa-download"></i></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3" class="text-center">No document</td>
+                            </tr> 
+                        @endforelse
                     </tbody>
                   </table>
                 </div>

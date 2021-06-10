@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
 @section('home')
     <div class="container-fluid">
@@ -23,7 +23,7 @@
                             <span>{{ $announcement->time_from }}</span>
                         </div>
 
-                        <div class="col-md-11 px-3 d-flex align-items-center">
+                        <div class="col-md-1  px-3 d-flex align-items-center">
                             <div class="row w-100">
                                 <div class="col-md-9">
                                     <h4 class="btn-link font-weight-bold" style="color: black" >{{ $announcement->announcement_title }}</h4>
