@@ -17,6 +17,10 @@ class PersonalInformation extends Model
         return $this->first_name.' '.$this->middle_name.' '.$this->surname;
     }
 
+    public function getFullName(){
+        return $this->surname.' '.$this->first_name.' '.$this->middle_name;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

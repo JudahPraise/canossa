@@ -18,19 +18,28 @@
                 <div class="card" style="height: 90vh; width: 90%;">
                     <div class="card-header">Employees</div>
                     <div class="card-body p-0 m-0">
-                        <div class="list-group">
+                        <div class="form-group mb-0">
+                            <div class="input-group input-group-alternative input-group-merge">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                              </div>
+                              <input class="form-control pl-3" id="populerNameKey" placeholder="Search" type="text">
+                            </div>
+                        </div>
+                        <ul class="list-group p-0 m-0" id="destPopuler">
                             @foreach ($employees as $employee)
-                                <a href="{{ route('employee.show', $employee->id) }}" class="list-group-item list-group-item-action d-flex">
+                            <li class="list-group-item list-group-item-action">
+                                <a href="{{ route('employee.show', $employee->id) }}" class="d-flex align-items-center">
                                     <div class="image is-rounded is-tiny-square">
                                         <img src="https://orbitcss.com/img/square.png">
                                     </div>
                                     <div class="ml-3">
-                                        <h4 class="m-0">{{ $employee->name }}</h4>
-                                        <span style="font-size: .8rem">{{ $employee->email }}</span>
+                                        <h3 class="m-0">{{ $employee->name}}</h3>
                                     </div>
                                 </a>
+                            </li>
                             @endforeach
-                        </div>
+                        </ul>
                     </div>
                   </div>
             </div>
@@ -42,6 +51,22 @@
 @endsection
 
 @section('js')
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#populerNameKey").on('keyup', function(){
+            var value = $(this).val().toLowerCase();
+            $("#destPopuler li").each(function () {
+                if ($(this).text().toLowerCase().search(value) > -1) {
+                    $(this).show();
+                    $(this).prev('.country').last().show();
+                } else {
+                    $(this).hide();
+                }
+            });   
+        })
+    });
+</script>
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>

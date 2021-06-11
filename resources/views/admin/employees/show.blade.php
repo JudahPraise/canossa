@@ -197,7 +197,7 @@
                               <div class="row row-cols-1 row-cols-md-2 mt-3">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Name</strong>
-                                      @if (!empty(auth()->user()->family->spouse))
+                                      @if (!empty($family->spouse))
                                           <strong style="color: black; font-size: 1rem">{{ $family->spouse->spouseFullname() }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -205,7 +205,7 @@
                                   </div>
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Occupation</strong>
-                                      @if (!empty(auth()->user()->family->spouse))
+                                      @if (!empty($family->spouse))
                                           <strong style="color: black; font-size: 1rem">{{ $family->spouse->occupation }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -215,7 +215,7 @@
                               <div class="row row-cols-1 row-cols-md-2">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Employer business name</strong>
-                                      @if (!empty(auth()->user()->family->spouse))
+                                      @if (!empty($family->spouse))
                                           <strong style="color: black; font-size: 1rem">{{ $family->spouse->employer_business_name}}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -223,7 +223,7 @@
                                   </div>
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Business address</strong>
-                                      @if (!empty(auth()->user()->family->spouse))
+                                      @if (!empty($family->spouse))
                                           <strong style="color: black; font-size: 1rem">{{ $family->spouse->business_address }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -233,7 +233,7 @@
                               <div class="row row-cols-1 row-cols-md-1">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Telephone number</strong>
-                                      @if (!empty(auth()->user()->family->spouse))
+                                      @if (!empty($family->spouse))
                                           <strong style="color: black; font-size: 1rem">{{ $family->spouse->tel_no}}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -265,7 +265,7 @@
                               <div class="row row-cols-1 row-cols-md-2 mt-3">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Name</strong>
-                                      @if (!empty(auth()->user()->family->mother))
+                                      @if (!empty($family->mother))
                                           <strong style="color: black; font-size: 1rem">{{ $family->mother->motherFullname() }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -273,7 +273,7 @@
                                   </div>
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Occupation</strong>
-                                      @if (!empty(auth()->user()->family->mother))
+                                      @if (!empty($family->mother))
                                           <strong style="color: black; font-size: 1rem">{{ $family->mother->occupation }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -283,7 +283,7 @@
                               <div class="row row-cols-1 row-cols-md-2">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Employer business name</strong>
-                                      @if (!empty(auth()->user()->family->mother))
+                                      @if (!empty($family->mother))
                                           <strong style="color: black; font-size: 1rem">{{ $family->mother->employer_business_name}}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -291,7 +291,7 @@
                                   </div>
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Business address</strong>
-                                      @if (!empty(auth()->user()->family->mother))
+                                      @if (!empty($family->mother))
                                           <strong style="color: black; font-size: 1rem">{{ $family->mother->business_address }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -302,7 +302,7 @@
                               <div class="row row-cols-1 row-cols-md-1">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Telephone number</strong>
-                                      @if (!empty(auth()->user()->family->mother))
+                                      @if (!empty($family->mother))
                                           <strong style="color: black; font-size: 1rem">{{ $family->mother->tel_no}}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -316,7 +316,7 @@
                               <div class="row row-cols-1 row-cols-md-2 mt-3">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Name</strong>
-                                      @if (!empty(auth()->user()->family->father))
+                                      @if (!empty($family->father))
                                           <strong style="color: black; font-size: 1rem">{{ $family->father->fatherFullname() }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -324,7 +324,7 @@
                                   </div>
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Occupation</strong>
-                                      @if (!empty(auth()->user()->family->father))
+                                      @if (!empty($family->father))
                                           <strong style="color: black; font-size: 1rem">{{ $family->father->occupation }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -334,7 +334,7 @@
                               <div class="row row-cols-1 row-cols-md-2">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Employer business name</strong>
-                                      @if (!empty(auth()->user()->family->father))
+                                      @if (!empty($family->father))
                                           <strong style="color: black; font-size: 1rem">{{ $family->father->employer_business_name}}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -342,7 +342,7 @@
                                   </div>
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Business address</strong>
-                                      @if (!empty(auth()->user()->family->father))
+                                      @if (!empty($family->father))
                                           <strong style="color: black; font-size: 1rem">{{ $family->father->business_address }}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -353,7 +353,7 @@
                               <div class="row row-cols-1 row-cols-md-1">
                                   <div class="col mb-3 d-flex flex-column">
                                       <strong style="font-size: 1rem">Telephone number</strong>
-                                      @if (!empty(auth()->user()->family->father))
+                                      @if (!empty($family->father))
                                           <strong style="color: black; font-size: 1rem">{{ $family->father->tel_no}}</strong>
                                       @else
                                           <strong style="color: black; font-size: 1rem">Not set</strong>
@@ -367,7 +367,7 @@
                               <div class="row d-flex justify-content-center">
                                   <h6 class="heading-small text-muted mb-4 ml-3">Elementary</h6>
                               </div>
-                              @if (!empty(auth()->user()->education->elem))
+                              @if (!empty($educ->elem))
                                   <div class="row row-cols-2 row-cols-md-4 mt-3">
                                       <div class="col mb-3 d-flex flex-column">
                                           <strong style="font-size: 1rem">Name of school</strong>
@@ -400,7 +400,7 @@
                               <div class="row d-flex justify-content-center">
                                   <h6 class="heading-small text-muted mb-4 ml-3">Secondary</h6>
                               </div>
-                              @if (!empty(auth()->user()->education->sec))
+                              @if (!empty($educ->sec))
                                   <div class="row row-cols-2 row-cols-md-4 mt-3">
                                       <div class="col mb-3 d-flex flex-column">
                                           <strong style="font-size: 1rem">Name of school</strong>
@@ -433,7 +433,7 @@
                               <div class="row d-flex justify-content-center">
                                   <h6 class="heading-small text-muted mb-4 ml-3">College</h6>
                               </div>
-                              @if (!empty(auth()->user()->education->col))
+                              @if (!empty($educ->col))
                                   <div class="row row-cols-2 row-cols-md-4 mt-3">
                                       <div class="col mb-3 d-flex flex-column">
                                           <strong style="font-size: 1rem">Name of school</strong>
@@ -470,7 +470,7 @@
                               <div class="row d-flex justify-content-center">
                                   <h6 class="heading-small text-muted mb-4 ml-3">Graduate Study</h6>
                               </div>
-                              @if (!empty(auth()->user()->education->grad->first()))
+                              @if (!empty($educ->grad))
                                   @foreach ($educ->grad as $grad)
                                       <div class="row row-cols-2 row-cols-md-5 mt-3">
                                           <div class="col mb-3 d-flex flex-column">
@@ -515,7 +515,7 @@
                               <div class="row d-flex justify-content-center">
                                   <h6 class="heading-small text-muted mb-4 ml-3">Work Experience</h6>
                               </div>
-                              @if (!empty(auth()->user()->experiences->first()))
+                              @if (!empty($employee->experiences))
                                   @foreach ($employee->experiences as $experience)
                                       <div class="row row-cols-2 row-cols-md-5 mt-3">
                                           <div class="col mb-3 d-flex flex-column">
@@ -544,7 +544,7 @@
                               <div class="row d-flex justify-content-center">
                                   <h6 class="heading-small text-muted mb-4 ml-3">Training Programs</h6>
                               </div>
-                              @if (!empty(auth()->user()->trainings->first()))
+                              @if (!empty($employee->trainings))
                                   @foreach ($employee->trainings as $training)
                                       <div class="row row-cols-2 row-cols-md-5 mt-3">
                                           <div class="col mb-3 d-flex flex-column">
@@ -582,7 +582,7 @@
                               <div class="row d-flex justify-content-center">
                                   <h6 class="heading-small text-muted mb-4 ml-3">Training Programs</h6>
                               </div>
-                              @if (!empty(auth()->user()->trainings->first()))
+                              @if (!empty($employee->voluntary_works))
                                   @foreach ($employee->voluntary_works as $voluntary)
                                       <div class="row row-cols-2 row-cols-md-5 mt-3">
                                           <div class="col mb-3 d-flex flex-column">

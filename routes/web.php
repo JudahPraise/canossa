@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware('auth')->prefix('admin')->group(function(){
+Route::prefix('admin')->group(function(){
     Route::get('/login', 'Admin\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'Admin\AdminLoginController@logout')->name('admin.logout');
