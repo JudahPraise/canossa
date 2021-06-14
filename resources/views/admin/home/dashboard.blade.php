@@ -1,98 +1,203 @@
 @extends('admin.layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbitcss/css/orbit.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="{{ asset('argon/vendor/nucleo/css/nucleo.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
+@endsection
+
 @section('home')
-<div class="container-fluid">
-  <div class="fade-in">
-    <!-- /.row-->
+  <div class="container-fluid">
+    <div class="row px-4 d-flex">
+      <div class="col-md-6">
+        <h1>Dashboard</h1>
+      </div>
+      <div class="col-md-6 d-flex justify-content-end">
+        {{-- <input type="text" placeholder="Search" id="myInput" onkeyup="myFunction()"> --}}
+      </div>
+    </div>
+      <!-- Card stats -->
     <div class="row">
-      <div class="col-sm-2">
-        <div class="c-callout c-callout-info b-t-1 b-r-1 b-b-1">
-          <small class="text-muted">New Clients</small><br>
-          <strong class="h4">9,123</strong>
-        </div>
-      </div><!--/.col-->
-      <div class="col-sm-2">
-        <div class="c-callout c-callout-danger b-t-1 b-r-1 b-b-1">
-          <small class="text-muted">Recuring Clients</small><br>
-          <strong class="h4">22,643</strong>
-        </div>
-      </div><!--/.col-->
-      <div class="col-sm-2">
-        <div class="c-callout c-callout-warning b-t-1 b-r-1 b-b-1">
-          <small class="text-muted">Pageviews</small><br>
-          <strong class="h4">78,623</strong>
-        </div>
-      </div><!--/.col-->
-      <div class="col-sm-2">
-        <div class="c-callout c-callout-success b-t-1 b-r-1 b-b-1">
-          <small class="text-muted">Organic</small><br>
-          <strong class="h4">49,123</strong>
-        </div>
-      </div><!--/.col-->
-      <div class="col-sm-2">
-        <div class="c-callout b-t-1 b-r-1 b-b-1">
-          <small class="text-muted">CTR</small><br>
-          <strong class="h4">23%</strong>
-        </div>
-      </div><!--/.col-->
-      <div class="col-sm-2">
-        <div class="c-callout c-callout-primary b-t-1 b-r-1 b-b-1">
-          <small class="text-muted">Bounce Rate</small><br>
-          <strong class="h4">5%</strong>
-        </div>
-      </div><!--/.col-->
-    </div><!--/.row-->
-    <!-- /.row-->
-    <div class="card">
-      <div class="card-header">Employees</div>
-      <div class="card-body">
-        <table class="table table-responsive-sm table-hover table-outline mb-0">
-          <thead class="thead-light">
-            <tr>
-              <th class="text-center">
-                <svg class="c-icon">
-                  <use xlink:href="assets/icons/coreui/free-symbol-defs.svg#cui-people"></use>
-                </svg>
-              </th>
-              <th>User</th>
-              <th class="text-center">Country</th>
-              <th>Usage</th>
-              <th class="text-center">Payment Method</th>
-              <th>Activity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-center">
-                <div class="c-avatar"><img class="c-avatar-img" src="{{ asset('core-ui/assets/img/avatars/1.jpg') }}" alt="user@email.com"><span class="c-avatar-status bg-success"></span></div>
-              </td>
-              <td>
-                <div>Yiorgos Avraamu</div>
-                <div class="small text-muted"><span>New</span> | Registered: Jan 1, 2015</div>
-              </td>
-              <td class="text-center"><i class="flag-icon flag-icon-us c-icon-xl" id="us" title="us"></i></td>
-              <td>
-                <div class="clearfix">
-                  <div class="float-left"><strong>50%</strong></div>
-                  <div class="float-right"><small class="text-muted">Jun 11, 2015 - Jul 10, 2015</small></div>
+      <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card card-stats pressable-day">
+          <!-- Card body -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Total No. of Employees</h5>
+                <span class="h2 font-weight-bold mb-0">350,897</span>
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                  <i class="ni ni-active-40"></i>
                 </div>
-                <div class="progress progress-xs">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card card-stats pressable-day">
+          <!-- Card body -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Teachers</h5>
+                <span class="h2 font-weight-bold mb-0">2,356</span>
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                  <i class="ni ni-chart-pie-35"></i>
                 </div>
-              </td>
-              <td class="text-center">
-                <svg class="c-icon c-icon-xl">
-                  <use xlink:href="assets/icons/brands/brands-symbol-defs.svg#cc-mastercard"></use>
-                </svg>
-              </td>
-              <td>
-                <div class="small text-muted">Last login</div><strong>10 sec ago</strong>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card card-stats  pressable-day">
+          <!-- Card body -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Staff</h5>
+                <span class="h2 font-weight-bold mb-0">924</span>
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                  <i class="ni ni-money-coins"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card card-stats pressable-day">
+          <!-- Card body -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">Maintenance</h5>
+                <span class="h2 font-weight-bold mb-0">49,65%</span>
+              </div>
+              <div class="col-auto">
+                <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                  <i class="ni ni-chart-bar-32"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <!-- Card header -->
+          <div class="card-header border-0 row d-flex align-items-center">
+              <div class="col-6 col-md-6 m-0">
+                <h2 class="mb-0">Employees</h2>
+              </div>
+              <div class="col-6 col-md-6 d-flex justify-content-sm-end p-0">
+                <form class="navbar-search-light form-inline" id="navbar-search-main">
+                  <div class="form-group mb-0  w-100">
+                    <div class="input-group input-group-alternative w-100">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Search" type="text" id="myInput" onkeyup="myFunction()">
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <!-- Light table -->
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush" id="myTable">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th></th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                @forelse ($employees as $employee)
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        @if(!empty($employee->image))
+                          <a href="#" class="avatar rounded-circle mr-3">
+                            <img src="{{ asset( 'storage/images/'.$employee->image) }}" style=" height: 50px; overflow: hidden;">
+                          </a>
+                        @else
+                          <a href="#">
+                            <img src="{{ asset($employee->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 50px; overflow: hidden;">
+                          </a>
+                        @endif
+                      </div>
+                    </th>
+                    <td>{{ $employee->name }}</td>
+                    <td class="budget">
+                      {{ $employee->role }}
+                    </td>
+                    <td>
+                      {{ $employee->department }}
+                    </td>
+                    <td>
+                      <a class="btn btn-sm btn-primary" href="{{ route('employee.show', $employee->id) }}">View Profile</a>
+                    </td>
+                  </tr>
+                @empty
+                  
+                @endforelse
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+</script>
+
+@endsection
+
+@section('js')
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
+    <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <!-- Argon JS -->
+    <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
 @endsection

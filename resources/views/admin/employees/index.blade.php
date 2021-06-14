@@ -12,40 +12,67 @@
 @endsection
 
 @section('home')
-    <div class="container-fluid is-desktop-up">
-        <div class="row d-flex flex-column">
-            <div class="col-md-4" style="position: fixed"> 
-                <div class="card" style="height: 90vh; width: 90%;">
-                    <div class="card-header">Employees</div>
-                    <div class="card-body p-0 m-0">
-                        <div class="form-group mb-0">
-                            <div class="input-group input-group-alternative input-group-merge">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-search"></i></span>
-                              </div>
-                              <input class="form-control pl-3" id="populerNameKey" placeholder="Search" type="text">
-                            </div>
-                        </div>
-                        <ul class="list-group p-0 m-0" id="destPopuler">
-                            @foreach ($employees as $employee)
-                            <li class="list-group-item list-group-item-action">
-                                <a href="{{ route('employee.show', $employee->id) }}" class="d-flex align-items-center">
-                                    <div class="image is-rounded is-tiny-square">
-                                        <img src="https://orbitcss.com/img/square.png">
-                                    </div>
-                                    <div class="ml-3">
-                                        <h3 class="m-0">{{ $employee->name}}</h3>
-                                    </div>
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
+    <div class="container-fluid p-3">
+        <div class="row row-cols-1 row-cols-md-2 d-flex align-items-center px-3 mb-3">
+            <div class="col-6 col-md-6 m-0">
+                <h2 class="mb-0">Employees</h2>
+            </div>
+            <div class="col-6 col-md-6 d-flex justify-content-sm-end p-0">
+                <form class="navbar-search-light form-inline" id="navbar-search-main">
+                  <div class="form-group mb-0  w-100">
+                    <div class="input-group input-group-alternative w-100">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Search" type="text" id="populerNameKey" onkeyup="myFunction()">
                     </div>
                   </div>
+                </form>
             </div>
-            <div class="col-md-8 align-self-end">
-                @yield('employee')
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4" id="destPopuler">
+            @forelse ($employees as $employee)
+            <div class="col mb-4">
+                <div class="card p-0">
+                    <img class="card-img-top" src="{{ asset('argon/img/theme/img-1-1000x600.jpg') }}" alt="Card image cap">
+                    <div class="card-profile-image avatar-upload">
+                       @if (!empty($employee->image))
+                            <a href="#">
+                                <img src="{{ asset( 'storage/images/'.$employee->image) }}" class="rounded-circle" style="height: 140px; width: 200px; overflow: hidden;">
+                            </a>
+                       @else
+                            <a href="#">
+                                <img src="{{ asset($employee->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 140px; width: 200px; overflow: hidden;">
+                            </a>
+                       @endif
+                    </div>
+                    <div class="card-body mt-4">
+                        <div class="row d-flex flex-column m-2" style="height: 10rem">
+                            <div class="col">
+                                <div class="card-profile-stats d-flex justify-content-center">
+                                    <div class="text-center">
+                                        <h3>
+                                          {{ $employee->name }}
+                                        </h3>
+                                        <h5>
+                                            {{ $employee->role }}
+                                        </h5>
+                                        <h5>
+                                           {{ $employee->department }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <a href="{{ route('employee.show', $employee->id) }}" class="btn btn-sm btn-primary">View profile</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            @empty
+                
+            @endforelse
         </div>
     </div>
 @endsection
@@ -56,7 +83,7 @@
     $(document).ready(function () {
         $("#populerNameKey").on('keyup', function(){
             var value = $(this).val().toLowerCase();
-            $("#destPopuler li").each(function () {
+            $("#destPopuler .col").each(function () {
                 if ($(this).text().toLowerCase().search(value) > -1) {
                     $(this).show();
                     $(this).prev('.country').last().show();

@@ -52,7 +52,7 @@ Route::prefix('admin')->group(function(){
     //Employees
     Route::prefix('/employees')->group(function(){
         Route::get('/', 'Admin\EmployeesController@index')->name('employees');
-        Route::get('/{id}', 'Admin\EmployeesController@show')->name('employee.show');
+        Route::get('/show/{id}', 'Admin\EmployeesController@show')->name('employee.show');
     });
 
 });

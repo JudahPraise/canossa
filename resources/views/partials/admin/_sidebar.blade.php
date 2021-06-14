@@ -16,7 +16,7 @@
       </a>
     </li>
     <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="{{ route('employee.show', '1') }}">
+      <a class="c-sidebar-nav-link" href="{{ route('employees') }}">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-user') }}"></use>
         </svg>

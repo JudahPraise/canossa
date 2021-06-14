@@ -58,9 +58,15 @@
       {{-- End Message Icon --}}
       {{-- Profile Icon --}}
       <li class="c-header-nav-item has-dropdown">
-        <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          <div class="c-avatar"><img class="c-avatar-img" src="{{ asset('core-ui/assets/img/avatars/6.jpg') }}" alt="user@email.com"></div>
-        </a>
+        @if (!empty(auth()->user()->image))
+          <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="c-avatar"><img class="c-avatar-img" src="{{ asset( 'storage/images/'.Auth::user()->image) }}" style=" height: 40px; overflow: hidden;"></div>
+          </a>
+        @else
+          <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="c-avatar"><img class="c-avatar-img" src="{{ asset(auth()->user()->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" style=" height: 40px; overflow: hidden;"></div>
+          </a>
+        @endif
         <div class="dropdown-menu dropdown-menu-right pt-0">
           <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
           <a class="dropdown-item" href="#">

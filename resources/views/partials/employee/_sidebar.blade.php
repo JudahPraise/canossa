@@ -39,14 +39,6 @@
       Documents
     </a>
   </li>
-  <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="typography.html">
-      <svg class="c-sidebar-nav-icon">
-        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-bell') }}"></use>
-      </svg>
-      Announcements
-    </a>
-  </li>
   <li class="c-sidebar-nav-item mt-auto">
     <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" href="{{ route('admin.logout') }}">
       <svg class="c-sidebar-nav-icon">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Employee\Portfolio;
 
+use App\User;
 use App\PersonalInformation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -67,6 +68,10 @@ class PersonalInfoController extends Controller
             'phil_health' => $request->phil_health
         ]);
 
+        User::where('id','=',Auth::user()->id)->update([
+            'name' => $personal->fullName()
+        ]);
+
         return redirect()->route('personal.index');
     }
 
@@ -106,7 +111,7 @@ class PersonalInfoController extends Controller
             'user_id' => auth()->user()->id,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
-            'surname' => $request-> surname, 
+            'surname' => $request->surname, 
             'date_of_birth' => $request->date_of_birth,
             'sex' => $request->sex,
             'citizenship' => $request->citizenship,
@@ -125,6 +130,10 @@ class PersonalInfoController extends Controller
             'pag_ibig' => $request->pag_ibig,
             'driver_license' => $request->driver_license,
             'phil_health' => $request->phil_health
+        ]);
+
+        User::where('id','=',Auth::user()->id)->update([
+            'name' => $request->surname.','.' '.$request->first_name.','.' '.$request->middle_name
         ]);
 
         return redirect()->route('personal.index');
