@@ -32,6 +32,14 @@
     </a>
   </li>
   <li class="c-sidebar-nav-item">
+    <a class="c-sidebar-nav-link" href="{{ route('resume') }}">
+      <svg class="c-sidebar-nav-icon">
+        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-file') }}"></use>
+      </svg>
+      Resume
+    </a>
+  </li>
+  <li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link" href="{{ route('document.index') }}">
       <svg class="c-sidebar-nav-icon">
         <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-folder-open') }}"></use>
@@ -40,11 +48,12 @@
     </a>
   </li>
   <li class="c-sidebar-nav-item mt-auto">
-    <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" href="{{ route('admin.logout') }}">
+    <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" onclick="document.getElementById('logoutForm').submit()">
       <svg class="c-sidebar-nav-icon">
         <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
       </svg>
       Logout
+      <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
     </a>
   </li>
 </ul>

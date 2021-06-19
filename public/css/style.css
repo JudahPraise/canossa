@@ -367,3 +367,16 @@ ion-icon{
   background-color: #eee;
 }
 
+/* @media print {
+  body {
+    visibility: hidden;
+  }
+  #paper, #paper *{
+    visibility: visible;
+  }
+  #paper {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+} */

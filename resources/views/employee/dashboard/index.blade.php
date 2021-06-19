@@ -1,78 +1,92 @@
 @extends('employee.layouts.home')
 
+@section('css')
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbitcss/css/orbit.css">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="{{ asset('argon/vendor/nucleo/css/nucleo.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
+@endsection
+
 @section('employee-home')
-<div class="container-fluid">
-  <div class="row pt-5">
-    <div class="col-lg-7">
-      <h4 class="font-weight-bold" style="color: black">Your Schedule</h4>
-    </div>
-    <div class="col-lg-5 d-flex justify-content-end align-items-start">
-      <div class="form-group row mr-2">
-        <div class="col-sm-10">
-          <div class="btn-group">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select Day
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="{{ route('schedule.filter-all', $days->all()) }}">All</a>
-              @foreach ($days as $day)
-              <a class="dropdown-item day" href="{{ route('schedule.filter', $day->day) }}" data-day="{{ $day->day }}">{{ $day->day }}</a>
-              @endforeach
+
+<div class="container-fluid p-4">
+
+  <div class="row w-100 m-0">
+    <div class="card w-100">
+      <div class="card-header border-0">
+        <div class="row align-items-center">
+          <div class="col">
+            <h3 class="mb-0">Schedule</h3>
+          </div>
+          <div class="col text-right">
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm dropdown-toggle mr-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Day
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ route('schedule.filter-all', $days->all()) }}">All</a>
+                @foreach ($days as $day)
+                <a class="dropdown-item day" href="{{ route('schedule.filter', $day->day) }}" data-day="{{ $day->day }}">{{ $day->day }}</a>
+                @endforeach
+              </div>
             </div>
+            <button class="btn btn-icon btn-success btn-sm" type="button" data-toggle="modal" data-target="#schedule">
+              <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+            </button>
           </div>
         </div>
       </div>
-      <button class="btn btn-md btn-success" data-toggle="modal" data-target="#schedule">Add Schedule</button>
+      <div class="table-responsive">
+        <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+            <tr class="border" style="color: black">
+              <th>Title</th>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @forelse ($schedules as $schedule)
+              <tr class="{{ $schedule->day == Carbon\Carbon::now()->format( 'l' ) ? 'bg-gradient-success text-white' : 'border'}}" style="color: black;"> 
+                <th>{{ $schedule->title }}</th>  
+                @if ($schedule->day == Carbon\Carbon::now()->format( 'l' ))
+                <td>Today</td>
+                @else
+                <td>{{ $schedule->day }}</td>
+                @endif
+                <td>{{ $schedule->time_from.' '.'-'.' '.$schedule->time_to }}</td>
+                <td class="d-flex">
+                  <a href="" class="sched btn btn-sm btn-icon btn-info"
+                  data-schedid="{{ $schedule->id }}"
+                  data-schedtitle="{{ $schedule->title }}"
+                  data-schedday="{{ $schedule->day }}"
+                  data-schedtimefrom="{{ $schedule->time_from }}"
+                  data-schedtimeto="{{ $schedule->time_to }}"
+                  data-toggle="modal" data-target="#editModal"><span class="btn-inner--icon"><i class="fas fa-edit"></i></span></a>
+                  <form action="{{ route('schedule.delete', $schedule->id) }}" method="POST" id='delete'>
+                    @method('DELETE')
+                    @csrf
+                      <button type="submit" class="btn btn-sm btn-icon btn-danger"><span class="btn-inner--icon"><i class="fas fa-trash"></i></span></button>
+                  </form>
+                </td>
+              </tr>
+            @empty
+              <tr>
+                <td class="text-center" colspan="4">You do not have schedule</td>
+              </tr>
+            @endforelse
+          </tbody>
+        </table>
+        {{ $schedules->links() }}
+      </div>
     </div>
   </div>
-
-  <div class="table-responsive" style="color: black">
-    <table class="table table-striped table-hover table-borderless">
-      <thead>
-        <tr class="border" style="color: black">
-          <th>Title</th>
-          <th>Day</th>
-          <th>Time</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        @forelse ($schedules as $schedule)
-          <tr class="{{ $schedule->day == Carbon\Carbon::now()->format( 'l' ) ? 'glowing-border' : 'border'}}" style="color: black;"> 
-            <th>{{ $schedule->title }}</th>  
-            @if ($schedule->day == Carbon\Carbon::now()->format( 'l' ))
-            <td>Today</td>
-            @else
-            <td>{{ $schedule->day }}</td>
-            @endif
-            <td>{{ $schedule->time_from.' '.'-'.' '.$schedule->time_to }}</td>
-            <td class="d-flex">
-              <a href="" class="sched" 
-              data-schedid="{{ $schedule->id }}"
-              data-schedtitle="{{ $schedule->title }}"
-              data-schedday="{{ $schedule->day }}"
-              data-schedtimefrom="{{ $schedule->time_from }}"
-              data-schedtimeto="{{ $schedule->time_to }}"
-              data-toggle="modal" data-target="#editModal"><i class="fas fa-edit text-primary px-3" style="font-size: 1.5rem"></i></a>
-              <form action="{{ route('schedule.delete', $schedule->id) }}" method="POST" id='delete'>
-                @method('DELETE')
-                @csrf
-                  <button type="submit" style="border: 0; padding: 0; margin: 0;"><i class="fas fa-trash-alt text-danger" style="font-size: 1.5rem"></i></button>
-              </form>
-            </td>
-          </tr>
-        @empty
-          <tr>
-            <td class="text-center" colspan="4">You do not have schedule</td>
-          </tr>
-        @endforelse
-      </tbody>
-    </table>
-    {{ $schedules->links() }}
-  </div>
-
 </div>
-
 
 <!-- Create Modal -->
 <div class="modal fade" id="schedule" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -190,6 +204,14 @@
 </script>
 @endsection
 
-@section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbitcss/css/orbit.css">
+@section('js')
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
+    <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <!-- Argon JS -->
+    <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee\Portfolio;
 
 use App\WorkExperience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,6 +52,8 @@ class WorkExperienceController extends Controller
                 'duration' => $request->duration[$item],
                 'work_description' => $request->work_description[$item],
                 'work_place' => $request->work_place[$item],
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
             ]);
         }
 
@@ -102,6 +105,8 @@ class WorkExperienceController extends Controller
                 'duration' => $request->duration[$item],
                 'work_description' => $request->work_description[$item],
                 'work_place' => $request->work_place[$item],
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
             ]);
         }
 

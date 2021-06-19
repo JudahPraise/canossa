@@ -20,11 +20,11 @@
                 </form>
             </div>
             <div class="col-md-5 mb-3 d-flex flex-column">
-                <strong style="font-size: 1rem">Name</strong>
+                <small style="font-size: 1rem">Name</small>
                 <strong style="color: black; font-size: 1.3rem">{{ $child->name }}</strong>
             </div>
             <div class="col-md-5 mb-3 d-flex flex-column">
-                <strong style="font-size: 1rem">Date of birth</strong>
+                <small style="font-size: 1rem">Date of birth</small>
                 <strong style="color: black; font-size: 1.3rem">{{ $child->date_of_birth }}</strong>
             </div>
         </div>

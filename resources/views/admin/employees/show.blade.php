@@ -20,10 +20,13 @@
             <div class="container-fluid d-flex align-items-center">
               <div class="row p-3 w-100">
                 <div class="col-lg-7 col-md-10">
-                  <h1 class="display-2 text-white">{{ $employee->name }}</h1>
-                  <h2 class="text-white mt-0">{{ $employee->employee_id }}</h2>
-                  <small class="text-white mt-0" style="font-size: 1rem">{{ $employee->department }}</small>
-                  <small class="text-white mt-0" style="font-size: 1rem">{{ $employee->role }}</small>
+                    <h1 class="display-2 text-white">{{ $employee->name }}</h1>
+                    <h2 class="text-white mt-0">{{ $employee->employee_id }}</h2>
+                    <small class="text-white mt-0" style="font-size: 1rem">{{ $employee->department }}</small>
+                    <small class="text-white mt-0" style="font-size: 1rem">{{ $employee->role }}</small><br>
+                    <a class="btn btn-icon btn-success mt-3" data-toggle="modal" data-target="#createModal" type="button" type="submit">
+                        <span class="btn-inner--icon text-white"><i class="fas fa-envelope mr-2"></i>Message</span>
+                    </a>
                 </div>
               </div>
             </div>
@@ -56,10 +59,59 @@
                   </div>
                   <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                     <div class="d-flex justify-content-between">
-                      <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
-                      <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                      
                     </div>
                   </div>
+                    <!-- Create Modal -->
+                    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Create Message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                              <form class="w-100" enctype="multipart/form-data"  action="{{ route('send') }}" method="POST">
+                                @csrf
+                                <div class="form-row">
+                                  <div class="col-md-12 mb-3">
+                                      <label for="validationDefault01">Send To</label>
+                                      <select id="inputState" class="form-control" name="send_to">
+                                        <option selected value="{{ $employee->name }}">{{ $employee->name }}</option>
+                                      </select>
+                                  </div>
+                                </div>
+                                <div class="form-row">
+                                  <div class="col-md-12 mb-3">
+                                    <label for="validationDefault01">Subject</label>
+                                    <input type="text" class="form-control" name="subject" id="validationDefault01" placeholder="Subject" required>
+                                  </div>
+                                </div>
+                                <div class="form-row">
+                                  <div class="col-md-12 mb-3">
+                                    <label for="exampleFormControlTextarea1">Message</label>
+                                    <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                  </div>
+                                </div>
+                            
+                                <div class="form-row">
+                                  <label for="">Attachment</label>
+                                  <div class="col-md-12 mb-3 custom-file">
+                                    <input type="file" class="custom-file-input" name="attachment" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary" value="Submit Form">Send</button>
+                            </div>
+                          </form>
+                          </div>
+                        </div>
+                    </div>
                     <div class="card-body pt-0">
                       <div class="row">
                             <div class="col">
@@ -76,10 +128,10 @@
                                             @endif
                                         </div>
                                         <div class="h5 mt-4">
-                                            <i class="ni business_briefcase-24 mr-2"></i>{{ $employee->role }}
+                                            {{ $employee->role }}
                                         </div>
                                         <div>
-                                            <i class="ni education_hat mr-2"></i>{{ $employee->department }}
+                                            {{ $employee->department }}
                                         </div>
                                     </div>
                                 </div>
@@ -93,11 +145,6 @@
                         <div class="col">
                           <h3 class="mb-0">Documents</h3>
                         </div>
-                        <div class="col d-flex justify-content-end">
-                            <a  href="{{ route('document.index') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                            </a>
-                        </div>
                       </div>
                     </div>
                     <div class="table-responsive">
@@ -107,7 +154,6 @@
                           <tr>
                             <th scope="col">Document</th>
                             <th scope="col">Updated</th>
-                            <th scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -120,11 +166,6 @@
                                       <div class="d-flex align-items-center">
                                         <span class="mr-2">{{ $document->updated_at->diffForHumans() }}</span>
                                       </div>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-icon btn-success btn-sm" type="submit">
-                                            <span class="btn-inner--icon text-white"><i class="fas fa-download"></i></span>
-                                        </a>
                                     </td>
                                 </tr>
                             @empty
@@ -152,22 +193,6 @@
                                 <h6 class="heading-small text-muted mb-4 text-center">Personal information</h6>
                                 <div class="row d-flex justify-content-between px-2">
                                     <h6 class="heading-small text-muted mb-4"></h6>
-                                   @if (!empty($employee->personal))
-                                    <div>
-                                        <button class="btn btn-icon btn-danger btn-sm" type="button">
-                                            <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                        </button>
-                                        <a  href="{{ route('personal.edit', Auth::user()->id) }}" {{ !empty($employee->personal()) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
-                                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                        </a>
-                                    </div>
-                                   @else
-                                        <div>
-                                            <a  href="{{ route('personal.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                   @endif
                                 </div>
                                 @if (!empty($employee->personal))
                                     <div class="pl-lg-3">
@@ -276,25 +301,6 @@
                             {{-- Family Background --}}
                             <div class="pl-lg-2">
                                 <h6 class="heading-small text-muted text-center">Family Background</h6>
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4">Spouse</h6>
-                                    @if (!empty($employee->family->spouse))
-                                        <div>
-                                            <button class="btn btn-icon btn-danger btn-sm" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                            </button>
-                                            <a  href="{{ route('spouse.edit', Auth::user()->id) }}" {{ !empty($employee->family->spouse) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('spouse.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @if (!empty($employee->family->spouse))
                                     <div class="row row-cols-1 row-cols-md-2 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -328,25 +334,6 @@
                                     </div>
                                 @endif
                                 <hr class="my-4" />
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4">Children</h6>
-                                    @if (!empty($employee->family()->children))
-                                        <div>
-                                            <button class="btn btn-icon btn-danger btn-sm" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                            </button>
-                                            <a  href="{{ route('children.edit', Auth::user()->id) }}" {{ !empty($employee->family->children) ? '' : ' btn-disabled' }} class="btn  btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('children.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @forelse ($family->children as $child)
                                     <div class="row row-cols-1 row-cols-md-2 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -364,25 +351,6 @@
                                     </div>
                                 @endforelse
                                 <hr class="my-4" />
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4">Mother</h6>
-                                    @if (!empty($employee->family->mother))
-                                        <div>
-                                            <button class="btn btn-icon btn-danger btn-sm" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                            </button>
-                                            <a  href="{{ route('mother.edit', Auth::user()->id) }}" {{ !empty($employee->family->mother) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('mother.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @if (!empty($employee->family->mother))
                                     <div class="row row-cols-1 row-cols-md-2 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -416,25 +384,6 @@
                                     </div>
                                 @endif
                                 <hr class="my-4" />
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4">Father</h6>
-                                    @if (!empty($employee->family->father))
-                                        <div>
-                                            <button class="btn btn-icon btn-danger btn-sm" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                            </button>
-                                            <a  href="{{ route('father.edit', Auth::user()->id) }}" {{ !empty($employee->family->father) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('father.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @if (!empty($employee->family->father))
                                     <div class="row row-cols-1 row-cols-md-2 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -473,29 +422,6 @@
                             {{-- Elementary --}}
                             <div class="pl-lg-2">
                                 <h6 class="heading-small text-muted text-center">Educational Background</h6>
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4">Elementary</h6>
-                                    @if (!empty($employee->education->elem))
-                                        <div class="d-flex flex-row align-items-center">
-                                            <form class="mr-2" action="{{ !empty($employee->education->elem) ? route('elem.delete', $educ->elem->id) : '#' }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-icon btn-danger btn-sm" type="submit">
-                                                    <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                                </button>
-                                            </form>
-                                            <a  href="{{ route('father.edit', Auth::user()->id) }}" {{ !empty($employee->family->father) ? '' : ' btn-disabled' }} class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div> 
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('elem.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @if (!empty($employee->education->elem))
                                     <div class="row row-cols-2 row-cols-md-4 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -526,29 +452,6 @@
                                 @endif
                                 <hr class="my-4" />
                                 {{-- Secondary --}}
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4">Secondary</h6>
-                                    @if (!empty($employee->education->secondary))
-                                        <div class="d-flex flex-row align-items-center">
-                                            <form class="mr-2" action="{{ !empty($employee->education->sec) ? route('sec.delete', $educ->sec->id) : "#" }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-icon btn-danger btn-sm" type="submit">
-                                                    <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                                </button>
-                                            </form>
-                                            <a href="{{  !empty($employee->education->sec) ? route('sec.edit', $educ->sec->id ) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('sec.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @if (!empty($employee->education->sec))
                                     <div class="row row-cols-2 row-cols-md-4 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -579,29 +482,6 @@
                                 @endif
                                 <hr class="my-4" />
                                 {{-- College --}}
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4">College</h6>
-                                    @if (!empty($employee->education->col))
-                                        <div class="d-flex flex-row align-items-center">
-                                            <form  class="mr-2" action="{{ !empty($employee->education->col) ? route('col.delete', $educ->col->id) : '#' }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-icon btn-danger btn-sm" type="submit">
-                                                    <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                                </button>
-                                            </form>
-                                            <a href="{{ !empty($employee->education->col) ? route('col.edit', $educ->col->id ) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('col.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @if (!empty($employee->education->col))
                                     <div class="row row-cols-2 row-cols-md-4 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -636,29 +516,6 @@
                                 @endif
                                 <hr class="my-4" />
                                 {{-- Graduate Study --}}
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4">Graduate Study</h6>
-                                    @if (!empty($employee->education()->grad))
-                                        <div class="d-flex flex-row align-items-center">
-                                            <form  class="mr-2" action="{{ !empty($employee->education->grad->first()) ? route('grad.delete', $employee->education->id) : '#' }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-icon btn-danger btn-sm" type="submit">
-                                                    <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                                </button>
-                                            </form>
-                                            <a href="{{ !empty($employee->education->grad->first()) ? route('grad.edit', $employee->education->id ) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('grad.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @forelse ($educ->grad as $grad)
                                     <div class="row row-cols-2 row-cols-md-5 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -700,25 +557,6 @@
                             {{-- Work Experience --}}
                             <div class="pl-lg-2">
                                 <h6 class="heading-small text-muted mb-4 text-center">Work Experience</h6>
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4"></h6>
-                                    @if (!empty($employee->experiences()->first()))
-                                        <div class="d-flex flex-row align-items-center">
-                                            <a href="{{ route('work.create') }}" class="btn btn-icon btn-success btn-sm" type="submit">
-                                                <span class="btn-inner--icon text-white"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                            <a href="{{ route('work.edit', Auth::user()->id)}}" class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('work.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @forelse ($employee->experiences as $experience)
                                     <div class="row row-cols-2 row-cols-md-5 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -733,15 +571,6 @@
                                             <small style="font-size: 1rem">Work Place</small>
                                             <strong style="color: black; font-size: 1rem">{{ $experience->work_place }}</strong>
                                         </div>
-                                        <div class="col mb-3 d-flex flex-column">
-                                            <form  class="mr-2" action="{{ route('work.delete', $experience->id) }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-icon btn-danger btn-sm" type="submit">
-                                                    <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                                </button>
-                                            </form>
-                                        </div>
                                     </div>
                                 @empty
                                     <div class="col-md-12 d-flex justify-content-center p-5">
@@ -753,25 +582,6 @@
                             <hr class="my-4" />
                             <div class="pl-lg-2">
                                 <h6 class="heading-small text-muted mb-4 text-center">Training Programs</h6>
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4"></h6>
-                                    @if (!empty($employee->trainings()->first()))
-                                        <div class="d-flex flex-row align-items-center">
-                                            <a href="{{ route('training.create') }}" class="btn btn-icon btn-success btn-sm" type="submit">
-                                                <span class="btn-inner--icon text-white"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                            <a href="{{ !empty($employee->trainings) ? route('training.edit', Auth::user()->id) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div>
-                                            <a  href="{{ route('training.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
                                 @forelse ($employee->trainings as $training)
                                     <div class="row row-cols-2 row-cols-md-5 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
@@ -790,18 +600,6 @@
                                             <small style="font-size: 1rem">Certificate</small>
                                             <strong style="color: black; font-size: 1rem">{{ $training->training_certificate }}</strong>
                                         </div>
-                                        <div class="col mb-3 d-flex align-items-center">
-                                            <form  class="mr-2" action="{{ route('work.delete', $training->id) }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-icon btn-danger btn-sm" type="submit">
-                                                    <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                                </button>
-                                            </form>
-                                            <a class="btn btn-icon btn-success btn-sm" type="submit">
-                                                <span class="btn-inner--icon text-white"><i class="fas fa-download"></i></span>
-                                            </a>
-                                        </div>
                                     </div>
                                 @empty
                                     <div class="col-md-12 d-flex justify-content-center p-5">
@@ -813,26 +611,7 @@
                             <hr class="my-4" />
                             <div class="pl-lg-2">
                                 <h6 class="heading-small text-muted mb-4 text-center">Voluntary Works</h6>
-                                <div class="row d-flex justify-content-between px-2">
-                                    <h6 class="heading-small text-muted mb-4"></h6>
-                                   @if (!empty($employee->voluntary_works()->first()))
-                                        <div class="d-flex flex-row align-items-center">
-                                            <a href="{{ route('voluntary.create') }}" class="btn btn-icon btn-success btn-sm" type="submit">
-                                                <span class="btn-inner--icon text-white"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                            <a href="{{ !empty($employee->voluntary_works) ? route('voluntary.edit', Auth::user()->id) : '#' }}" class="btn btn-sm btn-icon btn-info" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                                            </a>
-                                        </div>
-                                   @else
-                                        <div>
-                                            <a  href="{{ route('voluntary.create') }}" class="btn btn-sm btn-icon btn-success" type="button">
-                                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                                            </a>
-                                        </div>
-                                   @endif
-                                </div>
-                                @if (!empty($employee->voluntary))
+                                @if (!empty($employee->voluntary_works))
                                     @foreach ($employee->voluntary_works as $voluntary)
                                         <div class="row row-cols-2 row-cols-md-5 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
@@ -850,15 +629,6 @@
                                             <div class="col mb-3 d-flex flex-column">
                                                 <small style="font-size: 1rem">NATURE OF WORK</small>
                                                 <strong style="color: black; font-size: 1rem">{{ $voluntary->position }}</strong>
-                                            </div>
-                                            <div class="col mb-3 d-flex align-items-center">
-                                                <form  class="mr-2" action="{{ route('voluntary.delete', $voluntary->id) }}" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button class="btn btn-icon btn-danger btn-sm" type="submit">
-                                                        <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                                                    </button>
-                                                </form>
                                             </div>
                                         </div>
                                     @endforeach

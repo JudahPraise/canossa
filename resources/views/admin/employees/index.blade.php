@@ -34,7 +34,7 @@
             @forelse ($employees as $employee)
             <div class="col mb-4">
                 <div class="card p-0">
-                    <img class="card-img-top" src="{{ asset('argon/img/theme/img-1-1000x600.jpg') }}" alt="Card image cap">
+                    <img class="card-img-top" src="{{ asset('img/cover.jpg') }}" alt="Card image cap">
                     <div class="card-profile-image avatar-upload">
                        @if (!empty($employee->image))
                             <a href="#">

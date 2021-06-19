@@ -19,7 +19,7 @@
       <div class="form-row">
         <div class="col-md-6 mb-3">
           <label for="sy_graduated">School year graduated</label>
-          <input type="text" class="form-control" name="sy_graduated" value="{{ $secondary->sy_graduated }}" id="sy_graduated" placeholder="From - To">
+          <input type="text" class="form-control" name="sy_graduated" value="{{ $elementary->sy_graduated }}" id="sy_graduated" placeholder="From - To">
         </div>
         <div class="col-md-6 mb-3">
           <label for="academic_reward">Academic reward</label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee\Portfolio;
 
 use App\VoluntaryWork;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,6 +52,8 @@ class VoluntaryWorksController extends Controller
                 'duration' => $request->duration[$item],
                 'no_hours' => $request->no_hours[$item],
                 'position' => $request->position[$item],
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
             ]);
         }
 
@@ -103,6 +106,8 @@ class VoluntaryWorksController extends Controller
                 'duration' => $request->duration[$item],
                 'no_hours' => $request->no_hours[$item],
                 'position' => $request->position[$item],
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
             ]);
         }
 

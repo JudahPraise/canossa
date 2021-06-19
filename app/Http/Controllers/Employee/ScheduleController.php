@@ -27,8 +27,8 @@ class ScheduleController extends Controller
         $schedule->day = $request->input('day');
         $schedule->user_id = Auth::user()->id;
         $schedule->title = $request->input('title');
-        $schedule->time_from = '['.$request->input('time_from').$request->input('time_to').']';
-        $schedule->time_to = $request->input('time_to');
+        $schedule->time_from = Carbon::parse($request->input('time_from'))->format('h:i A');
+        $schedule->time_to = Carbon::parse($request->input('time_to'))->format('h:i A');;
 
 
         $schedule->save();

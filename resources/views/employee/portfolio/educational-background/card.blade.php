@@ -1,32 +1,45 @@
 @extends('employee.portfolio.educational-background.index')
 
 @section('educ')
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6 d-flex align-items-center" style="height: 4rem;">
-          <h3 class="font-weight-bold" style="color: black">Educational Background</h3>
-        </div>
-        <div class="col-6 d-flex justify-content-end align-items-center" style="height: 4rem;">
-          <a href="{{ route('portfolio.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none py-2 px-3" style="display:inline-block; "><i class="fas fa-caret-left text-primary" style="font-size: 1.6rem"></i></a>
-            <a href="{{ route('educ.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-large text-primary" style="font-size: 1.4rem"></i></a>
-            <a href="{{ route('educ.index', 'list') }}" class="neu-effect d-flex justify-content-center align-items-center text-decoration-none p-2" style="display:inline-block; "><i class="fas fa-th-list text-primary" style="font-size: 1.4rem"></i></a>
+<div class="container-fluid">
+  <div class="row w-100 m-0">
+    <div class="card has-no-shadow w-100">
+      <div class="card-header border-0">
+        <div class="row align-items-center">
+          <div class="col">
+            <h1 class="mb-0">Educational Background</h1>
+          </div>
+          <div class="col text-right">
+            <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+              <span class="btn-inner--icon"><i class="fas fa-caret-left"></i></span>
+            </a>
+              <a href="{{ route('educ.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+                <span class="btn-inner--icon"><i class="fas fa-th-large"></i></span>
+              </a>
+              <a href="{{ route('educ.index', 'list') }}" class="btn btn-icon btn-light" type="button">
+                <span class="btn-inner--icon"><i class="fas fa-th-list"></i></span>
+              </a>
+          </div>
         </div>
       </div>
-      
-      <div class="row row-cols-2 row-cols-md-4 mt-3">
+      <div class="row row-cols-2 row-cols-md-4 mt-3 p-3">
         <div class="col mb-4">
-            <div class="card has-no-shadow">
+            <div class="card">
                 <a href="{{ !empty(auth()->user()->education->elem ) ? route('educ.show', Auth::user()->id) : route('elem.create') }}" class="card__image">
                   <img src="{{ asset('img/for-educ/elementary.png') }}">
                 </a>
                 <div class="card__content">
-                  <p class="grid has-no-col-padding has-text-light-grey">
+                  <p class="grid has-no-col-padding">
                     <small class="column">
-                      Updated at 3 mins ago
+                      @if (auth()->user()->education->elementary)
+                        {{ auth()->user()->education->elem->updated_at->diffForhumans() }}
+                      @else
+                        No data yet
+                      @endif
                     </small>
                   </p>
                   <a href="{{ !empty(auth()->user()->education->elem ) ? route('educ.show', Auth::user()->id) : route('elem.create') }}" class="is-hover-underline has-text-black">
-                    <h5 style="font-weight: bold">Elementary</h5>
+                    <h2 style="font-weight: bold">Elementary</h2>
                   </a>
                 </div>
             </div>
@@ -40,18 +53,22 @@
                   </span>
                 </div>
             @endif
-            <div class="card has-no-shadow">
+            <div class="card">
                 <a href="{{ !empty(auth()->user()->education->sec ) ? route('educ.show', Auth::user()->id) : route('sec.create') }}" class="card__image">
                   <img src="{{ asset('img/for-educ/secondary.png') }}">
                 </a>
                 <div class="card__content">
-                  <p class="grid has-no-col-padding has-text-light-grey">
+                  <p class="grid has-no-col-padding">
                     <small class="column">
-                      Updated at 3 mins ago
+                      @if (!empty(auth()->user()->education->secondary))
+                        {{ auth()->user()->education->sec->updated_at->diffForhumans() }}
+                      @else
+                        No data yet
+                      @endif
                     </small>
                   </p>
                   <a href="{{ !empty(auth()->user()->education->sec ) ? route('educ.show', Auth::user()->id) : route('sec.create') }}" class="is-hover-underline has-text-black">
-                    <h5 style="font-weight: bold">Secondary</h5>
+                    <h2 style="font-weight: bold">Secondary</h2>
                   </a>
                 </div>
             </div>
@@ -65,18 +82,22 @@
               </span>
             </div>
           @endif
-           <div class="card has-no-shadow">
+           <div class="card">
                 <a href="{{ !empty(auth()->user()->education->col ) ? route('educ.show', Auth::user()->id) : route('col.create') }}" class="card__image">
                   <img src="{{ asset('img/for-educ/college.png') }}">
                 </a>
                 <div class="card__content">
-                  <p class="grid has-no-col-padding has-text-light-grey">
+                  <p class="grid has-no-col-padding">
                     <small class="column">
-                      Updated at 3 mins ago
+                      @if (!empty(auth()->user()->education->college))
+                        {{ auth()->user()->education->col->updated_at->diffForhumans() }}
+                      @else
+                        No data yet
+                      @endif
                     </small>
                   </p>
                   <a href="{{ !empty(auth()->user()->education->col ) ? route('educ.show', Auth::user()->id) : route('col.create') }}" class="is-hover-underline has-text-black">
-                    <h5 style="font-weight: bold">College</h5>
+                    <h2 style="font-weight: bold">College</h2>
                   </a>
                 </div>
             </div>
@@ -90,22 +111,28 @@
               </span>
             </div>
           @endif
-            <div class="card has-no-shadow">
+            <div class="card">
               <a href="{{ !empty(auth()->user()->education()->grad ) ? route('educ.show', Auth::user()->id) : route('grad.create') }}" class="card__image">
                 <img src="{{ asset('img/for-educ/graduatestudy.png') }}">
               </a>
               <div class="card__content">
-                <p class="grid has-no-col-padding has-text-light-grey">
+                <p class="grid has-no-col-padding">
                   <small class="column">
-                    Updated at 3 mins ago
+                    @if (!empty(auth()->user()->education->graduate_study))
+                      {{ auth()->user()->education->grad()->latest('updated_at')->first()->updated_at->diffForhumans() }}
+                    @else
+                      No data yet
+                    @endif
                   </small>
                 </p>
                 <a href="{{ !empty(auth()->user()->education()->grad ) ? route('educ.show', Auth::user()->id) : route('grad.create') }}" class="is-hover-underline has-text-black">
-                  <h5 style="font-weight: bold">Graduate Studies</h5>
+                  <h2 style="font-weight: bold">Graduate Studies</h2>
                 </a>
               </div>
             </div>
         </div>
+      </div>
     </div>
-    </div>
+  </div>
+</div>
 @endsection

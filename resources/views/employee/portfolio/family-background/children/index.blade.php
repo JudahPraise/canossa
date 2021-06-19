@@ -2,20 +2,27 @@
 
 @section('family')
 
-<div class="container-fluid cont">
-    <div class="row mb-3">
-        <div class="col-6 d-flex align-items-center" style="height: 4rem;">
-          <h3 class="font-weight-bold" style="color: black">Children</h3>
-        </div>
-        <div class="col-6 d-flex justify-content-end align-items-center" style="height: 4rem;">
-            <a href="{{ url()->current() === route('family.index', 'card') ? route('family.index', 'card') : route('family.index', 'card') }}" class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none py-2 px-3" style="display:inline-block; "><i class="fas fa-caret-left text-primary" style="font-size: 1.6rem"></i></a>
-            @if (url()->current() != route('children.create'))
-                <a href="{{ route('children.create') }}" class="{{ !empty(auth()->user()->family->children) ? 'neu-effect' : 'neu-effect-inset btn disabled' }} d-flex justify-content-center align-items-center text-decoration-none py-2 px-2" style="display:inline-block; "><i class="fas fa-plus text-primary" style="font-size: 1.7rem"></i></a>
-            @endif
+<div class="container-fluid">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+              <h1 class="mb-0">Children</h1>
+            </div>
+            <div class="col text-right">
+                <a href="{{ url()->current() === route('family.index', 'card') ? route('family.index', 'card') :  route('family.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+                    <span class="btn-inner--icon"><i class="fas fa-caret-left"></i></span>
+                </a>
+
+                @if (url()->current() != route('children.create'))
+                    <a href="{{ route('children.edit', Auth::user()->id) }}" class="btn btn-icon btn-info" type="button">
+                        <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                    </a>
+                @endif
+            </div>
         </div>
     </div>
     
-    <div class="row">
+    <div class="row p-3">
         @yield('children')
     </div>
     

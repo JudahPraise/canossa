@@ -25,6 +25,9 @@ class AdminController extends Controller
     public function index()
     {
         $employees = User::all();
-        return view('admin.home.dashboard', compact('employees'));
+        $teachers = User::where('role','=','Teacher')->count();
+        $staffs = User::where('role','=','Staff')->count();
+        $maintenance = User::where('role','=','Maintenance')->count();
+        return view('admin.home.dashboard', compact(['employees', 'teachers', 'staffs', 'maintenance']));
     }
 }

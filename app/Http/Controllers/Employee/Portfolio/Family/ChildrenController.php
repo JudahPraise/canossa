@@ -96,14 +96,22 @@ class ChildrenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Children::where('id','=',$id)->first()->update([
-            'family_id' => Auth::user()->family->id,
-            'name' => $request->name,
-            'date_of_birth' => $request->date_of_birth,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-        
+        Children::where('family_id','=',$id)->delete();
+
+        $children =[];
+
+        foreach ($request->name as $item => $key) {
+            $children[] = ([
+                'family_id' => Auth::user()->family->id,
+                'name' => $request->name[$item],
+                'date_of_birth' => $request->date_of_birth[$item],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        Children::insert($children);
+
         $family = Family::where('id','=',Auth::user()->family->id)->update([
             'updated_at' => Carbon::now()
         ]);

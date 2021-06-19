@@ -29,7 +29,7 @@
           <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-envelope-closed') }}"></use>
         </svg>
         Messages
-        <span class="badge badge-info">45</span>
+        {{-- <span class="badge badge-info">45</span> --}}
       </a>
     </li>
     <li class="c-sidebar-nav-item">

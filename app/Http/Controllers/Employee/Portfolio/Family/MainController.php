@@ -13,12 +13,17 @@ class MainController extends Controller
 
     public function index($view)
     {   
-        $family = Family::where('user_id','=',Auth::user()->id)->with('spouse', 'father', 'mother')->first();
-        $children = Children::where('family_id','=',Auth::user()->family->id)->paginate(2);
         if($view === 'card'){
-            return view('employee.portfolio.family-background.card', compact('family', 'children'));
+            return view('employee.portfolio.family-background.card');
         }else{
-            return view('employee.portfolio.family-background.list', compact('family', 'children'));
+            return view('employee.portfolio.family-background.list');
         }
+    }
+
+    public function show($id){
+        $family = Family::where('user_id','=',Auth::user()->id)->with('spouse', 'father', 'mother')->first();
+        $children = Children::where('family_id','=',Auth::user()->family->id)->get();
+
+        return view('employee.portfolio.family-background.show',  compact('family', 'children'));
     }
 }

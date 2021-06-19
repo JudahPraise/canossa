@@ -59,6 +59,7 @@ Route::prefix('admin')->group(function(){
 
 Route::middleware('auth')->prefix('employee')->group(function(){
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
+    Route::get('/logout', 'Auth\LoginController@logout')->name('employee.logout');
     Route::get('/', 'HomeController@index')->name('home');
     Route::post('/send', 'MessageController@send')->name('employee.send');
     Route::put('/update-profile-picture', 'Employee\ImageController@update')->name('image.update');
@@ -94,6 +95,7 @@ Route::middleware('auth')->prefix('employee')->group(function(){
         //Family Background
         Route::prefix('/family-background')->group(function(){
             Route::get('/index/{view}', 'Employee\Portfolio\Family\MainController@index')->name('family.index');
+            Route::get('/show/{id}', 'Employee\Portfolio\Family\MainController@show')->name('family.show');
             //Spouse
             Route::prefix('/spouse')->group(function(){
                 Route::get('/create', 'Employee\Portfolio\Family\SpouseController@create')->name('spouse.create');
@@ -200,9 +202,14 @@ Route::middleware('auth')->prefix('employee')->group(function(){
             Route::get('/download/{id}', 'DocumentsController@download')->name('document.download'); 
         });
     });
+    //Resume
+    Route::get('/resume', 'Employee\ResumeController@index')->name('resume');
     //Profile
     Route::prefix('profile')->group(function(){
         Route::get('/index', 'Employee\ProfileController@index')->name('profile.index');
     });
+    //Settings
+    Route::get('/settings', 'Employee\SettingsController@index')->name('settings');
+    Route::put('/settings/update/{id}', 'Employee\SettingsController@update')->name('account.update');
 
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee\Portfolio\Educational;
 use App\GraduateStudy;
 use Illuminate\Http\Request;
 use App\EducationalBackground;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +50,8 @@ class GraduateStudyController extends Controller
                 'level_units_earned'=> $request->level_units_earned[$item],
                 'sy_graduated'=> $request->sy_graduated[$item],
                 'academic_reward'=> $request->academic_reward[$item],
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
             ]);
         }
 
@@ -106,6 +109,8 @@ class GraduateStudyController extends Controller
                 'level_units_earned'=> $request->level_units_earned[$item],
                 'sy_graduated'=> $request->sy_graduated[$item],
                 'academic_reward'=> $request->academic_reward[$item],
+                'updated_at' => Carbon::now(),
+                'created_at' => Carbon::now()
             ]);
         }
 
@@ -126,6 +131,7 @@ class GraduateStudyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $grad = GraduateStudy::where('id','=',$id)->first()->delete();
+        return redirect()->back();
     }
 }

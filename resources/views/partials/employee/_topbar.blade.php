@@ -1,13 +1,11 @@
 <div class="c-wrapper">
-  <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
-    <button class="c-header-toggler c-class-toggler d-lg-none mr-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show"><span class="c-header-toggler-icon"></span></button><a class="c-header-brand d-sm-none" href="#"><img class="c-header-brand" src="{{ url('/assets/brand/coreui-base.svg')}}" width="97" height="46" alt="CoreUI Logo"></a>
+  <header class="c-header c-header-light c-header-fixed c-header-with-subheader" id="topbar">
+    <button class="c-header-toggler c-class-toggler d-lg-none mr-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show"><span class="c-header-toggler-icon"></span></button>
     <button class="c-header-toggler c-class-toggler ml-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true"><span class="c-header-toggler-icon"></span></button>
     <ul class="c-header-nav ml-auto mr-4">
       {{-- Message Icon --}}
-      <div class="has-dropdown dropleft mx-3">
-        <svg class="c-icon mr-2" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-envelope-open') }}"></use>
-        </svg>
+      <div class="has-dropdown dropleft">
+        <i class="fas fa-envelope" style="font-size: 1.5rem" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
         @if(auth()->user()->unreadNotifications->where('type','=','App\Notifications\MessageNotification')->count())  
           <span class="badge badge-danger align-self-start">{{ auth()->user()->unreadNotifications->where('type','=','App\Notifications\MessageNotification')->count() }}</span>
         @endif
@@ -16,11 +14,11 @@
             <span>Messages</span>
             <button class="btn btn-success btn-sm btn-pill mb-1" type="button" data-toggle="modal" data-target="#createModal">Create</button>
           </div>
-          <div class="card-body p-0 d-flex flex-column" style="position: absolute; top: 2.8rem; height:82%; width: 100%; overflow: scroll">
+          <div class="card-body p-0 d-flex flex-column" style="position: absolute; top: 2.8rem; height:82%; width: 100%; overflow-y: scroll">
             @if (auth()->user()->notifications->count())
               @foreach (Auth::user()->notifications as $notification)
                 @if ($notification->type === 'App\Notifications\MessageNotification')
-                  <a class="dropdown-item row d-flex message w-100 message-item m-0 mt-2" data-toggle="modal" data-target="#showMessage" 
+                  <a class="dropdown-item row d-flex message w-100 message-item m-0 mt-2 {{ $notification->read_at === null ? 'bg-gradient-success text-white' : '' }}" data-toggle="modal" data-target="#showMessage" 
                   data-markasread="{{ $notification->id }}"
                   data-sender="{{ $notification->data['sender'] }}"
                   data-subject="{{ $notification->data['subject'] }}"
@@ -37,9 +35,9 @@
                         @endIf
                       </div>
                       <span class="ml-2">
-                        <h6 class="card-title font-weight-bold m-0">{{ $notification->data['sender']}}</h6>
-                        <p class="card-text m-0 pt-1">{{ $notification->data['message']}}</p>
-                        <span class="m-0 p-0" style="font-size: 10px">{{ $notification->created_at->diffForHumans() }}</span>
+                        <h3 class="card-title font-weight-bold m-0 {{ $notification->read_at === null ? 'text-white' : '' }}">{{ $notification->data['sender']}}</h3>
+                        <p class="card-text m-0 pt-1 {{ $notification->read_at === null ? 'text-white' : '' }}">{{ $notification->data['message']}}</p>
+                        <span class="m-0 p-0 {{ $notification->read_at === null ? 'text-white' : '' }}" style="font-size: 10px">{{ $notification->created_at->diffForHumans() }}</span>
                       </span>
                     </div>
                   </a>
@@ -56,6 +54,80 @@
         </div>
       </div>
       {{-- End Message Icon --}}
+      {{-- Announcements --}}
+      <div class="has-dropdown dropleft mx-3">
+        <i class="fas fa-bell" style="font-size: 1.5rem" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+        @if(auth()->user()->unreadNotifications->where('type', 'App\Notifications\AnnouncementNotification')->count())  
+          <span class="badge badge-danger align-self-start">{{ auth()->user()->unreadNotifications()->where('type', 'App\Notifications\AnnouncementNotification')->count() }}</span>
+        @endif
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 25rem; height: 30rem; position: absolute; top: 2rem; left: -21rem;">
+          <div class="card-header d-flex align-items-center justify-content-between" style="position: absolute; top: 0; height:10%; width: 100%; color: black; font-weight: bold; font-size: 1.2rem;">
+            Announcements
+          </div>
+          <div class="card-body p-0 pt-2" style="position: absolute; top: 2.8rem; height:82%; width: 100%; overflow-y: scroll; overflow-x: hidden;">
+            @if (auth()->user()->notifications->count())
+              @forelse (auth()->user()->notifications as $notification)
+                @if ($notification->type === 'App\Notifications\AnnouncementNotification')
+                  <a class="dropdown-item row d-flex flex-column align-items-start announcement m-0 mt-2 {{ $notification->read_at === null ? 'bg-gradient-success text-white' : '' }}" 
+                  data-markasread="{{ $notification->id }}"
+                  data-title="{{ $notification->data['announcement_title'] }}"
+                  data-employees="{{ $notification->data['affected_employees'] }}"
+                  data-datefrom="{{ $notification->data['date_from'] }}"
+                  data-timefrom="{{ $notification->data['time_from'] }}"
+                  data-dateto="{{ $notification->data['date_to'] }}"
+                  data-timeto="{{ $notification->data['time_to'] }}"
+                  data-description="{{ $notification->data['announcement_description'] }}"
+                  data-link="{{ $notification->data['link'] }}"
+                  data-attachment="{{ $notification->data['attachment'] }}"
+                  data-toggle="modal" data-target="#showAnnouncement">
+                    <h3 class="card-title m-0 font-weight-800 {{ $notification->read_at === null ? 'text-white' : '' }}">{{ $notification->data['announcement_title']  }}</h3>
+                    <p class="m-0 {{ $notification->read_at === null ? 'text-white' : '' }}" style="">{{ $notification->data['announcement_description'] }}</p>
+                    <p class="card-text m-0 {{ $notification->read_at === null ? 'text-white' : '' }}">{{ Carbon\Carbon::parse($notification->data['date_from'])->format('M d') }}</p>
+                  </a>
+                @endif
+              @empty
+                <div class="container w-100 h-100 m-0 d-flex justify-content-center align-items-center">
+                  <p>No notifications yet</p>
+                </div>
+              @endforelse
+            @endif
+          </div>
+          <div class="card-footer d-flex justify-content-between" style="position: absolute; bottom: 0; height:10%; width: 100%">
+            @if (!empty(auth()->user()->notifications->where('type', 'App\Notifications\AnnouncementNotification')->first()->created_at))
+              <small class="text-muted">{{ auth()->user()->notifications->where('type', 'App\Notifications\AnnouncementNotification')->first()->created_at->diffForHumans() }}</small>
+            @endif
+              <small><a href="{{ route('announcement.markAllAsRead') }}" >Mark all as read</a></small>
+          </div>
+        </div>
+      </div>
+      <!--Announcement Show Modal -->
+      <div class="modal fade" id="showAnnouncement" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitleAnn"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h3>Description</h3>
+              <span id="bodyAnn"></span>
+            </div>
+            <div class="modal-body w-100">
+              <h3>Link</h3>
+              <a class="w-100" id="link" style=" word-wrap:break-word;"></a>
+            </div>
+            <div class="modal-body">
+              <h3>Attachment</h3>
+              <span id="attachment"></span>
+            </div>
+            <div class="modal-footer">
+              <a id="markAsReadAnn" class="btn btn-secondary">Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
       {{-- Profile Icon --}}
       <li class="c-header-nav-item has-dropdown">
         @if (!empty(auth()->user()->image))
@@ -69,25 +141,21 @@
         @endif
         <div class="dropdown-menu dropdown-menu-right pt-0">
           <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="{{ route('profile.index') }}">
             <svg class="c-icon mr-2">
-              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-bell"></use>
-            </svg> Updates<span class="badge badge-info ml-auto">42</span>
+              <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-user') }}"></use>
+            </svg>{{ !empty(auth()->user()->personal->first_name) ? auth()->user()->personal->first_name : auth()->user()->employee_id }}
           </a>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="{{ route('settings') }}">
             <svg class="c-icon mr-2">
-              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-envelope-open"></use>
-            </svg> Messages<span class="badge badge-success ml-auto">42</span>
+              <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-settings') }}"></use>
+            </svg> Settings
           </a>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" onclick="document.getElementById('logoutForm').submit()">
             <svg class="c-icon mr-2">
-              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-task"></use>
-            </svg> Tasks<span class="badge badge-danger ml-auto">42</span>
-          </a>
-          <a class="dropdown-item" href="#">
-            <svg class="c-icon mr-2">
-              <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-comment-square"></use>
-            </svg>Comments<span class="badge badge-warning ml-auto">42</span>
+              <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
+            </svg> Logout
+            <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
           </a>
         </div>
       </li>
@@ -176,8 +244,10 @@
               </div>
             </div>
             <hr>
-            <div>Message:</div>
+            <div>Message</div>
             <span id="bodyMess" style="color: black"></span>
+            <div class="mt-3">Attachment</div>
+            <span id="attachment" style="color: black"></span>
           </div>
           <div class="modal-footer">
             <a id="markAsReadMessShow" class="btn btn-secondary">Close</a>
@@ -253,6 +323,9 @@
             $('#markAsReadAnn').attr("href", "/employee/announcement/mark-as-read/"+$(this).data('markasread')+"")
             $('#modalTitleAnn').text($(this).data("title"))
             $('#bodyAnn').text($(this).data("description"))
+            $('#link').text($(this).data("link"))
+            $('#link').attr('href', $(this).data("link"))
+            $('#attachment').text($(this).data("attachment"))
           })
         });
 
@@ -263,6 +336,7 @@
             $('#markAsReadMessReply').attr("href", "/employee/announcement/mark-as-read/"+$(this).data('markasread')+"")
             $('#showClose').attr("href", "/employee/announcement/mark-as-read/"+$(this).data('markasread')+"")
             $('#replyClose').attr("href", "/employee/announcement/mark-as-read/"+$(this).data('markasread')+"")
+            $('#attachment').text($(this).data("attachment"))
             $('#modalTitleMess').text($(this).data("sender"))
             $('#sender').text($(this).data("sender"))
             $('#bodyMess').text($(this).data("message"))
