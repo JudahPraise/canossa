@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function(){
     Route::prefix('/manage-accounts')->group(function(){
         Route::get('/', 'Admin\RegisterController@index')->name('accounts.index');
         Route::post('/register', 'Admin\RegisterController@post')->name('register.post');
+        Route::delete('/remove/{id}', 'Admin\RegisterController@destroy')->name('register.delete');
     });
     //Messages
     Route::prefix('/messages')->group(function(){
@@ -54,6 +55,8 @@ Route::prefix('admin')->group(function(){
         Route::get('/', 'Admin\EmployeesController@index')->name('employees');
         Route::get('/show/{id}', 'Admin\EmployeesController@show')->name('employee.show');
     });
+
+    Route::get('/employee-feedback', 'Admin\FeedbackController@index')->name('admin.feedback.index');
 
 });
 
@@ -211,5 +214,8 @@ Route::middleware('auth')->prefix('employee')->group(function(){
     //Settings
     Route::get('/settings', 'Employee\SettingsController@index')->name('settings');
     Route::put('/settings/update/{id}', 'Employee\SettingsController@update')->name('account.update');
+
+    //Feedback
+    Route::post('/feedback', 'FeedbackController@store')->name('feedback.store');
 
 });

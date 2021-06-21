@@ -37,7 +37,7 @@
             <div class="row">
               <div class="col-xl-4 order-xl-2">
                 <div class="card card-profile">
-                  <img src="{{ asset('argon/img/theme/img-1-1000x600.jpg') }}" alt="Image placeholder" class="card-img-top">
+                  <img src="{{ asset('img/cover.jpg') }}" alt="Image placeholder" class="card-img-top">
                   <div class="row justify-content-center">
                     <div class="col-lg-3 order-lg-2">
                         <div class="card-profile-image avatar-upload">

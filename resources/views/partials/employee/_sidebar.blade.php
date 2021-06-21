@@ -48,14 +48,56 @@
     </a>
   </li>
   <li class="c-sidebar-nav-item mt-auto">
-    <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" onclick="document.getElementById('logoutForm').submit()">
-      <svg class="c-sidebar-nav-icon">
-        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
-      </svg>
-      Logout
-      <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
-    </a>
+    @if (!empty(auth()->user()->feedback))
+      <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" onclick="document.getElementById('logoutForm').submit()">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
+        </svg>
+        Logout
+        <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
+      </a>
+    @else
+      <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" data-toggle="modal" data-target="#feedbackModal">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
+        </svg>
+        Logout
+      </a>
+    @endif
   </li>
+  {{-- Feedback Modal --}}
+  <div class="modal fade" style="z-index: 2050" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <form class="w-100" enctype="multipart/form-data" id="feedbackForm"  action="{{ route('feedback.store') }}" method="POST">
+            @csrf
+            <div class="text-center mb-5">
+              <h1>We need your feedback!</h1>
+              <h3>What can we do to improve the experience?</h3>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Feedback</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" name="feedback" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Suggestion</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" name="suggestion" rows="3"></textarea>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" value="Submit Form">Send</button>
+          </div>
+       </form>
+      </div>
+    </div>
+  </div>
 </ul>
 
 <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>  

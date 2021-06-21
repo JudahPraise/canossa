@@ -42,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
         //     // dd(auth()->user()->education->grad()->latest('updated_at')->first());
         //     // dd(auth()->user()->experiences);
 
+        //     dd(auth()->user()->feedback);
+
         // });
 
     }

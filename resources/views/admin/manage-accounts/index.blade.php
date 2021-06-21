@@ -31,8 +31,12 @@
                   <td>{{ $employee->role}}</td>
                 @endif
                 <td>{{ $employee->email }}</td>
-                <td>
-                  <a href="" class="btn btn-sm btn-danger">Remove</a>
+                <td class="d-flex">
+                  <form action="{{ route('register.delete', $employee->id) }}" method="POST" id="employeeRemoveForm">
+                    @method('delete')
+                    @csrf 
+                    <button type="submit" class="btn btn-sm btn-danger mr-2">Remove</button>
+                  </form>
                   <a href="" class="btn btn-sm btn-info">Resigned</a>
                 </td>
               </tr>

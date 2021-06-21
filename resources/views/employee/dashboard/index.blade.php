@@ -60,7 +60,7 @@
                 <td>{{ $schedule->day }}</td>
                 @endif
                 <td>{{ $schedule->time_from.' '.'-'.' '.$schedule->time_to }}</td>
-                <td class="d-flex">
+                <td>
                   <a href="" class="sched btn btn-sm btn-icon btn-info"
                   data-schedid="{{ $schedule->id }}"
                   data-schedtitle="{{ $schedule->title }}"
@@ -68,11 +68,9 @@
                   data-schedtimefrom="{{ $schedule->time_from }}"
                   data-schedtimeto="{{ $schedule->time_to }}"
                   data-toggle="modal" data-target="#editModal"><span class="btn-inner--icon"><i class="fas fa-edit"></i></span></a>
-                  <form action="{{ route('schedule.delete', $schedule->id) }}" method="POST" id='delete'>
-                    @method('DELETE')
-                    @csrf
+                 
                       <button type="submit" class="btn btn-sm btn-icon btn-danger"><span class="btn-inner--icon"><i class="fas fa-trash"></i></span></button>
-                  </form>
+                  
                 </td>
               </tr>
             @empty

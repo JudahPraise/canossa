@@ -68,4 +68,15 @@ class RegisterController extends Controller
 
         return redirect()->route('accounts.index');
     }
+
+    protected function destroy($id){
+
+        $user = User::where('id','=',$id)->first();
+        $user->family->delete();
+        $user->education->delete();
+        $user->delete();
+
+        return redirect()->back();
+
+    }
 }

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Family;
 use App\Document;
+use App\Feedback;
 use App\Schedule;
 use App\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
@@ -87,4 +88,8 @@ class User extends Authenticatable
         return $this->hasMany(VoluntaryWork::class);
     }
 
+    public function feedback()
+    {
+        return $this->hasOne(Feedback::class, 'user_id');
+    }
 }
