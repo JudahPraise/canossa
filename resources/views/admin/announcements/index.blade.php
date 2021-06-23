@@ -27,7 +27,7 @@
       <div class="col">
         <div class="card">
           <!-- Card header -->
-            <div class="card-header border-0 row d-flex align-items-center">
+            <div class="card-header border-0 d-flex align-items-center">
                 <div class="col-6 col-md-6 m-0">
                   <h2 class="mb-0"></h2>
                 </div>
@@ -89,8 +89,8 @@
                       </td>
                     </tr>
                 @empty
-                  <tr>
-                    <td class="text-center" colspan="5"><p>No data</p></td>
+                  <tr class="text-center" >
+                    <td colspan="5"><small>No data</small></td>
                   </tr>
                 @endforelse
               </tbody>

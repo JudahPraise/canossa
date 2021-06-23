@@ -125,7 +125,7 @@
                   <th scope="col">Name</th>
                   <th></th>
                   <th scope="col">Role</th>
-                  <th scope="col">Department</th>
+                  <th>Email</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -150,7 +150,7 @@
                       {{ $employee->role }}
                     </td>
                     <td>
-                      {{ $employee->department }}
+                      {{ $employee->email }}
                     </td>
                     <td>
                       <a class="btn btn-sm btn-primary" href="{{ route('employee.show', $employee->id) }}">View Profile</a>

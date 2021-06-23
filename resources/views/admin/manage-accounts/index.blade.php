@@ -111,27 +111,17 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <label for="validationDefault01">Employee ID</label>
                 <input type="text" name="employee_id" class="form-control" id="validationDefault01" required>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <label for="validationDefault04">Role</label>
                 <select class="custom-select" name="role" id="validationDefault04" required>
                   <option selected disabled value="">Choose...</option>
                   <option>Teacher</option>
                   <option>Staff</option>
                   <option>Maintenance</option>
-                </select>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="validationDefault04">Department</label>
-                <select class="custom-select" name="department" id="validationDefault04">
-                  <option selected disabled value="">Choose...</option>
-                  <option>Elementary</option>
-                  <option>Junior High School</option>
-                  <option>Senior High School</option>
-                  <option>College</option>
                 </select>
               </div>
             </div>

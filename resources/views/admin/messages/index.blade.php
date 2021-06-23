@@ -98,8 +98,8 @@
                     </tr>
                   @endif
                 @empty
-                  <tr>
-                    <td colspan="5"><small>No data</small></td>
+                  <tr class="text-center">
+                    <td colspan="5"><small>No message yet</small></td>
                   </tr>
                 @endforelse
               </tbody>

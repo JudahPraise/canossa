@@ -57,9 +57,6 @@
                                         <h5>
                                             {{ $employee->role }}
                                         </h5>
-                                        <h5>
-                                           {{ $employee->department }}
-                                        </h5>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +68,7 @@
                 </div>
             </div>
             @empty
-                <div class="row text-center">
+                <div class="container w-100 text-center">
                     <p>No employees yet</p>
                 </div>
             @endforelse

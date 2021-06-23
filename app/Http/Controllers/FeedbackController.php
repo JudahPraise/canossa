@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Feedback;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,8 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $user = Feedback::where('user_id','=',Auth::user()->id)->first();
+        return view('employee.feedback.index', compact('user'));
     }
 
     /**
@@ -43,6 +45,17 @@ class FeedbackController extends Controller
         ]);
 
         return redirect()->route('employee.logout');
+    }
+
+    public function storeToFeedback(Request $request)
+    {
+        Feedback::create([
+            'user_id' => Auth::user()->id,
+            'feedback' => $request->input('feedback'),
+            'suggestion' => $request->input('suggestion')
+        ]);
+
+        return redirect()->route('feedback.index');
     }
 
     /**
@@ -74,9 +87,15 @@ class FeedbackController extends Controller
      * @param  \App\Feedback  $feedback
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Feedback $feedback)
+    public function update(Request $request, $id)
     {
-        //
+        Feedback::where('user_id','=',$id)->update([
+            'user_id' => Auth::user()->id,
+            'feedback' => $request->input('feedback'),
+            'suggestion' => $request->input('suggestion')
+        ]);
+
+        return redirect()->route('feedback.index');
     }
 
     /**

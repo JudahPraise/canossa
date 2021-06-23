@@ -130,9 +130,6 @@
                                         <div class="h5 mt-4">
                                             {{ $employee->role }}
                                         </div>
-                                        <div>
-                                            {{ $employee->department }}
-                                        </div>
                                     </div>
                                 </div>
                             </div>

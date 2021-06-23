@@ -77,9 +77,6 @@
                                         <div class="h5 mt-4">
                                             <i class="ni business_briefcase-24 mr-2"></i>{{ auth()->user()->role }}
                                         </div>
-                                        <div>
-                                            <i class="ni education_hat mr-2"></i>{{ auth()->user()->department }}
-                                        </div>
                                     </div>
                                 </div>
                             </div>

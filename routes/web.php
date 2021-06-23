@@ -218,6 +218,9 @@ Route::middleware('auth')->prefix('employee')->group(function(){
     Route::put('/settings/update/{id}', 'Employee\SettingsController@update')->name('account.update');
 
     //Feedback
-    Route::post('/feedback', 'FeedbackController@store')->name('feedback.store');
+    Route::get('/feedback/index', 'FeedbackController@index')->name('feedback.index');
+    Route::post('/feedback/logout', 'FeedbackController@store')->name('feedback.store');
+    Route::post('/feedback', 'FeedbackController@storeToFeedback')->name('feedback.storeToFeedback');
+    Route::put('/feedback/update{id}', 'FeedbackController@update')->name('feedback.update');
 
 });
