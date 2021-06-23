@@ -24,10 +24,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $employees = User::all();
-        $teachers = User::where('role','=','Teacher')->count();
-        $staffs = User::where('role','=','Staff')->count();
-        $maintenance = User::where('role','=','Maintenance')->count();
-        return view('admin.home.dashboard', compact(['employees', 'teachers', 'staffs', 'maintenance']));
+        $employees = User::where('status','=','active')->orderBy('name', 'ASC')->paginate(5);
+        $teachers = $employees->where('role','=','Teacher')->count();
+        $staffs = $employees->where('role','=','Staff')->count();
+        $maintenance = $employees->where('role','=','Maintenance')->count();
+        return view('admin.home.dashboard', compact(['employees', 'staffs', 'maintenance', 'teachers']));
     }
 }

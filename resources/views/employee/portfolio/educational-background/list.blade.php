@@ -7,22 +7,22 @@
       <div class="card-header border-0">
         <div class="row align-items-center">
           <div class="col">
-            <h1 class="mb-0">Educational Background</h1>
+            <h2 class="mb-0">Educational Background</h2>
           </div>
           <div class="col text-right">
-              <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-caret-left"></i></span>
               </a>
-              <a href="{{ route('educ.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('educ.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-large"></i></span>
               </a>
-              <a href="{{ route('educ.index', 'list') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('educ.index', 'list') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-list"></i></span>
               </a>
           </div>
         </div>
       </div>
-      <div class="row p-3 w-100">
+      <div class="row p-3">
         <a href="{{ route('educ.show', Auth::user()->id) }}" style="width: 100%; color: inherit" class="mb-3">
           <div class="card card-stats">
             <div class="card-body">
@@ -33,7 +33,7 @@
                   </div>
                 </div>
                 <div class="media__content d-flex flex-column">
-                  <strong style="font-size: 1.5rem">Elementary</strong>
+                  <h2 style="font-weight: bold">Elementary</h2>
                   <small style="text-muted" style="font-size: 1rem">
                     @if (auth()->user()->education->elementary)
                         {{ auth()->user()->education->elem->updated_at->diffForhumans() }}
@@ -56,7 +56,7 @@
                   </div>
                 </div>
                 <div class="media__content d-flex flex-column">
-                  <strong style="font-size: 1.5rem">Secondary</strong>
+                  <h2 style="font-weight: bold">Secondary</h2>
                   <small style="text-muted" style="font-size: 1rem">
                     @if (!empty(auth()->user()->education->secondary))
                         {{ auth()->user()->education->sec->updated_at->diffForhumans() }}
@@ -79,7 +79,7 @@
                   </div>
                 </div>
                 <div class="media__content d-flex flex-column">
-                  <strong style="font-size: 1.5rem">College</strong>
+                  <h2 style="font-weight: bold">College</h2>
                   <small style="text-muted" style="font-size: 1rem">
                     @if (!empty(auth()->user()->education->college))
                         {{ auth()->user()->education->col->updated_at->diffForhumans() }}
@@ -102,7 +102,7 @@
                   </div>
                 </div>
                 <div class="media__content d-flex flex-column">
-                  <strong style="font-size: 1.5rem">Graduate Studies</strong>
+                  <h2 style="font-weight: bold">Graduate Studies</h2>
                   <small style="text-muted" style="font-size: 1rem">
                     @if (!empty(auth()->user()->education->graduate_study))
                       {{ auth()->user()->education->grad()->latest('updated_at')->first()->updated_at->diffForhumans() }}

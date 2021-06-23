@@ -68,11 +68,10 @@
                     data-attachment="{{ $notification->data['attachment'] }}">
                       <th scope="row">
                         <div class="media align-items-center">
-                          @if(!empty($notification->data['sender_image']))
+  
                             <a href="#" class="avatar rounded-circle mr-3">
-                              <img src="{{ asset( 'storage/images/'.$notification->data['sender_image']) }}" style=" height: 50px; overflow: hidden;">
+                              <img src="{{ asset('storage/images/'.$notification->data['sender_image']) }}" style=" height: 50px; overflow: hidden;">
                             </a>
-                          @endif
                         </div>
                       </th>
                       <td>
@@ -129,7 +128,7 @@
             <hr>
             <div>Message:</div>
             <span id="bodyMess" style="color: black"></span>
-            <div>Attachment</div>
+            <div class="mt-3">Attachment:</div>
             <span id="attachment" style="color: black"></span>
           </div>
           <div class="modal-footer">

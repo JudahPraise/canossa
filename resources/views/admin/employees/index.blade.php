@@ -38,7 +38,7 @@
                     <div class="card-profile-image avatar-upload">
                        @if (!empty($employee->image))
                             <a href="#">
-                                <img src="{{ asset( 'storage/images/'.$employee->image) }}" class="rounded-circle" style="height: 140px; width: 200px; overflow: hidden;">
+                                <img src="{{ asset('storage/images/'.$employee->image) }}" class="rounded-circle" style="height: 140px; width: 200px; overflow: hidden;">
                             </a>
                        @else
                             <a href="#">
@@ -71,7 +71,9 @@
                 </div>
             </div>
             @empty
-                
+                <div class="row text-center">
+                    <p>No employees yet</p>
+                </div>
             @endforelse
         </div>
     </div>

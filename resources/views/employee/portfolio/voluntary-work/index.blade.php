@@ -13,7 +13,7 @@
 @section('portfolio')
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row p-2">
         <div class="col-6 d-flex align-items-center" style="height: 4rem;">
           <h2 class="font-weight-bold" style="color: black">Voluntary Works</h2>
         </div>
@@ -30,7 +30,7 @@
         </div>
     </div>
     
-    <div class="row">
+    <div class="row p-2">
         @yield('voluntary')
     </div>
 </div>

@@ -10,17 +10,17 @@
             <h1 class="mb-0">Portfolio</h1>
           </div>
           <div class="col text-right">
-              <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-large"></i></span>
               </a>
-              <a href="{{ route('portfolio.index', 'list') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('portfolio.index', 'list') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-list"></i></span>
               </a>
           </div>
         </div>
       </div>
-      <div class="row row-cols-2 row-cols-md-4 p-3">
-        <div class="col mb-4">
+      <div class="row row-cols-2 row-cols-md-4">
+        <div class="col mb-3">
             <div class="card  bg-gradient-white">
                 <a href="{{ route('personal.index') }}" class="card__image">
                   <img class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/Personal site-cuate.svg') }}" alt="">
@@ -36,12 +36,12 @@
                     </small>
                   </p>
                   <a href="{{ route('personal.index') }}" class="is-hover-underline has-text-black">
-                    <h2 style="font-weight: bold">Personal Information</h2>
+                    <h4 style="font-weight: bold">Personal Information</h4>
                   </a>
                 </div>
             </div>
         </div>
-        <div class="col mb-4">
+        <div class="col mb-3">
             <div class="card bg-gradient-white">
                 <a href="{{ route('family.index', 'card') }}" class="card__image">
                   <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/Family-cuate.svg') }}" alt="">
@@ -57,12 +57,12 @@
                     </small>
                   </p>
                   <a href="{{ route('family.index', 'card') }}" class="is-hover-underline has-text-black">
-                    <h2 style="font-weight: bold">Family Background</h2>
+                    <h4  style="font-weight: bold">Family Background</h4>
                   </a>
                 </div>
             </div>
         </div>
-        <div class="col mb-4">
+        <div class="col mb-3">
          <div class="card  bg-gradient-white">
               <a href="{{ route('educ.index', 'card') }}" class="card__image">
                 <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/Mathematics-pana.svg') }}" alt="">
@@ -78,12 +78,12 @@
                   </small>
                 </p>
                 <a href="{{ route('educ.index', 'card') }}" class="is-hover-underline has-text-black">
-                  <h2 style="font-weight: bold">Educational Background</h2>
+                  <h4  style="font-weight: bold">Educational Background</h4>
                 </a>
               </div>
           </div>
         </div>
-        <div class="col mb-4">
+        <div class="col mb-3">
           <div class="card  bg-gradient-white">
             <a href="{{ route('work.index') }}" class="card__image">
               <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/experience.png') }}" alt="">
@@ -99,12 +99,12 @@
                 </small>
               </p>
               <a href="{{ route('work.index') }}" class="is-hover-underline has-text-black">
-                <h2 style="font-weight: bold">Work Experience</h2>
+                <h4  style="font-weight: bold">Work Experience</h4>
               </a>
             </div>
           </div>
         </div>
-        <div class="col mb-4">
+        <div class="col mb-3">
           <div class="card  bg-gradient-white">
             <a href="{{ route('training.index') }}" class="card__image">
               <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/trainings.svg') }}" alt="">
@@ -120,12 +120,12 @@
                 </small>
               </p>
               <a href="{{ route('training.index') }}" class="is-hover-underline has-text-black">
-                <h2 style="font-weight: bold">Training Programs</h2>
+                <h4  style="font-weight: bold">Training Programs</h4>
               </a>
             </div>
           </div>
         </div>
-      <div class="col mb-4">
+      <div class="col mb-3">
         <div class="card  bg-gradient-white">
           <a href="{{ route('voluntary.index') }}" class="card__image">
             <img  class="bd-placeholder-img card-img-top" width="100%" height="180" src="{{ asset('img/for-portfolio/volunteer.png') }}" alt="">
@@ -141,7 +141,7 @@
               </small>
             </p>
             <a href="{{ route('educ.index', 'card') }}" class="is-hover-underline has-text-black">
-              <h2 style="font-weight: bold">Voluntary Works</h2>
+              <h4  style="font-weight: bold">Voluntary Works</h4>
             </a>
           </div>
         </div>

@@ -9,12 +9,12 @@
               <h1 class="mb-0">Mother</h1>
             </div>
             <div class="col text-right">
-                <a href="{{ url()->current() === route('family.index', 'card') ? route('family.index', 'card') :  route('family.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+                <a href="{{ url()->current() === route('family.index', 'card') ? route('family.index', 'card') :  route('family.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                     <span class="btn-inner--icon"><i class="fas fa-caret-left"></i></span>
                 </a>
 
                 @if (url()->current() != route('mother.create'))
-                    <a href="{{ route('mother.edit', Auth::user()->id) }}" class="btn btn-icon btn-info" type="button">
+                    <a href="{{ route('mother.edit', Auth::user()->id) }}" class="btn btn-sm btn-icon btn-info" type="button">
                         <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                     </a>
                 @endif

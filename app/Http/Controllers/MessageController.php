@@ -21,6 +21,7 @@ class MessageController extends Controller
         }elseif(Auth::guard('web')->check()){
             $message->sender_image = Auth::guard('web')->user()->image;
             $message->sender = Auth::guard('web')->user()->name;
+            
         }
         $message->send_to = $request->input('send_to');
         $message->send_to_all = $request->input('send_to_all');

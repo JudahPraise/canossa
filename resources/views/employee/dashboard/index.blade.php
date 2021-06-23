@@ -18,21 +18,17 @@
   <div class="row w-100 m-0">
     <div class="card w-100">
       <div class="card-header border-0">
-        <div class="row align-items-center">
-          <div class="col">
-            <h3 class="mb-0">Schedule</h3>
-          </div>
-          <div class="col text-right">
-            <div class="btn-group">
-              <button class="btn btn-secondary btn-sm dropdown-toggle mr-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Day
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{ route('schedule.filter-all', $days->all()) }}">All</a>
-                @foreach ($days as $day)
-                <a class="dropdown-item day" href="{{ route('schedule.filter', $day->day) }}" data-day="{{ $day->day }}">{{ $day->day }}</a>
-                @endforeach
-              </div>
+        <div class="row align-items-center justify-content-between px-2">
+          <h3 class="mb-0">Schedule</h3>
+          <div class="d-flex">
+            <button class="btn btn-secondary btn-sm dropdown-toggle mr-2" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select Day
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{{ route('schedule.filter-all', $days->all()) }}">All</a>
+              @foreach ($days as $day)
+              <a class="dropdown-item day" href="{{ route('schedule.filter', $day->day) }}" data-day="{{ $day->day }}">{{ $day->day }}</a>
+              @endforeach
             </div>
             <button class="btn btn-icon btn-success btn-sm" type="button" data-toggle="modal" data-target="#schedule">
               <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>

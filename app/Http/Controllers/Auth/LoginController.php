@@ -46,6 +46,16 @@ class LoginController extends Controller
         
     }
 
+    // public function authenticate(Request $request)
+    // {
+    //     $credentials = $request->only('email');
+    //     dd($credentials);
+
+    //     $user = User::where('email','=',$credentials)->first();
+    //     if (Auth::guard('web')->attempt($user->status === 'active')) {
+    //     }
+    // }
+
     public function logout()
     {
         Auth::guard('web')->logout();

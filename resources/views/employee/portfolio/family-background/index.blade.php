@@ -2,7 +2,7 @@
 
 @section('portfolio')
 
-<div class="container-fluid cont">
+<div class="container-fluid">
     
     <div class="row">
         @yield('family')

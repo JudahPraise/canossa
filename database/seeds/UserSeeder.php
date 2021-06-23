@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         
         $user = new User();
         $user->name = 'Employee1';
-        $user->sex = 'Male';
+        $user->sex = 'M';
         $user->employee_id = '2018-00001-CL-0';
         $user->email = 'employee1@test.com';
         $user->password = Hash::make('password');

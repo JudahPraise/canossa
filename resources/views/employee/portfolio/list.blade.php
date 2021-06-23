@@ -10,16 +10,16 @@
             <h1 class="mb-0">Portfolio</h1>
           </div>
           <div class="col text-right">
-              <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-large"></i></span>
               </a>
-              <a href="{{ route('portfolio.index', 'list') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('portfolio.index', 'list') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-list"></i></span>
               </a>
           </div>
         </div>
       </div>
-      <a href="{{ route('personal.index') }}" style="width: 100%; color: inherit;" class="row p-3 w-100">
+      <a href="{{ route('personal.index') }}" style="width: 100%; color: inherit;" class="mb-3">
         <div style="width: 100%" class="mb-3">
           <div class="card card-stats">
             <div class="card-body">

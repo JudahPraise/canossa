@@ -22,7 +22,7 @@
             <h3 class="mb-0">Documents</h3>
           </div>
           <div class="col text-right">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#uploadModal"><span class="cil-cloud-upload btn-icon mr-2"></span> Upload File</button>
+            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#uploadModal"><span class="cil-cloud-upload btn-icon mr-2"></span> Upload File</button>
           </div>
         </div>
       </div>

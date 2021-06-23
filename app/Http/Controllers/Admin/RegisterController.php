@@ -13,7 +13,7 @@ class RegisterController extends Controller
 {
 
     public function index(){
-        $employees = User::paginate(10);
+        $employees = User::orderBy('name', 'ASC')->paginate(10);
         return view('admin.manage-accounts.index', compact('employees', $employees));
 
     }
@@ -74,9 +74,11 @@ class RegisterController extends Controller
         $user = User::where('id','=',$id)->first();
         $user->family->delete();
         $user->education->delete();
+        $user->feedback->delete();
         $user->delete();
 
         return redirect()->back();
 
     }
+
 }

@@ -7,22 +7,22 @@
       <div class="card-header border-0">
         <div class="row align-items-center">
           <div class="col">
-            <h1 class="mb-0">Educational Background</h1>
+            <h2 class="mb-0">Family Background</h2>
           </div>
           <div class="col text-right">
-              <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-caret-left"></i></span>
               </a>
-              <a href="{{ route('family.index', 'card') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('family.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-large"></i></span>
               </a>
-              <a href="{{ route('family.index', 'list') }}" class="btn btn-icon btn-light" type="button">
+              <a href="{{ route('family.index', 'list') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-list"></i></span>
               </a>
           </div>
         </div>
       </div>
-      <div class="row p-3 w-100">
+      <div class="row">
         <a href="{{ !empty(auth()->user()->family->spouse) ? route('family.show', Auth::user()->id) : route('spouse.create') }}" style="width: 100%; color: inherit" class="mb-3">
           <div class="card card-stats">
             <div class="card-body">

@@ -13,7 +13,6 @@
 
     <!-- Scripts -->
     <script  src="{{ asset('js/app.js') }}" defer></script>
-    <script  src="{{ asset('js/sb-admin-js/sb-admin-2.min.js') }}" defer></script>
     <script  src="{{ asset('vendor/jquery/jquery.min.js') }}" defer></script>
     <script  src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}" defer></script>
     @yield('dropzone-js')
@@ -21,7 +20,7 @@
     <!-- Icons-->
     <link href="{{ asset('core-ui/css/free.min.css') }}" rel="stylesheet"> <!-- core-ui icons -->
     <link href="{{ asset('core-ui/css/flag-icon.min.css') }}" rel="stylesheet"> <!-- core-ui icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"> <!-- fontawesome icons -->
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -60,7 +59,6 @@
     <script src="{{ asset('core-ui/js/coreui.bundle.min.js') }}"></script>
     <script src="{{ asset('core-ui/js/coreui-utils.js') }}"></script>
     <script src="{{ asset('material/assets/js/core/jquery.min.js') }}" type="text/javascript"></script>
-    {{-- <script src="{{ asset('js/sidenav.js') }}"></script> --}}
 
     @yield('js')
 

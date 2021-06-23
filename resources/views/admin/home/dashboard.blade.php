@@ -156,11 +156,16 @@
                       <a class="btn btn-sm btn-primary" href="{{ route('employee.show', $employee->id) }}">View Profile</a>
                     </td>
                   </tr>
-                @empty
-                  
+                @empty  
+                    <tr class="text-center">
+                      <td colspan="5">No employees yet</td>
+                    </tr>
                 @endforelse
               </tbody>
             </table>
+            <div class="row d-flex justify-content-end w-100">
+              {{ $employees->links() }}
+            </div>
           </div>
         </div>
       </div>

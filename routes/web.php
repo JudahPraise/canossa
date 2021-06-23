@@ -55,8 +55,10 @@ Route::prefix('admin')->group(function(){
         Route::get('/', 'Admin\EmployeesController@index')->name('employees');
         Route::get('/show/{id}', 'Admin\EmployeesController@show')->name('employee.show');
     });
-
+    //Feedback
     Route::get('/employee-feedback', 'Admin\FeedbackController@index')->name('admin.feedback.index');
+    //Archive
+    Route::get('/resigned/{id}', 'ResignController@resign')->name('resigned');
 
 });
 
