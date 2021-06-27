@@ -17,9 +17,33 @@ class RedirectIfAuthenticated
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
-    {
-        if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+    {   
+
+        switch ($guard) {
+            
+            case 'admin':
+          
+                if(Auth::guard($guard)->check()){
+                    return redirect()->route('admin')->with('message', "You are now logged in");
+                }
+
+                break;
+
+            case 'student':
+
+                if(Auth::guard($guard)->check()){
+                    return redirect()->route('student')->with('message', "You are now logged in");
+                }
+
+                break;
+            
+            default:
+               
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('schedule.index');
+                }
+
+                break;
         }
 
         return $next($request);

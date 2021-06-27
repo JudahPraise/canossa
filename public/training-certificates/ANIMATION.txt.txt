@@ -1,0 +1,26 @@
+initial position - -955.8857
+next position - 1123
+last position - 3050
+frame 2
+position - 802, 540
+scale - 55
+orientation - 339, 328, 348
+
+frame 3
+position - 639, 540
+scale - 55
+orientation - 339, 328, 348
+
+frane 1
+position - 960, 540
+scale - 100
+orientation 0
+
+
+Drop Shadow
+3frame
+4frame
+last frame
+
+FFD200
+F7971E

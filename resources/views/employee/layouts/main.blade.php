@@ -2,16 +2,22 @@
 
 @section('content')
 
-<div class="container-fluid d-flex flex-column align-items-center"  style="width: 100%; background-color: #e9ecef;">
-    @include('partials.employee_nav')
+<div class="c-sidebar c-sidebar-light c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+
+  @include('partials.employee._sidebar')
+  @include('partials.employee._topbar')
+  
+  <div class="c-body">
+
+    <main class="c-main pt-0">
+
+      @yield('home') 
+
+    </main>
+
+  </div>
+
 </div>
 
-<div class="container-fluid d-flex flex-column align-items-center mt-3"  style="width: 100%;">
-    @yield('home')
-</div>
-
-<div class="container d-flex flex-column align-items-center"  style="width: 100%;">
-    @include('partials.footer')
-</div>
 
 @endsection

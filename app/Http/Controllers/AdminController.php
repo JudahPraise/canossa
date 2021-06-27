@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +14,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
 
     /**
@@ -23,6 +24,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home.dashboard');
+        $employees = User::where('status','=','active')->orderBy('name', 'ASC')->paginate(5);
+        $teachers = $employees->where('role','=','Teacher')->count();
+        $staffs = $employees->where('role','=','Staff')->count();
+        $maintenance = $employees->where('role','=','Maintenance')->count();
+        return view('admin.home.dashboard', compact(['employees', 'staffs', 'maintenance', 'teachers']));
     }
 }

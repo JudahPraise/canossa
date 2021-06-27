@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use File;
 use App\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class DocumentsController extends Controller
 {
@@ -23,6 +23,32 @@ class DocumentsController extends Controller
         $document = new Document();
 
         $document->user_id = auth()->id();
+        $document->type = $request->input('type');
+        if($request->hasFile('file')){
+
+            $file = $request->file('file');
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $request->file->storeAs('documents', $filename, 'public');
+            $document->file = $filename;
+            $document->extension = $extension;
+        }
+        
+        $document->save();
+        return redirect()->back();
+
+    }
+    
+    public function update(Request $request, $id){
+
+        $document = Document::where('id','=',$id)->first();
+        // dd(url());
+        if(File::exists(storage_path("app/public/documents/{$document->file}"))){
+            File::delete(storage_path("app/public/documents/{$document->file}"));
+        }
+
+        $document->user_id = auth()->id();
+        $document->type = $request->input('type');
 
         if($request->hasFile('file')){
 
@@ -32,24 +58,27 @@ class DocumentsController extends Controller
             $request->file->storeAs('documents', $filename, 'public');
             $document->file = $filename;
             $document->extension = $extension;
-           
         }
         
-        $document->save();
-        return response()->json(['success'=>$filename]);
+        $document->update();
+
+        return redirect()->back();
 
     }
 
     public function download($id){
         $document = Document::where('id','=',$id)->first();
-        return response()->download(storage_path("app/public/documents/{$document->document_filename}"));
+        return response()->download(storage_path("app/public/documents/{$document->file}"));
     }
 
     public function delete($id){
 
         $document = Document::where('id','=',$id)->first();
+        if(File::exists(storage_path("app/public/documents/{$document->file}"))){
+            File::delete(storage_path("app/public/documents/{$document->file}"));
+        }
         $document->delete($document);
-        return redirect()->back()->with('delete', "{$document->type_document} has been deleted!");
+        return redirect()->back()->with('delete', "{$document->file} has been deleted!");
 
     }
     

@@ -1,17 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-<div class="container-fluid d-flex flex-column align-items-center bg-dark"  style="width: 100%;">
-    @include('partials.admin_nav')
-</div>
+        <!-- Sidebar -->
+        @include('partials.admin._sidebar')
+        <!-- End of Sidebar -->
 
-<div class="container-fluid d-flex flex-column align-items-center mt-3"  style="width: 100%;">
-    @yield('home')
-</div>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-<div class="container-fluid d-flex flex-column align-items-center"  style="width: 100%;">
-    @include('partials.footer')
-</div>
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                @include('partials.admin._topbar')
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    @yield('home')
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- FIXME: Footer -->
+            {{-- @include('partials.admin._footer') --}}
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
 
 @endsection

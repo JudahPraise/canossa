@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(236, 236, 236)!important;
+}
+
+#paper{
+    width: 8.5in!important;
+    background-color: white;
+    margin: 2rem;
+}
+
+.divider{
+    border: 2px solid grey;
+}
+
+@media print {
+    body{
+        background-color: white!important;
+        margin: 0;
+        padding: 0;
+    }
+}

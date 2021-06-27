@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -26,15 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    protected function redirectTo()
-    {
-        if (auth()->user()->role == 'Employee') {
-            return '/home';
-        }
-        return '/admin';
-    }
+    protected $redirectTo = '/employee';
 
     /**
      * Create a new controller instance.
@@ -45,4 +39,28 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function showLoginForm(){
+
+        return view('login-pages.employee');
+        
+    }
+
+    // public function authenticate(Request $request)
+    // {
+    //     $credentials = $request->only('email');
+    //     dd($credentials);
+
+    //     $user = User::where('email','=',$credentials)->first();
+    //     if (Auth::guard('web')->attempt($user->status === 'active')) {
+    //     }
+    // }
+
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+        Session::flush();
+        return redirect('/');
+    }
+    
 }
