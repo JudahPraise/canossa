@@ -14,7 +14,7 @@
 @section('employee-home')
 
 <div class="container w-100 d-flex justify-content-center align-items-center mt-5">
-    <div class="card w-50">
+    <div class="card" style="width: 90vw">
       <div class="card-header border-0">
         <div class="row align-items-center">
           <div class="col">
