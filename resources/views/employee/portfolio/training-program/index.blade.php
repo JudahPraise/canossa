@@ -11,6 +11,9 @@
             <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-icon btn-secondary btn-sm" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-caret-left"></i></span>
             </a>
+            <a href="{{ route('training.create') }}" class="btn btn-icon btn-success btn-sm" type="button">
+                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+            </a>
         </div>
     </div>
     

@@ -19,7 +19,7 @@
             <div class="card-body w-100">
                 <div class="row px-2 d-flex align-items-center justify-content-between">
                         <strong style="font-weight: bold; color: black; font-size: 1.3rem">Spouse</strong>
-                        <a href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.edit', $family->spouse->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
+                        <a href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.edit', $family->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                         </a>
                 </div>
@@ -71,11 +71,16 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row px-2 d-flex justify-content-between align-items-center">
-                        <strong style="font-weight: bold; color: black; font-size: 1.3rem">Children</strong>
+                <div class="row px-2 d-flex justify-content-between">
+                    <strong class="justify-self-start" style="font-weight: bold; color: black; font-size: 1.3rem">Children</strong>
+                    <div>
                         <a href="{{ !empty(auth()->user()->family->children) ? route('children.edit', $family->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                         </a>
+                        <a href="{{ route('children.create') }}" class="btn btn-icon btn-success btn-sm" type="button">
+                            <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                        </a>
+                    </div>
                 </div>
                 @forelse ($children as $child)
                     <div class="row row-cols-1 row-cols-md-2 mt-3">

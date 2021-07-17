@@ -83,12 +83,28 @@
               <h3>What can we do to improve the experience?</h3>
             </div>
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Feedback</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" name="feedback" rows="3"></textarea>
+              <label for="feedback">Feedback</label>
+              <span role="textbox" contenteditable id="feedback"  style="display: block;
+              width: 100%;
+              overflow: hidden;
+              resize: both;
+              min-height: 40px;
+              line-height: 20px;
+              border: 2px solid grey;
+              padding: .7rem"></span>
+              <textarea name="feedback" id="textFeedback" hidden></textarea>
             </div>
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Suggestion</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" name="suggestion" rows="3"></textarea>
+              <label for="suggestion">Suggestion</label>
+              <span role="textbox" contenteditable id="suggestion" style="display: block;
+              width: 100%;
+              overflow: hidden;
+              resize: both;
+              min-height: 40px;
+              line-height: 20px;
+              border: 2px solid grey;
+              padding: .7rem"></span>
+              <textarea name="suggestion" id="textSuggest" hidden></textarea>
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -101,5 +117,16 @@
 </ul>
 
 <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>  
+
+
+  <script>
+    const form = document.getElementById('feedbackForm')
+    form.addEventListener('submit', submit);
+
+    function submit() {
+      document.getElementById('textFeedback').value = document.getElementById('feedback').innerHTML
+      document.getElementById('textSuggest').value = document.getElementById('suggestion').innerHTML
+    }
+  </script>
 
 </div>

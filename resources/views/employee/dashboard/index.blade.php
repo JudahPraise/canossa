@@ -64,8 +64,10 @@
                   data-schedtimefrom="{{ $schedule->time_from }}"
                   data-schedtimeto="{{ $schedule->time_to }}"
                   data-toggle="modal" data-target="#editModal"><span class="btn-inner--icon"><i class="fas fa-edit"></i></span></a>
-                 
-                      <button type="submit" class="btn btn-sm btn-icon btn-danger"><span class="btn-inner--icon"><i class="fas fa-trash"></i></span></button>
+                  <form action="{{ route(  'schedule.delete', $schedule->id)  }}" method="POST" id="deleteForm" hidden>
+                    @method('delete') @csrf
+                  </form>
+                  <button type="submit" class="btn btn-sm btn-icon btn-danger" onclick="document.getElementById('deleteForm').submit()"><span class="btn-inner--icon"><i class="fas fa-trash"></i></span></button>
                   
                 </td>
               </tr>

@@ -13,9 +13,6 @@
               <a href="{{ route('portfolio.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-caret-left"></i></span>
               </a>
-              <a href="{{ route('family.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
-                <span class="btn-inner--icon"><i class="fas fa-th-large"></i></span>
-              </a>
               <a href="{{ route('family.index', 'list') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-list"></i></span>
               </a>
@@ -46,7 +43,7 @@
         </div>
         <div class="col mb-4">
             <div class="card">
-                <a href="{{ !empty(auth()->user()->family()->children) ? route('family.show', Auth::user()->id) : route('children.create') }}" class="card__image">
+                <a href="{{ !empty(auth()->user()->family->children) ? route('family.show', Auth::user()->id) : route('children.create') }}" class="card__image">
                   <img src="{{ asset('img/for-family/children.png') }}">
                 </a>
                 <div class="card__content">
@@ -59,7 +56,7 @@
                       @endif
                     </small>
                   </p>
-                  <a href="{{ !empty(auth()->user()->family()->children) ? route('family.show', Auth::user()->id) : route('children.create') }}" class="is-hover-underline has-text-black">
+                  <a href="{{ !empty(auth()->user()->family->children) ? route('family.show', Auth::user()->id) : route('children.create') }}" class="is-hover-underline has-text-black">
                     <h2 style="font-weight: bold">Children</h2>
                   </a>
                 </div>

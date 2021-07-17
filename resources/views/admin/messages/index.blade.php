@@ -84,16 +84,16 @@
                       <td>
                         {{ $notification->created_at->diffForHumans() }}
                       </td>
-                      <td>
-                        <a class="btn btn-sm btn-secondary message" data-toggle="modal" data-target="#showMessage" 
+                      <td class="message">
+                        <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showMessage" 
                         data-markasread="{{ $notification->id }}"
                         data-sender="{{ $notification->data['sender'] }}"
                         data-subject="{{ $notification->data['subject'] }}"
                         data-message="{{ $notification->data['message'] }}"
-                        data-attachment="{{ $notification->data['attachment'] }}">View Message</a>
-                        <a class="btn btn-sm btn-info text-white message" data-toggle="modal"  id="replyTo"
+                        data-attachment="{{ $notification->data['attachment'] }}">View Message</button>
+                        <button class="btn btn-sm btn-info text-white" data-toggle="modal"  id="replyTo"
                         data-target="#replyModal" 
-                        data-sendto="{{ $notification->data['sender'] }}" >Reply</a>
+                        data-sendto="{{ $notification->data['sender'] }}" >Reply</button>
                       </td>
                     </tr>
                   @endif
@@ -109,7 +109,7 @@
       </div>
     </div>
     <!--Message Show Modal -->
-    <div class="modal fade" id="showMessage" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="showMessage" aria-labelledby="showMessage" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -138,7 +138,7 @@
       </div>
     </div>
     <!-- Create Modal -->
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="createModal" aria-labelledby="createModal" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -202,57 +202,57 @@
         </div>
       </div>
     </div>
-    <!-- Reply Modal -->
-    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <!-- Modal -->
+    <div class="modal fade" id="replyModal" aria-labelledby="replyModal" aria-hidden="true">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Reply to: <span id="reply" style="color:black" ></span></h5>
-              <a type="button" class="text-decoration-none close" id="replyClose" data-dismiss="modal">
-                <span  aria-hidden="true">&times;</span>
-              </a>
-          </div>
-          <div class="modal-body">
-            <form class="w-100" enctype="multipart/form-data" action="{{ route('send') }}" method="POST">
-              @csrf
-              <div class="form-row mb-3">
-                <div class="col-md-12 mb-3">
-                    <label for="validationDefault01">Send To</label>
-                    <select id="inputState" class="form-control" name="send_to">           
-                      <option id="sendTo"></option>
-                    </select> 
-                </div>
-              </div>
-              
-              <div class="form-row mb-3">
-                <div class="col-md-12 mb-3">
-                  <label for="validationDefault01">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="validationDefault01" placeholder="Subject" required>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-md-12 mb-3">
-                  <label for="exampleFormControlTextarea1">Message</label>
-                  <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <label for="">Attachment</label>
-                <div class="col-md-12 mb-3 custom-file">
-                  <input type="file" class="custom-file-input-core" name="attachment" id="customFile">
-                  <label class="custom-file-label-core" for="customFile">Choose file</label>
-                </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <a type="button" class="btn btn-secondary" id="markAsReadMessReply" data-dismiss="modal">Close</a>
-            <a id="replyMarkAsRead">
-              <button type="submit" class="btn btn-primary" value="Submit Form">Send</button>
+            <h5 class="modal-title" id="exampleModalLabel">Reply to: <span id="reply" style="color:black" ></span></h5>
+            <a type="button" class="text-decoration-none close" id="replyClose" data-dismiss="modal">
+              <span  aria-hidden="true">&times;</span>
             </a>
           </div>
-        </form>
+          <div class="modal-body">
+            <div class="modal-body">
+              <form class="w-100" enctype="multipart/form-data" id="replyForm" action="{{ route('send') }}" method="POST">
+                @csrf
+                <div class="form-row mb-3">
+                  <div class="col-md-12 mb-3">
+                      <label for="validationDefault01">Send To</label>
+                      <select id="inputState" class="form-control" name="send_to">           
+                        <option id="sendTo"></option>
+                      </select> 
+                  </div>
+                </div>
+                
+                <div class="form-row mb-3">
+                  <div class="col-md-12 mb-3">
+                    <label for="validationDefault01">Subject</label>
+                    <input type="text" class="form-control" name="subject" id="validationDefault01" placeholder="Subject" required>
+                  </div>
+                </div>
+  
+                <div class="form-row">
+                  <div class="col-md-12 mb-3">
+                    <label for="exampleFormControlTextarea1">Message</label>
+                    <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                </div>
+  
+                <div class="form-row">
+                  <label for="">Attachment</label>
+                  <div class="col-md-12 mb-3 custom-file">
+                    <input type="file" class="custom-file-input-core" name="attachment" id="customFile">
+                    <label class="custom-file-label-core" for="customFile">Choose file</label>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('replyForm').submit()">Save changes</button>
+          </div>
         </div>
       </div>
     </div>
@@ -269,13 +269,14 @@
               $('#attachment').text($(this).data("attachment"))
               $('#replyTo').attr('data-sendto', $(this).data("sender"))
             })
+            $('#replyTo').click(function(event){
+              $('#reply').text($(this).data('sendto'))
+              $('#sendTo').text($(this).data('sendto'))
+              $('#sendTo').val($(this).data('sendto'))
+            });
           });
   
-          $('#replyTo').click(function(event){
-            $('#reply').text($(this).data('sendto'))
-            $('#sendTo').text($(this).data('sendto'))
-            $('#sendTo').val($(this).data('sendto'))
-          });
+
       });
   </script>
 @endsection
