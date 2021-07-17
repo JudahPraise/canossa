@@ -79,7 +79,7 @@ class SpouseController extends Controller
     public function edit($id)
     {
         $family = Family::where('user_id','=',$id)->with('spouse')->first();
-        $spouse = $family->spouse->first();
+        $spouse = $family->spouse;
         return view('employee.portfolio.family-background.spouse.edit', compact('spouse'));
     }
 

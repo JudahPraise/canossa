@@ -16,9 +16,6 @@
               <a href="{{ route('family.index', 'card') }}" class="btn btn-sm btn-icon btn-light" type="button">
                 <span class="btn-inner--icon"><i class="fas fa-th-large"></i></span>
               </a>
-              <a href="{{ route('family.index', 'list') }}" class="btn btn-sm btn-icon btn-light" type="button">
-                <span class="btn-inner--icon"><i class="fas fa-th-list"></i></span>
-              </a>
           </div>
         </div>
       </div>

@@ -31,12 +31,26 @@
               <h3>What can we do to improve the experience?</h3>
             </div>
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Feedback</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" name="feedback" placeholder="" rows="3">{{ $user->feedback }}</textarea>
+              <label for="feedback">Feedback</label>
+              <span role="textbox" contenteditable id="feedback" name="feedback" style="display: block;
+              width: 100%;
+              overflow: hidden;
+              resize: both;
+              min-height: 40px;
+              line-height: 20px;
+              border: 2px solid grey;
+              padding: .7rem">{{ $user->feedback }}</span>
             </div>
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Suggestion</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" name="suggestion" placeholder="" rows="3">{{ $user->suggestion }}</textarea>
+              <label for="suggestion">Suggestion</label>
+              <span role="textbox" contenteditable id="suggestion" name="suggestion" style="display: block;
+              width: 100%;
+              overflow: hidden;
+              resize: both;
+              min-height: 40px;
+              line-height: 20px;
+              border: 2px solid grey;
+              padding: .7rem">{{ $user->suggestion }}</span>
             </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary" value="Submit Form">Update</button>

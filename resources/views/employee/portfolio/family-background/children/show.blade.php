@@ -13,11 +13,6 @@
                 >
                     <i class="fas fa-edit text-success" style="font-size: 1.1rem"></i>
                 </a>
-                <form action="{{ route('children.destroy', $child->id) }}" method="POST" id='delete'>
-                    @method('DELETE')
-                    @csrf
-                    <button class="neu-effect d-flex justify-content-center align-items-center mr-2 text-decoration-none py-3 px-3" style="border: 0; width: 2.6rem; height: 2.6rem"><i class="fas fa-trash text-danger" style="font-size: 1.1rem"></i></button>
-                </form>
             </div>
             <div class="col-md-5 mb-3 d-flex flex-column">
                 <small style="font-size: 1rem">Name</small>
