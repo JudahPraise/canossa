@@ -77,13 +77,13 @@
                       <div class="row">
                           <h3 id="name"></h3>
                       </div>
-                      <div class="row mb-3">
-                          <strong>Feedback</strong>
-                          <small id="feedback"></small>
+                      <div class="row d-flex flex-column mb-3">
+                          <strong class="mb-2">Feedback</strong>
+                          <small id="feedback" style="font-size: 1rem"></small>
                       </div>
-                      <div class="row">
-                          <strong>Suggestion</strong>
-                          <small id="suggestion"></small>
+                      <div class="row d-flex flex-column">
+                          <strong class="mb-2">Suggestion</strong>
+                          <small id="suggestion" style="font-size: 1rem"></small>
                       </div>
                   </div>
                   <div class="modal-footer">

@@ -21,12 +21,19 @@ class UserSeeder extends Seeder
             'password' =>  Hash::make('password'),
             'role' => 'Admin',
         ]);
+
+        Admin::create([
+            'name' => 'Admin',
+            'email' => 'hrisadmin@canossa.com',
+            'password' =>  Hash::make('hriscanossa'),
+            'role' => 'Admin',
+        ]);
         
         $user = new User();
-        $user->name = 'Employee1';
+        $user->name = 'Sample Employee';
         $user->sex = 'M';
         $user->employee_id = '2018-00001-CL-0';
-        $user->email = 'employee1@test.com';
+        $user->email = 'employee@test.com';
         $user->password = Hash::make('password');
         $user->role = 'Teacher';
         $user->department = 'College';
