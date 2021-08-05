@@ -35,7 +35,7 @@ class DocumentsController extends Controller
         }
         
         $document->save();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Document saved successfully!');
 
     }
     
@@ -62,7 +62,7 @@ class DocumentsController extends Controller
         
         $document->update();
 
-        return redirect()->back();
+        return redirect()->back()->with('update', "{$request->type} has been updated!");
 
     }
 

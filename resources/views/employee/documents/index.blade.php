@@ -13,7 +13,7 @@
 @section('employee-home')
 
 <div class="container-fluid p-4">
-
+  @component('components.alerts')@endcomponent
   <div class="row w-100 m-0">
     <div class="card w-100">
       <div class="card-header border-0">
