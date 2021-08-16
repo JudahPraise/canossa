@@ -14,6 +14,7 @@
 
     {{-- Header --}}
     <div class="container-fluid m-0 p-0">
+        @component('components.alerts')@endcomponent
         <!-- Header -->
         <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url({{ asset('img/canossa.jpg') }}); background-size: cover; background-position: center top;">
             <!-- Mask -->

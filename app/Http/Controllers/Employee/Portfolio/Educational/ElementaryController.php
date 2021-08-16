@@ -97,7 +97,7 @@ class ElementaryController extends Controller
             'elementary' => true
         ]);
 
-        return redirect()->route('educ.show', Auth::user()->id);
+        return redirect()->route('educ.show', Auth::user()->id)->with('update', 'Elementary updated successfully!');
     }
 
     /**
@@ -111,6 +111,6 @@ class ElementaryController extends Controller
         $elementary = Elementary::where('id','=',$id)->first();
         $elementary->delete();
         
-        return redirect()->back();
+        return redirect()->back()->with('delete', 'Elementary data deleted successfully!');
     }
 }

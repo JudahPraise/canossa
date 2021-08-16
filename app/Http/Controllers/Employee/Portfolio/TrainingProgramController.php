@@ -60,7 +60,7 @@ class TrainingProgramController extends Controller
 
         $training->save();
 
-        return redirect()->route('training.show', Auth::user()->id);
+        return redirect()->route('training.show', Auth::user()->id)->with('success', 'Training Program saved successfully!');
     }   
 
     /**
@@ -114,7 +114,7 @@ class TrainingProgramController extends Controller
 
         $training->update();
 
-        return redirect()->route('training.show', Auth::user()->id);
+        return redirect()->route('training.show', Auth::user()->id)->with('update', 'Training Program updated successfully!');
     }
 
     /**

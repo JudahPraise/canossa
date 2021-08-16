@@ -12,6 +12,10 @@
     <div id="message" class="bg-info">
         <span>{{ session('update') }}</span>
     </div>
+@elseif(session('sent'))
+    <div id="message" class="bg-info">
+        <span>{{ session('sent') }}</span>
+    </div>
 @endif
 
 

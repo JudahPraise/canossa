@@ -36,6 +36,7 @@ class DocumentsController extends Controller
         
         $document->save();
         return redirect()->back()->with('success', 'Document saved successfully!');
+                                        //?name     //?Session Data
 
     }
     

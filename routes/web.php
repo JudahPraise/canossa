@@ -85,7 +85,6 @@ Route::middleware('auth')->prefix('employee')->group(function(){
         Route::get('/filter/{day}', 'Employee\ScheduleController@filter')->name('schedule.filter');
         Route::get('/filter/all', 'Employee\ScheduleController@filterAll')->name('schedule.filter-all');
     });
-
     //Portfolio
     Route::prefix('/portfolio')->group(function(){
         Route::get('/index/{view}', 'Employee\PortfolioController@index')->name('portfolio.index');
@@ -216,7 +215,6 @@ Route::middleware('auth')->prefix('employee')->group(function(){
     //Settings
     Route::get('/settings', 'Employee\SettingsController@index')->name('settings');
     Route::put('/settings/update/{id}', 'Employee\SettingsController@update')->name('account.update');
-
     //Feedback
     Route::get('/feedback/index', 'FeedbackController@index')->name('feedback.index');
     Route::post('/feedback/logout', 'FeedbackController@store')->name('feedback.store');
@@ -224,3 +222,6 @@ Route::middleware('auth')->prefix('employee')->group(function(){
     Route::put('/feedback/update{id}', 'FeedbackController@update')->name('feedback.update');
 
 });
+
+Route::get('/medical', 'NurseController@index');
+Route::get('/assign-nurse/{id}', 'Medical\RegisterController@post')->name('assign.nurse');

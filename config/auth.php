@@ -57,6 +57,18 @@ return [
             'provider' => 'admins',
             'hash' => false,
         ],
+
+        //? Nurse Guard
+        'nurse' => [
+            'driver' => 'session',
+            'provider' => 'nurses',
+        ],
+        'nurse-api' => [
+            'driver' => 'token',
+            'provider' => 'nurses',
+            'hash' => false,
+        ],
+
     ],
 
     /*
@@ -87,6 +99,11 @@ return [
             'model' => App\Admin::class,
         ],
 
+        'nurses' => [
+            'driver' => 'eloquent',
+            'model' => App\Nurse::class,
+        ],
+
     ],
 
     /*
@@ -114,6 +131,13 @@ return [
 
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'nurses' => [
+            'provider' => 'nurses',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

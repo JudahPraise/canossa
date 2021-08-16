@@ -27,6 +27,11 @@
                     <a class="btn btn-icon btn-success mt-3" data-toggle="modal" data-target="#createModal" type="button" type="submit">
                         <span class="btn-inner--icon text-white"><i class="fas fa-envelope mr-2"></i>Message</span>
                     </a>
+                   @if ($employee->role === 'Nurse')
+                        <a class="btn btn-icon btn-success mt-3" href="{{ route('assign.nurse', $employee->id) }}">
+                           <span class="btn-inner--icon text-white"><i class="fas fa-envelope mr-2"></i>Assign in medical record</span>
+                        </a>
+                   @endif
                 </div>
               </div>
             </div>

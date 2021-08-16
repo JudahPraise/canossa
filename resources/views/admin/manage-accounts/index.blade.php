@@ -122,6 +122,8 @@
                   <option>Teacher</option>
                   <option>Staff</option>
                   <option>Maintenance</option>
+                  <option>Nurse</option>
+                  <option>Doctor</option>
                 </select>
               </div>
             </div>

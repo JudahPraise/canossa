@@ -72,7 +72,7 @@ class PersonalInfoController extends Controller
             'name' => $personal->fullName()
         ]);
 
-        return redirect()->route('personal.index');
+        return redirect()->route('personal.index')->with('success', 'Personal Information store successfully!');
     }
 
     /**
@@ -136,7 +136,7 @@ class PersonalInfoController extends Controller
             'name' => $request->surname.','.' '.$request->first_name.','.' '.$request->middle_name
         ]);
 
-        return redirect()->route('personal.index');
+        return redirect()->route('personal.index')->with('update', 'Personal Information updated successfully!');
     }
 
     /**
