@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class RegisterController extends Controller
 {
 
-    /**
-     * Create a new user instance after a valid registration.
+    /**     * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\User
@@ -22,37 +21,29 @@ class RegisterController extends Controller
     protected function post(Request $request, $id)
     {
 
-        $employee = User::where('id','=',$id)->first();
-
-        if($employee->role === 'Nurse')
+        if (Hash::check($request->password, Auth::guard('admin')->user()->password))
         {
-            $nurse = new Nurse();
+            $nurse = Nurse::where('user_id','=',$id)->first();
+            $employee = User::where('id','=',$id)->first();
 
-            $nurse->name = $employee->name;          
-            $nurse->role = $employee->role;  
-            $nurse->email = $employee->email;
-            $nurse->password = $employee->password;
+            if ($nurse === null) {
 
-            $nurse->save();
+                $nurse = new Nurse();
+
+                $nurse->name = $employee->name;
+                $nurse->user_id = $employee->id;          
+                $nurse->role = $employee->role;  
+                $nurse->email = $employee->email;
+                $nurse->password = $employee->password;
+
+                $nurse->save();
+
+                return redirect()->back()->with('success', sprintf('You gave %s access to medical records', $employee->name));
+            }
+
+            return redirect()->back()->with('update', sprintf('%s already have access to medical records', $employee->name));
         }
-        else
-        {
-            return 'not a nurse';
-        }
 
-        return 'saved';
+        return redirect()->back()->with('delete', 'Password did not match!');  
     }
-
-    // protected function destroy($id){
-
-    //     $user = User::where('id','=',$id)->first();
-    //     $user->family->delete();
-    //     $user->education->delete();
-    //     $user->feedback->delete();
-    //     $user->delete();
-
-    //     return redirect()->back();
-
-    // }
-
 }

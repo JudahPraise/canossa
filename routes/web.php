@@ -223,5 +223,8 @@ Route::middleware('auth')->prefix('employee')->group(function(){
 
 });
 
-Route::get('/medical', 'NurseController@index');
-Route::get('/assign-nurse/{id}', 'Medical\RegisterController@post')->name('assign.nurse');
+Route::get('/medical-record', 'NurseController@index')->name('nurse');
+Route::post('/assign-nurse/{id}', 'Medical\RegisterController@post')->name('assign.nurse');
+Route::get('/medical/login-page', 'Medical\NurseLoginController@showLoginForm')->name('nurse.login');
+Route::post('/login', 'Medical\NurseLoginController@login')->name('nurse.login.submit');
+Route::get('/logout', 'Medical\NurseLoginController@logout')->name('nurse.logout');

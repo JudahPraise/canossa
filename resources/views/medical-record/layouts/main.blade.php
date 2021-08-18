@@ -20,9 +20,13 @@
 </div> --}}
 
 
-<main class="c-main pt-0 d-flex justify-content-center align-items-center">
+<main class="c-main pt-0 d-flex justify-content-center align-items-center flex-column">
 
-   <h1>Medical Record</h1> 
+   <h1>Medical Record</h1>
+   <a class="btn btn-danger text-white" onclick="document.getElementById('logoutForm').submit()">
+     Logout
+    <form action="{{ route('nurse.logout') }}" method="POST" id="logoutForm">@csrf</form>
+   </a>
 
 </main>
 

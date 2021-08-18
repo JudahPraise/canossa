@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Medical;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 
-class AdminLoginController extends Controller
+class NurseLoginController extends Controller
 {
     public function __construct(){
 
-        $this->middleware('guest:admin', ['except' => ['logout']]);
+        $this->middleware('guest:nurse', ['except' => ['logout']]);
 
     }
 
     public function showLoginForm(){
-        return view('login-pages.admin');
+        return view('login-pages.nurse');
     }
 
     public function login(Request $request){
@@ -25,11 +25,11 @@ class AdminLoginController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6'
         ]);
-        
+
         //* Attempt to log the user in
-        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        if(Auth::guard('nurse')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             //* If successful, then redirect to their intended location
-            return redirect()->intended(route('admin'));
+            return redirect()->intended(route('nurse'));
         }
 
         //* If unsuccessful, redirect back to login
@@ -38,7 +38,7 @@ class AdminLoginController extends Controller
 
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('nurse')->logout();
 
         return redirect('/');
     }

@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="{{ asset('argon/vendor/nucleo/css/nucleo.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     <!-- Argon CSS -->
-    <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('argon/css/argon.css') }}" type="text/css">
 @endsection
 
 @section('home')
     <div class="container-fluid m-0 p-0">
+        @component('components.alerts')@endcomponent
         <!-- Header -->
         <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url({{ asset('img/canossa.jpg') }}); background-size: cover; background-position: center top;">
             <!-- Mask -->
@@ -28,9 +29,37 @@
                         <span class="btn-inner--icon text-white"><i class="fas fa-envelope mr-2"></i>Message</span>
                     </a>
                    @if ($employee->role === 'Nurse')
-                        <a class="btn btn-icon btn-success mt-3" href="{{ route('assign.nurse', $employee->id) }}">
+                        <a class="btn btn-icon btn-success mt-3" data-toggle="modal" data-target="#exampleModal">
                            <span class="btn-inner--icon text-white"><i class="fas fa-envelope mr-2"></i>Assign in medical record</span>
                         </a>
+
+                        <!-- Confirm Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Confirm Password</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    {{-- <h2>Are you sure you want to assign {{ $employee->name }} as administrator from medical records?</h2> --}}
+                                    <form id="confirmForm" action="{{ route('assign.nurse', $employee->id) }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                          <label for="exampleInputPassword1">Password</label>
+                                          <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary" onclick="document.getElementById('confirmForm').submit()">Confirm</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                    @endif
                 </div>
               </div>
@@ -656,6 +685,7 @@
     <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
     <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
 @endsection

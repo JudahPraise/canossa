@@ -29,10 +29,10 @@ class RedirectIfAuthenticated
 
                 break;
 
-            case 'student':
+            case 'nurse':
 
                 if(Auth::guard($guard)->check()){
-                    return redirect()->route('student')->with('message', "You are now logged in");
+                    return redirect()->route('nurse')->with('message', "You are now logged in");
                 }
 
                 break;
