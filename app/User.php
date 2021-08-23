@@ -93,4 +93,18 @@ class User extends Authenticatable
     {
         return $this->hasOne(Feedback::class, 'user_id');
     }
+
+    public function getAge() {
+        $format = '%y years, %m months';
+
+        if(!empty($this->personal->date_of_birth))
+        {
+            return \Carbon\Carbon::parse($this->personal->date_of_birth)->diff(\Carbon\Carbon::now())->format($format);
+        }else
+        {
+            return 'null';
+        }
+
+       
+    }
 }

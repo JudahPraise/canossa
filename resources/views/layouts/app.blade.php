@@ -9,7 +9,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    @if(Auth::guard('admin')->check())
+        <title>CHRMIS - ADMIN</title>
+    @elseif(Auth::guard('nurse')->check())
+        <title>CHRMIS - MEDICAL RECORDS</title>
+    @elseif (Auth::guard('web')->check())
+        <title>CHRMIS - {{Auth::guard('web')->user()->name}}</title>
+    @else
+        <title>CHRMIS</title>
+    @endif
 
     <!-- Scripts -->
     <script  src="{{ asset('js/app.js') }}" defer></script>

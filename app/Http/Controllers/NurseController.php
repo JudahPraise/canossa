@@ -17,7 +17,7 @@ class NurseController extends Controller
     }
 
     public function index()
-    {
-        return view('medical-record.layouts.main');
+    {        
+        return redirect()->route('medical.dashboard');
     }
 }

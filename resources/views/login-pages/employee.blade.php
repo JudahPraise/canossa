@@ -7,7 +7,7 @@
 </div>
 
 <div class="continer w-100 p-lg-2 ">
-    <form method="POST" action="{{ route('login') }}" class="w-100">
+    <form method="POST" action="{{ route('employee.login.submit') }}" class="w-100">
         @csrf
 
         <div class="form-group row">

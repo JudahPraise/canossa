@@ -62,8 +62,9 @@ Route::prefix('admin')->group(function(){
 
 });
 
-Route::middleware('auth')->prefix('employee')->group(function(){
+Route::prefix('employee')->group(function(){
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
+    Route::post('/login', 'Auth\LoginController@login')->name('employee.login.submit');
     Route::get('/logout', 'Auth\LoginController@logout')->name('employee.logout');
     Route::get('/', 'HomeController@index')->name('home');
     Route::post('/send', 'MessageController@send')->name('employee.send');
@@ -223,8 +224,16 @@ Route::middleware('auth')->prefix('employee')->group(function(){
 
 });
 
-Route::get('/medical-record', 'NurseController@index')->name('nurse');
-Route::post('/assign-nurse/{id}', 'Medical\RegisterController@post')->name('assign.nurse');
-Route::get('/medical/login-page', 'Medical\NurseLoginController@showLoginForm')->name('nurse.login');
-Route::post('/login', 'Medical\NurseLoginController@login')->name('nurse.login.submit');
-Route::get('/logout', 'Medical\NurseLoginController@logout')->name('nurse.logout');
+
+Route::prefix('medical-record')->group(function(){
+
+    Route::get('/', 'NurseController@index')->name('nurse');
+    Route::post('/assign-nurse/{id}', 'Medical\RegisterController@post')->name('assign.nurse');
+    Route::get('/medical/login-page', 'Medical\NurseLoginController@showLoginForm')->name('nurse.login');
+    Route::post('/login', 'Medical\NurseLoginController@login')->name('nurse.login.submit');
+    Route::post('/logout', 'Medical\NurseLoginController@logout')->name('nurse.logout');
+
+    Route::get('/dashboard', 'Medical\DashboardController@index')->name('medical.dashboard');
+    Route::get('/employee/{id}', 'Medical\DashboardController@show')->name('medical.show');
+
+});

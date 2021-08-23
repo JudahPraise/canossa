@@ -53,7 +53,7 @@
         {{-- Physical --}}
         <div class="form-row">
             <div class="col-md-4 mb-3">
-              <label for="height">Height</label>
+               <label for="height">Height</label>
               <input type="text" class="form-control" name="height" id="height" required>
             </div>
             <div class="col-md-4 mb-3">
