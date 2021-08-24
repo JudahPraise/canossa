@@ -55,11 +55,11 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
               <label for="height">Height</label>
-              <input type="text" class="form-control" name="height" id="height" value="{{ $personal->height }}" required>
+              <input type="number" step="any" class="form-control" name="height" id="height" value="{{ $personal->height }}" required>
             </div>
             <div class="col-md-4 mb-3">
               <label for="weight">Weight</label>
-              <input type="text" class="form-control" name="weight" id="weight" value="{{ $personal->weight }}" required>
+              <input type="number" step="any" class="form-control" name="weight" id="weight" value="{{ $personal->weight }}" required>
             </div>
             <div class="col-md-4 mb-3">
                 <label for="blood_type">Blood Type</label>

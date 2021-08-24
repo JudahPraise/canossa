@@ -9,14 +9,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @if(Auth::guard('admin')->check())
-        <title>CHRMIS - ADMIN</title>
-    @elseif(Auth::guard('nurse')->check())
+    @if(Request::is('/'))
+        <title>CHRMIS - EMPLOYEE</title>
+    @elseif(Request::is('medical-record/medical/login-page'))
         <title>CHRMIS - MEDICAL RECORDS</title>
+    @elseif (Request::is('admin/login'))
+        <title>CHRMIS - ADMIN</title>
     @elseif (Auth::guard('web')->check())
-        <title>CHRMIS - {{Auth::guard('web')->user()->name}}</title>
-    @else
-        <title>CHRMIS</title>
+        <title>CHRMIS - {{ Auth::guard('web')->user()->name }}</title>
     @endif
 
     <!-- Scripts -->

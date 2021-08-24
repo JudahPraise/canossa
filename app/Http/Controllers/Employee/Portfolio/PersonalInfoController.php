@@ -43,6 +43,14 @@ class PersonalInfoController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $weight = $request->weight;
+        $initialHeight = $request->height;
+        
+        $height = $initialHeight * $initialHeight;
+
+        $bmi = $weight / $height;
+
         $personal = PersonalInformation::create([
             'user_id' => auth()->user()->id,
             'first_name' => $request->first_name,
@@ -54,6 +62,7 @@ class PersonalInfoController extends Controller
             'civil_status' => $request->civil_status,
             'height' => $request->height,
             'weight' => $request->weight,
+            'bmi' => $bmi,
             'blood_type' => $request->blood_type,
             'address' => $request->address,
             'zip_code' => $request->zip_code,
@@ -107,6 +116,14 @@ class PersonalInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $weight = $request->weight;
+        $initialHeight = $request->height;
+        
+        $height = $initialHeight * $initialHeight;
+
+        $bmi = $weight / $height;
+
         $personal = PersonalInformation::where('user_id','=',$id)->update([
             'user_id' => auth()->user()->id,
             'first_name' => $request->first_name,
@@ -118,6 +135,7 @@ class PersonalInfoController extends Controller
             'civil_status' => $request->civil_status,
             'height' => $request->height,
             'weight' => $request->weight,
+            'bmi' => $bmi,
             'blood_type' => $request->blood_type,
             'address' => $request->address,
             'zip_code' => $request->zip_code,
@@ -147,6 +165,6 @@ class PersonalInfoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 
     }
 }

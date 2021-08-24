@@ -49,17 +49,21 @@
                                             <h2 class="m-0 p-0">{{ $user->name }}</h2>
                                             <p class="m-0 p-0">{{ $user->role }}</p>
                                             <div class="row ml-1 d-flex justify-content-between">
-                                                <span style="color: grey">
+                                                <span class="py-sm-2" style="color: grey">
                                                     Height <br>
-                                                    <span id="height">{{ !empty($user->personal->height) ? $user->personal->height : 'N/A'}}</span>
+                                                    <span id="height" style="color: black">{{ !empty($user->personal->height) ? $user->personal->height.' '.'M' : 'N/A'}}</span>
                                                 </span>
-                                                <span style="color: grey">
+                                                <span class="py-sm-2" style="color: grey">
                                                     Weight <br>
-                                                    <span id="weight">{{ !empty($user->personal->weight) ? $user->personal->weight : 'N/A' }}</span>
+                                                    <span id="weight" style="color: black">{{ !empty($user->personal->weight) ? $user->personal->weight.' '.'KL' : 'N/A' }}</span>
                                                 </span>
-                                                <span style="color: grey">
+                                                <span class="py-sm-2" style="color: grey">
+                                                    BMI <br>
+                                                    <span id="weight" style="color: black">{{ !empty($user->personal->bmi) ? $user->personal->bmi : 'N/A' }}</span>
+                                                </span>
+                                                <span class="py-sm-2" style="color: grey">
                                                     Blood <br>
-                                                    <span id="blood">{{ !empty($user->personal->blood_type) ? $user->personal->blood_type : 'N/A' }}</span>        
+                                                    <span id="blood" style="color: black">{{ !empty($user->personal->blood_type) ? $user->personal->blood_type : 'N/A' }}</span>        
                                                 </span>
                                             </div>
                                         </div>
