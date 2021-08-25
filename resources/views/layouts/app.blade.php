@@ -17,6 +17,10 @@
         <title>CHRMIS - ADMIN</title>
     @elseif (Auth::guard('web')->check())
         <title>CHRMIS - {{ Auth::guard('web')->user()->name }}</title>
+    @elseif (Auth::guard('admin')->check())
+        <title>CHRMIS - ADMIN</title>
+    @elseif (Auth::guard('nurse')->check())
+        <title>CHRMIS - MEDICAL RECORDS</title>
     @endif
 
     <!-- Scripts -->

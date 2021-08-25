@@ -32,7 +32,6 @@
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
             @forelse ($users as $user)
-                
                 <a href="{{ route('medical.show', $user->id) }}">
                     <div class="col">
                         <div class="card p-2">
@@ -72,12 +71,9 @@
                         </div>
                     </div>
                 </a>
-
             @empty
-                
             @endforelse
         </div>
-
    </div>
 @endsection
 

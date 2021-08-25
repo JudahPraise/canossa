@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Medical;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use App\Diagnosis;
 
 class DashboardController extends Controller
 {
@@ -17,6 +18,7 @@ class DashboardController extends Controller
     public function show($id)
     {
         $user = User::where('id','=',$id)->with('personal')->first();
-        return view('medical-record.dashboard.show', compact('user'));
+        $diagnosis = Diagnosis::where('employee_id','=',$id)->first();
+        return view('medical-record.dashboard.show', compact(['user','diagnosis']));
     }
 }

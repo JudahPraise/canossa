@@ -236,4 +236,6 @@ Route::prefix('medical-record')->group(function(){
     Route::get('/dashboard', 'Medical\DashboardController@index')->name('medical.dashboard');
     Route::get('/employee/{id}', 'Medical\DashboardController@show')->name('medical.show');
 
+    Route::post('/diagnosis/{id}', 'Medical\DiagnosisController@store')->name('diagnosis.store');
+
 });

@@ -16,10 +16,6 @@
     <div class="container-fluid p-3">
         <div class="row">
             <div class="col-md-8">
-                <div class="row d-flex justify-content-end">
-                    <button type="button" class="btn btn btn-primary btn-neutral mr-3 mb-3">Contact</button>
-                    <button type="button" class="btn btn-primary mr-3 mb-3">Prescription</button>
-                </div>
                 <div class="card">
                     <div class="card-body">
                         <div class="row mb-4">
@@ -52,6 +48,7 @@
                                             <span id="blood" style="color: black">{{ !empty($user->personal->blood_type) ? $user->personal->blood_type : 'N/A' }}</span>        
                                         </span>
                                     </div>
+                                    <h3>Health Status</h3>
                                     <div class="row ml-1 mb-2 d-flex justify-content-between mb-4 w-100">
                                         <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
                                             <img src="{{ asset('img/heart.png') }}" alt="" height="40" width="40">
@@ -74,17 +71,21 @@
                                 <h3 class="ml-3">Last checked</h3>
                             </div>
                             <div class="col-md-8 d-flex justify-content-center justify-content-md-start p-0">
-                                <p>Dr. Beu Hudson on 23rd Jan 2020</p>
+                                <p>{{ $diagnosis->nurse.' '.$diagnosis->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4 d-flex justify-content-center justify-content-md-start">
-                                <h3 class="ml-3">Observation</h3>
+                                <h3 class="ml-3">Present Diagnosis</h3>
                             </div>
                             <div class="col-md-8 d-flex justify-content-center justify-content-md-start p-0 text-center text-md-left">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                <p>{{ $diagnosis->diagnosis }}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="row d-flex justify-content-end pr-3">
+                        <button type="button" class="btn btn btn-primary btn-neutral mr-3 mb-3">Contact</button>
+                        <button type="button" class="btn btn-primary mr-3 mb-3" data-toggle="modal" data-target="#exampleModal">Prescription</button>
                     </div>
                 </div>
             </div>
@@ -98,35 +99,32 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row row-cols-2 row-cols-md-4">
-                    <div class="col">
-                         <div class="card">
-                            <div class="card-body">
-                            </div>
-                         </div>
-                    </div>
-                    <div class="col">
-                         <div class="card">
-                            <div class="card-body">
-                            </div>
-                         </div>
-                    </div>
-                    <div class="col">
-                         <div class="card">
-                            <div class="card-body">
-                            </div>
-                         </div>
-                    </div>
-                    <div class="col">
-                         <div class="card">
-                            <div class="card-body">
-                            </div>
-                         </div>
-                    </div>
-                </div>
+    </div>
+
+    <!-- Prescription Modal -->
+    <div class="modal fade cd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <div class="modal-body">
+                <form action="{{ route('diagnosis.store', $user->id) }}" method="POST" id="diagnosisForm">
+                    @csrf
+                    <div class="form-group">
+                        <label for="diagnosis">Diagnosis</label>
+                        <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="document.getElementById('diagnosisForm').submit()">Save changes</button>
+            </div>
+          </div>
         </div>
     </div>
 
