@@ -15,6 +15,14 @@
       Dashboard
     </a>
   </li>
+  <li class="c-sidebar-nav-item">
+    <a class="c-sidebar-nav-link" href="{{ route('sample') }}">
+      <svg class="c-sidebar-nav-icon">
+        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-speedometer') }}"></use>
+      </svg>
+      Sample
+    </a>
+  </li>
   <li class="c-sidebar-nav-item mt-auto">
       <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" onclick="document.getElementById('logoutForm').submit()">
         <svg class="c-sidebar-nav-icon">

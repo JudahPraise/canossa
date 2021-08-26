@@ -238,4 +238,14 @@ Route::prefix('medical-record')->group(function(){
 
     Route::post('/diagnosis/{id}', 'Medical\DiagnosisController@store')->name('diagnosis.store');
 
+    Route::post('/physical-examination/{id}', 'Medical\PhysicalExamController@store')->name('physical.store');
+
+    Route::post('/hospitalization/{id}', 'Medical\HospitalizationController@store')->name('hospital.store');
+
+    Route::get('/sample', function(){
+
+        return view('medical-record.dashboard.sample');
+        
+    })->name('sample');
+
 });
