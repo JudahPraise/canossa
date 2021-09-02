@@ -16,20 +16,19 @@
     </a>
   </li>
   <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="{{ route('sample') }}">
+    <a class="c-sidebar-nav-link" href="{{ route('labtest.index') }}">
       <svg class="c-sidebar-nav-icon">
-        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-speedometer') }}"></use>
+        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-beaker') }}"></use>
       </svg>
-      Sample
+      Lab Tests
     </a>
   </li>
   <li class="c-sidebar-nav-item mt-auto">
-      <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" onclick="document.getElementById('logoutForm').submit()">
+      <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" href="{{ route('nurse.logout') }}">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
         </svg>
         Logout
-        <form action="{{ route('nurse.logout') }}" method="POST" id="logoutForm">@csrf</form>
       </a>
   </li>
 </ul>

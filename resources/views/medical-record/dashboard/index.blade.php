@@ -34,7 +34,7 @@
             @forelse ($users as $user)
                 <a href="{{ route('medical.show', $user->id) }}">
                     <div class="col">
-                        <div class="card p-2">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                         <div class="col-3 d-flex justify-content-center">
@@ -46,24 +46,14 @@
                                         </div>
                                         <div class="col-8 d-flex flex-column justify-content-center">
                                             <h2 class="m-0 p-0">{{ $user->name }}</h2>
-                                            <p class="m-0 p-0">{{ $user->role }}</p>
-                                            <div class="row ml-1 d-flex justify-content-between">
-                                                <span class="py-sm-2" style="color: grey">
-                                                    Height <br>
-                                                    <span id="height" style="color: black">{{ !empty($user->personal->height) ? $user->personal->height.' '.'M' : 'N/A'}}</span>
-                                                </span>
-                                                <span class="py-sm-2" style="color: grey">
-                                                    Weight <br>
-                                                    <span id="weight" style="color: black">{{ !empty($user->personal->weight) ? $user->personal->weight.' '.'KL' : 'N/A' }}</span>
-                                                </span>
-                                                <span class="py-sm-2" style="color: grey">
-                                                    BMI <br>
-                                                    <span id="weight" style="color: black">{{ !empty($user->personal->bmi) ? $user->personal->bmi : 'N/A' }}</span>
-                                                </span>
-                                                <span class="py-sm-2" style="color: grey">
-                                                    Blood <br>
-                                                    <span id="blood" style="color: black">{{ !empty($user->personal->blood_type) ? $user->personal->blood_type : 'N/A' }}</span>        
-                                                </span>
+                                            <p class="m-0 p-0 mb-2">{{ $user->role }}</p>
+                                            <span style="color: black;">Health Problems</span>
+                                            <div class="row d-flex justify-content-start">
+                                                @forelse ($user->healthProblems as $problem)
+                                                    <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem->problem }}</span>
+                                                @empty
+                                                    <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">Healthy</span>
+                                                @endforelse
                                             </div>
                                         </div>
                                 </div>

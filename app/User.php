@@ -3,9 +3,11 @@
 namespace App;
 
 use App\Family;
+use App\LabTest;
 use App\Document;
 use App\Feedback;
 use App\Schedule;
+use App\HealthProblem;
 use App\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -48,6 +50,10 @@ class User extends Authenticatable
 
     public function documents(){
         return $this->hasMany(Document::class);
+    }
+
+    public function labTest(){
+        return $this->hasOne(LabTest::class)->latest();
     }
 
     public function schedules(){
@@ -106,5 +112,10 @@ class User extends Authenticatable
         }
 
        
+    }
+
+    public function healthProblems()
+    {
+        return $this->hasMany(HealthProblem::class)->where('created_at', HealthProblem::max('created_at'))->orderBy('created_at','desc');
     }
 }

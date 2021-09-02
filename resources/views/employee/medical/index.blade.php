@@ -1,17 +1,17 @@
-@extends('medical-record.layouts.home')
+@extends('employee.layouts.home')
 
 @section('css')
-  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbitcss/css/orbit.css"> --}}
-  <!-- Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <!-- Icons -->
-  <link rel="stylesheet" href="{{ asset('argon/vendor/nucleo/css/nucleo.css') }}" type="text/css">
-  <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
-  <!-- Argon CSS -->
-  <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="{{ asset('argon/vendor/nucleo/css/nucleo.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
 @endsection
 
-@section('medical-home')
+@section('employee-home')
+
 <div class="row row-cols-1 row-cols-md-2 p-3">
     <div class="col col-md-8 mb-3">
         <div class="card h-100 p-2">
@@ -46,17 +46,23 @@
                                     <span id="blood" style="color: black">{{ !empty($user->personal->blood_type) ? $user->personal->blood_type : 'N/A' }}</span>        
                                 </span>
                             </div>
-                            <h3 style="color: black;">Health Problems</>
-                            <div class="row mb-2">
-                               @if (!empty($diagnosis))
-                                    @forelse ($problems as $problem)
-                                        <span class="badge badge-pill badge-primary m-2" style="font-size: 1rem">{{ $problem->problem }}</span>
-                                    @empty
-                                        <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">Healthy</span>
-                                    @endforelse
-                               @else
-                               <p class="text-muted font-italic">No recent diagnosis by the school doctor</p> 
-                               @endif
+                            <div class="row ml-1 mb-2 d-flex justify-content-between w-100">
+                                <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
+                                    <img src="{{ asset('img/heart.png') }}" alt="" height="40" width="40">
+                                    High BP
+                                </span>
+                                <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
+                                    <img src="{{ asset('img/injection.png') }}" alt="" height="40" width="40">
+                                    On Insulin
+                                </span>
+                                <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
+                                    <img src="{{ asset('img/bone.png') }}" alt="" height="40" width="40">
+                                    Fracture
+                                </span>
+                                <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
+                                    <img src="{{ asset('img/bone.png') }}" alt="" height="40" width="40">
+                                    Fracture
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -165,10 +171,6 @@
                                 <p>{{ $diagnosis->diagnosis }}</p>
                             </div>
                         </div>
-                        <div class="row d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-primary btn-neutral">Contact</button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogModal">Prescription</button>
-                        </div>
                     @else 
                         <div class="row p-5 d-flex justify-content-center align-items-center">
                             <div class="col-md-4">
@@ -178,54 +180,7 @@
                                 <p class="text-muted font-italic">No recent diagnosis by the school doctor</p>    
                             </div>
                         </div>   
-                        <div class="row d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-primary btn-neutral">Contact</button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogModal">Prescription</button>
-                        </div>
                     @endif
-                </div>
-                <!-- Prescription Modal -->
-                <div class="modal fade cd-example-modal-md" id="dialogModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Prescription</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('diagnosis.store', $user->id) }}" method="POST" id="diagnosisForm">
-                                @csrf
-                                <label><strong>Health Problem</strong></label>
-                                <div class="form-row d-flex">
-                                    <div class="col-md-6 d-flex flex-column">
-                                        <label><input type="checkbox" name="problem[]" value="Heart Disease"> Heart Disease</label>
-                                        <label><input type="checkbox" name="problem[]" value="Diabetes"> Diabetes</label>
-                                        <label><input type="checkbox" name="problem[]" value="UTI"> UTI</label>
-                                        <label><input type="checkbox" name="problem[]" value="Hypertension"> Hypertension</label>
-                                        <label><input type="checkbox" name="problem[]" value="Allergy"> Allergy (Food, Medicine)</label>
-                                    </div>
-                                    <div class="col-md-6 d-flex flex-column">
-                                        <label><input type="checkbox" name="problem[]" value="Ulcer"> Ulcer</label>
-                                        <label><input type="checkbox" name="problem[]" value="Hepatitis"> Hepatitis</label>
-                                        <label><input type="checkbox" name="problem[]" value="Scoliosis"> Scoliosis</label>
-                                        <label><input type="checkbox" name="problem[]" value="Migraine"> Migraine</label>
-                                        <label><input type="checkbox" name="problem[]" value="Asthma"> Asthma</label>
-                                    </div>
-                                </div> 
-                                <div class="form-group mt-3">
-                                    <label for="diagnosis"><strong>Diagnosis</strong></label>
-                                    <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" onclick="document.getElementById('diagnosisForm').submit()">Save changes</button>
-                        </div>
-                      </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -329,73 +284,9 @@
                             <h3>{{ $physical->hr }}</h3>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-end mr-1">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#physicalModal">Update</button>
-                    </div>
                 @else
                     <p class="text-muted font-italic">No recent data</p>
-                    <div class="row d-flex justify-content-end mr-1">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#physicalModal">Add</button>
-                    </div>
                 @endif
-            </div>
-        </div>
-        <!-- Physical Examination Modal -->
-        <div class="modal fade cd-example-modal-lg" id="physicalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Physical Examination</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                          <form action="{{ route('physical.store', $user->id) }}" method="POST" id="physicalExamForm">
-                              @csrf
-                              <div class="form-row mb-3">
-                                <div class="col-6">
-                                  <label for="inputAddress">School Year</label>
-                                  <input type="text" class="form-control" name="school_year">
-                                </div>
-                              </div>
-                              <div class="form-row mb-3">
-                                  <div class="col">
-                                    <label for="inputAddress">Height</label>
-                                    <input type="number" step="any" class="form-control" name="height">
-                                  </div>
-                                  <div class="col">
-                                    <label for="inputAddress">Weight</label>
-                                    <input type="number" step="any" class="form-control" name="weight">
-                                  </div>
-                              </div>
-                              <div class="form-row mb-3">
-                                <div class="col">
-                                  <label for="inputAddress">BMI</label>
-                                  <input type="number" step="any" class="form-control" name="bmi">
-                                </div>
-                                <div class="col">
-                                  <label for="inputAddress">Blood Pressure</label>
-                                  <input type="text" class="form-control" name="bp">
-                                </div>
-                              </div>
-                              <div class="form-row">
-                                <div class="col">
-                                  <label for="inputAddress">Respiratory Rate</label>
-                                  <input type="text" class="form-control" name="rr">
-                                </div>
-                                <div class="col">
-                                  <label for="inputAddress">Heart Rate</label>
-                                  <input type="text" class="form-control" name="hr">
-                                </div>
-                              </div>
-                          </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('physicalExamForm').submit()">Save changes</button>
-                      </div>
-                </div>
             </div>
         </div>
     </div>
@@ -430,63 +321,9 @@
                             <p>{{ $hospital->medication }}</p>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-end mr-1">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hospitalModal">Update</button>
-                    </div>
                 @else
                     <p class="text-muted font-italic">No recent data</p>
-                    <div class="row d-flex justify-content-end mr-1">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hospitalModal">Update</button>
-                    </div>
                 @endif
-            </div>
-        </div>
-        <!-- Hospitalization Modal -->
-        <div class="modal fade cd-example-modal-lg" id="hospitalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-              <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Hospitalization</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('hospital.store', $user->id) }}" method="POST" id="hospitalForm">
-                            @csrf
-                            <div class="form-row mb-3">
-                              <div class="col-6">
-                                <label for="inputAddress">Disease</label>
-                                <input type="text" class="form-control" name="disease">
-                              </div>
-                              <div class="col-6">
-                                <label for="inputAddress">Height</label>
-                                <input type="date" class="form-control" name="d_date">
-                              </div>
-                            </div>
-                            <div class="form-row mb-3">
-                              <div class="col">
-                                <label for="inputAddress">Operation</label>
-                                <input type="text" class="form-control" name="operation">
-                              </div>
-                              <div class="col">
-                                <label for="inputAddress">Date</label>
-                                <input type="date" class="form-control" name="o_date">
-                              </div>
-                            </div>
-                            <div class="form-row">
-                              <div class="col">
-                                <label for="inputAddress">Chronic diseases & medication presently being taken</label>
-                                <input type="text" class="form-control" name="medication">
-                              </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" onclick="document.getElementById('hospitalForm').submit()">Save changes</button>
-                    </div>
-              </div>
             </div>
         </div>
     </div>
@@ -495,6 +332,51 @@
 @endsection
 
 @section('js')
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script type="application/javascript">
+    $(document).ready(function () {
+        $('#update').each(function() {
+          $(this).click(function(event){
+            $('#formUpdate').attr("action", "/employee/medical-record/update-labtest/"+$(this).data('id')+"")
+            // console.log($(this).data('id'));
+          })
+        });
+      });
+</script>
+
+<!-- Script -->
+<script>
+
+    var $fileInput = $('.file-input');
+    var $droparea = $('.file-drop-area');
+      
+    // highlight drag area
+    $fileInput.on('dragenter focus click', function() {
+      $droparea.addClass('is-active');
+    });
+    
+    // back to normal state
+    $fileInput.on('dragleave blur drop', function() {
+      $droparea.removeClass('is-active');
+    });
+    
+    // change inner text
+    $fileInput.on('change', function() {
+      var filesCount = $(this)[0].files.length;
+      var $textContainer = $(this).prev();
+    
+      if (filesCount === 1) {
+        // if single file is selected, show file name
+        var fileName = $(this).val().split('\\').pop();
+        $textContainer.text(fileName);
+      } else {
+        // otherwise show number of files
+        $textContainer.text(filesCount + ' files selected');
+      }
+    });
+  </script>
+
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>

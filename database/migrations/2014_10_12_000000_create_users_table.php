@@ -24,11 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('role');
             $table->string('department')->nullable();
-            $table->string('medical-record')->default('cannot');
-            $table->string('admin')->default('cannot');
             $table->mediumText('image')->nullable();
             $table->string('status')->default('active');
-            $table->rememberToken();
+            $table->string('labtest')->nullable();
+            $table->rememberToken();    
             $table->timestamps();
 
         });

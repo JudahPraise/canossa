@@ -213,6 +213,12 @@ Route::prefix('employee')->group(function(){
     Route::prefix('profile')->group(function(){
         Route::get('/index', 'Employee\ProfileController@index')->name('profile.index');
     });
+    //Medical Record
+    Route::prefix('/medical-record')->group(function(){
+        Route::get('/{id}', 'Employee\RecordController@index')->name('record.index');
+        Route::post('/upload-labtest', 'Employee\RecordController@store')->name('record.store');
+        Route::put('/update-labtest/{id}', 'Employee\RecordController@update')->name('record.update');
+    });
     //Settings
     Route::get('/settings', 'Employee\SettingsController@index')->name('settings');
     Route::put('/settings/update/{id}', 'Employee\SettingsController@update')->name('account.update');
@@ -231,7 +237,7 @@ Route::prefix('medical-record')->group(function(){
     Route::post('/assign-nurse/{id}', 'Medical\RegisterController@post')->name('assign.nurse');
     Route::get('/medical/login-page', 'Medical\NurseLoginController@showLoginForm')->name('nurse.login');
     Route::post('/login', 'Medical\NurseLoginController@login')->name('nurse.login.submit');
-    Route::post('/logout', 'Medical\NurseLoginController@logout')->name('nurse.logout');
+    Route::get('/logout', 'Medical\NurseLoginController@logout')->name('nurse.logout');
 
     Route::get('/dashboard', 'Medical\DashboardController@index')->name('medical.dashboard');
     Route::get('/employee/{id}', 'Medical\DashboardController@show')->name('medical.show');
@@ -242,10 +248,6 @@ Route::prefix('medical-record')->group(function(){
 
     Route::post('/hospitalization/{id}', 'Medical\HospitalizationController@store')->name('hospital.store');
 
-    Route::get('/sample', function(){
-
-        return view('medical-record.dashboard.sample');
-        
-    })->name('sample');
+    Route::get('lab-tests', 'Medical\LabTestController@index')->name('labtest.index');
 
 });

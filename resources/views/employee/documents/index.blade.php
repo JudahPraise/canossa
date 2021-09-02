@@ -106,6 +106,9 @@
                   <option>Birth Certificate</option>
                   <option>Baptismal Certificate</option>
                   <option>Marriage Certificate</option>
+                  <option>NBI Clearance</option>
+                  <option>College Diploma</option>
+                  <option>Lab Test</option>
                 </select>   
               </div>
               <div class="form-row mb-3">
@@ -143,6 +146,9 @@
                   <option>Birth Certificate</option>
                   <option>Baptismal Certificate</option>
                   <option>Marriage Certificate</option>
+                  <option>NBI Clearance</option>
+                  <option>College Diploma</option>
+                  <option>Lab Test</option>
                 </select>   
               </div>
               <div class="form-row mb-3">
