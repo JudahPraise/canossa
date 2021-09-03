@@ -24,17 +24,17 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
                       </div>
-                      <input class="form-control form-control-alternative" placeholder="Search" type="text">
+                      <input class="form-control form-control-alternative" type="text" placeholder="Search employee" type="text" id="populerNameKey" onkeyup="myFunction()">
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"  id="destPopuler">
             @forelse ($users as $user)
-                <a href="{{ route('medical.show', $user->id) }}">
-                    <div class="col">
-                        <div class="card">
+                <a href="{{ route('medical.show', $user->id) }}" class="emp">
+                    <div class="col mb-2">
+                        <div class="card"> 
                             <div class="card-body">
                                 <div class="row">
                                         <div class="col-3 d-flex justify-content-center">
@@ -68,6 +68,22 @@
 @endsection
 
 @section('js')
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $("#populerNameKey").on('keyup', function(){
+                var value = $(this).val().toLowerCase();
+                $("#destPopuler .emp").each(function () {
+                    if ($(this).text().toLowerCase().search(value) > -1) {
+                        $(this).show();
+                        $(this).prev('.country').last().show();
+                    } else {
+                        $(this).hide();
+                    }
+                });   
+            })
+        });
+    </script>
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
