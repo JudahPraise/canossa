@@ -46,17 +46,20 @@
                                     <span id="blood" style="color: black">{{ !empty($user->personal->blood_type) ? $user->personal->blood_type : 'N/A' }}</span>        
                                 </span>
                             </div>
-                            <h3 style="color: black;">Health Problems</>
-                            <div class="row mb-2">
-                               @if (!empty($diagnosis))
-                                    @forelse ($problems as $problem)
-                                        <span class="badge badge-pill badge-primary m-2" style="font-size: 1rem">{{ $problem->problem }}</span>
-                                    @empty
+                            <div class="row d-flex flex-column">
+                                @if (!empty($diagnosis))
+                                    <h4 style="color: black;">Health Problems</h4>
+                                    <div class="row d-flex justify-content-start p-0 m-0">
+                                        @foreach ($diagnosis->problems as $problem)
+                                            <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                         @endforeach
+                                    </div>
+                                @else
+                                    <h4 style="color: black;">Health Status</h4>
+                                    <div class="row d-flex justify-content-start p-0 m-0">
                                         <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">Healthy</span>
-                                    @endforelse
-                               @else
-                               <p class="text-muted font-italic">No recent diagnosis by the school doctor</p> 
-                               @endif
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -197,27 +200,33 @@
                         <div class="modal-body">
                             <form action="{{ route('diagnosis.store', $user->id) }}" method="POST" id="diagnosisForm">
                                 @csrf
+                                <h3><strong>Health Status</strong></h3>
+                                <div class="form-group">
+                                    <label><input id="healthy" type="checkbox" name="isHealthy" value="Healthy"><strong> Healthy</strong></label>
+                                </div>
                                 <label><strong>Health Problem</strong></label>
                                 <div class="form-row d-flex">
                                     <div class="col-md-6 d-flex flex-column">
-                                        <label><input type="checkbox" name="problem[]" value="Heart Disease"> Heart Disease</label>
-                                        <label><input type="checkbox" name="problem[]" value="Diabetes"> Diabetes</label>
-                                        <label><input type="checkbox" name="problem[]" value="UTI"> UTI</label>
-                                        <label><input type="checkbox" name="problem[]" value="Hypertension"> Hypertension</label>
-                                        <label><input type="checkbox" name="problem[]" value="Allergy"> Allergy (Food, Medicine)</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Heart Disease"> Heart Disease</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Diabetes"> Diabetes</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="UTI"> UTI</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Hypertension"> Hypertension</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Allergy"> Allergy (Food, Medicine)</label>
                                     </div>
                                     <div class="col-md-6 d-flex flex-column">
-                                        <label><input type="checkbox" name="problem[]" value="Ulcer"> Ulcer</label>
-                                        <label><input type="checkbox" name="problem[]" value="Hepatitis"> Hepatitis</label>
-                                        <label><input type="checkbox" name="problem[]" value="Scoliosis"> Scoliosis</label>
-                                        <label><input type="checkbox" name="problem[]" value="Migraine"> Migraine</label>
-                                        <label><input type="checkbox" name="problem[]" value="Asthma"> Asthma</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Ulcer"> Ulcer</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Hepatitis"> Hepatitis</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Scoliosis"> Scoliosis</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Migraine"> Migraine</label>
+                                        <label><input class="healthProblem" type="checkbox" name="problem[]" value="Asthma"> Asthma</label>
                                     </div>
                                 </div> 
-                                <div class="form-group mt-3">
+                                <h3 class="mt-3"><strong>Prescription</strong></h3>
+                                <div class="form-group">
                                     <label for="diagnosis"><strong>Diagnosis</strong></label>
                                     <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3"></textarea>
                                 </div>
+                                <label for="diagnosis"><strong>Medications</strong></label>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -495,6 +504,38 @@
 @endsection
 
 @section('js')
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+
+            $(function() {
+              enable_cb();
+              $("#healthy").click(enable_cb);
+            });
+
+            function enable_cb() {
+                if (this.checked) {
+                  $("input.healthProblem").attr("disabled", true);
+                } else {
+                  $("input.healthProblem").removeAttr("disabled");
+                }
+            }
+
+            $(function() {
+              disable_cb();
+              $("input.healthProblem").click(disable_cb);
+            });
+
+            function disable_cb() {
+                if (this.checked) {
+                  $("#healthy").attr("disabled", true);
+                } else {
+                  $("#healthy").removeAttr("disabled");
+                }
+            }
+
+        });
+    </script>
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>

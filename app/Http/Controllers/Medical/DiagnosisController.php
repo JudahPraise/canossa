@@ -17,22 +17,12 @@ class DiagnosisController extends Controller
     {
         $diagnosis = new Diagnosis();
 
-        $problems =[];
-
-        foreach ($request->problem as $item => $key) {
-            $problems[] = ([
-                'user_id' => $id,
-                'problem' => $request->problem[$item],
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
-        }
-
-        HealthProblem::insert($problems);
-
-        $diagnosis->employee_id = $id;
+        $diagnosis->user_id = $id;
         $diagnosis->nurse = Auth::guard('nurse')->user()->name;
+        $diagnosis->date = Carbon::now();
         $diagnosis->diagnosis = $request->diagnosis;
+        $diagnosis->isHealthy = $request->isHealthy;
+        $diagnosis->problems = $request->problem;
 
         $diagnosis->save();
 

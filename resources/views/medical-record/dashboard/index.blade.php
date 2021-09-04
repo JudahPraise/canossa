@@ -47,12 +47,19 @@
                                         <div class="col-8 d-flex flex-column justify-content-center">
                                             <h2 class="m-0 p-0">{{ $user->name }}</h2>
                                             <p class="m-0 p-0 mb-2">{{ $user->role }}</p>
-                                            <span style="color: black;">Health Problems</span>
-                                            <div class="row d-flex justify-content-start">
-                                                @forelse ($user->healthProblems as $problem)
-                                                    <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem->problem }}</span>
+                                            <div class="row d-flex flex-column ml-1">
+                                                @forelse ($user->diagnoses as $diagnosis)
+                                                    <h4 style="color: black;">Health Problems</h4>
+                                                    <div class="row d-flex justify-content-start p-0 m-0">
+                                                        @foreach ($diagnosis->problems as $problem)
+                                                            <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                                         @endforeach
+                                                    </div>
                                                 @empty
-                                                    <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">Healthy</span>
+                                                    <h4 style="color: black;">Health Status</h4>
+                                                    <div class="row d-flex justify-content-start p-0 m-0">
+                                                        <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">Healthy</span>
+                                                    </div>
                                                 @endforelse
                                             </div>
                                         </div>

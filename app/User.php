@@ -7,6 +7,7 @@ use App\LabTest;
 use App\Document;
 use App\Feedback;
 use App\Schedule;
+use App\Diagnosis;
 use App\HealthProblem;
 use App\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function diagnoses()
+    {
+        return $this->hasMany(Diagnosis::class);
+    }
 
     public function documents(){
         return $this->hasMany(Document::class);
@@ -114,8 +119,4 @@ class User extends Authenticatable
        
     }
 
-    public function healthProblems()
-    {
-        return $this->hasMany(HealthProblem::class)->where('created_at', HealthProblem::max('created_at'))->orderBy('created_at','desc');
-    }
 }
