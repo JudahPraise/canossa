@@ -23,6 +23,7 @@ class DiagnosisController extends Controller
         $diagnosis->diagnosis = $request->diagnosis;
         $diagnosis->isHealthy = $request->isHealthy;
         $diagnosis->problems = $request->problem;
+        $diagnosis->medications = $request->medications;
 
         $diagnosis->save();
 

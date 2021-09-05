@@ -46,18 +46,22 @@
                                     <span id="blood" style="color: black">{{ !empty($user->personal->blood_type) ? $user->personal->blood_type : 'N/A' }}</span>        
                                 </span>
                             </div>
-                            <div class="row d-flex flex-column">
+                            <div class="row d-flex flex-column ml-1">
                                 @if (!empty($diagnosis))
-                                    <h4 style="color: black;">Health Problems</h4>
+                                    <h4 style="color: black;">{{ !empty($diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
                                     <div class="row d-flex justify-content-start p-0 m-0">
-                                        @foreach ($diagnosis->problems as $problem)
-                                            <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
-                                         @endforeach
+                                        @if (!empty($diagnosis->isHealthy))
+                                            <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">{{ $diagnosis->isHealthy }}</span>
+                                        @else
+                                            @foreach ($diagnosis->problems as $problem)
+                                                <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 @else
                                     <h4 style="color: black;">Health Status</h4>
                                     <div class="row d-flex justify-content-start p-0 m-0">
-                                        <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">Healthy</span>
+                                        <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
                                     </div>
                                 @endif
                             </div>
@@ -72,7 +76,7 @@
                         <div class="col-md-8">
                             @if (!empty($labtest))
                                 <span style="font-size: 1.2rem">{{ $labtest->file }}</span>
-                                <button class="btn btn-icon btn-primary btn-sm ml-2" ype="submit" id="update"  data-toggle="modal" data-target="#updateModal" data-id="{{ $labtest->id }}">
+                                <button class="btn btn-icon btn-primary btn-sm ml-2" type="submit" id="update"  data-toggle="modal" data-target="#updateModal" data-id="{{ $labtest->id }}">
                                     <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                 </button>
                                 <button type="button" data-toggle="modal" data-target="#uploadModal" class="btn btn-primary btn-sm">Update Lab Test</button>
@@ -81,7 +85,7 @@
                                     <span class="btn-inner--icon text-white"><i class="fas fa-file-upload mr-2"></i>Upload Lab Test</span>
                                 </a>
                             @endif
-                            <!-- Upload Modal -->
+                            <!-- Upload Lab Test Modal -->
                             <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -114,7 +118,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Update Modal -->
+                            <!-- Update Lab Test Modal -->
                             <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
@@ -142,7 +146,7 @@
                                             <input class="file-input" type="file" name="file" multiple>
                                           </div>
                                         </div>
-                                        <button class="btn btn-sm btn-primary" type="submit" value="Submit Form">Update File</button>
+                                        <button class="btn btn-sm btn-primary" type="submit" value="Submit Form" >Update File</button>
                                       </form>
                                     </div>
                                   </div>
@@ -168,6 +172,18 @@
                                 <p>{{ $diagnosis->diagnosis }}</p>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3 class="">Medication</h3>
+                            </div>
+                            <div class="col-md-8">
+                                @forelse ($diagnosis->medications as $medication)
+                                    <img src="{{ asset('img/capsule.png') }}" alt="" height="45" width="45" data-toggle="tooltip" data-placement="top" title="{{ $medication['med'].' '.'-'.' '.$medication['sched'] }}">
+                                @empty
+                                <p class="text-muted font-italic">No recent medication to take</p>    
+                                @endforelse
+                            </div>
+                        </div>
                         <div class="row d-flex justify-content-end mt-5">
                             <button type="button" class="btn btn-primary btn-neutral">Contact</button>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogModal">Prescription</button>
@@ -182,7 +198,7 @@
                             </div>
                         </div>   
                         <div class="row d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-primary btn-neutral">Contact</button>
+                            <button type="button" class="btn btn-primary btn-neutral" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Contact</button>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogModal">Prescription</button>
                         </div>
                     @endif
@@ -227,6 +243,24 @@
                                     <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3"></textarea>
                                 </div>
                                 <label for="diagnosis"><strong>Medications</strong></label>
+                                <div class="form-group inputs_div">
+                                    <div class="form-row d-flex align-items-center">
+                                      <div class="col-md-5 mb-3">
+                                        <label for="name">Medicine</label>
+                                        <input type="text" class="form-control" name="medications[{{ 0 }}][med]" id="med" required>
+                                      </div>
+                                      <div class="col-md-5 mb-3 mr-2">
+                                        <label for="date_of_birth">Schedule</label>
+                                        <input type="text" class="form-control" name="medications[{{ 0 }}][sched]" id="sched" required>
+                                      </div>
+                                      <button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add" type="button">
+                                        <i class="fas fa-plus"></i>
+                                      </button>
+                                      <button class="btn btn-danger btn-sm btn-fab btn-icon btn-round" type="button">
+                                        <i class="fas fa-minus"></i>
+                                      </button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -246,7 +280,7 @@
             <div class="row mb-3">
                 <div class="col-6">
                     Date of Birth
-                    <h3>{{ !empty( $user->personal->date_of_birth) ? $user->personal->date_of_birth : 'N/A' }}</h3>
+                    <h3>{{ !empty( $user->dob) ? Carbon\Carbon::parse($user->dob)->format('F j, Y') : 'N/A' }}</h3>
                 </div>
                 <div class="col-6">
                     Sex
@@ -507,6 +541,27 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script type="application/javascript">
         $(document).ready(function () {
+            var count = 0;
+            $(this).on("click", ".add", function(){
+                count++;
+                var html = '<div class="form-row d-flex align-items-center"><div class="col-md-5 mb-3"><label for="name">Medicine</label><input type="text" class="form-control" name="medications['+count+'][med]" id="name" required></div><div class="col-md-5 mb-3 mr-2"><label for="date_of_birth">Schedule</label><input type="text" class="form-control" name="medications['+count+'][sched]" id="date_of_birth" required></div><button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add"><i class="fas fa-plus"></i></button><button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove"><i class="fas fa-minus"></i></button></div>'
+                console.log('get');
+                $('.inputs_div').append(html);
+            // console.log('hello');
+            });
+            $(this).on("click", ".remove", function(){
+                var target_input = $(this).parent();
+                target_input.remove();
+            });
+        }) 
+    </script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+    <script type="application/javascript">
+        $(document).ready(function () {
 
             $(function() {
               enable_cb();
@@ -533,7 +588,6 @@
                   $("#healthy").removeAttr("disabled");
                 }
             }
-
         });
     </script>
     <!-- Argon Scripts -->

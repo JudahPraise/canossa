@@ -248,6 +248,8 @@ Route::prefix('medical-record')->group(function(){
 
     Route::post('/hospitalization/{id}', 'Medical\HospitalizationController@store')->name('hospital.store');
 
-    Route::get('lab-tests', 'Medical\LabTestController@index')->name('labtest.index');
+    Route::get('/lab-tests', 'Medical\LabTestController@index')->name('labtest.index');
+    Route::post('/lab-tests/upload/{id}', 'Medical\LabTestController@store')->name('labtest.store');
+
 
 });

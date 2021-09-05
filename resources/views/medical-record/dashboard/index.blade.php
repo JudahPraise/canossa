@@ -18,7 +18,17 @@
             <div class="col">
                 <h1>Dashboard</h1>
             </div>
-            <div class="col d-flex justify-content-end">
+            <div class="col d-flex justify-content-end align-items-center">
+                <div class="form-group w-25 mr-2">
+                    <div class="input-group input-group-alternative mb-4">
+                        <select class="form-control form-control-alternative p-2" id="category">
+                            <option value="all">All</option>
+                            <option value="Healthy">Healthy</option>
+                            <option value="Not yet checked">Not yet checked</option>
+                            <option value="Health problem">Have health problem</option>
+                          </select>
+                    </div>
+                </div>
                 <div class="form-group w-50">
                     <div class="input-group input-group-alternative mb-4">
                       <div class="input-group-prepend">
@@ -37,32 +47,40 @@
                         <div class="card"> 
                             <div class="card-body">
                                 <div class="row">
-                                        <div class="col-3 d-flex justify-content-center">
-                                            @if (!empty($user->image))
-                                                <img src="{{ asset( 'storage/images/'.$user->image) }}" width="100">
-                                            @else
-                                                <img src="{{ $user->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}" width="80">
-                                            @endif
-                                        </div>
-                                        <div class="col-8 d-flex flex-column justify-content-center">
-                                            <h2 class="m-0 p-0">{{ $user->name }}</h2>
-                                            <p class="m-0 p-0 mb-2">{{ $user->role }}</p>
-                                            <div class="row d-flex flex-column ml-1">
-                                                @forelse ($user->diagnoses as $diagnosis)
-                                                    <h4 style="color: black;">Health Problems</h4>
-                                                    <div class="row d-flex justify-content-start p-0 m-0">
+                                    <div class="col-3 d-flex justify-content-center">
+                                        @if (!empty($user->image))
+                                            <img src="{{ asset( 'storage/images/'.$user->image) }}" width="100">
+                                        @else
+                                            <img src="{{ $user->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}" width="80">
+                                        @endif
+                                    </div>
+                                    <div class="col-8 d-flex flex-column justify-content-center">
+                                        <h2 class="m-0 p-0">{{ $user->name }}</h2>
+                                        <p class="m-0 p-0 mb-2">{{ $user->role }}</p>
+                                        <div class="row d-flex flex-column ml-1">
+                                            @forelse ($user->diagnoses as $diagnosis)
+                                                <h4 style="color: black;">{{ !empty($diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
+                                                <div class="row d-flex justify-content-start p-0 m-0">
+                                                    @if (!empty($diagnosis->isHealthy))
+                                                        <div class="row d-flex justify-content-start p-0 m-0" id="isHealthy">
+                                                            <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">{{ $diagnosis->isHealthy }}</span>
+                                                        </div>
+                                                    @else
                                                         @foreach ($diagnosis->problems as $problem)
-                                                            <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
-                                                         @endforeach
-                                                    </div>
-                                                @empty
-                                                    <h4 style="color: black;">Health Status</h4>
-                                                    <div class="row d-flex justify-content-start p-0 m-0">
-                                                        <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">Healthy</span>
-                                                    </div>
-                                                @endforelse
-                                            </div>
+                                                            <div class="row d-flex justify-content-start p-0 m-0" id="healthProblem">
+                                                                <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            @empty
+                                                <h4 style="color: black;">Health Status</h4>
+                                                <div class="row d-flex justify-content-start p-0 m-0" id="notChecked">
+                                                    <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
+                                                </div>
+                                            @endforelse
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +102,21 @@
                     if ($(this).text().toLowerCase().search(value) > -1) {
                         $(this).show();
                         $(this).prev('.country').last().show();
+                    } else {
+                        $(this).hide();
+                    }
+                });   
+            })
+
+            $("#category").on('change', function(){
+                var value = $(this).val().toLowerCase();
+                $("#destPopuler .emp").each(function () {
+                    if ($(this).text().toLowerCase().search(value) > -1) {
+                        $(this).show();
+                        $(this).prev('.country').last().show();
+                    } else if(value == "all") {
+                        $('.filterText').val('');
+		                $('.emp').show();
                     } else {
                         $(this).hide();
                     }

@@ -15,7 +15,7 @@ class RecordController extends Controller
     public function index($id)
     {
         $user = User::where('id','=',$id)->with('personal')->first();
-        $diagnosis = Diagnosis::where('employee_id','=',$id)->latest()->first();
+        $diagnosis = Diagnosis::where('user_id','=',$id)->latest()->first();
         $physical = PhysicalExam::where('employee_id','=',$id)->latest()->first();
         $hospital = Hospitalization::where('employee_id','=',$id)->latest()->first();
         $labtest = LabTest::where('user_id','=',$id)->latest()->first();

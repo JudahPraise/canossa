@@ -101,13 +101,17 @@
                 <label for="validationDefault01">Name</label>
                 <input type="text" name="name" class="form-control" id="validationDefault01" required>
               </div>
-              <div class="col-md-1 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="validationDefault04">Gender</label>
                 <select class="custom-select" name="sex" id="validationDefault04" required>
                   <option selected disabled value=""></option>
                   <option>M</option>
                   <option>F</option>
                 </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="validationDefault03">Date of birth</label>
+                <input type="date" name="dob" class="form-control" id="validationDefault03" required>
               </div>
             </div>
             <div class="form-row">

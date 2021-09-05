@@ -21,7 +21,8 @@ class CreateDiagnosesTable extends Migration
             $table->date('date');
             $table->mediumText('diagnosis');
             $table->string('isHealthy')->nullable();
-            $table->json('problems');
+            $table->json('problems')->nullable();
+            $table->json('medications')->nullable();
             $table->timestamps();
         });
     }

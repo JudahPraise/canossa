@@ -13,15 +13,13 @@ body {
   background: #232323;
 }
 #message {
-  position: absolute;
+  position: fixed;
   z-index: 12;
   bottom: 3rem;
   right: 1rem;
   width: 25rem;
   height: 5rem;
   padding: 20px;
-  display: flex;
-  align-items: center;
   background-color: #343434;
   margin-top: 20px;
   -webkit-border-radius: 10px;

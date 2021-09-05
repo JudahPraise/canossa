@@ -10,7 +10,8 @@ class Diagnosis extends Model
     protected $fillable = ['nurse', 'diagnosis'];
 
     protected $casts = [
-        'problems' => 'array'
+        'problems' => 'array',
+        'medications' => 'array'
     ];
 
     public function user(){

@@ -45,6 +45,7 @@ class RegisterController extends Controller
         $employee->name = $request->input('name');       
         $employee->employee_id = $request->input('employee_id');    
         $employee->sex = $request->input('sex');    
+        $employee->dob = $request->input('dob');    
         $employee->role = $request->input('role');    
         $employee->department = $request->input('department');
         $employee->email = $request->input('email');

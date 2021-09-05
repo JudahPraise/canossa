@@ -27,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = 
-    ['name', 'sex', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
+    ['name', 'sex', 'dob', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
 
 
     /**
@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function diagnoses()
     {
-        return $this->hasMany(Diagnosis::class);
+        return $this->hasMany(Diagnosis::class, 'user_id')->latest()->limit(1);
     }
 
     public function documents(){
@@ -108,9 +108,9 @@ class User extends Authenticatable
     public function getAge() {
         $format = '%y years, %m months';
 
-        if(!empty($this->personal->date_of_birth))
+        if(!empty($this->dob))
         {
-            return \Carbon\Carbon::parse($this->personal->date_of_birth)->diff(\Carbon\Carbon::now())->format($format);
+            return \Carbon\Carbon::parse($this->dob)->diff(\Carbon\Carbon::now())->format($format);
         }else
         {
             return 'null';

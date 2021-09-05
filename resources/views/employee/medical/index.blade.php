@@ -46,23 +46,24 @@
                                     <span id="blood" style="color: black">{{ !empty($user->personal->blood_type) ? $user->personal->blood_type : 'N/A' }}</span>        
                                 </span>
                             </div>
-                            <div class="row ml-1 mb-2 d-flex justify-content-between w-100">
-                                <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
-                                    <img src="{{ asset('img/heart.png') }}" alt="" height="40" width="40">
-                                    High BP
-                                </span>
-                                <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
-                                    <img src="{{ asset('img/injection.png') }}" alt="" height="40" width="40">
-                                    On Insulin
-                                </span>
-                                <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
-                                    <img src="{{ asset('img/bone.png') }}" alt="" height="40" width="40">
-                                    Fracture
-                                </span>
-                                <span class="py-sm-2 d-flex flex-column align-items-center" style="color: black">
-                                    <img src="{{ asset('img/bone.png') }}" alt="" height="40" width="40">
-                                    Fracture
-                                </span>
+                            <div class="row d-flex flex-column ml-1">
+                                @if (!empty($diagnosis->problems))
+                                    <h4 style="color: black;">{{ !empty($diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
+                                    <div class="row d-flex justify-content-start p-0 m-0">
+                                        @if (!empty($diagnosis->isHealthy))
+                                            <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $diagnosis->isHealthy }}</span>
+                                        @else
+                                            @foreach ($diagnosis->problems as $problem)
+                                                <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                @else
+                                    <h4 style="color: black;">Health Status</h4>
+                                    <div class="row d-flex justify-content-start p-0 m-0">
+                                        <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -75,6 +76,9 @@
                         <div class="col-md-8">
                             @if (!empty($labtest))
                                 <span style="font-size: 1.2rem">{{ $labtest->file }}</span>
+                                <button class="btn btn-icon btn-success btn-sm ml-2" ype="submit" id="update"  data-toggle="modal" data-target="#viewModal">
+                                    <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
+                                </button>
                                 <button class="btn btn-icon btn-primary btn-sm ml-2" ype="submit" id="update"  data-toggle="modal" data-target="#updateModal" data-id="{{ $labtest->id }}">
                                     <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                                 </button>
@@ -84,6 +88,21 @@
                                     <span class="btn-inner--icon text-white"><i class="fas fa-file-upload mr-2"></i>Upload Lab Test</span>
                                 </a>
                             @endif
+                            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Upload File</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="{{ asset('img/document.jpg') }}" alt="" srcset="" style="height: 100%; width: 100%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Upload Modal -->
                             <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -192,7 +211,7 @@
             <div class="row mb-3">
                 <div class="col-6">
                     Date of Birth
-                    <h3>{{ !empty( $user->personal->date_of_birth) ? $user->personal->date_of_birth : 'N/A' }}</h3>
+                    <h3>{{ !empty( $user->dob) ? Carbon\Carbon::parse($user->dob)->format('F j, Y') : 'N/A' }}</h3>
                 </div>
                 <div class="col-6">
                     Sex
