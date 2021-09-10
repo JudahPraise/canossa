@@ -30,14 +30,14 @@
               </div>
             </div>
           </div>
-          <a class="btn btn-sm btn-pill btn-success text-white add">Add</a>
-          <a class="btn btn-sm btn-pill btn-danger text-white">remove</a>
+          {{-- <a class="btn btn-sm btn-pill btn-success text-white add">Add</a>
+          <a class="btn btn-sm btn-pill btn-danger text-white">remove</a> --}}
         </div>
       </div>
       <button type="submit" value="Submit Form" class="btn btn-sm btn-primary mb-3 float-right">Submit</button>
     </form>
 </div>
-{{-- 
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script type="application/javascript">
   $(document).ready(function(){
@@ -51,6 +51,6 @@
           target_input.remove();
       });
     });
-</script> --}}
+</script>
 
 @endsection

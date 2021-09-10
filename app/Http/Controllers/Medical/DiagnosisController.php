@@ -29,4 +29,21 @@ class DiagnosisController extends Controller
 
         return redirect()->back();
     }
+
+    public function update(Request $request, $id)
+    {
+        $diagnosis = Diagnosis::where('id','=',$id)->first();
+
+        $diagnosis->user_id = $diagnosis->user_id;
+        $diagnosis->nurse = Auth::guard('nurse')->user()->name;
+        $diagnosis->date = Carbon::now();
+        $diagnosis->diagnosis = $request->diagnosis;
+        $diagnosis->isHealthy = $request->isHealthy;
+        $diagnosis->problems = $request->problem;
+        $diagnosis->medications = $request->medications;
+
+        $diagnosis->update();
+
+        return redirect()->back();
+    }
 }

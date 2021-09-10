@@ -47,23 +47,26 @@
                                 </span>
                             </div>
                             <div class="row d-flex flex-column ml-1">
-                                @if (!empty($diagnosis->problems))
-                                    <h4 style="color: black;">{{ !empty($diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
-                                    <div class="row d-flex justify-content-start p-0 m-0">
-                                        @if (!empty($diagnosis->isHealthy))
-                                            <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $diagnosis->isHealthy }}</span>
-                                        @else
-                                            @foreach ($diagnosis->problems as $problem)
-                                                <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                <h4 style="color: black;">{{ !empty($user->diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
+                                <div class="row d-flex justify-content-start p-0 m-0">
+                                    @if (!empty($user->diagnosis->isHealthy))
+                                        <div class="row d-flex justify-content-start p-0 m-0" id="isHealthy">
+                                            <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">{{ $user->diagnosis->isHealthy }}</span>
+                                        </div>
+                                    @else
+                                        @if (!empty($user->diagnosis->problems))
+                                            @foreach ($user->diagnosis->problems as $problem)
+                                                <div class="row d-flex justify-content-start p-0 m-0" id="healthProblem">
+                                                    <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                                </div>
                                             @endforeach
+                                        @else
+                                            <div class="row d-flex justify-content-start p-0 m-0" id="notChecked">
+                                                <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
+                                        </div>
                                         @endif
-                                    </div>
-                                @else
-                                    <h4 style="color: black;">Health Status</h4>
-                                    <div class="row d-flex justify-content-start p-0 m-0">
-                                        <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
-                                    </div>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,13 +95,13 @@
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Upload File</h5>
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Lab test</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <img src="{{ asset('img/document.jpg') }}" alt="" srcset="" style="height: 100%; width: 100%">
+                                            <img src="{{ asset('storage/labtests/'.$labtest->file) }}" alt="" srcset="" style="height: 100%; width: 100%">
                                         </div>
                                     </div>
                                 </div>
@@ -188,6 +191,63 @@
                             </div>
                             <div class="col-md-8">
                                 <p>{{ $diagnosis->diagnosis }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3 class="">Medication</h3>
+                            </div>
+                            <div class="col-md-7">
+                                @if (!empty($diagnosis->medications))
+                                    @foreach ($diagnosis->medications as $medication)
+                                        <img src="{{ asset('img/capsule.png') }}" alt="" height="45" width="45" data-toggle="tooltip" data-placement="top" title="{{ $medication['med'].' '.'-'.' '.$medication['sched'] }}">
+                                    @endforeach
+                                @else
+                                    <p class="text-muted font-italic">No recent medication to take</p>  
+                                @endif
+
+                                @if(!empty($diagnosis->medications))
+                                    <a href="" class="ml-3" data-toggle="modal" data-target="#medList">view list</a>
+                                @endif
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="medList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @if (!empty($diagnosis->medications))
+                                                <table class="table table-borderless">
+                                                    <thead>
+                                                      <tr>
+                                                        <th scope="col" style="font-size: 1rem">Medicine</th>
+                                                        <th scope="col" style="font-size: 1rem">Schedule</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      @foreach ($diagnosis->medications as $medication)
+                                                          <tr>
+                                                              <td style="font-size: 1rem"><i class="fas fa-capsules mr-2"></i>{{ $medication['med'] }}</td>
+                                                              <td style="font-size: 1rem"><i class="fas fa-clock mr-2"></i>{{ $medication['sched'] }}</td>
+                                                          </tr>
+                                                      @endforeach
+                                                    </tbody>
+                                                </table>
+                                            @else
+                                                <p class="text-muted font-italic">No recent medication to take</p>
+                                            @endif
+                                              
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-primary w-100" data-dismiss="modal"><i class="fas fa-print mr-2"></i>Print</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @else 
@@ -362,6 +422,12 @@
           })
         });
       });
+</script>
+
+<script type="application/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
 </script>
 
 <!-- Script -->

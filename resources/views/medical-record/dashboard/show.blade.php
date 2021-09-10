@@ -47,23 +47,26 @@
                                 </span>
                             </div>
                             <div class="row d-flex flex-column ml-1">
-                                @if (!empty($diagnosis))
-                                    <h4 style="color: black;">{{ !empty($diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
-                                    <div class="row d-flex justify-content-start p-0 m-0">
-                                        @if (!empty($diagnosis->isHealthy))
-                                            <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">{{ $diagnosis->isHealthy }}</span>
-                                        @else
-                                            @foreach ($diagnosis->problems as $problem)
-                                                <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                <h4 style="color: black;">{{ !empty($user->diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
+                                <div class="row d-flex justify-content-start p-0 m-0">
+                                    @if (!empty($user->diagnosis->isHealthy))
+                                        <div class="row d-flex justify-content-start p-0 m-0" id="isHealthy">
+                                            <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">{{ $user->diagnosis->isHealthy }}</span>
+                                        </div>
+                                    @else
+                                        @if (!empty($user->diagnosis->problems))
+                                            @foreach ($user->diagnosis->problems as $problem)
+                                                <div class="row d-flex justify-content-start p-0 m-0" id="healthProblem">
+                                                    <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
+                                                </div>
                                             @endforeach
+                                        @else
+                                            <div class="row d-flex justify-content-start p-0 m-0" id="notChecked">
+                                                <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
+                                        </div>
                                         @endif
-                                    </div>
-                                @else
-                                    <h4 style="color: black;">Health Status</h4>
-                                    <div class="row d-flex justify-content-start p-0 m-0">
-                                        <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
-                                    </div>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -176,16 +179,61 @@
                             <div class="col-md-4">
                                 <h3 class="">Medication</h3>
                             </div>
-                            <div class="col-md-8">
-                                @forelse ($diagnosis->medications as $medication)
-                                    <img src="{{ asset('img/capsule.png') }}" alt="" height="45" width="45" data-toggle="tooltip" data-placement="top" title="{{ $medication['med'].' '.'-'.' '.$medication['sched'] }}">
-                                @empty
-                                <p class="text-muted font-italic">No recent medication to take</p>    
-                                @endforelse
+                            <div class="col-md-7">
+                                @if (!empty($diagnosis->medications))
+                                    @foreach ($diagnosis->medications as $medication)
+                                        <img src="{{ asset('img/capsule.png') }}" alt="" height="45" width="45" data-toggle="tooltip" data-placement="top" title="{{ $medication['med'].' '.'-'.' '.$medication['sched'] }}">
+                                    @endforeach
+                                @else
+                                    <p class="text-muted font-italic">No recent medication to take</p>  
+                                @endif
+
+                                @if(!empty($diagnosis->medications))
+                                    <a href="" class="ml-3" data-toggle="modal" data-target="#medList">view list</a>
+                                @endif
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="medList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @if (!empty($diagnosis->medications))
+                                            <table class="table table-borderless">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col" style="font-size: 1rem">Medicine</th>
+                                                    <th scope="col" style="font-size: 1rem">Schedule</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  @foreach ($diagnosis->medications as $medication)
+                                                      <tr>
+                                                          <td style="font-size: 1rem"><i class="fas fa-capsules mr-2"></i>{{ $medication['med'] }}</td>
+                                                          <td style="font-size: 1rem"><i class="fas fa-clock mr-2"></i>{{ $medication['sched'] }}</td>
+                                                      </tr>
+                                                  @endforeach
+                                                </tbody>
+                                            </table>
+                                        @else
+                                            <p class="text-muted font-italic">No recent medication to take</p>
+                                        @endif
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-primary w-100" data-dismiss="modal"><i class="fas fa-print mr-2"></i>Print</button>
+                                    </div>
+                                  </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-primary btn-neutral">Contact</button>
+                            <button type="button" class="btn btn-primary btn-secondary" data-toggle="modal" data-target="#editModal">Edit</button>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogModal">Prescription</button>
                         </div>
                     @else 
@@ -198,7 +246,6 @@
                             </div>
                         </div>   
                         <div class="row d-flex justify-content-end mt-5">
-                            <button type="button" class="btn btn-primary btn-neutral" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Contact</button>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dialogModal">Prescription</button>
                         </div>
                     @endif
@@ -242,16 +289,22 @@
                                     <label for="diagnosis"><strong>Diagnosis</strong></label>
                                     <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3"></textarea>
                                 </div>
-                                <label for="diagnosis"><strong>Medications</strong></label>
+                                <div class="row d-flex justify-content-between px-3">
+                                    <label for="diagnosis"><strong>Medications</strong></label>
+                                    <label class="custom-toggle">
+                                        <input type="checkbox" id="checkMedicine">
+                                        <span class="custom-toggle-slider rounded-circle"></span>
+                                    </label>
+                                </div>
                                 <div class="form-group inputs_div">
                                     <div class="form-row d-flex align-items-center">
                                       <div class="col-md-5 mb-3">
                                         <label for="name">Medicine</label>
-                                        <input type="text" class="form-control" name="medications[{{ 0 }}][med]" id="med" required>
+                                        <input type="text" class="form-control med" name="medications[{{ 0 }}][med]" id="med" required>
                                       </div>
                                       <div class="col-md-5 mb-3 mr-2">
                                         <label for="date_of_birth">Schedule</label>
-                                        <input type="text" class="form-control" name="medications[{{ 0 }}][sched]" id="sched" required>
+                                        <input type="text" class="form-control med" name="medications[{{ 0 }}][sched]" id="sched" required>
                                       </div>
                                       <button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add" type="button">
                                         <i class="fas fa-plus"></i>
@@ -270,6 +323,106 @@
                       </div>
                     </div>
                 </div>
+                @if($diagnosis)
+                    <!-- Prescription Edit Modal -->
+                    <div class="modal fade cd-example-modal-md" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Prescription</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('diagnosis.edit', $diagnosis->id) }}" method="POST" id="diagnosisUpdateForm">
+                                    @method('PUT')
+                                    @csrf
+                                    <h3><strong>Health Status</strong></h3>
+                                    <div class="form-group">
+                                        <label><input id="healthy" type="checkbox" name="isHealthy" value="Healthy" {{ !empty($diagnosis->isHealthy) ? 'checked' : '' }}><strong> Healthy</strong></label>
+                                    </div>
+                                    <label><strong>Health Problem</strong></label>
+                                    <div class="form-row d-flex">
+                                        <div class="col-md-6 d-flex flex-column">
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Heart Disease"> Heart Disease</label>
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Diabetes"> Diabetes</label>
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="UTI"> UTI</label>
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Hypertension"> Hypertension</label>
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Allergy"> Allergy (Food, Medicine)</label>
+                                        </div>
+                                        <div class="col-md-6 d-flex flex-column">
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Ulcer"> Ulcer</label>
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Hepatitis"> Hepatitis</label>
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Scoliosis"> Scoliosis</label>
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Migraine"> Migraine</label>
+                                            <label><input class="healthProblem" type="checkbox" name="problem[]" value="Asthma"> Asthma</label>
+                                        </div>
+                                    </div> 
+                                    <h3 class="mt-3"><strong>Prescription</strong></h3>
+                                    <div class="form-group">
+                                        <label for="diagnosis"><strong>Diagnosis</strong></label>
+                                        <textarea class="form-control" id="diagnosis" name="diagnosis" rows="3">{{ $diagnosis->diagnosis }}</textarea>
+                                    </div>
+                                    <label for="diagnosis"><strong>Medications</strong></label>
+                                    <div class="form-group inputs_div">
+                                        @if (!empty($diagnosis->medications))
+                                            @foreach ($diagnosis->medications as $medication)
+                                                <div class="form-row d-flex align-items-center">
+                                                    <div class="col-md-5 mb-3">
+                                                      <label for="name">Medicine</label>
+                                                      <input type="text" class="form-control" name="medications[{{ $loop->iteration }}][med]" id="med" value="{{ $medication['med'] }}" required>
+                                                    </div>
+                                                    <div class="col-md-5 mb-3 mr-2">
+                                                      <label for="date_of_birth">Schedule</label>
+                                                      <input type="text" class="form-control" name="medications[{{ $loop->iteration }}][sched]" id="sched" value="{{ $medication['sched'] }}" required>
+                                                    </div>
+                                                    <button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add" type="button">
+                                                      <i class="fas fa-plus"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove" type="button">
+                                                      <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <div class="row d-flex justify-content-between px-3">
+                                                <label for="diagnosis"><strong>Medications</strong></label>
+                                                <label class="custom-toggle">
+                                                    <input type="checkbox" id="checkEditMedicine">
+                                                    <span class="custom-toggle-slider rounded-circle"></span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group inputs_div">
+                                                <div class="form-row d-flex align-items-center">
+                                                  <div class="col-md-5 mb-3">
+                                                    <label for="name">Medicine</label>
+                                                    <input type="text" class="form-control med" name="medications[{{ 0 }}][med]" id="med" required>
+                                                  </div>
+                                                  <div class="col-md-5 mb-3 mr-2">
+                                                    <label for="date_of_birth">Schedule</label>
+                                                    <input type="text" class="form-control med" name="medications[{{ 0 }}][sched]" id="sched" required>
+                                                  </div>
+                                                  <button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add" type="button">
+                                                    <i class="fas fa-plus"></i>
+                                                  </button>
+                                                  <button class="btn btn-danger btn-sm btn-fab btn-icon btn-round" type="button">
+                                                    <i class="fas fa-minus"></i>
+                                                  </button>
+                                                </div>
+                                            </div>   
+                                        @endif
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" onclick="document.getElementById('diagnosisUpdateForm').submit()">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -326,6 +479,7 @@
       </div>
     </div>
 </div>
+
 <div class="row px-3">
     <div class="col-md-4 order-md-5">
         <div class="card">
@@ -373,6 +527,7 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-end mr-1">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#physicalEditModal">Edit</button>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#physicalModal">Update</button>
                     </div>
                 @else
@@ -441,6 +596,67 @@
                 </div>
             </div>
         </div>
+        <!-- Physical Examination Edit Modal -->
+        @if(!empty($physical))
+            <div class="modal fade cd-example-modal-lg" id="physicalEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Physical Examination</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              <form action="{{ route('physical.edit', $physical->id) }}" method="POST" id="physicalExamEditForm">
+                                @method('PUT')
+                                  @csrf
+                                  <div class="form-row mb-3">
+                                    <div class="col-6">
+                                      <label for="inputAddress">School Year</label>
+                                      <input type="text" class="form-control" name="school_year" value="{{ $physical->school_year }}">
+                                    </div>
+                                  </div>
+                                  <div class="form-row mb-3">
+                                      <div class="col">
+                                        <label for="inputAddress">Height</label>
+                                        <input type="number" step="any" class="form-control" name="height" value="{{ $physical->height }}">
+                                      </div>
+                                      <div class="col">
+                                        <label for="inputAddress">Weight</label>
+                                        <input type="number" step="any" class="form-control" name="weight" value="{{ $physical->weight }}">
+                                      </div>
+                                  </div>
+                                  <div class="form-row mb-3">
+                                    <div class="col">
+                                      <label for="inputAddress">BMI</label>
+                                      <input type="number" step="any" class="form-control" name="bmi" value="{{ $physical->bmi }}">
+                                    </div>
+                                    <div class="col">
+                                      <label for="inputAddress">Blood Pressure</label>
+                                      <input type="text" class="form-control" name="bp" value="{{ $physical->bp }}">
+                                    </div>
+                                  </div>
+                                  <div class="form-row">
+                                    <div class="col">
+                                      <label for="inputAddress">Respiratory Rate</label>
+                                      <input type="text" class="form-control" name="rr" value="{{ $physical->rr }}">
+                                    </div>
+                                    <div class="col">
+                                      <label for="inputAddress">Heart Rate</label>
+                                      <input type="text" class="form-control" name="hr" value="{{ $physical->hr }}">
+                                    </div>
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="document.getElementById('physicalExamEditForm').submit()">Save changes</button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="col-md-8 order-md-1">
         <div class="card">
@@ -473,7 +689,8 @@
                             <p>{{ $hospital->medication }}</p>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-end mr-1">
+                    <div class="row d-flex justify-content-end mr-1 mb-3">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editHospitalModal">Edit</button>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hospitalModal">Update</button>
                     </div>
                 @else
@@ -532,16 +749,189 @@
               </div>
             </div>
         </div>
+        <!-- Hospitalization Update Modal -->
+        @if(!empty($hospital))
+            <div class="modal fade cd-example-modal-lg" id="editHospitalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Hospitalization</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('hospital.edit',$hospital->id) }}" method="POST" id="hospitalEditForm">
+                                @method('PUT')
+                                @csrf
+                                <div class="form-row mb-3">
+                                  <div class="col-6">
+                                    <label for="inputAddress">Disease</label>
+                                    <input type="text" class="form-control" name="disease" value="{{ $hospital->disease }}">
+                                  </div>
+                                  <div class="col-6">
+                                    <label for="inputAddress">Height</label>
+                                    <input type="date" class="form-control" name="d_date" value="{{ $hospital->d_date }}">
+                                  </div>
+                                </div>
+                                <div class="form-row mb-3">
+                                  <div class="col">
+                                    <label for="inputAddress">Operation</label>
+                                    <input type="text" class="form-control" name="operation" value="{{ $hospital->operation }}">
+                                  </div>
+                                  <div class="col">
+                                    <label for="inputAddress">Date</label>
+                                    <input type="date" class="form-control" name="o_date" value="{{ $hospital->o_date }}">
+                                  </div>
+                                </div>
+                                <div class="form-row">
+                                  <div class="col">
+                                    <label for="inputAddress">Chronic diseases & medication presently being taken</label>
+                                    <input type="text" class="form-control" name="medication" value="{{ $hospital->medication }}">
+                                  </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" onclick="document.getElementById('hospitalEditForm').submit()">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
+
+<div class="row px-3">
+    <div class="col-md-4 order-md-5">
+        
+    </div>
+    <div class="col-md-8 order-md-1">
+      <div class="card p-2">
+        <div class="card-body">
+            <h2>Personal History</h2>
+            @if (!empty($histories))
+                <div class="container py-3">
+                    @foreach ($histories->illnesses as $history)
+                        <span class="badge badge-pill badge-warning m-2" style="font-size: 1.2rem" style="cursor: pointer">{{ $history }}</span>
+                    @endforeach
+                </div>
+                <div class="row d-flex justify-content-end mr-1">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#">Edit</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#personalHistory">Update</button>
+                </div>
+            @else
+                <div class="row d-flex justify-content-end mr-1">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#personalHistory">Add</button>
+                </div>
+            @endif
+            <div class="modal fade cd-example-modal-md" id="personalHistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Personal History</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Check if you has been ill of the following:</h3>
+                        <div class="row p-2" id="selection">
+                            @foreach ($illnesses as $illness)
+                                <label for="{{ $loop->iteration }}" class="pill">
+                                    <span class="badge badge-pill badge-warning m-2" style="font-size: 1.2rem" style="cursor: pointer">{{ $illness->illness }}<input class="illness" type="checkbox" name="illnesses[]" id="{{ $loop->iteration }}" value="{{ $illness->illness }}" hidden></span>
+                                </label>
+                            @endforeach
+                        </div>
+                        <hr>
+                        <form action="{{ route('history.store', $user->id) }}" method="POST" id="historyForm">
+                            @csrf
+                            <h3>Selected</h3>
+                            <div class="row p-2" id="cart">
+                              
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="document.getElementById('historyForm').submit()">Save changes</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+    
 
 @endsection
 
 @section('js')
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
     <script type="application/javascript">
         $(document).ready(function () {
-            var count = 0;
+
+            $(function() {
+              update_disable_cb();
+              $("input.illness").click(update_disable_cb);
+            });
+
+            function update_disable_cb() {
+                if (this.checked) {
+                    var pill = '<label for="'+$(this).attr('id')+'" class="pill"><span class="badge badge-pill badge-primary m-2" style="font-size: 1.2rem" style="cursor: pointer">'+$(this).val()+'<input class="illness" type="checkbox" id="'+$(this).attr('id')+'" value="'+$(this).val()+'" name="illnesses[]" checked hidden></span></label>'
+                    $('#cart').append(pill);
+                    $(this).parent().remove();
+                } else {
+                    $("input.med").attr("disabled", true);
+                }
+            }
+        });
+    </script>
+    <script type="application/javascript">
+      $(document).ready(function () {
+        $('#update').each(function() {
+          $(this).click(function(event){
+            $('#formUpdate').attr("action", "/medical-record/lab-tests/update/"+$(this).data('id')+"")
+            // console.log($(this).data('id'));
+          })
+        });
+      });
+    </script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+
+            // Prescription Modal
+            $(function() {
+              update_disable_cb();
+              $("#checkMedicine").click(update_disable_cb);
+            });
+
+            function update_disable_cb() {
+                if (this.checked) {
+                    $("input.med").removeAttr("disabled");
+                } else {
+                    $("input.med").attr("disabled", true);
+                }
+            }
+
+            // Prescription Edit
+            $(function() {
+              edit_disable_cb();
+              $("#checkEditMedicine").click(edit_disable_cb);
+            });
+
+            function edit_disable_cb() {
+                if (this.checked) {
+                    $("input.med").removeAttr("disabled");
+                } else {
+                    $("input.med").attr("disabled", true);
+                }
+            }
+
+            var count = {{ !empty($diagnosis->medication) ? count($diagnosis->medications) : 0 }};
             $(this).on("click", ".add", function(){
                 count++;
                 var html = '<div class="form-row d-flex align-items-center"><div class="col-md-5 mb-3"><label for="name">Medicine</label><input type="text" class="form-control" name="medications['+count+'][med]" id="name" required></div><div class="col-md-5 mb-3 mr-2"><label for="date_of_birth">Schedule</label><input type="text" class="form-control" name="medications['+count+'][sched]" id="date_of_birth" required></div><button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add"><i class="fas fa-plus"></i></button><button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove"><i class="fas fa-minus"></i></button></div>'
@@ -555,6 +945,7 @@
             });
         }) 
     </script>
+
     <script type="application/javascript">
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip()
@@ -590,13 +981,42 @@
             }
         });
     </script>
-    <!-- Argon Scripts -->
-    <!-- Core -->
+    <!-- Script -->
+    <script>
+    
+      var $fileInput = $('.file-input');
+      var $droparea = $('.file-drop-area');
+        
+      // highlight drag area
+      $fileInput.on('dragenter focus click', function() {
+        $droparea.addClass('is-active');
+      });
+      
+      // back to normal state
+      $fileInput.on('dragleave blur drop', function() {
+        $droparea.removeClass('is-active');
+      });
+      
+      // change inner text
+      $fileInput.on('change', function() {
+        var filesCount = $(this)[0].files.length;
+        var $textContainer = $(this).prev();
+      
+        if (filesCount === 1) {
+          // if single file is selected, show file name
+          var fileName = $(this).val().split('\\').pop();
+          $textContainer.text(fileName);
+        } else {
+          // otherwise show number of files
+          $textContainer.text(filesCount + ' files selected');
+        }
+      });
+    </script>
     <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
     <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
-    <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
+
 @endsection

@@ -27,4 +27,22 @@ class PhysicalExamController extends Controller
 
         return redirect()->back();
     }
+
+    public function update(Request $request, $id)
+    {
+        $physical = PhysicalExam::where('id','=',$id)->first();
+
+        $physical->employee_id = $physical->employee_id;
+        $physical->school_year = $request->school_year;
+        $physical->height = $request->height;
+        $physical->weight = $request->weight;
+        $physical->bmi = $request->bmi;
+        $physical->bp = $request->bp;
+        $physical->rr = $request->rr;
+        $physical->hr = $request->hr;
+
+        $physical->update();
+
+        return redirect()->back();
+    }
 }

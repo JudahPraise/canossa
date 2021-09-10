@@ -3,12 +3,14 @@
 namespace App;
 
 use App\Family;
+use App\Illness;
 use App\LabTest;
 use App\Document;
 use App\Feedback;
 use App\Schedule;
 use App\Diagnosis;
 use App\HealthProblem;
+use App\PersonalHistory;
 use App\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -48,9 +50,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function diagnoses()
+    public function diagnosis()
     {
-        return $this->hasMany(Diagnosis::class, 'user_id')->latest()->limit(1);
+        return $this->hasOne(Diagnosis::class, 'user_id')->latest();
+    }
+
+    public function illness()
+    {
+        return $this->hasOne(PersonalHistory::class, 'user_id')->latest();
     }
 
     public function documents(){
@@ -115,8 +122,6 @@ class User extends Authenticatable
         {
             return 'null';
         }
-
-       
     }
 
 }

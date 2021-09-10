@@ -65,7 +65,7 @@
                 <div class="row d-flex justify-content-between align-items-center px-2">
                     <strong style="font-weight: bold; color: black; font-size: 1.3rem">Secondary</strong>
                     <div class="d-flex align-items-center">
-                        <a href="{{  !empty(auth()->user()->education->sec) ? route('sec.edit', $education->sec->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
+                        <a href="{{  !empty(auth()->user()->education->sec) ? route('sec.edit', $education->sec->id ) : route('sec.create') }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                         </a>
                         <form action="{{ !empty(auth()->user()->education->sec) ? route('sec.delete', $education->sec->id) : "#" }}" method="POST">
@@ -109,7 +109,7 @@
                 <div class="row d-flex justify-content-between align-items-center px-2">
                     <strong style="font-weight: bold; color: black; font-size: 1.3rem">College</strong>
                     <div class="d-flex align-items-center">
-                        <a href="{{ !empty(auth()->user()->education->col) ? route('col.edit', $education->col->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
+                        <a href="{{ !empty(auth()->user()->education->col) ? route('col.edit', $education->col->id ) : route('col.create') }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                         </a>
                         <form action="{{ !empty(auth()->user()->education->col) ? route('col.delete', $education->col->id) : '#' }}" method="POST">
@@ -154,9 +154,12 @@
                     </div>
                 @endif
                 <hr>
-                <div class="row d-flex">
-                    <div class="col-md-6 px-2">
-                        <strong style="font-weight: bold; color: black; font-size: 1.3rem">Graduate Studies</strong>
+                <div class="row d-flex justify-content-between align-items-center px-2">
+                    <strong style="font-weight: bold; color: black; font-size: 1.3rem">Graduate Studies</strong>
+                    <div class="d-flex align-items-center">
+                        <a href="{{ route('grad.create') }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
+                            <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                        </a>
                     </div>
                 </div>
                 @if (!empty(auth()->user()->education->grad->first()))

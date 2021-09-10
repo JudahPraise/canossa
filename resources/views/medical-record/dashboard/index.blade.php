@@ -58,27 +58,26 @@
                                         <h2 class="m-0 p-0">{{ $user->name }}</h2>
                                         <p class="m-0 p-0 mb-2">{{ $user->role }}</p>
                                         <div class="row d-flex flex-column ml-1">
-                                            @forelse ($user->diagnoses as $diagnosis)
-                                                <h4 style="color: black;">{{ !empty($diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
-                                                <div class="row d-flex justify-content-start p-0 m-0">
-                                                    @if (!empty($diagnosis->isHealthy))
-                                                        <div class="row d-flex justify-content-start p-0 m-0" id="isHealthy">
-                                                            <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">{{ $diagnosis->isHealthy }}</span>
-                                                        </div>
-                                                    @else
-                                                        @foreach ($diagnosis->problems as $problem)
+                                            <h4 style="color: black;">{{ !empty($user->diagnosis->isHealthy) ? 'Health Status' : 'Health Problem' }}</h4>
+                                            <div class="row d-flex justify-content-start p-0 m-0">
+                                                @if (!empty($user->diagnosis->isHealthy))
+                                                    <div class="row d-flex justify-content-start p-0 m-0" id="isHealthy">
+                                                        <span class="badge badge-pill badge-success m-1" style="font-size: 1rem">{{ $user->diagnosis->isHealthy }}</span>
+                                                    </div>
+                                                @else
+                                                    @if (!empty($user->diagnosis->problems))
+                                                        @foreach ($user->diagnosis->problems as $problem)
                                                             <div class="row d-flex justify-content-start p-0 m-0" id="healthProblem">
                                                                 <span class="badge badge-pill badge-primary m-1" style="font-size: 1rem">{{ $problem }}</span>
                                                             </div>
                                                         @endforeach
+                                                    @else
+                                                        <div class="row d-flex justify-content-start p-0 m-0" id="notChecked">
+                                                            <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
+                                                    </div>
                                                     @endif
-                                                </div>
-                                            @empty
-                                                <h4 style="color: black;">Health Status</h4>
-                                                <div class="row d-flex justify-content-start p-0 m-0" id="notChecked">
-                                                    <span class="badge badge-pill badge-warning m-1" style="font-size: 1rem">Not yet checked</span>
-                                                </div>
-                                            @endforelse
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

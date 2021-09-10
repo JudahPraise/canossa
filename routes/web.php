@@ -243,13 +243,19 @@ Route::prefix('medical-record')->group(function(){
     Route::get('/employee/{id}', 'Medical\DashboardController@show')->name('medical.show');
 
     Route::post('/diagnosis/{id}', 'Medical\DiagnosisController@store')->name('diagnosis.store');
+    Route::put('/diagnosis/edit/{id}', 'Medical\DiagnosisController@update')->name('diagnosis.edit');
 
     Route::post('/physical-examination/{id}', 'Medical\PhysicalExamController@store')->name('physical.store');
+    Route::put('/physical-examination/edit/{id}', 'Medical\PhysicalExamController@update')->name('physical.edit');
 
     Route::post('/hospitalization/{id}', 'Medical\HospitalizationController@store')->name('hospital.store');
+    Route::put('/hospitalization/edit/{id}', 'Medical\HospitalizationController@update')->name('hospital.edit');
 
     Route::get('/lab-tests', 'Medical\LabTestController@index')->name('labtest.index');
     Route::post('/lab-tests/upload/{id}', 'Medical\LabTestController@store')->name('labtest.store');
+    Route::put('/lab-tests/update/{id}', 'Medical\LabTestController@update')->name('labtest.update');
+
+    Route::post('/personal-history/{id}', 'Medical\PersonalHistoryController@store')->name('history.store');
 
 
 });

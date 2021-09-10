@@ -1,6 +1,7 @@
 @extends('login-pages.main')
 
 @section('login')
+
 <div class="container">
     <h3>Employee Module</h3>
     <h3 style="font-weight: 600">Welcome Back!</h3>
