@@ -2,6 +2,7 @@
 
 @section('family')
 <div class="container-fluid">
+    @component('components.alerts')@endcomponent
     <div class="row w-100 m-0">
         <div class="card has-no-shadow w-100">
             <div class="card-header">

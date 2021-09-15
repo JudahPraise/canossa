@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbitcss/css/orbit.css">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
@@ -52,7 +51,7 @@
                                 <div class="card-profile-stats d-flex justify-content-center">
                                     <div class="text-center">
                                         <h3>
-                                          {{ $employee->name }}
+                                          {{ $employee->fullName() }}
                                         </h3>
                                         <h5>
                                             {{ $employee->role }}

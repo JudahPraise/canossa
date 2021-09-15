@@ -49,10 +49,9 @@
             </tr>
           </thead>
           <tbody>
-
-            @forelse ($employees as $employee)
+            {{-- @forelse ($employees as $employee)
               <tr class="border">
-                <td>{{ $employee->name}}</td>
+                <td>{{ $employee->fullName()}}</td>
                 <td>{{ $employee->employee_id }}</td>
                 @if (!empty($employee->department))
                   <td>{{ $employee->role}}</td>
@@ -62,11 +61,6 @@
                 <td>{{ $employee->email }}</td>
                 <td class="{{ $employee->status === 'resigned' ? 'text-danger' : 'text-success'}}">{{ $employee->status }}</td>
                 <td class="d-flex">
-                  <form action="{{ route('register.delete', $employee->id) }}" method="POST" id="employeeRemoveForm">
-                    @method('delete')
-                    @csrf 
-                    <button type="submit" class="btn btn-sm btn-danger mr-2">Remove</button>
-                  </form>
                   <a href="{{ route('resigned', $employee->id) }}" class="btn btn-sm btn-info">Resigned</a>
                 </td>
               </tr>
@@ -74,12 +68,12 @@
                 <tr class="text-center">
                   <td colspan="5">No employees yet</td>
                 </tr>
-              @endforelse
+              @endforelse --}}
             </tbody>
           </table>
-          <div class="row d-flex justify-content-end w-100 p-2">
+          {{-- <div class="row d-flex justify-content-end w-100 p-2">
             {{ $employees->links() }}
-          </div>
+          </div> --}}
       </div>
     </div>
   </div>
@@ -98,16 +92,41 @@
             @csrf
             <div class="form-row">
               <div class="col-md-4 mb-3">
-                <label for="validationDefault01">Name</label>
-                <input type="text" name="name" class="form-control" id="validationDefault01" required>
+                <label for="validationDefault01">Last name</label>
+                <input type="text" name="lname" class="form-control" id="validationDefault01" required>
               </div>
-              <div class="col-md-1 mb-3">
+              <div class="col-md-4 mb-3">
+                <label for="validationDefault01">First name</label>
+                <input type="text" name="fname" class="form-control" id="validationDefault01" required>
+              </div>
+              <div class="col-md-2 mb-3">
+                <label for="validationDefault01">Middle initial</label>
+                <input type="text" name="mname" class="form-control" id="validationDefault01">
+              </div>
+              <div class="col-md-2 mb-3">
+                <label for="validationDefault04">Suffix</label>
+                <select class="custom-select" name="extname" id="validationDefault04">
+                  <option selected disabled value=""></option>
+                  <option>Sr.</option>
+                  <option>Jr.</option>
+                  <option>I</option>
+                  <option>II</option>
+                  <option>III</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
                 <label for="validationDefault04">Gender</label>
                 <select class="custom-select" name="sex" id="validationDefault04" required>
                   <option selected disabled value=""></option>
                   <option>M</option>
                   <option>F</option>
                 </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="validationDefault03">Date of birth</label>
+                <input type="date" name="dob" class="form-control" id="validationDefault03" required>
               </div>
             </div>
             <div class="form-row">
@@ -122,6 +141,8 @@
                   <option>Teacher</option>
                   <option>Staff</option>
                   <option>Maintenance</option>
+                  <option>Nurse</option>
+                  <option>Doctor</option>
                 </select>
               </div>
             </div>
@@ -195,4 +216,45 @@
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script type="application/javascript">
+      
+      $(document).ready(function (e) {
+        e.preventDefault();
+
+        fetchEmployee();
+
+        function fetchEmployee()
+        {
+          $.ajax({
+            type: "GET",
+            url: "/admin/manage-accounts/employees",
+            dataType: "json",
+            success: function(response) {
+
+              console.log(response.employees);
+              $('tbody').html('');
+              $.each(response.employees, function(key, item){
+                $('tbody').append(
+                  '<tr class="border">\
+                    <td>'+item.lname+','+item.fname+','+item.mname+'</td>\
+                    <td>'+item.employee_id+'</td>\
+                    <td>'+item.role+'</td>\
+                    <td>'+item.email+'</td>\
+                    <td class="d-flex">\
+                      <a href="admin/resigned/'+item.id+'" class="btn btn-sm btn-info">Resigned</a>\
+                    </td>\
+                  </tr>'
+                );
+              });
+
+            }
+          });
+        }
+
+      });
+
+    </script>
 @endsection

@@ -3,9 +3,14 @@
 namespace App;
 
 use App\Family;
+use App\Illness;
+use App\LabTest;
 use App\Document;
 use App\Feedback;
 use App\Schedule;
+use App\Diagnosis;
+use App\HealthProblem;
+use App\PersonalHistory;
 use App\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -24,7 +29,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = 
-    ['name', 'sex', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
+    ['fname', 'mname', 'sname', 'extname', 'sex', 'dob', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
 
 
     /**
@@ -45,8 +50,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function diagnosis()
+    {
+        return $this->hasOne(Diagnosis::class, 'user_id')->latest();
+    }
+
+    public function illness()
+    {
+        return $this->hasOne(PersonalHistory::class, 'user_id')->latest();
+    }
+
     public function documents(){
         return $this->hasMany(Document::class);
+    }
+
+    public function labTest(){
+        return $this->hasOne(LabTest::class)->latest();
     }
 
     public function schedules(){
@@ -92,4 +111,26 @@ class User extends Authenticatable
     {
         return $this->hasOne(Feedback::class, 'user_id');
     }
+
+    public function getAge() {
+        $format = '%y years, %m months';
+
+        if(!empty($this->dob))
+        {
+            return \Carbon\Carbon::parse($this->dob)->diff(\Carbon\Carbon::now())->format($format);
+        }else
+        {
+            return 'null';
+        }
+    }
+
+    public function fullName()
+    {
+        if($this->extname === null){
+            return $this->lname.','.' '.$this->fname.','.' '.$this->mname;
+        }
+
+        return $this->lname.','.' '.$this->fname.','.' '.$this->mname.' '.$this->extname.'.';
+    }
+
 }

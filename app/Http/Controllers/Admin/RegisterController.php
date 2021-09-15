@@ -12,10 +12,17 @@ use Illuminate\Support\Facades\Validator;
 class RegisterController extends Controller
 {
 
-    public function index(){
-        $employees = User::orderBy('name', 'ASC')->paginate(10);
-        return view('admin.manage-accounts.index', compact('employees', $employees));
+    public function index()
+    {
+        return view('admin.manage-accounts.index');
+    }
 
+    function fetchEmployees()
+    {
+        $employees = User::orderBy('lname', 'ASC')->get();
+        return response()->json([
+            "employees" => $employees,
+        ]);
     }
 
     /**
@@ -42,9 +49,13 @@ class RegisterController extends Controller
     {
         $employee = new User();
 
-        $employee->name = $request->input('name');       
+        $employee->fname = $request->input('fname');       
+        $employee->lname = $request->input('lname');       
+        $employee->mname = $request->input('mname');       
+        $employee->extname = $request->input('extname');       
         $employee->employee_id = $request->input('employee_id');    
         $employee->sex = $request->input('sex');    
+        $employee->dob = $request->input('dob');    
         $employee->role = $request->input('role');    
         $employee->department = $request->input('department');
         $employee->email = $request->input('email');
@@ -54,12 +65,12 @@ class RegisterController extends Controller
 
         $employee->setFamily()->create([
             'user_id' => $employee->id,
-            'family_name' => $employee->name,
+            'family_name' => $employee->fullName(),
         ]);
 
         $employee->education()->create([
             'user_id' => $employee->id,
-            'name' => $employee->name,
+            'name' => $employee->fullName(),
             'elementary' => null,
             'secondary' => null,
             'college' => null,

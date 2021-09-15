@@ -1,13 +1,14 @@
 @extends('login-pages.main')
 
 @section('login')
+
 <div class="container">
     <h3>Employee Module</h3>
     <h3 style="font-weight: 600">Welcome Back!</h3>
 </div>
 
 <div class="continer w-100 p-lg-2 ">
-    <form method="POST" action="{{ route('login') }}" class="w-100">
+    <form method="POST" action="{{ route('employee.login.submit') }}" class="w-100">
         @csrf
 
         <div class="form-group row">

@@ -4,6 +4,7 @@
 
 <div class="container-fluid">
     <form id="form" action="{{ route('voluntary.update', Auth::user()->id) }}" method="POST"  enctype="multipart/form-data">
+      @method('PUT')
         @csrf
         <div class="inputs_div">
             @foreach ($voluntaries as $voluntary)

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\LabTest;
 use App\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentsController extends Controller
 {
@@ -20,12 +22,13 @@ class DocumentsController extends Controller
 
     public function store(Request $request){
 
+            
         $document = new Document();
 
         $document->user_id = auth()->id();
         $document->type = $request->input('type');
-        if($request->hasFile('file')){
 
+        if($request->hasFile('file')){
             $file = $request->file('file');
             $filename = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
@@ -33,16 +36,15 @@ class DocumentsController extends Controller
             $document->file = $filename;
             $document->extension = $extension;
         }
-        
         $document->save();
-        return redirect()->back();
 
+
+        return redirect()->back()->with('success', 'Document saved successfully!');
     }
     
     public function update(Request $request, $id){
 
         $document = Document::where('id','=',$id)->first();
-        // dd(url());
         if(File::exists(storage_path("app/public/documents/{$document->file}"))){
             File::delete(storage_path("app/public/documents/{$document->file}"));
         }
@@ -62,7 +64,7 @@ class DocumentsController extends Controller
         
         $document->update();
 
-        return redirect()->back();
+        return redirect()->back()->with('update', "{$request->type} has been updated!");
 
     }
 

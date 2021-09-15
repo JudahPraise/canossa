@@ -39,6 +39,7 @@ class ChildrenController extends Controller
      */
     public function store(Request $request)
     {
+
         $children =[];
 
         foreach ($request->name as $item => $key) {
@@ -69,7 +70,7 @@ class ChildrenController extends Controller
     public function show($id)
     {
         $family = Family::where('user_id','=',$id)->with('children')->get();
-        $children = $family->first()->children;
+        $children = $family->children;
         // dd($children);
         return view('employee.portfolio.family-background.children.show', compact('children'));
     }

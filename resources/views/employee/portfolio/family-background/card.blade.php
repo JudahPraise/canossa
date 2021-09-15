@@ -43,7 +43,7 @@
         </div>
         <div class="col mb-4">
             <div class="card">
-                <a href="{{ !empty(auth()->user()->family->children) ? route('family.show', Auth::user()->id) : route('children.create') }}" class="card__image">
+                <a href="{{ !empty(auth()->user()->family->children->first()) ? route('family.show', Auth::user()->id) : route('children.create') }}" class="card__image">
                   <img src="{{ asset('img/for-family/children.png') }}">
                 </a>
                 <div class="card__content">
@@ -56,7 +56,7 @@
                       @endif
                     </small>
                   </p>
-                  <a href="{{ !empty(auth()->user()->family->children) ? route('family.show', Auth::user()->id) : route('children.create') }}" class="is-hover-underline has-text-black">
+                  <a href="{{ !empty(auth()->user()->family->children->first()) ? route('family.show', Auth::user()->id) : route('children.create') }}" class="is-hover-underline has-text-black">
                     <h2 style="font-weight: bold">Children</h2>
                   </a>
                 </div>

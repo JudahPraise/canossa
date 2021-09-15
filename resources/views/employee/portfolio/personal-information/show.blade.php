@@ -38,6 +38,10 @@
                         <strong style="color: black; font-size: 1.3rem">{{ $personal->weight }}</strong>
                     </div>
                     <div class="col mb-3 d-flex flex-column">
+                        <strong style="font-size: 1rem">BMI</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ $personal->bmi }}</strong>
+                    </div>
+                    <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">Blood Type</strong>
                         <strong style="color: black; font-size: 1.3rem">{{ $personal->blood_type }}</strong>
                     </div>

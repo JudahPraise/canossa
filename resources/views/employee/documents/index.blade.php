@@ -13,7 +13,7 @@
 @section('employee-home')
 
 <div class="container-fluid p-4">
-
+  @component('components.alerts')@endcomponent
   <div class="row w-100 m-0">
     <div class="card w-100">
       <div class="card-header border-0">
@@ -106,6 +106,9 @@
                   <option>Birth Certificate</option>
                   <option>Baptismal Certificate</option>
                   <option>Marriage Certificate</option>
+                  <option>NBI Clearance</option>
+                  <option>College Diploma</option>
+                  <option>Lab Test</option>
                 </select>   
               </div>
               <div class="form-row mb-3">
@@ -143,6 +146,9 @@
                   <option>Birth Certificate</option>
                   <option>Baptismal Certificate</option>
                   <option>Marriage Certificate</option>
+                  <option>NBI Clearance</option>
+                  <option>College Diploma</option>
+                  <option>Lab Test</option>
                 </select>   
               </div>
               <div class="form-row mb-3">

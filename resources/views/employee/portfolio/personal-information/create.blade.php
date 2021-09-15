@@ -9,29 +9,28 @@
         <div class="form-row">
           <div class="col-md-4 mb-3">
             <label for="first_name">First name</label>
-            <input type="text" class="form-control" name="first_name" id="first_name" required>
+            <input type="text" class="form-control" name="first_name" value="{{ Auth::user()->fname }}" id="first_name" required>
           </div>
           <div class="col-md-4 mb-3">
             <label for="middle_name">Middle name</label>
-            <input type="text" class="form-control" name="middle_name" id="middle_name" required>
+            <input type="text" class="form-control" name="middle_name" value="{{ Auth::user()->mname }}" id="middle_name" required>
           </div>
           <div class="col-md-4 mb-3">
             <label for="surname">Last name</label>
-            <input type="text" class="form-control" name="surname" id="surname" required>
+            <input type="text" class="form-control" name="surname" value="{{ Auth::user()->lname }}" id="surname" required>
           </div>
         </div>
         {{-- Status --}}
         <div class="form-row">
           <div class="col-md-3 mb-3">
-            <label for="date_of_birth">Date of birth</label>
-            <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" required>
+            <label for="date_of_birth">Date of birth</label> 
+            <input type="date" class="form-control" name="date_of_birth" id="date_of_birth" value="{{ Auth::user()->dob }}" required>
           </div>
           <div class="col-md-3 mb-3">
             <label for="sex">Sex</label>
             <select class="custom-select" name="sex" id="sex" required>
-              <option selected disabled value="">Choose...</option>
-              <option>Male</option>
-              <option>Female</option>
+              <option {{ Auth::user()->sex === 'M' ? 'selected' : ''  }}>Male</option>
+              <option {{ Auth::user()->sex === 'F' ? 'selected' : ''  }}>Female</option>
             </select>
           </div>
           <div class="col-md-3 mb-3">
@@ -53,12 +52,12 @@
         {{-- Physical --}}
         <div class="form-row">
             <div class="col-md-4 mb-3">
-              <label for="height">Height</label>
-              <input type="text" class="form-control" name="height" id="height" required>
+               <label for="height">Height</label>
+              <input type="number" step="any" class="form-control" name="height" id="height" required>
             </div>
             <div class="col-md-4 mb-3">
               <label for="weight">Weight</label>
-              <input type="text" class="form-control" name="weight" id="weight" required>
+              <input type="number" step="any" class="form-control" name="weight" id="weight" required>
             </div>
             <div class="col-md-4 mb-3">
                 <label for="blood_type">Blood Type</label>
@@ -103,7 +102,7 @@
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <label for="email_address">Email Address</label>
+                <label for="email_address">User Address</label>
                 <div class="input-group has-validation">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>

@@ -8,9 +8,7 @@
   @include('partials.employee._topbar')
   
   <div class="c-body">
-
     <main class="c-main pt-0">
-
       @yield('home') 
 
     </main>

@@ -42,6 +42,7 @@ Route::prefix('admin')->group(function(){
     //Manage Accounts
     Route::prefix('/manage-accounts')->group(function(){
         Route::get('/', 'Admin\RegisterController@index')->name('accounts.index');
+        Route::get('/employees', 'Admin\RegisterController@fetchEmployees')->name('accounts.fetch');
         Route::post('/register', 'Admin\RegisterController@post')->name('register.post');
         Route::delete('/remove/{id}', 'Admin\RegisterController@destroy')->name('register.delete');
     });
@@ -62,8 +63,9 @@ Route::prefix('admin')->group(function(){
 
 });
 
-Route::middleware('auth')->prefix('employee')->group(function(){
+Route::prefix('employee')->group(function(){
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('employee.login');
+    Route::post('/login', 'Auth\LoginController@login')->name('employee.login.submit');
     Route::get('/logout', 'Auth\LoginController@logout')->name('employee.logout');
     Route::get('/', 'HomeController@index')->name('home');
     Route::post('/send', 'MessageController@send')->name('employee.send');
@@ -85,7 +87,6 @@ Route::middleware('auth')->prefix('employee')->group(function(){
         Route::get('/filter/{day}', 'Employee\ScheduleController@filter')->name('schedule.filter');
         Route::get('/filter/all', 'Employee\ScheduleController@filterAll')->name('schedule.filter-all');
     });
-
     //Portfolio
     Route::prefix('/portfolio')->group(function(){
         Route::get('/index/{view}', 'Employee\PortfolioController@index')->name('portfolio.index');
@@ -213,14 +214,49 @@ Route::middleware('auth')->prefix('employee')->group(function(){
     Route::prefix('profile')->group(function(){
         Route::get('/index', 'Employee\ProfileController@index')->name('profile.index');
     });
+    //Medical Record
+    Route::prefix('/medical-record')->group(function(){
+        Route::get('/{id}', 'Employee\RecordController@index')->name('record.index');
+        Route::post('/upload-labtest', 'Employee\RecordController@store')->name('record.store');
+        Route::put('/update-labtest/{id}', 'Employee\RecordController@update')->name('record.update');
+    });
     //Settings
     Route::get('/settings', 'Employee\SettingsController@index')->name('settings');
     Route::put('/settings/update/{id}', 'Employee\SettingsController@update')->name('account.update');
-
     //Feedback
     Route::get('/feedback/index', 'FeedbackController@index')->name('feedback.index');
     Route::post('/feedback/logout', 'FeedbackController@store')->name('feedback.store');
     Route::post('/feedback', 'FeedbackController@storeToFeedback')->name('feedback.storeToFeedback');
     Route::put('/feedback/update{id}', 'FeedbackController@update')->name('feedback.update');
+
+});
+
+
+Route::prefix('medical-record')->group(function(){
+
+    Route::get('/', 'NurseController@index')->name('nurse');
+    Route::post('/assign-nurse/{id}', 'Medical\RegisterController@post')->name('assign.nurse');
+    Route::get('/medical/login-page', 'Medical\NurseLoginController@showLoginForm')->name('nurse.login');
+    Route::post('/login', 'Medical\NurseLoginController@login')->name('nurse.login.submit');
+    Route::get('/logout', 'Medical\NurseLoginController@logout')->name('nurse.logout');
+
+    Route::get('/dashboard', 'Medical\DashboardController@index')->name('medical.dashboard');
+    Route::get('/employee/{id}', 'Medical\DashboardController@show')->name('medical.show');
+
+    Route::post('/diagnosis/{id}', 'Medical\DiagnosisController@store')->name('diagnosis.store');
+    Route::put('/diagnosis/edit/{id}', 'Medical\DiagnosisController@update')->name('diagnosis.edit');
+
+    Route::post('/physical-examination/{id}', 'Medical\PhysicalExamController@store')->name('physical.store');
+    Route::put('/physical-examination/edit/{id}', 'Medical\PhysicalExamController@update')->name('physical.edit');
+
+    Route::post('/hospitalization/{id}', 'Medical\HospitalizationController@store')->name('hospital.store');
+    Route::put('/hospitalization/edit/{id}', 'Medical\HospitalizationController@update')->name('hospital.edit');
+
+    Route::get('/lab-tests', 'Medical\LabTestController@index')->name('labtest.index');
+    Route::post('/lab-tests/upload/{id}', 'Medical\LabTestController@store')->name('labtest.store');
+    Route::put('/lab-tests/update/{id}', 'Medical\LabTestController@update')->name('labtest.update');
+
+    Route::post('/personal-history/{id}', 'Medical\PersonalHistoryController@store')->name('history.store');
+
 
 });

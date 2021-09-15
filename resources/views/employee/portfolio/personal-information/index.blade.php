@@ -3,6 +3,7 @@
 @section('portfolio')
 
 <div class="container-fluid p-2">
+    @component('components.alerts')@endcomponent
     <div class="card-header">
         <div class="row align-items-center">
             <div class="col">

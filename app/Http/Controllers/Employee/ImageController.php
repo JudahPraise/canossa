@@ -28,7 +28,7 @@ class ImageController extends Controller
 
         }
 
-        return redirect()->back()->with('message', 'Profile updated successfully');
+        return redirect()->back()->with('success', 'Profile updated successfully');
 
     }
 
