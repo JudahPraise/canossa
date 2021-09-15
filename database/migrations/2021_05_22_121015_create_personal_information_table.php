@@ -18,8 +18,9 @@ class CreatePersonalInformationTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('first_name');
-            $table->string('middle_name');
+            $table->string('middle_name')->nullable();
             $table->string('surname');
+            $table->string('name_extension')->nullable();
             $table->date('date_of_birth');
             $table->string('sex');
             $table->string('citizenship');
@@ -30,15 +31,15 @@ class CreatePersonalInformationTable extends Migration
             $table->string('blood_type');
             $table->mediumText('address');
             $table->string('zip_code');
-            $table->string('tel_number');
-            $table->string('cell_number');
-            $table->string('prc');
-            $table->string('gsis');
-            $table->string('sss');
-            $table->string('pag_ibig');
-            $table->string('driver_license');
-            $table->string('phil_health');
-            $table->mediumText('email_address');
+            $table->string('tel_number')->nullable();
+            $table->string('cell_number')->nullable();
+            $table->string('prc')->nullable();
+            $table->string('gsis')->nullable();
+            $table->string('sss')->nullable();
+            $table->string('pag_ibig')->nullable();
+            $table->string('driver_license')->nullable();
+            $table->string('phil_health')->nullable();
+            $table->mediumText('email_address')->nullable();
             $table->timestamps();
         });
     }

@@ -29,7 +29,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = 
-    ['name', 'sex', 'dob', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
+    ['fname', 'mname', 'sname', 'extname', 'sex', 'dob', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
 
 
     /**
@@ -122,6 +122,15 @@ class User extends Authenticatable
         {
             return 'null';
         }
+    }
+
+    public function fullName()
+    {
+        if($this->extname === null){
+            return $this->lname.','.' '.$this->fname.','.' '.$this->mname;
+        }
+
+        return $this->lname.','.' '.$this->fname.','.' '.$this->mname.' '.$this->extname.'.';
     }
 
 }

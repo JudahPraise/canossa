@@ -51,7 +51,7 @@
                                 <div class="card-profile-stats d-flex justify-content-center">
                                     <div class="text-center">
                                         <h3>
-                                          {{ $employee->name }}
+                                          {{ $employee->fullName() }}
                                         </h3>
                                         <h5>
                                             {{ $employee->role }}

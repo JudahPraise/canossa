@@ -24,7 +24,10 @@ class UserSeeder extends Seeder
         ]);
         
         $user = new User();
-        $user->name = 'Employee1';
+        $user->fname = 'Employee';
+        $user->lname = 'Sample';
+        $user->mname = 'D.';
+        $user->extname = 'JR';
         $user->sex = 'M';
         $user->dob = Carbon::create('1999', '04', '15');
         $user->employee_id = '2018-00001-CL-0';
@@ -38,12 +41,12 @@ class UserSeeder extends Seeder
 
         $user->family()->create([
             'user_id' => $user->id,
-            'family_name' => $user->name,
+            'family_name' => $user->fullName(),
         ]);
 
         $user->education()->create([
             'user_id' => $user->id,
-            'name' => $user->name,
+            'name' => $user->fullName(),
             'elementary' => null,
             'secondary' => null,
             'college' => null,

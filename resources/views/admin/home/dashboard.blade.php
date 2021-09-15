@@ -122,8 +122,8 @@
             <table class="table align-items-center table-flush" id="myTable">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col">Name</th>
                   <th></th>
+                  <th scope="col">Name</th>
                   <th scope="col">Role</th>
                   <th>Email</th>
                   <th scope="col">Action</th>
@@ -145,7 +145,7 @@
                         @endif
                       </div>
                     </th>
-                    <td>{{ $employee->name }}</td>
+                    <td>{{ $employee->fullName() }}</td>
                     <td class="budget">
                       {{ $employee->role }}
                     </td>

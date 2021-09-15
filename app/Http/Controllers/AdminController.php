@@ -24,7 +24,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $employees = User::where('status','=','active')->orderBy('name', 'ASC')->paginate(5);
+        $employees = User::where('status','=','active')->orderBy('lname', 'ASC')->paginate(5);
         $teachers = $employees->where('role','=','Teacher')->count();
         $staffs = $employees->where('role','=','Staff')->count();
         $maintenance = $employees->where('role','=','Maintenance')->count();
