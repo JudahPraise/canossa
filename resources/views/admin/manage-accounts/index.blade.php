@@ -49,7 +49,7 @@
             </tr>
           </thead>
           <tbody>
-            {{-- @forelse ($employees as $employee)
+            @forelse ($employees as $employee)
               <tr class="border">
                 <td>{{ $employee->fullName()}}</td>
                 <td>{{ $employee->employee_id }}</td>
@@ -68,12 +68,12 @@
                 <tr class="text-center">
                   <td colspan="5">No employees yet</td>
                 </tr>
-              @endforelse --}}
+              @endforelse
             </tbody>
           </table>
-          {{-- <div class="row d-flex justify-content-end w-100 p-2">
+          <div class="row d-flex justify-content-end w-100 p-2">
             {{ $employees->links() }}
-          </div> --}}
+          </div>
       </div>
     </div>
   </div>
@@ -100,7 +100,7 @@
                 <input type="text" name="fname" class="form-control" id="validationDefault01" required>
               </div>
               <div class="col-md-2 mb-3">
-                <label for="validationDefault01">Middle initial</label>
+                <label for="validationDefault01">M.I.</label>
                 <input type="text" name="mname" class="form-control" id="validationDefault01">
               </div>
               <div class="col-md-2 mb-3">
@@ -146,28 +146,19 @@
                 </select>
               </div>
             </div>
-            <div class="form-row">
+            <div class="form-row d-flex align-items-center">
               <div class="col-md-4 mb-3">
-                <label for="email">{{ __('E-Mail Address') }}</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                @error('email')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
+                <label for="email">{{ __('Username') }}</label>
+                <input id="email" type="text" class="form-control" name="email" required>
               </div>
-              <div class="col-md-4 mb-3">
+              <div class="col-md-8 mb-3">
                 <label for="password">{{ __('Password') }}</label>
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                @error('password')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="password-confirm">{{ __('Confirm Password') }}</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                <div class="input-group">
+                  <input id="password" type="text" class="form-control" name="password" required>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-success" id="generateBtn" type="button">Generate Password</button>
+                  </div>
+                </div>
               </div>
             </div>
             
@@ -202,6 +193,16 @@
       }       
     }
   }
+
+  const generate = document.getElementById('generateBtn');
+
+  generate.addEventListener("click", function(){
+
+    var randomstring = Math.random().toString(36).slice(-8);
+
+    document.getElementById('password').value = randomstring;
+  })
+  
 </script>
 @endsection
 
@@ -219,42 +220,4 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
-    <script type="application/javascript">
-      
-      $(document).ready(function (e) {
-        e.preventDefault();
-
-        fetchEmployee();
-
-        function fetchEmployee()
-        {
-          $.ajax({
-            type: "GET",
-            url: "/admin/manage-accounts/employees",
-            dataType: "json",
-            success: function(response) {
-
-              console.log(response.employees);
-              $('tbody').html('');
-              $.each(response.employees, function(key, item){
-                $('tbody').append(
-                  '<tr class="border">\
-                    <td>'+item.lname+','+item.fname+','+item.mname+'</td>\
-                    <td>'+item.employee_id+'</td>\
-                    <td>'+item.role+'</td>\
-                    <td>'+item.email+'</td>\
-                    <td class="d-flex">\
-                      <a href="admin/resigned/'+item.id+'" class="btn btn-sm btn-info">Resigned</a>\
-                    </td>\
-                  </tr>'
-                );
-              });
-
-            }
-          });
-        }
-
-      });
-
-    </script>
 @endsection

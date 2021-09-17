@@ -29,7 +29,7 @@
                 </form>
             </div>
         </div>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4" id="destPopuler">
+        {{-- <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4" id="destPopuler">
             @forelse ($employees as $employee)
             <div class="col mb-4">
                 <div class="card p-0">
@@ -70,6 +70,32 @@
                 <div class="container w-100 text-center">
                     <p>No employees yet</p>
                 </div>
+            @endforelse
+        </div> --}}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"  id="destPopuler">
+            @forelse ($employees as $employee)
+                <a href="{{ route('medical.show', $employee->id) }}" class="emp">
+                    <div class="col mb-2">
+                        <div class="card"> 
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-3 d-flex justify-content-center">
+                                        @if (!empty($employee->image))
+                                            <img src="{{ asset( 'storage/images/'.$employee->image) }}" width="100">
+                                        @else
+                                            <img src="{{ $employee->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}" width="80">
+                                        @endif
+                                    </div>
+                                    <div class="col-8 d-flex flex-column justify-content-center">
+                                        <p class="p-0" style="font-size: 1vw; font-weight: bold">{{ $employee->fullName() }}</p>
+                                        <p class="m-0 p-0 mb-2">{{ $employee->role }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @empty
             @endforelse
         </div>
     </div>

@@ -14,15 +14,8 @@ class RegisterController extends Controller
 
     public function index()
     {
-        return view('admin.manage-accounts.index');
-    }
-
-    function fetchEmployees()
-    {
-        $employees = User::orderBy('lname', 'ASC')->get();
-        return response()->json([
-            "employees" => $employees,
-        ]);
+        $employees = User::orderBy('lname', 'ASC')->paginate(10);
+        return view('admin.manage-accounts.index', compact('employees'));
     }
 
     /**
