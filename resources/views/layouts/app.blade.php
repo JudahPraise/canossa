@@ -12,9 +12,9 @@
     <title>CHRMIS</title>
 
     <!-- Scripts -->
-    <script  src="{{ asset('js/app.js') }}" defer></script>
-    <script  src="{{ asset('vendor/jquery/jquery.min.js') }}" defer></script>
-    <script  src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}" defer></script>
+    <script  src="{{ asset('js/app.js') }}"></script>
+    <script  src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script  src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     @yield('dropzone-js')
 
     <!-- Icons-->
@@ -57,9 +57,15 @@
     </main>
     
     <!-- CoreUI and necessary plugins-->
-    <script src="{{ asset('core-ui/js/coreui.bundle.min.js') }}"></script>
-    <script src="{{ asset('core-ui/js/coreui-utils.js') }}"></script>
-    <script src="{{ asset('material/assets/js/core/jquery.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('core-ui/js/coreui-chartjs.bundle.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('core-ui/js/Chart.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('core-ui/js/tooltips.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('core-ui/js/coreui.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('core-ui/js/coreui-utils.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('core-ui/js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('core-ui/js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
 
     @yield('js')
 

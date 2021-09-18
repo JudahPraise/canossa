@@ -30,9 +30,9 @@
                 </div>
               </div>
             </form>
-            <a class="btn btn-sm btn-icon btn-success text-white" type="button" data-toggle="modal" data-target="#registerEmployee">
+            <a class="btn btn-sm btn-icon btn-success text-white" type="button" data-toggle="modal" data-target="#registerEmployee" id="addEmployee">
               <span class="btn-inner--icon"><i class="fas fa-plus mr-2"></i></span>Add Employee
-          </a>
+            </a>
           </div>
       </div>
       <!-- Light table -->
@@ -77,6 +77,34 @@
       </div>
     </div>
   </div>
+  @if(session('success'))
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#myModal').modal('show');
+        console.log('show');
+      });
+    </script>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{ session('success') }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Name</p>
+            <h3>{{ $data[0]->name }}</h3>
+            <p>Username</p>
+            <h3>{{ $data[0]->userName }}</h3>
+            <p>Password</p>
+            <h1>{{ $data[0]->password }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  @endif
   <!-- Modal -->
   <div class="modal fade" id="registerEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -88,7 +116,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{ route('register.post') }}">
+          <form method="POST" action="{{ route('register.post') }}" id="registerForm">
             @csrf
             <div class="form-row">
               <div class="col-md-4 mb-3">
@@ -147,28 +175,23 @@
               </div>
             </div>
             <div class="form-row d-flex align-items-center">
-              <div class="col-md-4 mb-3">
+              <div class="col-md-6 mb-3">
                 <label for="email">{{ __('Username') }}</label>
                 <input id="email" type="text" class="form-control" name="email" required>
               </div>
-              <div class="col-md-8 mb-3">
+              <div class="col-md-6 mb-3">
                 <label for="password">{{ __('Password') }}</label>
                 <div class="input-group">
-                  <input id="password" type="text" class="form-control" name="password" required>
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-success" id="generateBtn" type="button">Generate Password</button>
-                  </div>
+                  <input id="password" type="text" class="form-control text-success" name="password" required>
                 </div>
               </div>
             </div>
-            
-          
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button class="btn btn-primary" type="submit" value="Submit Form">Register</button>
+          <button class="btn btn-primary" type="submit" value="Submit Form" onclick="document.getElementById('registerForm').submit()">Register</button>
         </div>
-      </form>
       </div>
     </div>
   </div>
@@ -194,7 +217,7 @@
     }
   }
 
-  const generate = document.getElementById('generateBtn');
+  const generate = document.getElementById('addEmployee');
 
   generate.addEventListener("click", function(){
 
@@ -217,7 +240,5 @@
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
 @endsection
