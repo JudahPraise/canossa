@@ -12,9 +12,9 @@
 
         <div class="form-group row">
             <div class="col-md-12">
-                <input id="email" type="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input id="admin_id" type="text" placeholder="Admin ID" class="form-control @error('admin_id') is-invalid @enderror" name="admin_id" value="{{ old('admin_id') }}" required autocomplete="admin_id" autofocus>
 
-                @error('email')
+                @error('admin_id')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -31,18 +31,6 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-12">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                    <label class="form-check-label" for="remember">
-                        {{ __('Remember Me') }}
-                    </label>
-                </div>
             </div>
         </div>
 

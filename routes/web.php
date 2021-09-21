@@ -23,7 +23,7 @@ Auth::routes();
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Admin\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/logout', 'Admin\AdminLoginController@logout')->name('admin.logout');
+    Route::post('/logout', 'Admin\AdminLoginController@logout')->name('admin.logout');
     Route::post('/password-confirm', 'Admin\ConfirmPasswordController@confirm')->name('admin.password.confirm.submit');
     Route::get('/password-confirm', 'Admin\ConfirmPasswordController@showConfirmForm')->name('admin.password.confirm');
     Route::post('/password-email', 'Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email'); //? Forgot Password Enter Email Submit
@@ -31,7 +31,14 @@ Route::prefix('admin')->group(function(){
     Route::post('password-reset', 'Admin\ResetPasswordController@reset')->name('admin.password.update');
     Route::get('/password-reset/{token}', 'Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::get('/', 'AdminController@index')->name('admin');
-
+    //Admins
+    Route::prefix('/admins')->group(function(){
+        Route::get('/', 'Admin\AdminsController@index')->name('admin.accounts');
+    });
+    //Account
+    Route::prefix('/account')->group(function(){
+        Route::get('/{id}', 'Admin\AccountController@index')->name('admin.account.index');
+    });
     //Announcements
     Route::prefix('/announcements')->group(function(){
         Route::get('/', 'Admin\AnnouncementController@index')->name('announcement.index');

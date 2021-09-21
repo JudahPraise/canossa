@@ -15,7 +15,8 @@ class RegisterController extends Controller
     public function index()
     {
         $employees = User::orderBy('lname', 'ASC')->paginate(10);
-        return view('admin.manage-accounts.index', compact('employees'));
+        $count = User::all()->count();
+        return view('admin.manage-accounts.index', compact('employees', 'count'));
     }
 
     /**

@@ -132,12 +132,8 @@
             </div>
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <label for="validationDefault01">Employee ID</label>
-                <input type="text" name="employee_id" class="form-control" id="validationDefault01" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="validationDefault04">Role</label>
-                <select class="custom-select" name="role" id="validationDefault04" required>
+                <label for="selectRole">Role</label>
+                <select class="custom-select" name="role" id="selectRole" required>
                   <option selected disabled value="">Choose...</option>
                   <option>Teacher</option>
                   <option>Staff</option>
@@ -145,6 +141,10 @@
                   <option>Nurse</option>
                   <option>Doctor</option>
                 </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="employeeID">Employee ID</label>
+                <input type="text" name="employee_id" class="form-control text-success" id="employeeID" disabled>
               </div>
             </div>
             <div class="form-row d-flex align-items-center">
@@ -155,7 +155,7 @@
               <div class="col-md-6 mb-3">
                 <label for="password">{{ __('Password') }}</label>
                 <div class="input-group">
-                  <input id="password" type="text" class="form-control text-success" name="password" required>
+                  <input id="password" type="text" class="form-control text-success" name="password" disabled>
                 </div>
               </div>
             </div>
@@ -193,12 +193,30 @@
   const generate = document.getElementById('addEmployee');
 
   generate.addEventListener("click", function(){
-
     var randomstring = Math.random().toString(36).slice(-8);
-
     document.getElementById('password').value = randomstring;
+    document.getElementById('employeeID').value = generateId({{ $count }});
   })
-  
+
+  function generateId(d) {
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear().toString().substr(-2);
+    var next_emp = d + 1;
+    var emp_id = (next_emp < 10) ? '0' + next_emp.toString() : next_emp.toString();
+    id = "CEMP"+"-"+yyyy+mm+dd+"-"+emp_id;
+
+    return id;
+
+    //CEMP-20210922-01 - Employee
+    //CADM-20210922-01 - Admin
+    
+  }
+
+ 
+
 </script>
 @endsection
 
