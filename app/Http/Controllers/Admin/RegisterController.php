@@ -70,17 +70,11 @@ class RegisterController extends Controller
             'graduate_study' => null
         ]);
 
-        $data = [];
-
-        $data[] = (object) [
-            'name' => $employee->fullName(),
-            'userName' => $employee->email,
-            'password' => $request->password,
-        ];
+        $data = "Hello World";
 
         // dd($data);
 
-        return redirect()->route('accounts.index')->with('success', 'Registered Successfully')->with('data', $data);
+        return redirect()->route('accounts.index')->with('success', 'Employee registered successfully!');
     }
 
     protected function destroy($id){

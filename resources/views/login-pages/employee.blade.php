@@ -7,6 +7,8 @@
     <h3 style="font-weight: 600">Welcome Back!</h3>
 </div>
 
+@component('components.alerts')@endcomponent
+
 <div class="continer w-100 p-lg-2 ">
     <form method="POST" action="{{ route('employee.login.submit') }}" class="w-100">
         @csrf

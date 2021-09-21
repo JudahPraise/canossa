@@ -11,6 +11,7 @@
 @endsection
 
 @section('home')
+@component('components.alerts')@endcomponent
 <div class="row px-3">
   <div class="col">
     <div class="card">
@@ -77,34 +78,6 @@
       </div>
     </div>
   </div>
-  @if(session('success'))
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#myModal').modal('show');
-        console.log('show');
-      });
-    </script>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">{{ session('success') }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Name</p>
-            <h3>{{ $data[0]->name }}</h3>
-            <p>Username</p>
-            <h3>{{ $data[0]->userName }}</h3>
-            <p>Password</p>
-            <h1>{{ $data[0]->password }}</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  @endif
   <!-- Modal -->
   <div class="modal fade" id="registerEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
