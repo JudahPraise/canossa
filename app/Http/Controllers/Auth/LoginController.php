@@ -51,20 +51,18 @@ class LoginController extends Controller
 
         //* Validate the form data
         $this->validate($request, [
-            'email' => 'required|email',
             'password' => 'required|min:6'
         ]); 
         
         //* Attempt to log the user in
-        if(Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        if(Auth::guard('web')->attempt(['employee_id' => $request->employee_id, 'password' => $request->password])) {
             //* If successful, then redirect to their intended location
-            session()->flash('loggedIn', 'Successfully Logged In');
             return redirect()->intended(route('home'));
         }
 
         //* If unsuccessful, redirect back to login
-        session()->flash('error', 'Invalid Credentials');
-        return redirect()->back()->withInput($request->only('email', 'remember'));
+        session()->flash('login', 'Invalid Credentials');
+        return redirect()->back();
     }
 
     public function logout()

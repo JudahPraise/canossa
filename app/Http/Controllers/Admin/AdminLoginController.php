@@ -33,6 +33,7 @@ class AdminLoginController extends Controller
         }
 
         //* If unsuccessful, redirect back to login
+        session()->flash('login', 'Invalid Credentials');
         return redirect()->back();
     }
 

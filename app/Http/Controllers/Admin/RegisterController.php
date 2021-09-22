@@ -52,7 +52,6 @@ class RegisterController extends Controller
         $employee->dob = $request->input('dob');    
         $employee->role = $request->input('role');    
         $employee->department = $request->input('department');
-        $employee->email = $request->input('email');
         $employee->password = Hash::make($request->input('password'));
 
         $employee->save();

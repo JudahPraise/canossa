@@ -24,11 +24,12 @@ class UserSeeder extends Seeder
         $user->extname = 'JR';
         $user->sex = 'M';
         $user->dob = Carbon::create('1999', '04', '15');
-        $user->email = 'employee1@test.com';
         $user->password = Hash::make('password');
         $user->role = 'Teacher';
         $user->department = 'College';
         $user->image = '';
+        $user->category = "Regular Employee";
+        $user->qr_token = "q0m59krrf9nm92wzinbuek";
 
         $user->save();
 
