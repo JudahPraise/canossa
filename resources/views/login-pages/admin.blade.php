@@ -1,64 +1,66 @@
-@extends('login-pages.main')
+@extends('layouts.app')
 
-@section('login')
-<div class="container">
-    <h3>Admin Module</h3>
-    <h3 style="font-weight: 600">Welcome Back!</h3>
-</div>
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+@endsection
 
-<div class="continer w-100 p-lg-2">
-    <form method="POST" action="{{ route('admin.login.submit') }}" class="w-100">
-        @csrf
-
-        <div class="form-group row">
-            <div class="col-md-12">
-                <input id="email" type="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+@section('content')
+    <div class="container-fluid">
+        <div class="area">
+            <div class="login-container d-flex justify-content-center" id="loginContainer" style="z-index: 999;">
+                 <form class="login-form text-center" id="loginForm" action="{{ route('admin.login.submit') }}" method="POST">
+                    @csrf
+                     <div class="container mb-4">
+                         <img src="{{ asset('img/circle-logo.png') }}" alt="" height="70" width="70">
+                         <h2 class="ml-2 mt-1" style="font-weight: bolder; color: #0179C7;">CHRMIS</h2>
+                     </div>
+                     <h3 class="mb-3 font-weight-light text-uppercase">Admin Module</h3>
+                     @if(session('login'))
+                        <div class="alert alert-danger alert-dismissible fade show animate__animated animate__bounce" role="alert" >
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            {{ session('login') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+                     <div class="form-group">
+                         <input type="text" name="admin_id" class="form-control rounded-pill form-control-lg bg-transparent" placeholder="Admin ID" required>
+                     </div>
+                     <div class="form-group">
+                         <input type="password" name="password" class="form-control rounded-pill form-control-lg bg-transparent" placeholder="Password" required>
+                     </div>
+                     <div class="form group form-check">
+                         <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                         <label class="form-check-label" for="exampleCheck1">I understand and agree with the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy.</a></label>
+                       </div>
+                     <button type="submit" class="btn mt-4 rounded-pill btn-lg btn-custom btn-block text-uppercase" id="btnSubmit">Log in</button>
+                     <!-- <p class="mt-3 font-weight-normal">Don't have an account? <a href="#"><strong>Register Now</strong></a></p> -->
+                     <p class="mt-5 mb-3 text-muted">© 2021-2022</p>
+                 </form>
             </div>
-        </div>
+            <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+         </div>
+    </div>
 
-        <div class="form-group row">
-            <div class="col-md-12">
-                <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+@endsection
 
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-12">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                    <label class="form-check-label" for="remember">
-                        {{ __('Remember Me') }}
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group row mb-0 w-100">
-            <div class="col-md-8">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Login') }}
-                </button>
-
-                @if (Route::has('admin.password.request'))
-                    <a class="btn btn-link" href="{{ route('admin.password.request') }}">
-                        {{ __('Forgot Your Password?') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-    </form>
-</div>
+@section('js')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 @endsection

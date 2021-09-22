@@ -14,15 +14,9 @@ class RegisterController extends Controller
 
     public function index()
     {
-        return view('admin.manage-accounts.index');
-    }
-
-    function fetchEmployees()
-    {
-        $employees = User::orderBy('lname', 'ASC')->get();
-        return response()->json([
-            "employees" => $employees,
-        ]);
+        $employees = User::orderBy('lname', 'ASC')->paginate(10);
+        $count = User::all()->count();
+        return view('admin.manage-accounts.index', compact('employees', 'count'));
     }
 
     /**
@@ -58,7 +52,6 @@ class RegisterController extends Controller
         $employee->dob = $request->input('dob');    
         $employee->role = $request->input('role');    
         $employee->department = $request->input('department');
-        $employee->email = $request->input('email');
         $employee->password = Hash::make($request->input('password'));
 
         $employee->save();
@@ -77,7 +70,11 @@ class RegisterController extends Controller
             'graduate_study' => null
         ]);
 
-        return redirect()->route('accounts.index');
+        $data = "Hello World";
+
+        // dd($data);
+
+        return redirect()->route('accounts.index')->with('success', 'Employee registered successfully!');
     }
 
     protected function destroy($id){

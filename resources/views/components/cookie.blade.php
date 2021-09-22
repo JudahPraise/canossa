@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/cookie.css') }}">
 
-<div class="fixed-bottom d-flex justify-content-center">
+<div class="fixed-bottom d-flex justify-content-center" id="cookieContainer">
     <div class="container-fluid text-white cookie-container"  style="background-color: #233D4D; width: 65%">
         <div class="row p-3 d-flex justify-content-center align-items-center">
             <p class="mt-3">We use cookies to ensure you get the best experience on our Website and Online Services. By continuing, you agree to our use of cookies.</p>
@@ -21,7 +21,7 @@
         document.cookie = "CookieBy=CHRMIS; max-age="+60*60*24*30;
 
         if (document.cookie) {
-            cookieBox.classList.add('hide');
+            document.getElementById('cookieContainer').remove();
         }else{
             alert("Cookie can't be set!");
         }
@@ -30,5 +30,7 @@
     
     let checkCookie = document.cookie.indexOf("CookieBy=CHRMIS");
     checkCookie != -1 ? cookieBox.classList.add("hide"): cookieBox.classList.remove("hide");
+
+    checkCookie = -1 ? document.getElementById('cookieContainer').remove(): cookieBox.classList.remove("hide");
     
 </script>

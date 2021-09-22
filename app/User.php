@@ -14,6 +14,7 @@ use App\PersonalHistory;
 use App\PersonalInformation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -22,14 +23,14 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $guard = 'user';
-    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = 
-    ['fname', 'mname', 'sname', 'extname', 'sex', 'dob', 'employee_id', 'email', 'password', 'role', 'department', 'image'];
+    ['for_emp_id','fname', 'mname', 'sname', 'extname', 'sex', 'dob', 'employee_id', 'password', 'role', 'department', 'image','category',
+    'qr_token'];
 
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function diagnosis()
     {

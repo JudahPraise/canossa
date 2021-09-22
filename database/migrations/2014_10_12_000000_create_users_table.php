@@ -23,11 +23,11 @@ class CreateUsersTable extends Migration
             $table->string('sex');
             $table->date('dob');
             $table->string('employee_id');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role');
             $table->string('department')->nullable();
+            $table->string('category');
+            $table->string('qr_token');
             $table->mediumText('image')->nullable();
             $table->string('status')->default('active');
             $table->string('labtest')->nullable();

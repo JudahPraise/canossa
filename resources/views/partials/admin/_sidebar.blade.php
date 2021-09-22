@@ -57,11 +57,12 @@
       </a>
     </li>
     <li class="c-sidebar-nav-item mt-auto">
-      <a class="c-sidebar-nav-link c-sidebar-nav-link-danger" href="{{ route('admin.logout') }}">
+      <a class="c-sidebar-nav-link c-sidebar-nav-link-danger" onclick="document.getElementById('logoutForm2').submit()">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
         </svg>
         Logout
+        <form action="{{ route('admin.logout') }}" method="POST" id="logoutForm2">@csrf</form>
       </a>
     </li>
   </ul>
