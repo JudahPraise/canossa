@@ -50,7 +50,7 @@
 </head>
 <body class="p-0">
 
-    <main class="c-app bg-white">
+    <main class="c-app {{ Route::current()->getName() == 'admin.login' ? "bg-transparent" : "bg-white" }}">
 
         @yield('content')
 

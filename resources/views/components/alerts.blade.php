@@ -20,13 +20,17 @@
     <div id="message" class="bg-success d-flex align-items-center">
         <span style="font-size: 1rem"><i class="fas fa-bullhorn mr-2 text-white"></i>{{ session('announced') }}</span>
     </div>
-@elseif(session('loggedin'))
-    <div id="message" class="bg-success d-flex align-items-center">
-        <span style="font-size: 1rem"><i class="fas fa-door-open mr-2 text-white"></i>{{ session('loggedin') }}</span>
-    </div>
 @elseif(session('error'))
     <div id="message" class="bg-danger d-flex align-items-center">
-        <span style="font-size: 1rem"><i class="fas fa-times-circle mr-2 text-white"></i>{{ session('error') }}</span>
+        <div class="row d-flex align-items-center">
+            <div class="col-2">
+                <i class="fas fa-times-circle mr-2 text-white" style="font-size: 2rem"></i>
+            </div>
+            <div class="col-10">
+                <h4>Failed!</h4>
+                <span style="font-size: 1rem">{{ session('error') }}</span>
+            </div>
+        </div>
     </div>
 @endif
 
@@ -36,6 +40,7 @@
     $(function() {
         showMessage();
     });
+
     function showMessage() {
       var m = $("#message");
     

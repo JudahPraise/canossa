@@ -16,6 +16,7 @@
 <div class="container-fluid p-4">
   @component('components.alerts')@endcomponent
   <div class="row w-100 m-0">
+    <div id="qrcode"></div>
     <div class="card w-100">
       <div class="card-header border-0">
         <div class="row align-items-center justify-content-between px-2">
@@ -82,6 +83,8 @@
       </div>
     </div>
   </div>
+
+  {!! QrCode::size(100)->generate('{{ Auth::user()->qr_token }}'); !!}
 </div>
 
 <!-- Create Modal -->
@@ -181,21 +184,26 @@
     </form>
     </div>
   </div>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="{{ asset('js/qrcode.js') }}"></script>
 <script>
     $(document).ready(function () {
-    $('.sched').each(function() {
-      $(this).click(function(event){
-        $('#schedId').val($(this).data("schedid"))
-        $('#title').val($(this).data("schedtitle"))
-        $('#day').text($(this).data("schedday"))
-        $('#day').val($(this).data("schedday"))
-        $('#timeFrom').val($(this).data("schedtimefrom"))
-        $('#timeTo').val($(this).data("schedtimeto"))
-      })
-    });
+      $('.sched').each(function() {
+        $(this).click(function(event){
+          $('#schedId').val($(this).data("schedid"))
+          $('#title').val($(this).data("schedtitle"))
+          $('#day').text($(this).data("schedday"))
+          $('#day').val($(this).data("schedday"))
+          $('#timeFrom').val($(this).data("schedtimefrom"))
+          $('#timeTo').val($(this).data("schedtimeto"))
+        })
+      });
   });
+
+  
+
 </script>
 @endsection
 
