@@ -7,8 +7,6 @@
 @endsection
 
 @section('content')
-    @component('components.alerts')@endcomponent
-
     <div class="container-fluid">
         <div class="area">
             <div class="login-container d-flex justify-content-center" id="loginContainer" style="z-index: 999;">

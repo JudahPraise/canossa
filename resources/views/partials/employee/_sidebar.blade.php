@@ -59,7 +59,7 @@
     {{-- @if(!empty(auth()->user()->feedback) || auth()->user()->status === 'resigned') --}}
       <a class="c-sidebar-nav-link c-sidebar-nav-link-danger text-white" onclick="document.getElementById('logoutForm').submit()">
         <svg class="c-sidebar-nav-icon">
-          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-medical-cross') }}"></use>
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
         </svg> 
         Logout
         <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
