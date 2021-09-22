@@ -7,15 +7,13 @@
     <h3 style="font-weight: 600">Welcome Back!</h3>
 </div>
 
-@component('components.alerts')@endcomponent
-
 <div class="continer w-100 p-lg-2 ">
     <form method="POST" action="{{ route('employee.login.submit') }}" class="w-100">
         @csrf
 
         <div class="form-group row">
             <div class="col-md-12">
-                <input id="email" type="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email" autofocus>
+                <input id="email" type="text" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror" name="employee_id" required autocomplete="email" autofocus>
 
                 @error('email')
                     <span class="invalid-feedback" role="alert">
