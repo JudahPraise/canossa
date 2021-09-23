@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/breakpoints.css') }}" type="text/css">
 @endsection
 
 @section('home')
@@ -17,20 +18,24 @@
     <div class="card">
       <!-- Card header -->
       <div class="card-header border-0 d-flex align-items-center">
-          <div class="col-6 col-md-6 m-0 d-flex align-items-center">
+        <div class="row w-100">
+          <div class="col-md-12 col-lg-2 p-2 d-flex align-items-center justify-content-start">
             <h2 class="mb-0">Employees</h2>
-            <div class="input-group input-group-alternative w-25 ml-2">
-              <select class="form-control form-select" aria-label="Default select example">
-                <option selected>Category</option>
-                <option value="1">Resign Employees</option>
-                <option value="2">Partimer</option>
-                <option value="3">Regular Employee</option>
-              </select>
-            </div>
           </div>
-          <div class="col-6 col-md-6 d-flex justify-content-sm-end align-items-center p-0">
-            <form class="navbar-search-light form-inline mr-2" id="navbar-search-main">
-              <div class="form-group mb-0  w-100">
+          <div class="col-md-6 col-lg-5 p-2 d-flex align-items-center justify-content-end">
+            <form action="{{ route('accounts.fetch.category') }}" id="categoryForm" class="break-input">
+              <select class="form-control input-group input-group-alternative " name="category" onchange="document.getElementById('categoryForm').submit()">
+                <option disabled selected>Category</option>
+                <option  {{ $category === 'Resigned' ? 'selected' : '' }}  value="All">All</option>
+                <option {{ $category === 'Regular' ? 'selected' : '' }}  value="Regular">Regular Employees</option>
+                <option {{ $category === 'Partime' ? 'selected' : '' }}  value="Partime">Partime Employees</option>
+                <option {{ $category === 'Resigned' ? 'selected' : '' }}  value="Resign">Resign Employees</option>
+              </select>
+            </form>
+          </div>
+          <div class="col-md-6 col-lg-5 p-2 d-flex align-items-center justify-content-end">
+            <form class="navbar-search-light form-inline mr-2 w-100" id="navbar-search-main">
+              <div class="form-group mb-0 w-100">
                 <div class="input-group input-group-alternative w-100">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-search"></i></span>
@@ -39,10 +44,11 @@
                 </div>
               </div>
             </form>
-            <a class="btn btn-icon btn-success text-white" type="button" data-toggle="modal" data-target="#registerEmployee" id="addEmployee">
-              <span class="btn-inner--icon"><i class="fas fa-plus mr-2"></i></span>Add Employee
+            <a class="btn btn-icon btn-success text-white d-flex" type="button" data-toggle="modal" data-target="#registerEmployee" id="addEmployee">
+              <span class="btn-inner--icon"><i class="fas fa-plus mr-2"></i></span>Register
             </a>
           </div>
+        </div>
       </div>
       <!-- Light table -->
       <div class="table-responsive">
@@ -53,7 +59,7 @@
               <th scope="col">Employee ID</th>
               <th scope="col">Role</th>
               <th scope="col">Email</th>
-              <th scope="col">Status</th>
+              <th scope="col">Category</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -63,12 +69,12 @@
                 <td>{{ $employee->fullName()}}</td>
                 <td>{{ $employee->employee_id }}</td>
                 @if (!empty($employee->department))
-                  <td>{{ $employee->role}}</td>
+                  <td>{{ $employee->role }}</td>
                 @else
-                  <td>{{ $employee->role}}</td>
+                  <td>{{ $employee->role }}</td>
                 @endif
                 <td>{{ $employee->email }}</td>
-                <td class="{{ $employee->status === 'resigned' ? 'text-danger' : 'text-success'}}">{{ $employee->status }}</td>
+                <td>{{ $employee->category }}</td>
                 <td class="d-flex">
                   <a href="{{ route('resigned', $employee->id) }}" class="btn btn-sm btn-info">Resigned</a>
                 </td>
@@ -152,12 +158,12 @@
             <label for="">Category</label>
             <div class="form-row d-flex mb-5">
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="regular" name="category" class="custom-control-input">
-                <label class="custom-control-label" for="regular" style="font-size: 1.1rem">Regular Employee</label>
+                <input type="radio" id="regular" name="category" class="custom-control-input" value="Regular">
+                <label class="custom-control-label" for="regular" style="font-size: 1.1rem">Regular</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="partime" name="category" class="custom-control-input">
-                <label class="custom-control-label" for="partime" style="font-size: 1.1rem">Partime Employee</label>
+                <input type="radio" id="partime" name="category" class="custom-control-input" value="Partime">
+                <label class="custom-control-label" for="partime" style="font-size: 1.1rem">Partime</label>
               </div>
             </div>
             <hr>
@@ -165,12 +171,12 @@
             <div class="form-row d-flex align-items-center">
               <div class="col-md-5 mb-3">
                 <label for="employeeID">Employee ID</label>
-                <input type="text" name="employee_id" class="form-control" style="font-weight: bold; color: black; font-size: 1.2rem" id="employeeID" disabled>
+                <input type="text" name="employee_id" class="form-control" id="employeeID" style="font-weight: bold; color: black; font-size: 1.2rem" >
               </div>
               <div class="col-md-5 mb-3">
                 <label for="password">{{ __('Password') }}</label>
                 <div class="input-group">
-                  <input id="password" type="text" class="form-control" style="font-weight: bold; color: black; font-size: 1.2rem" name="password" disabled>
+                  <input type="text" name="password" class="form-control" id="password" style="font-weight: bold; color: black; font-size: 1.2rem">
                 </div>
               </div>
               <div class="col-md-2 mb-3">
@@ -224,7 +230,6 @@
 	    correctLevel : QRCode.CorrectLevel.H
     });
 
-    alert(qr_token);
     document.getElementById('qrTokenInput').value = qr_token;
     document.getElementById('password').value = emp_pass;
     document.getElementById('employeeID').value = generateId({{ $count }});

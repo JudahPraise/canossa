@@ -25,7 +25,7 @@
                  <form class="login-form text-center" action="{{ route('employee.login.submit') }}" method="POST">
                     @csrf
                      <div class="container d-flex align-items-center d-lg-none d-sm-block mb-4">
-                         <img src="./images/circle-logo.png" alt="" height="60" width="60">
+                         <img src="{{ asset('img/circle-logo.png') }}" alt="" height="60" width="60">
                          <h1 class="ml-2 mt-1" style="font-weight: bolder; color: #0179C7;">CHRMIS</h1>
                      </div>
                      <div class="container mb-4">

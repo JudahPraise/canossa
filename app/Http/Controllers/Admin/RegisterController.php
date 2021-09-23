@@ -16,9 +16,22 @@ class RegisterController extends Controller
     {
         $employees = User::orderBy('lname', 'ASC')->paginate(10);
         $count = User::all()->count();
-        return view('admin.manage-accounts.index', compact('employees', 'count'));
+        $category = 'All';
+        return view('admin.manage-accounts.index', compact('employees', 'count'))->with('category', $category);
     }
 
+    public function getCategory(Request $request)
+    {
+        if($request->category === 'All'){
+
+            return redirect()->route('accounts.index');
+
+        }
+        $employees = User::where('category','=',$request->category)->orderBy('lname', 'ASC')->paginate(10);
+        $count = User::all()->count();
+        $category = $request->category;
+        return view('admin.manage-accounts.index', compact('employees', 'count'))->with('category', $category);
+    }
     /**
      * Get a validator for an incoming registration request.
      *
@@ -51,7 +64,9 @@ class RegisterController extends Controller
         $employee->sex = $request->input('sex');    
         $employee->dob = $request->input('dob');    
         $employee->role = $request->input('role');    
+        $employee->category = $request->input('category');    
         $employee->department = $request->input('department');
+        $employee->qr_token = $request->input('qr_token');
         $employee->password = Hash::make($request->input('password'));
 
         $employee->save();

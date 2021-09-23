@@ -49,7 +49,7 @@ Route::prefix('admin')->group(function(){
     //Manage Accounts
     Route::prefix('/manage-accounts')->group(function(){
         Route::get('/', 'Admin\RegisterController@index')->name('accounts.index');
-        // Route::get('/employees', 'Admin\RegisterController@fetchEmployees')->name('accounts.fetch');
+        Route::get('/fetch', 'Admin\RegisterController@getCategory')->name('accounts.fetch.category');
         Route::post('/register', 'Admin\RegisterController@post')->name('register.post');
         Route::delete('/remove/{id}', 'Admin\RegisterController@destroy')->name('register.delete');
     });
