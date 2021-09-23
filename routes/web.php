@@ -31,6 +31,7 @@ Route::prefix('admin')->group(function(){
     Route::post('password-reset', 'Admin\ResetPasswordController@reset')->name('admin.password.update');
     Route::get('/password-reset/{token}', 'Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('/fetch', 'AdminController@getCategory')->name('admin.fetch.category');
     //Admins
     Route::prefix('/admins')->group(function(){
         Route::get('/', 'Admin\AdminsController@index')->name('admin.accounts');
@@ -65,8 +66,9 @@ Route::prefix('admin')->group(function(){
     });
     //Feedback
     Route::get('/employee-feedback', 'Admin\FeedbackController@index')->name('admin.feedback.index');
-    //Archive
+    //Resigned Employee
     Route::get('/resigned/{id}', 'ResignController@resign')->name('resigned');
+    Route::get('/retrieved/{id}', 'ResignController@retrieve')->name('retrieve');
 
 });
 

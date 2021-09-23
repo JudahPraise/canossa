@@ -14,7 +14,8 @@ class RegisterController extends Controller
 
     public function index()
     {
-        $employees = User::orderBy('lname', 'ASC')->paginate(10);
+        $employees = User::where('category','Regular')->orWhere('category','Part Time')->orderBy('lname', 'ASC')->get();
+        // dd($employees);
         $count = User::all()->count();
         $category = 'All';
         return view('admin.manage-accounts.index', compact('employees', 'count'))->with('category', $category);
@@ -27,7 +28,7 @@ class RegisterController extends Controller
             return redirect()->route('accounts.index');
 
         }
-        $employees = User::where('category','=',$request->category)->orderBy('lname', 'ASC')->paginate(10);
+        $employees = User::where('category','=',$request->category)->orderBy('lname', 'ASC')->get();
         $count = User::all()->count();
         $category = $request->category;
         return view('admin.manage-accounts.index', compact('employees', 'count'))->with('category', $category);

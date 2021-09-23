@@ -24,10 +24,24 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $employees = User::where('status','=','active')->orderBy('lname', 'ASC')->paginate(5);
+        $employees = User::where('category','Regular')->orWhere('category','Part Time')->orderBy('lname', 'ASC')->get();
         $teachers = $employees->where('role','=','Teacher')->count();
         $staffs = $employees->where('role','=','Staff')->count();
         $maintenance = $employees->where('role','=','Maintenance')->count();
-        return view('admin.home.dashboard', compact(['employees', 'staffs', 'maintenance', 'teachers']));
+        $category = 'All';
+        return view('admin.home.dashboard', compact(['employees', 'staffs', 'maintenance', 'teachers']))->with('category', $category);
+    }
+
+    public function getCategory(Request $request)
+    {
+        if($request->category === 'All'){
+
+            return redirect()->route('accounts.index');
+
+        }
+        $employees = User::where('category','=',$request->category)->orderBy('lname', 'ASC')->get();
+        $count = User::all()->count();
+        $category = $request->category;
+        return view('admin.manage-accounts.index', compact('employees', 'count'))->with('category', $category);
     }
 }

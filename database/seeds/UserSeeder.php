@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         $user->role = 'Teacher';
         $user->department = 'College';
         $user->image = '';
-        $user->category = "Regular Employee";
+        $user->category = "Regular";
         $user->qr_token = "q0m59krrf9nm92wzinbuek";
 
         $user->save();
