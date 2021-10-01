@@ -15,6 +15,7 @@
   @component('components.alerts')@endcomponent
 
    <div class="container break-container">
+      
       <h2 class="mb-3">Update Account Information</h3>
       <form>
           <div class="form-group">

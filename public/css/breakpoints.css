@@ -32,7 +32,7 @@
 @media only screen and (min-width: 992px) {
    .break-container{
        /* border: 5px solid green; */
-        width: 75%;
+        width: 70%;
    }
    .break-input{
       width: 100%!important;
@@ -42,7 +42,7 @@
 @media only screen and (min-width: 1200px) {
    .break-container{
        /* border: 5px solid black; */
-        width: 70%;
+        width: 60%;
    }
    .break-input{
       width: 30%!important;
