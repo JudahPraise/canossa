@@ -19,7 +19,6 @@
 
     <!-- Icons-->
     <link href="{{ asset('core-ui/css/free.min.css') }}" rel="stylesheet"> <!-- core-ui icons -->
-    <link href="{{ asset('core-ui/css/flag-icon.min.css') }}" rel="stylesheet"> <!-- core-ui icons -->
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
 
     <!-- Fonts -->
@@ -62,8 +61,7 @@
     <script type="text/javascript" src="{{ asset('core-ui/js/tooltips.js') }}"></script>
     <script type="text/javascript" src="{{ asset('core-ui/js/coreui.bundle.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('core-ui/js/coreui-utils.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('core-ui/js/main.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('core-ui/js/app.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('core-ui/js/main.js') }}"></script> --}}
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
 

@@ -16,7 +16,7 @@
     <div class="container break-container">
         <div class="row px-3 mb-3 d-flex justify-content-between">
           <h2 class="mb-3">Update Account Information</h3>
-          <button class="btn btn-sm btn-success"><a href="{{ route('admin.create') }}" >Add Admin </a></button>
+          <button class="btn btn-sm btn-success"><a href="{{ route('admin.create') }}" class="text-white">Add Admin </a></button>
         </div>
         <div class="table-responsive">
             <table class="table align-items-center table-flush" id="myTable">

@@ -46,6 +46,7 @@ class UserSeeder extends Seeder
             'name' => $user->fullName(),
             'employee_id' => $user->employee_id,
             'admin_id' => 'CADM-210922-01',
+            'dep_pos' => 'Human Resource',
             'password' => Hash::make('password')
         ]);
         

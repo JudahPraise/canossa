@@ -12,7 +12,7 @@
 @endsection
 
 @section('home')
-
+    @component('components.alerts')@endcomponent
     <div class="container break-container">
         <h2 class="mb-3">Assign Administrator</h3>
         <div class="form-group position-relative">
@@ -24,22 +24,94 @@
             </div>
             <div id="matchList" class="list-group position-absolute w-100" style="z-index: 1"></div>
         </div>
-        <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        @if (!empty($employee))
+            <div class="container px-2">
+                <h3>Employee Information</h3>
+                <div class="row row-cols-md-2">
+                    <div class="col-8">
+                        <span>Name</span>
+                        <h3>{{ $employee->fullName() }}</h3>
+                        <span>Employee ID</span>
+                        <h3>{{ $employee->employee_id }}</h3>
+                    </div>
+                    <div class="col-4">
+                        <div class="col d-flex justify-content-end align-items-center">
+                            @if (!empty($employee->image))
+                                <img src="{{ asset( 'storage/images/'.$employee->image) }}" width="130">
+                            @else
+                                <img src="{{ $employee->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}" width="100">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <form onsubmit="return false">
+                    @csrf
+                    <h3>Account Information</h3>
+                    <input value="{{ $employee->id }}" id="empId" hidden>
+                    <div class="form-row mb-3">
+                        <div class="col">
+                            <label for="formGroupExampleInput">Example label</label>
+                            <input type="text" class="form-control" placeholder="Admin ID" id="adminId" style="font-weight: bold; color: black;">
+                        </div>
+                        <div class="col">
+                            <label for="selectDepartment">Department</label>
+                            <select class="form-control" id="selectDepartment">
+                                <option  disabled selected>Select department...</option>
+                                <option value="1">Director</option>
+                                <option value="2">Elementary</option>
+                                <option value="3">Secondary</option>
+                                <option value="4">Tertiary</option>
+                                <option value="5">Human Resource</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <label for="admPass">Password</label>
+                        <div class="input-group is-invalid">
+                            <input type="text" class="form-control" id="adminPass" placeholder="Password" style="font-weight: bold; color: black;" required>
+                            <div class="input-group-append">
+                               <button type="button" class="btn btn-success" type="button" id="generatePassword">Generate</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row w-100 d-flex justify-content-center p-3">
+                        <button class="btn btn-primary text-center" data-toggle="modal" data-target="#confirmModal" id="assignBtn">Assign as Administrator</button>
+                    </div>
+                </form>
+                <!-- Confirm Modal -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="confirmModalLabel">Confirm Password</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            {{-- <h2>Are you sure you want to assign {{ $employee->name }} as administrator from medical records?</h2> --}}
+                            <form id="confirmForm" action="{{ route('admin.assign') }}" method="POST">
+                                @csrf
+                                <input type="text" hidden name="admin_id" id="adm_Id">
+                                <input type="text" hidden name="admin_pass" id="adm_Pass">
+                                <input type="text" hidden name="employee_id" id="emp_Id">
+                                <input type="text" hidden name="admin_pos" id="adm_pos">
+                                <div class="form-group">
+                                  <label for="exampleInputPassword1">Password</label>
+                                  <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" onclick="document.getElementById('confirmForm').submit()">Confirm</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+        @endif
     </div>
 @endsection
 
@@ -57,7 +129,10 @@
         <script>
             const search = document.getElementById('search');
             const matchList = document.getElementById('matchList');
-    
+            const selectDepartment = document.getElementById('selectDepartment');
+            const generatePassword = document.getElementById('generatePassword');
+            const assignBtn = document.getElementById('assignBtn');
+
             const searchEmployees = async searchText => {
                 const res = await fetch('{{ route('admin.getEmployees') }}');
                 const employees = await res.json();
@@ -72,7 +147,6 @@
                     matchList.innerHTML = '';
                 }
     
-                console.log(matches);
                 outputHtml(matches);
             };
     
@@ -93,5 +167,37 @@
             }
     
             search.addEventListener('input', () => searchEmployees(search.value));
+            selectDepartment.addEventListener('change', function(){
+                var id = parseInt(this.value, 10);
+                 const adminId = document.getElementById('adminId').value = generateId(id);
+            });
+
+            function generateId(d) {  
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear().toString().substr(-2);
+                var next_emp = d;
+                var emp_id = (next_emp < 10) ? '0' + next_emp.toString() : next_emp.toString();
+                id = "CADM"+"-"+yyyy+mm+dd+"-"+emp_id;  
+
+                return id;  
+
+                //CEMP-20210922-01 - Employee
+                //CADM-20210922-01 - Admin
+            } 
+
+            generatePassword.addEventListener('click', function (){
+                var adm_pass = Math.random().toString(36).slice(-8);
+                document.getElementById('adminPass').value = adm_pass;
+            });
+
+            assignBtn.addEventListener('click', function (){
+                document.getElementById('adm_Id').value = document.getElementById('adminId').value
+                document.getElementById('adm_Pass').value = document.getElementById('adminPass').value
+                document.getElementById('emp_Id').value = document.getElementById('empId').value
+                document.getElementById('adm_pos').value = selectDepartment.options[selectDepartment.selectedIndex].text
+            })
+
         </script>
 @endsection

@@ -38,6 +38,7 @@ Route::prefix('admin')->group(function(){
         Route::get('/create-admin','Admin\AdminsController@create')->name('admin.create');
         Route::get('/getEmployees','Admin\AdminsController@getEmployees')->name('admin.getEmployees');
         Route::get('/getEmployee/{id}', 'Admin\AdminsController@getEmployee')->name('admin.getEmployee');
+        Route::post('/assign-as-admin', 'Admin\AdminsController@assignAdmin')->name('admin.assign');
     });
     //Account
     Route::prefix('/account')->group(function(){

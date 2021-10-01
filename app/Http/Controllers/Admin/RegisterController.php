@@ -86,8 +86,6 @@ class RegisterController extends Controller
             'graduate_study' => null
         ]);
 
-        $data = "Hello World";
-
         // dd($data);
 
         return redirect()->route('accounts.index')->with('success', 'Employee registered successfully!');
