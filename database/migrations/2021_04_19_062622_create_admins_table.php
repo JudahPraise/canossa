@@ -22,6 +22,7 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->string('user_id')->nullable();
             $table->string('dep_pos');
+            $table->string('desc_id');
             $table->mediumText('image')->nullable();
             $table->rememberToken();
             $table->timestamps();

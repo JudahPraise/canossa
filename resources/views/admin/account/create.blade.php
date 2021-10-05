@@ -58,11 +58,9 @@
                             <label for="selectDepartment">Department</label>
                             <select class="form-control" id="selectDepartment">
                                 <option  disabled selected>Select department...</option>
-                                <option value="1">Director</option>
-                                <option value="2">Elementary</option>
-                                <option value="3">Secondary</option>
-                                <option value="4">Tertiary</option>
-                                <option value="5">Human Resource</option>
+                                @foreach ($descriptions as $description)
+                                    <option value="{{ $description->id }}">{{ $description->description }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -111,6 +109,11 @@
                     </div>
                 </div>
             </div>
+        @else
+        <div class="row d-flex flex-column align-items-center justify-content-center mt-5">
+            <img src="{{ asset('SVG/search.svg') }}" width="100">
+            <p class="pt-3">Waiting to search!</p>
+        </div>
         @endif
     </div>
 @endsection

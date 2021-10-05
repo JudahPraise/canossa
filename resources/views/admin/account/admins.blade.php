@@ -22,8 +22,8 @@
             <table class="table align-items-center table-flush" id="myTable">
               <thead>
                 <tr class="border" style="color: black">
-                  <th scope="col">ID</th>
                   <th scope="col">Name</th>
+                  <th scope="col">Department</th>
                   <th scope="col">Employee ID</th>
                   <th scope="col">Admin ID</th>
                   <th scope="col">Action</th>
@@ -32,12 +32,12 @@
              <tbody>
                @foreach ($admins as $admin)
                  <tr class="border">
-                   <td>{{ $admin->id }}</td>
                    <td>{{ $admin->name }}</td>
+                   <td>{{ $admin->dep_pos }}</td>
                    <td>{{ $admin->employee_id  }}</td>
                    <td>{{ $admin->admin_id  }}</td>
                    <td>
-                    <button class="btn btn-sm btn-warning">Change User</button>
+                    <a href="{{ route('admin.create') }}" class="btn btn-sm btn-warning">Change User</a>
                    </td>
                  </tr>
                @endforeach
