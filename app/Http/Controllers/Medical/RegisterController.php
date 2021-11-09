@@ -30,10 +30,11 @@ class RegisterController extends Controller
 
                 $nurse = new Nurse();
 
-                $nurse->name = $employee->name;
+                $nurse->name = $employee->fullname();
                 $nurse->user_id = $employee->id;          
                 $nurse->role = $employee->role;  
-                $nurse->email = $employee->email;
+                $nurse->image = $employee->image;  
+                $nurse->employee_id = $employee->employee_id;
                 $nurse->password = $employee->password;
 
                 $nurse->save();

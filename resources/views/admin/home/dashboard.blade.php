@@ -181,22 +181,22 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script>
   
-  $(document).ready( function () {
-      $('#myTable').DataTable( {
-          responsive:true,
-          searching: false,
-          pagingType: 'simple_numbers',
-          oLanguage: {
-            oPaginate: {
-              sNext: '<span class="pagination-fa"><i class="fa fa-chevron-right" ></i></span>',
-              sPrevious: '<span class="pagination-fa"><i class="fa fa-chevron-left" ></i></span>'
-            }
-          },
-          lengthMenu: [[5], [5]],
-          bInfo: true,
-          bLengthChange: false,
-      } );
-  } );
+    $(document).ready( function () {
+        $('#myTable').DataTable( {
+            responsive:true,
+            searching: false,
+            pagingType: 'simple_numbers',
+            oLanguage: {
+              oPaginate: {
+                sNext: '<span class="pagination-fa"><i class="fa fa-chevron-right" ></i></span>',
+                sPrevious: '<span class="pagination-fa"><i class="fa fa-chevron-left" ></i></span>'
+              }
+            },
+            lengthMenu: [[5], [5]],
+            bInfo: true,
+            bLengthChange: false,
+        } );
+    } );
 
   function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
@@ -220,8 +220,8 @@
 
 @endsection
 
-@section('js')
+@section('js')  
     {{-- DataTable --}}
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('vendor\datatables\dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
 @endsection

@@ -79,7 +79,16 @@
               </tr>
             @empty
               <tr class="text-center">
-                <td colspan="5">No documents</td>
+                <td colspan="5">
+                  <div class="container">
+                    <div class="row py-2">
+                      <div class="container-fluid d-flex flex-column align-items-center p-1" data-toggle="modal" data-target="#addModal">
+                        <img src="{{ asset('SVG/undraw_empty_street.svg') }}" alt="" srcset="" height="250" width="250">
+                        <span>Nothing in here</span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
               </tr>
             @endforelse
           </tbody>

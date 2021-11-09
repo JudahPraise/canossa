@@ -74,7 +74,7 @@
         </div> --}}
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"  id="destPopuler">
             @forelse ($employees as $employee)
-                <a href="{{ route('medical.show', $employee->id) }}" class="emp">
+                <a href="{{ route('employee.show', $employee->id) }}" class="emp">
                     <div class="col mb-2">
                         <div class="card"> 
                             <div class="card-body">

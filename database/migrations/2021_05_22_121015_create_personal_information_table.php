@@ -25,10 +25,6 @@ class CreatePersonalInformationTable extends Migration
             $table->string('sex');
             $table->string('citizenship');
             $table->string('civil_status');
-            $table->float('height', 5, 2);
-            $table->float('weight', 5, 2);
-            $table->float('bmi', 5, 2)->nullable();
-            $table->string('blood_type');
             $table->mediumText('address');
             $table->string('zip_code');
             $table->string('tel_number')->nullable();

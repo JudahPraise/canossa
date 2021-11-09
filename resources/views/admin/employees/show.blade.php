@@ -21,7 +21,7 @@
             <div class="container-fluid d-flex align-items-center">
               <div class="row p-3 w-100">
                 <div class="col-lg-7 col-md-10">
-                    <h1 class="display-2 text-white">{{ $employee->name }}</h1>
+                    <h1 class="display-2 text-white">{{ $employee->fullName() }}</h1>
                     <h2 class="text-white mt-0">{{ $employee->employee_id }}</h2>
                     <small class="text-white mt-0" style="font-size: 1rem">{{ $employee->department }}</small>
                     <small class="text-white mt-0" style="font-size: 1rem">{{ $employee->role }}</small><br>

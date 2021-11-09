@@ -8,8 +8,7 @@ class PersonalInformation extends Model
 {
     protected $fillable = [
         'user_id','first_name', 'middle_name', 'surname', 'name_extension', 'date_of_birth',
-        'sex', 'citizenship', 'civil_status', 'height', 'weight', 
-        'blood_type', 'address', 'zip_code', 'tel_number', 'cell_number', 
+        'sex', 'citizenship', 'civil_status', 'address', 'zip_code', 'tel_number', 'cell_number', 
         'email_address', 'prc', 'gsis', 'sss', 'pag_ibig', 'driver_license', 'phil_health'
     ];
 

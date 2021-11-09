@@ -43,35 +43,38 @@ class UserSeeder extends Seeder
             'graduate_study' => null
         ]);
 
-        $employee->setFamily()->create([
-            'user_id' => $employee->id,
-            'family_name' => $employee->fullName(),
+        $user->setFamily()->create([
+            'user_id' => $user->id,
+            'family_name' => $user->fullName(),
+        ]);
+
+        $user->record()->create([
+            'user_id' => $user->id,
+            'year_from' => '2021',
+            'year_to' => '2022'
         ]);
 
         AdminDescription::create([
             'description' => 'Director',
         ]);
         AdminDescription::create([
-            'description' => 'Elementary Department',
+            'description' => 'Data Officer',
         ]);
         AdminDescription::create([
-            'description' => 'JHS Department',
+            'description' => 'IT Administrator',
         ]);
         AdminDescription::create([
-            'description' => 'SHS Department',
-        ]);
-        AdminDescription::create([
-            'description' => 'College Department',
+            'description' => 'School Nurse',
         ]);
         AdminDescription::create([
             'description' => 'Human Resource',
-            'admin_id' => 'CADM-210922-06'
+            'admin_id' => 'CADM-210922-05'
         ]);
 
         Admin::create([
             'name' => $user->fullName(),
             'employee_id' => $user->employee_id,
-            'admin_id' => 'CADM-210922-06',
+            'admin_id' => 'CADM-210922-05',
             'dep_pos' => 'Human Resource',
             'desc_id' => '6',
             'user_id' => $user->id,

@@ -29,7 +29,7 @@ class DashboardController extends Controller
         $hospital = Hospitalization::where('employee_id','=',$id)->latest()->first();
         $labtest = LabTest::where('user_id','=',$id)->latest()->first();
         $histories = PersonalHistory::where('user_id','=',$id)->latest()->first();
-        $illnesses = Illness::where('name','=',$input)->get();
+        $illnesses = Illness::where('illness','=',$id)->get();
         return view('medical-record.dashboard.show', compact(['user','diagnosis','physical','hospital','labtest','illnesses','histories']));
     }
 }

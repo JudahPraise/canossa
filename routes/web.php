@@ -229,9 +229,12 @@ Route::prefix('employee')->group(function(){
     });
     //Medical Record
     Route::prefix('/medical-record')->group(function(){
-        Route::get('/{id}', 'Employee\RecordController@index')->name('record.index');
-        Route::post('/upload-labtest', 'Employee\RecordController@store')->name('record.store');
-        Route::put('/update-labtest/{id}', 'Employee\RecordController@update')->name('record.update');
+        Route::get('/', 'Employee\MedicalRecord\MedicalRecordController@index')->name('record.index');
+        //Labtest
+        Route::prefix('/lab-test')->group(function(){
+            Route::post('/upload-labtest/{id}', 'Employee\MedicalRecord\LabTestController@store')->name('employee.labtest.store');
+            // Route::put('/update-labtest/{id}', 'Employee\RecordController@update')->name('record.update');
+        });
     });
     //Settings
     Route::get('/settings', 'Employee\SettingsController@index')->name('settings');

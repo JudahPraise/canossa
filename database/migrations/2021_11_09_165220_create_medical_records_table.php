@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonalHistoriesTable extends Migration
+class CreateMedicalRecordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreatePersonalHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('personal_histories', function (Blueprint $table) {
-
+        Schema::create('medical_records', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->json('illnesses')->nullable();
+            $table->string('year_from');
+            $table->string('year_to');
             $table->timestamps();
-            
         });
     }
 
@@ -31,6 +30,6 @@ class CreatePersonalHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personal_histories');
+        Schema::dropIfExists('medical_records');
     }
 }

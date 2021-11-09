@@ -15,8 +15,8 @@
       <form action="{{ route('nurse.login.submit') }}" method="POST">
         @csrf
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="exampleInputEmail1">Employee ID</label>
+          <input type="text" class="form-control" name="employee_id" id="exampleInputEmail1">
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">

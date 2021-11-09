@@ -2,31 +2,45 @@
 
 namespace App\Http\Controllers\Employee;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\User;
+use App\LabTest;
 use App\Diagnosis;
 use App\PhysicalExam;
+use App\MedicalRecord;
 use App\Hospitalization;
-use App\LabTest;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class RecordController extends Controller
 {
     public function index($id)
     {
         $user = User::where('id','=',$id)->with('personal')->first();
-        $diagnosis = Diagnosis::where('user_id','=',$id)->latest()->first();
-        $physical = PhysicalExam::where('employee_id','=',$id)->latest()->first();
-        $hospital = Hospitalization::where('employee_id','=',$id)->latest()->first();
-        $labtest = LabTest::where('user_id','=',$id)->latest()->first();
-        return view('employee.medical.index', compact(['user','diagnosis','physical','hospital','labtest']));
+        // $diagnosis = Diagnosis::where('user_id','=',$id)->latest()->first();
+        // $physical = PhysicalExam::where('user_id','=',$id)->latest()->first();
+        // $hospital = Hospitalization::where('user_id','=',$id)->latest()->first();
+        // $labtest = LabTest::where('user_id','=',$id)->latest()->first();
+        // return view('employee.medical.index', compact(['user','diagnosis','physical','hospital','labtest']));
+        return view('employee.medical.index', compact('user'));
     }
 
     public function store(Request $request){
+        $labtest = new LabTest();  
 
-        $labtest = new LabTest();
+        $record = MedicalRecord::create([
+            'user_id' => auth()->user()->id,
+            'hospitalization' => false,
+            'recent_physical_exam' => false,
+            'personal_history' => false,
+            'medications' => false,
+            'immunizations' => false,
+            'labtest' => true
+        ]);
+
+        // dd($record->id);
 
         $labtest->user_id = auth()->user()->id;
+        $labtest->record_id = $record->id;
         $labtest->type = $request->input('type');
 
         if($request->hasFile('file')){
@@ -39,7 +53,7 @@ class RecordController extends Controller
             $labtest->extension = $extension;
         }
         
-        User::where('id','=',auth()->id())->update([
+        User::where('id','=',auth()->user()->id)->update([
             'labtest' => 'true'
         ]);
 

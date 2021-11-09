@@ -50,6 +50,7 @@ class AdminsController extends Controller
             $employee = User::where('id','=',$request->employee_id)->first();
             $fullname = $employee->lname.','.$employee->fname.','.$employee->mname.','.$employee->extname;
             $admins = Admin::where('desc_id','=',$get_description->admin_id)->first();
+
             if(!empty($admins)){
 
                 AdminDescription::where('description','=',$request->admin_pos)->update([

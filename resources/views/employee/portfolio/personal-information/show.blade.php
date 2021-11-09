@@ -28,24 +28,6 @@
                         <strong style="color: black; font-size: 1.3rem">{{ $personal->civil_status }}</strong>
                     </div>
                 </div>
-                <div class="row row-cols-2 row-cols-md-4 mt-3">
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">Height</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->height }}</strong>
-                    </div>
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">Weight</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->weight }}</strong>
-                    </div>
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">BMI</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->bmi }}</strong>
-                    </div>
-                    <div class="col mb-3 d-flex flex-column">
-                        <strong style="font-size: 1rem">Blood Type</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->blood_type }}</strong>
-                    </div>
-                </div>
                 <hr>
                 <strong style="color: black; font-size: 1.5rem">Contact Information</strong>
                 <div class="row row-cols-2 row-cols-md-2 mt-3">

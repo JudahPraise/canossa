@@ -23,7 +23,7 @@
         </div>
     </div>
     
-    <div class="row p-2">
+    <div class="row p-4">
         @yield('personal')
     </div>
 </div>

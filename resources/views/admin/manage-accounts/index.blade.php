@@ -289,7 +289,7 @@
 
   </script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      
     {{-- DataTable --}}
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>

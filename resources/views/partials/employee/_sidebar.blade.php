@@ -48,7 +48,7 @@
     </a>
   </li>
   <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="{{ route('record.index', Auth::guard('web')->user()->id) }}">
+    <a class="c-sidebar-nav-link" href="{{ route('record.index') }}">
       <svg class="c-sidebar-nav-icon">
         <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-medical-cross') }}"></use>
       </svg>

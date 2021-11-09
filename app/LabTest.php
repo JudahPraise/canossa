@@ -2,17 +2,14 @@
 
 namespace App;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class LabTest extends Model
 {
-    protected $fillable = [
-        'id', 'file', 'extension', 'type'
-    ];
+    protected $fillable = ['record_id','type','file','extension'];
 
-    public function user()
+    public function record()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(MedicalRecord::class, 'record_id');
     }
 }

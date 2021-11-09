@@ -16,8 +16,10 @@ class CreateLabTestsTable extends Migration
         Schema::create('lab_tests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('type');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('record_id');
+            $table->foreign('record_id')->references('id')->on('medical_records');
+            $table->string('type');
             $table->mediumText('file');
             $table->string('extension');
             $table->timestamps();

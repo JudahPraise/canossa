@@ -84,7 +84,7 @@
     </div>
   </div>
 
-  {!! QrCode::size(100)->generate('{{ Auth::user()->qr_token }}'); !!}
+  {{-- {!! QrCode::size(100)->generate('{{ Auth::user()->qr_token }}'); !!} --}}
 </div>
 
 <!-- Create Modal -->

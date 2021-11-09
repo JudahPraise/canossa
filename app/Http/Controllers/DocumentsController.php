@@ -22,7 +22,6 @@ class DocumentsController extends Controller
 
     public function store(Request $request){
 
-            
         $document = new Document();
 
         $document->user_id = auth()->id();

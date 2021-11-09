@@ -33,6 +33,7 @@ class User extends Authenticatable
     'qr_token'];
 
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -51,23 +52,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function diagnosis()
-    {
-        return $this->hasOne(Diagnosis::class, 'user_id')->latest();
-    }
-
-    public function illness()
-    {
-        return $this->hasOne(PersonalHistory::class, 'user_id')->latest();
-    }
-
     public function documents(){
         return $this->hasMany(Document::class);
-    }
-
-    public function labTest(){
-        return $this->hasOne(LabTest::class)->latest();
     }
 
     public function schedules(){
@@ -112,6 +98,11 @@ class User extends Authenticatable
     public function feedback()
     {
         return $this->hasOne(Feedback::class, 'user_id');
+    }
+
+    public function record()
+    {
+        return $this->hasMany(MedicalRecord::class);
     }
 
     public function getAge() {
