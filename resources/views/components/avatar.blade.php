@@ -15,7 +15,7 @@
             <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" onchange="document.getElementById('uploadForm').submit()" hidden/>
         </form>
         <a href="#" onclick="document.getElementById('imageUpload').click()">
-          <img src="{{ asset( 'storage/images/'.$user->image) }}" class="rounded-circle" style="height: 150px; width: 150px; overflow: hidden;">
+          <img src="{{ asset( 'storage/images/'.$image) }}" class="rounded-circle" style="height: 150px; width: 150px; overflow: hidden;">
         </a>
     @endif
 </div>

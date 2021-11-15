@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('employee.labtest.store', Request::get('school_year')) }}" method="POST" enctype="multipart/form-data" id="uploadFile">
+        <form action="{{ route('employee.labtest.store', !empty(Request::get('school_year')) ? Request::get('school_year') : $latestRecord) }}" method="POST" enctype="multipart/form-data" id="uploadFile">
           @csrf
           <div class="form-row d-flex flex-column">
             <div class="form-row mb-3">
@@ -36,48 +36,6 @@
     </div>
   </div>
 </div>
-
-@if (!empty($file))
-  <!-- Show File Modal -->
-  <div class="modal fade" id="{{ $showFile }}" tabindex="-1" aria-labelledby="showFileModelLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="showFileModelLabel">Lab Test</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <img style="width: 100%" src="{{ asset('storage/labtests/'.$file) }}" alt="" srcset="">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Delete Modal -->
-  <div class="modal fade" id="{{ $deleteFile }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="deleteFileModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteFileModalLabel">Delete file</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete this file?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
-@endif
 
 <script>
     

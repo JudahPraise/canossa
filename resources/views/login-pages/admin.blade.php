@@ -27,7 +27,7 @@
                         </div>
                     @endif
                      <div class="form-group">
-                         <input type="text" name="admin_id" class="form-control rounded-pill form-control-lg bg-transparent" placeholder="Admin ID" value="CADM-210922-05" required>
+                         <input type="text" name="admin_id" class="form-control rounded-pill form-control-lg bg-transparent" placeholder="Admin ID" required>
                      </div>
                      <div class="form-group">
                          <input type="password" name="password" class="form-control rounded-pill form-control-lg bg-transparent" placeholder="Password" required>

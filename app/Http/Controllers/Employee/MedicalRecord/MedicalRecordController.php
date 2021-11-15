@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Employee\MedicalRecord;
 
 use App\User;
+use App\Immunization;
 use App\MedicalRecord;
+use App\Hospitalization;
+use App\EmployeeMedication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
 class MedicalRecordController extends Controller
@@ -14,12 +18,12 @@ class MedicalRecordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $user = User::where('id','=',auth()->user()->id)->with('personal')->first();
-        $records = MedicalRecord::where('user_id','=',auth()->user()->id)->get();
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests')->find($request->school_year);
-        return view('employee.medical.index', compact('user', 'record', 'records'));
+        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests','hospitalizations','medications','immunizations')->first();
+        // dd($record->hospitalizations);
+        return view('employee.medical.index', compact('user', 'record'));
     }
 
     /**
@@ -29,7 +33,8 @@ class MedicalRecordController extends Controller
      */
     public function create()
     {
-        //
+        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('hospitalizations')->first();
+        return view('employee.medical.create', compact('record'));
     }
 
     /**
@@ -40,7 +45,16 @@ class MedicalRecordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::where('id','=',auth()->user()->id)->with('records')->first();
+        $record = new MedicalRecord();
+
+        $record->year_from = $request->year_from;
+        $record->year_to = $request->year_to;
+
+        $user->records()->save($record);
+
+        return redirect()->route('record.index')->with('success', 'School year updated!');
+
     }
 
     /**
@@ -49,9 +63,11 @@ class MedicalRecordController extends Controller
      * @param  \App\MedicalRecord  $medicalRecord
      * @return \Illuminate\Http\Response
      */
-    public function show(MedicalRecord $medicalRecord)
+    public function show(Request $request, $id)
     {
-        //
+        $user = User::where('id','=',auth()->user()->id)->with('personal')->first();
+        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests','hospitalizations')->first();
+        return view('employee.medical.index', compact('user', 'record', 'records'));
     }
 
     /**
@@ -86,5 +102,53 @@ class MedicalRecordController extends Controller
     public function destroy(MedicalRecord $medicalRecord)
     {
         //
+    }
+
+    public function storeRecord(Request $request, $id)
+    {
+        if(!empty($request->disease))
+        {
+            $hospitalization = new Hospitalization();
+
+            $hospitalization->record_id = $id;
+            $hospitalization->disease = $request->disease;
+            $hospitalization->d_date = $request->d_date;
+            $hospitalization->operation = $request->operation;
+            $hospitalization->o_date = $request->o_date;
+    
+            $hospitalization->save();
+        }
+
+
+        if(!empty($request->medicine))
+        {
+            $medications = new EmployeeMedication();
+            $medications->record_id = $id;
+            $medications->medicine = $request->medicine;
+            
+            $medications->save();
+        }
+        
+       if(!empty($request->vaccine_recieved))
+       {
+        $immunizations =[];
+
+        foreach ($request->vaccine_recieved as $item => $key) {
+            $immunizations[] = ([
+                'record_id' => $id,
+                'vaccine_recieved' => $request->vaccine_recieved[$item],
+                'status' => $request->status[$item],
+                'brand' => $request->brand[$item],
+                'date' => $request->date[$item],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        Immunization::insert( $immunizations);
+
+       }
+
+        return redirect()->route('record.index')->with('success', 'Record saved!');
     }
 }

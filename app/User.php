@@ -100,9 +100,9 @@ class User extends Authenticatable
         return $this->hasOne(Feedback::class, 'user_id');
     }
 
-    public function record()
+    public function records()
     {
-        return $this->hasMany(MedicalRecord::class);
+        return $this->hasOne(MedicalRecord::class);
     }
 
     public function getAge() {

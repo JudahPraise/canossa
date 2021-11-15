@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMedicalRecordsTable extends Migration
+class CreateEmployeeMedicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMedicalRecordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('medical_records', function (Blueprint $table) {
+        Schema::create('employee_medications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('record_id');
+            $table->foreign('record_id')->references('id')->on('medical_records');
+            $table->json('medicine');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateMedicalRecordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medical_records');
+        Schema::dropIfExists('employee_medications');
     }
 }

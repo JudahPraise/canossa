@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -84,6 +85,15 @@ class RegisterController extends Controller
             'secondary' => null,
             'college' => null,
             'graduate_study' => null
+        ]);
+
+        $now = Carbon::now()->format('Y');
+        $nextYear = Carbon::now()->addYear()->format('Y');
+
+        $employee->records()->create([
+            'user_id' => $employee->id,
+            'year_from' => $now,
+            'year_to' => $nextYear
         ]);
 
         // dd($data);

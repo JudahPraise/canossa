@@ -8,11 +8,13 @@ use Illuminate\View\Component;
 class LabtestFile extends Component
 {
    
-    public $labtest;
+    public $labtests;
+    public $record;
 
-    public function __construct($labtest)
+    public function __construct($labtests, $record)
     {
-        $this->labtest = $labtest;
+        $this->labtests = $labtests;
+        $this->record = $record;
     }
 
     /**

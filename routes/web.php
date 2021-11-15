@@ -230,10 +230,35 @@ Route::prefix('employee')->group(function(){
     //Medical Record
     Route::prefix('/medical-record')->group(function(){
         Route::get('/', 'Employee\MedicalRecord\MedicalRecordController@index')->name('record.index');
+        Route::get('/create/{id}', 'Employee\MedicalRecord\MedicalRecordController@create')->name('record.create');
+        Route::post('/add-record/{id}', 'Employee\MedicalRecord\MedicalRecordController@storeRecord')->name('record.add');
+        Route::get('/show/{id}', 'Employee\MedicalRecord\MedicalRecordController@show')->name('record.show');
+        Route::post('/school-year/update', 'Employee\MedicalRecord\MedicalRecordController@store')->name('record.store');
         //Labtest
         Route::prefix('/lab-test')->group(function(){
             Route::post('/upload-labtest/{id}', 'Employee\MedicalRecord\LabTestController@store')->name('employee.labtest.store');
+            Route::delete('/delete-labtest/{id}', 'Employee\MedicalRecord\LabTestController@destroy')->name('employee.labtest.delete');
+            Route::get('/download-labtest/{id}', 'Employee\MedicalRecord\LabTestController@download')->name('employee.labtest.download');
             // Route::put('/update-labtest/{id}', 'Employee\RecordController@update')->name('record.update');
+        });
+        //Personal History
+        Route::prefix('/history')->group(function(){
+            Route::get('/create', 'Employee\MedicalRecord\PersonalHistoryController@index')->name('employee.history.create');
+            Route::get('/edit/{id}', 'Employee\MedicalRecord\PersonalHistoryController@edit')->name('employee.history.edit');
+        });
+        //Hospitalization
+        Route::prefix('/hospitalization')->group(function(){
+            Route::get('/create', 'Employee\MedicalRecord\HospitalizationController@index')->name('employee.hospitalization.create');
+            Route::post('/store', 'Employee\MedicalRecord\HospitalizationController@store')->name('employee.hospitalization.store');
+            Route::get('/edit/{id}', 'Employee\MedicalRecord\HospitalizationController@edit')->name('employee.hospitalization.edit');
+        });
+        //Medication
+        Route::prefix('/medication')->group(function(){
+            Route::get('/create', 'Employee\MedicalRecord\MedicationController@index')->name('employee.medication.create');
+        });
+        //Immunization
+        Route::prefix('/immunization')->group(function(){
+            Route::get('/create', 'Employee\MedicalRecord\ImmunizationController@index')->name('employee.immunization.create');
         });
     });
     //Settings

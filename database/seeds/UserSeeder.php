@@ -48,10 +48,11 @@ class UserSeeder extends Seeder
             'family_name' => $user->fullName(),
         ]);
 
-        $user->record()->create([
+        // $now = Carbon::now()->format('Y');
+        // $nextYear = Carbon::now()->addYear()->format('Y');
+
+        $user->records()->create([
             'user_id' => $user->id,
-            'year_from' => '2021',
-            'year_to' => '2022'
         ]);
 
         AdminDescription::create([

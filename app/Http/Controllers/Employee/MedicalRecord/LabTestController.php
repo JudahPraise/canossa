@@ -37,8 +37,8 @@ class LabTestController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $record =  $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests')->find($id);
-       
+       $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests')->find($id);
+    
         $labtest = new LabTest();  
 
         $labtest->user_id = auth()->user()->id;
@@ -92,14 +92,20 @@ class LabTestController extends Controller
         //
     }
 
+    public function download($id){
+        $labtest = LabTest::where('id','=',$id)->first();
+        return response()->download(storage_path("app/public/labtests/{$labtest->file}"));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\LabTest  $labTest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LabTest $labTest)
+    public function destroy($id)
     {
-        //
+        LabTest::where('id','=',$id)->delete();
+        return redirect()->back()->with('delete', 'File deleted successfully!');
     }
 }
