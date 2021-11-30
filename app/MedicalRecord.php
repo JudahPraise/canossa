@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\EmployeeMedication;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,15 +20,10 @@ class MedicalRecord extends Model
         return $this->hasMany(LabTest::class, 'record_id');
     }
 
-    // public function currentRecord()
-    // {
-    //     return $this->where('year_from','=',Carbon::now()->format('Y'));
-    // }
-
-    // public function school_year()
-    // {
-    //     return $this->year_from.' '.'-'.' '.$this->year_to;
-    // }
+    public function latestLabtest()
+    {
+       return $this->hasOne(LabTest::class, 'record_id')->latest();
+    }
 
     public function medications()
     {
@@ -42,5 +38,10 @@ class MedicalRecord extends Model
     public function immunizations()
     {
         return $this->hasMany(Immunization::class, 'record_id');
+    }
+
+    public function history()
+    {
+        return $this->hasMany(MedicalHistory::class, 'record_id');
     }
 }

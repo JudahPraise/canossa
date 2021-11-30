@@ -21,8 +21,8 @@ class MedicalRecordController extends Controller
     public function index()
     {
         $user = User::where('id','=',auth()->user()->id)->with('personal')->first();
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests','hospitalizations','medications','immunizations')->first();
-        // dd($record->hospitalizations);
+        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests','hospitalizations','medications','immunizations','history')->first();
+        // dd($record->medications);
         return view('employee.medical.index', compact('user', 'record'));
     }
 
@@ -33,7 +33,7 @@ class MedicalRecordController extends Controller
      */
     public function create()
     {
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('hospitalizations')->first();
+        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->first();
         return view('employee.medical.create', compact('record'));
     }
 
@@ -88,9 +88,9 @@ class MedicalRecordController extends Controller
      * @param  \App\MedicalRecord  $medicalRecord
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MedicalRecord $medicalRecord)
+    public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

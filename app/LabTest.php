@@ -12,4 +12,9 @@ class LabTest extends Model
     {
         return $this->belongsTo(MedicalRecord::class, 'record_id');
     }
+
+    public function latestLabtest()
+    {
+        return $this->latest()->first();
+    }
 }

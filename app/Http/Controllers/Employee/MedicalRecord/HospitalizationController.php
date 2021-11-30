@@ -16,8 +16,7 @@ class HospitalizationController extends Controller
      */
     public function index()
     {
-        $record = MedicalRecord::where('id','=',auth()->user()->id)->with('hospitalizations')->first();
-        return view('employee.medical.record-forms.hospitalization.create', compact('record'));
+        return view('employee.medical.record-forms.hospitalization.create');
     }
 
     /**
@@ -38,7 +37,7 @@ class HospitalizationController extends Controller
      */
     public function store(Request $request)
     {
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('hospitalizations','medications')->first();
+        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('hospitalizations')->first();
 
         $hospitalization = new Hospitalization();
         $hospitalization->disease = $request->disease;
@@ -48,13 +47,11 @@ class HospitalizationController extends Controller
 
         $record->hospitalizations()->save($hospitalization);
 
-        if($record->medications->isEmpty()){
+        if($record->hospitalizations->isEmpty()){
             return redirect()->route('employee.medication.create')->with('success', 'Record save!');
         }
 
         return redirect()->route('record.index')->with('success', 'Record save!');
-
-        
     }
 
     /**
@@ -90,7 +87,14 @@ class HospitalizationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Hospitalization::where('id','=',$id)->update([
+            'disease' => $request->disease,
+            'd_date' => $request->d_date,
+            'operation' => $request->operation,
+            'o_date' => $request->o_date,
+        ]);
+
+        return redirect()->back()->with('udpate', 'Record updated!');
     }
 
     /**
@@ -101,6 +105,7 @@ class HospitalizationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Hospitalization::where('id','=',$id)->first()->delete();
+        return redirect()->back()->with('delete', 'Record deleted!');
     }
 }

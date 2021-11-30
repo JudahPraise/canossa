@@ -3,18 +3,16 @@
 namespace App\View\Components;
 
 use App\LabTest;
+use App\MedicalRecord;
 use Illuminate\View\Component;
 
 class LabtestFile extends Component
 {
    
-    public $labtests;
-    public $record;
-
-    public function __construct($labtests, $record)
+    
+    public function __construct()
     {
-        $this->labtests = $labtests;
-        $this->record = $record;
+        //
     }
 
     /**
@@ -24,7 +22,7 @@ class LabtestFile extends Component
      */
     public function render()
     {
-        // $labtests = LabTest::where('user_id','=',auth()->user()->id)->get();
-        return view('components.lab-test');
+        $record = MedicalRecord::where('id','=',auth()->user()->id)->with('labtests')->get();
+        return view('components.lab-test', compact('record'));
     }
 }

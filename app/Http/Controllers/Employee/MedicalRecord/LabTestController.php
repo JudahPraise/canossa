@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee\MedicalRecord;
 use App\LabTest;
 use App\MedicalRecord;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
 class LabTestController extends Controller
@@ -35,24 +36,28 @@ class LabTestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-       $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests')->find($id);
-    
+       $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests')->first();
+        
         $labtest = new LabTest();  
 
         $labtest->user_id = auth()->user()->id;
         $labtest->type = $request->input('type');
 
+        $date = Carbon::now();
+
         if($request->hasFile('file')){
 
             $file = $request->file('file');
-            $filename = $file->getClientOriginalName();
+            $filename = auth()->user()->lname."_".$date->toDateString();
             $extension = $file->getClientOriginalExtension();
-            $request->file->storeAs('labtests', $filename, 'public');
-            $labtest->file = $filename;
+            $file = $filename.'.'.$extension;
+            $request->file->storeAs('labtests', $file, 'public');
+            $labtest->file = $file;
             $labtest->extension = $extension;
         }
+
         $record->labtests()->save($labtest);
 
         return redirect()->back()->with('success', 'Document saved successfully!');

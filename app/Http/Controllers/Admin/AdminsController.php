@@ -26,7 +26,7 @@ class AdminsController extends Controller
     // AJAX request
     public function getEmployees(Request $request)
     {    
-        $data = User::select('lname','fname','mname','extname','id','role', 'category')->where("lname","LIKE","%{$request->employee_name}%")->where('category','!=','Resigned')->get();
+        $data = User::select('lname','fname','mname','extname','id','role', 'category')->where("lname","LIKE","%{$request->employee_name}%")->where('category','=','Regular')->get();
         return response()->json($data);
     }  
 

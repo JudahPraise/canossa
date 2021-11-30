@@ -126,4 +126,46 @@ class User extends Authenticatable
         return $this->lname.','.' '.$this->fname.','.' '.$this->mname.' '.$this->extname.'.';
     }
 
+    public function shortName()
+    {
+        if($this->extname === null){
+            return $this->lname.','.' '.$this->fname;
+        }
+
+        return $this->lname.','.' '.$this->fname;
+    }
+
+    public function height()
+    { 
+        if(!empty($this->personal->height))
+        {
+            return $this->personal->height.' '."ft";
+        }else
+        {
+            return 'not set';
+        }
+    }
+
+    public function weight()
+    {
+        if(!empty($this->personal->weight))
+        {
+            return $this->personal->weight.' '."kl";
+        }else
+        {
+            return 'not set';
+        }
+    }
+
+    public function bloodType()
+    {
+        if(!empty($this->personal->blood_type))
+        {
+            return $this->personal->blood_type;
+        }else
+        {
+            return 'not set';
+        }
+    }
+
 }

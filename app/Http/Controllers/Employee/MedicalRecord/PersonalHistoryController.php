@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee\MedicalRecord;
 
 use App\MedicalRecord;
+use App\PersonalHistory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,8 +16,8 @@ class PersonalHistoryController extends Controller
      */
     public function index()
     {
-        $record = MedicalRecord::where('id','=',auth()->user()->id)->with('hospitalizations')->first();
-        return view('employee.medical.record-forms.history', compact('record'));
+        $record = MedicalRecord::where('id','=',auth()->user()->id)->with('history')->first();
+        return view('employee.medical.record-forms.history.create', compact('record'));
     }
 
     /**
@@ -37,7 +38,13 @@ class PersonalHistoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('history')->first();
+        $history = new PersonalHistory();
+        $history->illnesses = $request->illnesses;
+
+        $record->history()->save($history);
+
+        return redirect()->route('record.index')->with('success', 'Record save!');
     }
 
     /**
@@ -48,7 +55,7 @@ class PersonalHistoryController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -71,7 +78,12 @@ class PersonalHistoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $history = PersonalHistory::where('id','=',$id)->first();
+        $history->illnesses = $request->illnesses;
+
+        $history->update();
+
+        return redirect()->route('record.index')->with('update', 'Record updated!');
     }
 
     /**

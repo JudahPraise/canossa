@@ -10,10 +10,14 @@ class EmployeeMedication extends Model
         'medicine' => 'array',
     ];
 
-    protected $fillable = ['record_id','medicine'];
+    protected $fillable = ['record_id','name','condition','strength','frequency'];
 
     public function record()
     {
         return $this->belongsTo(MedicalRecord::class);
+    }
+
+    public function mg(){
+        return $this->strength.' '.'mg';
     }
 }

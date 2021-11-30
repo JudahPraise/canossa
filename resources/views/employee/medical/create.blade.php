@@ -36,7 +36,7 @@
         </li>
     </ul>
 
-    <div class="row p-4">
+    <div class="row p-4 mx-3">
         @yield('create-record-section')
     </div>
 
@@ -54,6 +54,7 @@
     <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
     <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <script src="{{ asset('js/employee-medical-record-index.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
 @endsection

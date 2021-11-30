@@ -16,6 +16,7 @@
 @endsection
 
 @section('employee-home')
+@component('components.alerts')@endcomponent
 <div class="row d-flex justify-content-center p-2">
     <div class="col-md-3 shadow bg-white rounded p-3 m-1 d-flex flex-column justify-content-center">
         <div class="row avatar-upload d-flex justify-content-center">
@@ -42,89 +43,51 @@
             </div>
         </div>
         <div class="form-row m-3">
-            <div class="col-md-4 mb-2">
-                <label for="">Height</label>
-                <input type="number" step="0.01" class="form-control" id="height">
-                <small class="font-italic text-muted"><span class="text-danger mr-1">*</span>in ft</small>
+            <div class="col mb-3 d-flex flex-column">
+                <p style="font-size: .8rem">Height</p>
+                <strong style="font-size: 1.1rem">{{ auth()->user()->height() }}</strong>
             </div>
-            <div class="col-md-4 mb-2">
-                <label>Weight</label>
-                <input type="number" step="0.01" class="form-control" id="weight">
-                <small class="font-italic text-muted"><span class="text-danger mr-1">*</span>in kl</small>
+            <div class="col mb-3 d-flex flex-column">
+                <p style="font-size: .8rem">Weight</p>
+                <strong style="font-size: 1.1rem">{{ auth()->user()->weight() }}</strong>
             </div>
-            <div class="col-md-4 mb-2">
-                <label for="">Blood Type</label>
-                <select class="custom-select" id="validationDefault04" name="type">
-                    <option disabled selected>Choose...</option>
-                    <option>A</option>
-                    <option>O</option>
-                    <option>B</option>
-                    <option>AB</option>
-                    <option>A-</option>
-                    <option>O-</option>
-                    <option>B-</option>
-                    <option>AB-</option>
-                </select> 
+            <div class="col mb-3 d-flex flex-column">
+                <p style="font-size: .8rem">Blood Type</p>
+                <strong style="font-size: 1.1rem">{{ auth()->user()->bloodType() }}</strong>
             </div>
         </div>
     </div>
 </div>
 <div class="row p-3 d-flex justify-content-center align-items-start">
     <div class="col-md-7 shadow bg-white rounded">
-        <h2 class="m-3">Medical Record</h2>
-        @if($record->hospitalizations == null || $record->immunizations == null || $record->medications == null)
-            <div class="container">
-                <div class="row py-2">
-                    <a href="{{ route('employee.history.create', $record->id) }}" class="container-fluid d-flex flex-column align-items-center p-1">
-                        <img src="{{ asset('SVG/undraw_create.svg') }}" alt="" srcset="" height="250" width="250">
-                        <span>Create medical record</span>
-                    </a>
-                </div>
+        <span class="w-100 d-flex justify-content-between align-items-center">
+            <h2 class="m-3">Medical Record</h2>
+            <i class="fas fa-ellipsis-h dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <div class="dropdown-menu">
+                <h6 class="dropdown-header">Add Record</h6>
+                <a class="dropdown-item" href="{{ route('employee.history.create') }}">Personal History</a>
+                <a class="dropdown-item" href="{{ route('employee.hospitalization.create') }}">Hospitalization</a>
+                <a class="dropdown-item" href="{{ route('employee.medication.create') }}">Medications</a>
+                <a class="dropdown-item" href="{{ route('employee.immunization.create') }}">Immunization</a>
             </div>
+        </span>
+
+        @if (!empty($record))
+            <x-medical-history></x-medical-history>
+            <x-medication></x-medication>
+            <x-hospitalization></x-hospitalization>
+            <x-immunization></x-immunization>
         @else
-           <section>
-               <div class="row m-3 d-flex justify-content-between align-items-center">
-                    <h3>Hospitalization</h3>
-               </div>
-               <div class="row m-3">
-                    <div class="table-responsive">
-                        <table class="table table-borderless dt-responsive nowrap w-100" id="myTable">
-                            <thead>
-                              <tr>
-                                <th scope="col">Disease</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Operation</th>
-                                <th scope="col">Date</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($record->hospitalizations as $hospitalization)
-                                    <tr>
-                                        <td>{{ $hospitalization->disease }}</td>
-                                        <td>{{ $hospitalization->d_date }}</td>
-                                        <td>{{ $hospitalization->operation }}</td>
-                                        <td>{{ $hospitalization->o_date }}</td>
-                                        <td class="d-flex justify-content-around">
-                                          <a class="text-primary" style="cursor: pointer"><i class="fas fa-pencil-alt mr-2"></i>Edit</a>
-                                          <a class="text-danger" style="cursor: pointer"><i class="fas fa-trash-alt mr-2"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-               </div>
-           </section>
+            
         @endif
+
     </div>
-    <div class="col-md-4">
+
+    {{-- Labtest --}}
+    <div class="col-md-4">  
         <div class="row">
-            <div class="col-md-12 shadow bg-white rounded p-3 m-2">
-                <x-labtestfile :labtests="$record->labtests" :record="$record"></x-labtestfile>
-            </div>
-            <div class="col-md-12 shadow bg-white rounded p-3 m-2">
-                <x-diagnosis></x-diagnosis>
+            <div class="col-md-12 shadow bg-white rounded p-3 mx-2">
+                <x-labtestfile></x-labtestfile>
             </div>
         </div>
     </div>
@@ -145,19 +108,13 @@
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
-    <script>
-        $( document ).ready(function() {
-            $('#myTable').DataTable( {
-            responsive:true,
-            searching: false,
-            bInfo: false,
-            bLengthChange: false,
-            bPaginate: false,
-          });
-        });
-    </script>
+    <script src="{{ asset('js/employee-medical-record-index.js') }}"></script>
 
     {{-- DataTable --}}
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
+
+    <script>
+        
+    </script>
 @endsection

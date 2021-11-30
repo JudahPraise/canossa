@@ -17,7 +17,10 @@ class CreateEmployeeMedicationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('record_id');
             $table->foreign('record_id')->references('id')->on('medical_records');
-            $table->json('medicine');
+            $table->string('name');
+            $table->string('condition');
+            $table->integer('strength')->nullable();
+            $table->string('frequency')->nullable();
             $table->timestamps();
         });
     }

@@ -36,6 +36,9 @@ class CreatePersonalInformationTable extends Migration
             $table->string('driver_license')->nullable();
             $table->string('phil_health')->nullable();
             $table->mediumText('email_address')->nullable();
+            $table->float('height', 5, 2);
+            $table->float('weight', 5, 2);
+            $table->string('blood_type');
             $table->timestamps();
         });
     }

@@ -46,10 +46,10 @@
                      <div class="form-group">
                          <input type="password" name="password" class="form-control rounded-pill form-control-lg bg-transparent" placeholder="Password" required>
                      </div>
-                     <div class="form group form-check">
+                     {{-- <div class="form group form-check">
                          <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
                          <label class="form-check-label" for="exampleCheck1">I understand and agree with the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy.</a></label>
-                       </div>
+                       </div> --}}
                      <button type="submit" class="btn mt-4 rounded-pill btn-lg btn-custom btn-block text-uppercase">Log in</button>
                      <!-- <p class="mt-3 font-weight-normal">Don't have an account? <a href="#"><strong>Register Now</strong></a></p> -->
                      <p class="mt-5 mb-3 text-muted">© 2021-2022</p>

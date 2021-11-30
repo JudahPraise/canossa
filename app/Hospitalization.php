@@ -12,4 +12,14 @@ class Hospitalization extends Model
     {
         return $this->belongsTo(MedicalRecord::class);
     }
+
+    public function dDate()
+    {
+        return \Carbon\Carbon::parse($this->d_date)->format('d/m/y');
+    }
+
+    public function oDate()
+    {
+        return \Carbon\Carbon::parse($this->o_date)->format('d/m/y');
+    }
 }
