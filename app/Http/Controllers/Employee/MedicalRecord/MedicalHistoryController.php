@@ -17,7 +17,8 @@ class MedicalHistoryController extends Controller
      */
     public function index()
     {
-        return view('employee.medical.record-forms.history.create');
+        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('history')->first();
+        return view('employee.medical.record-forms.history.create', compact('record'));
     }
 
     /**
@@ -47,11 +48,14 @@ class MedicalHistoryController extends Controller
             $illnesses[] = ([
                 'record_id' => $record->id,
                 'illnesses' => $request->illnesses[$item],
+                'isOther' => $request->isOther[$item],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
         }
 
+        // dd($illnesses);
+        MedicalHistory::where('record_id','=',$record->id)->delete();
         MedicalHistory::insert($illnesses);
 
         return redirect()->route('record.index')->with('success', 'Record save!');
@@ -76,7 +80,9 @@ class MedicalHistoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $histories = MedicalHistory::where('record_id','=',$id)->get();
+        $otherHistories = $histories->where('isOther','=','true');
+        return view('employee.medical.record-forms.history.create', compact('histories', 'otherHistories'));
     }
 
     /**
@@ -88,7 +94,23 @@ class MedicalHistoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $illnesses = [];
+
+        foreach($request->illnesses as $item => $key)
+        {
+            $illnesses[] = ([
+                'record_id' => $record->id,
+                'illnesses' => $request->illnesses[$item],
+                'isOther' => $request->isOther[$item],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        MedicalHistory::where('record_id','=',$id)->delete();
+        MedicalHistory::insert($illnesses);
+
+        return redirect()->route('record.index')->with('success', 'Record save!');
     }
 
     /**

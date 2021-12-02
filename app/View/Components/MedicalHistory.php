@@ -12,9 +12,11 @@ class MedicalHistory extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $id;
+    
+    public function __construct($id)
     {
-        //
+        $this->id = $id;
     }
 
     /**
@@ -24,7 +26,7 @@ class MedicalHistory extends Component
      */
     public function render()
     {
-        $record = MedicalRecord::where('id','=',auth()->user()->id)->with('history')->first();
+        $record = MedicalRecord::where('user_id','=',$this->id)->with('history')->first();
         return view('components.medical-history', compact('record'));
     }
 }

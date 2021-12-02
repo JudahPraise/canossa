@@ -5,9 +5,9 @@
     </a>
 </div>
 <div class="row d-flex justify-content-center">
-    @if (!empty($record->labtests))
+    {{-- @foreach ($record as $data) --}}
         <div class="list-group px-3 w-100">
-            @foreach($record->labtests as $labtest)
+            @forelse($record->labtests as $labtest)
                 <div class="list-group-item list-group-item-action d-flex justify-content-between p-3">
                     <span class="d-flex" style="font-size: 1rem">
                         <span class="d-flex justify-content-center align-items-center">
@@ -28,18 +28,19 @@
 
                 <x-showlabtest :file="$labtest->file" :modal="$labtest->id"></x-showlabtest>
                 <x-deletelabtest :file="$labtest->id"></x-deletelabtest>
-            @endforeach
+            @empty
+                <div class="container">
+                    <div class="row py-2">
+                      <div class="container-fluid d-flex flex-column align-items-center p-1" data-toggle="modal" data-target="#addModal">
+                        <img src="{{ asset('SVG/undraw_add_file.svg') }}" alt="" srcset="" height="250" width="250">
+                        <span>Add File</span>
+                      </div>
+                    </div>
+                </div>  
+            @endforelse
         </div> 
-    @else
-        <div class="container">
-            <div class="row py-2">
-              <div class="container-fluid d-flex flex-column align-items-center p-1" data-toggle="modal" data-target="#addModal">
-                <img src="{{ asset('SVG/undraw_add_file.svg') }}" alt="" srcset="" height="250" width="250">
-                <span>Add File</span>
-              </div>
-            </div>
-        </div>
-    @endif
+    {{-- @endforeach --}}
+    
 
     @component('components.modals')
         @slot('addFile')

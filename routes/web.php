@@ -245,6 +245,7 @@ Route::prefix('employee')->group(function(){
         Route::prefix('/history')->group(function(){
             Route::get('/create', 'Employee\MedicalRecord\MedicalHistoryController@index')->name('employee.history.create');
             Route::post('/store', 'Employee\MedicalRecord\MedicalHistoryController@store')->name('employee.history.store');
+            Route::get('/edit/{id}', 'Employee\MedicalRecord\MedicalHistoryController@edit')->name('employee.history.edit');
             Route::put('/update/{id}', 'Employee\MedicalRecord\MedicalHistoryController@update')->name('employee.history.update');
             Route::delete('/delete/{id}', 'Employee\MedicalRecord\MedicalHistoryController@destroy')->name('employee.history.delete');
         });

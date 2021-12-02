@@ -6,15 +6,14 @@
     <div class="row m-3">
         @if (!empty($record->history))
             @foreach ($record->history as $illness)
-                <form action="{{ route('employee.history.delete', $illness->id) }}" method="POST" id="historyUpdate">
+                <form method="POST" id="historyDelete">
                     @method('DELETE')
                     @csrf
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input delete-pill" type="checkbox" checked id="illness" name="illnesses[]" value="{{-- $illness --}}" onchange="document.getElementById('historyUpdate').submit()" data-historyid="{{ $record->id }}" hidden>
                         <label class="form-check-label" for="illness">
                             <span class="badge badge-pill badge-primary mb-3" style="font-size: 1rem;">
                                 {{ $illness->illnesses }}
-                                <span class="ml-2">
+                                <span class="ml-2 delete-pill" data-illnessid="{{ $illness->id }}">
                                     <i class="fas fa-times text-danger" id="deletePill"></i>
                                 </span>
                             </span>
@@ -23,15 +22,16 @@
                 </form>
             @endforeach
             <div class="form-check form-check-inline">
-                <input class="form-check-input delete-pill" type="checkbox" checked id="illness" name="illnesses[]" value="{{-- $illness --}}" onchange="document.getElementById('historyUpdate').submit()" data-historyid="{{ $record->id }}" hidden>
-                <label class="form-check-label" for="illness">
-                    <span class="badge badge-pill badge-primary mb-3" style="font-size: 1rem">
-                         Add
-                        <span class="ml-2">
-                            <i class="fas fa-plus text-success" id="deletePill"></i>
+                <a href="{{ !empty($record->history) ? route('employee.history.edit', $record->id) : route('employee.history.create') }}">
+                    <label class="form-check-label" for="illness">
+                        <span class="badge badge-pill badge-primary mb-3" style="font-size: 1rem">
+                             Add
+                            <span class="ml-2">
+                                <i class="fas fa-plus text-success" id="deletePill"></i>
+                            </span>
                         </span>
-                    </span>
-                </label>
+                    </label>
+                </a>
             </div>
         @else
             <div class="row d-flex justify-content-center w-100">

@@ -12,7 +12,7 @@ class EmployeesController extends Controller
 {
     public function index(){
 
-        $employees = User::where('status','=','active')->with('personal')->get();
+        $employees = User::where('category','!=','Resigned')->with('personal')->get();
         return view('admin.employees.index', compact('employees'));
 
     }

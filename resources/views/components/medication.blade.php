@@ -3,15 +3,15 @@
         <h3>Medications</h3>
     </div>
     <div class="row m-3">
-        <div class="table-responsive">
-            <table class="table table-borderless dt-responsive nowrap w-100" id="myTable">
+      <div class="table-responsive" style="overflow: hidden">
+        <table class="table table-borderless dt-responsive nowrap " id="medTable" width="100%">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Condition</th>
                         <th scope="col">Strength</th>
                         <th scope="col">Frequency</th>
-                        <th></th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +39,7 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        {{-- </div> --}}
     </div>
     <!--Update Modal-->
     <div class="modal fade" id="editMedication" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -124,3 +124,19 @@
         </div>
     </div>
 </section> 
+
+{{-- <script>
+  $( document ).ready(function() {
+    $('#medTable').DataTable( {
+      responsive:true,
+      columnDefs: [
+		          { responsivePriority: 1, targets: 0 },
+		          { responsivePriority: 2, targets: 4 }
+		      ],
+      searching: false,
+      bInfo: false,
+      bLengthChange: false,
+      bPaginate: false,
+    });
+  })
+</script> --}}

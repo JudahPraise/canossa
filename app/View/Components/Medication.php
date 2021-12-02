@@ -6,15 +6,12 @@ use App\MedicalRecord;
 use Illuminate\View\Component;
 
 class Medication extends Component
-{
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
+{ 
+    public $id;
+    
+    public function __construct($id)
     {
-        //
+        $this->id = $id;
     }
 
     /**
@@ -24,7 +21,7 @@ class Medication extends Component
      */
     public function render()
     {
-        $record = MedicalRecord::where('id','=',auth()->user()->id)->with('hospitalizations')->first();
+        $record = MedicalRecord::where('user_id','=',$this->id)->with('history')->first();
         return view('components.medication', compact('record'));
     }
 }

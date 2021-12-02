@@ -7,11 +7,11 @@ use Illuminate\View\Component;
 
 class Avatar extends Component
 {
-    public $image;
+    public $id;
 
-    public function __construct($image)
+    public function __construct($id)
     {
-        $this->image = $image;
+        $this->id = $id;
     }
 
     /**
@@ -21,7 +21,7 @@ class Avatar extends Component
      */
     public function render()
     {
-        $user = User::where('id','=',auth()->user()->id)->with('personal')->first();
+        $user = User::where('id','=',$this->id)->with('personal')->first();
         return view('components.avatar', compact('user'));
     }
 }

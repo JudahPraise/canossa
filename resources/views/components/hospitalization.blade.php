@@ -4,43 +4,43 @@
          <h3>Hospitalization</h3>
     </div>
     <div class="row m-3">
-         <div class="table-responsive">
-             <table class="table table-borderless dt-responsive nowrap w-100" id="myTable">
-                 <thead>
-                   <tr>
-                     <th scope="col">Disease</th>
-                     <th scope="col">Date</th>
-                     <th scope="col">Operation</th>
-                     <th scope="col">Date</th>
-                     <th></th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                     @foreach ($record->hospitalizations as $hospitalization)
-                         <tr>
-                             <td>{{ $hospitalization->disease }}</td>
-                             <td>{{ $hospitalization->dDate() }}</td>
-                             <td>{{ $hospitalization->operation }}</td>
-                             <td>{{ $hospitalization->oDate() }}</td>
-                             <td class="d-flex justify-content-around">
-                               <a class="text-primary hospitalization-edit" style="cursor: pointer" 
-                               data-toggle="modal" data-target="#editHospitalization"
-                               data-hospitalizationid="{{ $hospitalization->id }}"
-                               data-disease="{{ $hospitalization->disease }}"
-                               data-ddate="{{ $hospitalization->d_date}}"
-                               data-operation="{{ $hospitalization->operation }}"
-                               data-odate="{{ $hospitalization->o_date }}"
-                               ><i class="fas fa-pencil-alt mr-2"></i>Edit</a>
-                               <a class="text-danger hospitalization-delete" style="cursor: pointer"
-                               data-toggle="modal" data-target="#deleteHospitalization"
-                               data-hospitalizationid="{{ $hospitalization->id }}"
-                               ><i class="fas fa-trash-alt mr-2"></i>Delete</a>
-                             </td>
-                         </tr>
-                     @endforeach
-                 </tbody>
-             </table>
-         </div>
+      <div class="table-responsive" style="overflow: hidden">
+        <table class="table table-borderless dt-responsive nowrap " id="hosTable" width="100%">
+          <thead>
+            <tr>
+              <th scope="col">Disease</th>
+              <th scope="col">Date</th>
+              <th scope="col">Operation</th>
+              <th scope="col">Date</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              @foreach ($record->hospitalizations as $hospitalization)
+                  <tr>
+                      <td>{{ $hospitalization->disease }}</td>
+                      <td>{{ $hospitalization->dDate() }}</td>
+                      <td>{{ !empty($hospitalization->operation) ? $hospitalization->operation : 'N/A' }}</td>
+                      <td>{{ $hospitalization->oDate() }}</td>
+                      <td class="d-flex justify-content-around">
+                        <a class="text-primary hospitalization-edit" style="cursor: pointer" 
+                        data-toggle="modal" data-target="#editHospitalization"
+                        data-hospitalizationid="{{ $hospitalization->id }}"
+                        data-disease="{{ $hospitalization->disease }}"
+                        data-ddate="{{ $hospitalization->d_date}}"
+                        data-operation="{{ !empty($hospitalization->operation) ? $hospitalization->operation : 'N/A' }}"
+                        data-odate="{{ $hospitalization->o_date }}"
+                        ><i class="fas fa-pencil-alt mr-2"></i>Edit</a>
+                        <a class="text-danger hospitalization-delete" style="cursor: pointer"
+                        data-toggle="modal" data-target="#deleteHospitalization"
+                        data-hospitalizationid="{{ $hospitalization->id }}"
+                        ><i class="fas fa-trash-alt mr-2"></i>Delete</a>
+                      </td>
+                  </tr>
+              @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
      <!--Update Modal-->
      <div class="modal fade" id="editHospitalization" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,3 +118,20 @@
         </div>
     </div>
 </section>
+
+{{-- <script>
+  $( document ).ready(function() {
+    $('#hosTable').DataTable( {
+        responsive:true,
+        columnDefs: [
+		            { responsivePriority: 1, targets: 0 },
+		            { responsivePriority: 2, targets: 4 }
+		        ],
+        searching: false,
+        bInfo: false,
+        bLengthChange: false,
+        bPaginate: false,
+
+    });
+  })
+</script> --}}

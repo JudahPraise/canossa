@@ -4,15 +4,15 @@
          <h3>Immunization</h3>
     </div>
     <div class="row m-3">
-         <div class="table-responsive">
-             <table class="table table-borderless dt-responsive nowrap w-100" id="myTable">
+      <div class="table-responsive" style="overflow: hidden">
+        <table class="table table-borderless dt-responsive nowrap" id="immTable" width="100%">
                  <thead>
                    <tr>
                      <th scope="col">Vaccine</th>
                      <th scope="col">Status</th>
                      <th scope="col">Brand</th>
                      <th scope="col">Date</th>
-                     <th></th>
+                     <th scope="col">Action</th>
                    </tr>
                  </thead>
                  <tbody>
@@ -119,3 +119,19 @@
         </div>
     </div>
 </section>
+
+{{-- <script>
+  $( document ).ready(function() {
+    $('#immTable').DataTable( {
+      responsive:true,
+      columnDefs: [
+		          { responsivePriority: 1, targets: 0 },
+		          { responsivePriority: 2, targets: 4 }
+		      ],
+      searching: false,
+      bInfo: false,
+      bLengthChange: false,
+      bPaginate: false,
+    });
+  })
+</script> --}}

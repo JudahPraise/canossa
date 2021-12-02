@@ -14,11 +14,10 @@
 
 @section('medical-home')
     <div class="container-fluid p-3">
-
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"  id="destPopuler">
             @forelse ($users as $data)
                 <div class="col">
-                    <a class="card">
+                    <a class="card" href="{{ route('medical.show', $data->id) }}">
                         <img src="{{ asset('img/medical-cover.jpg') }}" class="card__image" alt="" />
                         <div class="card__overlay">
                             <div class="card__header">

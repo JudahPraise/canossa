@@ -11,8 +11,13 @@ class DashboardController extends Controller
     public function index()
     {
         $users = MedicalRecord::with('user','history','latestLabtest')->get();
-        // dd($users);
         return view('medical-record.dashboard.index', compact('users'));
+    }
+
+    public function show($id)
+    {
+        $record = MedicalRecord::where('id','=',$id)->with('user','history','latestLabtest')->first();
+        return view('medical-record.dashboard.show', compact('record'));
     }
 
 

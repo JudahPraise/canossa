@@ -20,7 +20,7 @@
 <div class="row d-flex justify-content-center p-2">
     <div class="col-md-3 shadow bg-white rounded p-3 m-1 d-flex flex-column justify-content-center">
         <div class="row avatar-upload d-flex justify-content-center">
-            <x-avatar :image="$user->image"  />
+            <x-avatar :id="$user->id" :image="$user->image"  />
         </div>
         <div class="row d-flex flex-column align-items-center p-3">
             <h5>{{ auth()->user()->fullName() }}</h5>
@@ -62,9 +62,8 @@
     <div class="col-md-7 shadow bg-white rounded">
         <span class="w-100 d-flex justify-content-between align-items-center">
             <h2 class="m-3">Medical Record</h2>
-            <i class="fas fa-ellipsis-h dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <p class="font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">Add Record</p>
             <div class="dropdown-menu">
-                <h6 class="dropdown-header">Add Record</h6>
                 <a class="dropdown-item" href="{{ route('employee.history.create') }}">Personal History</a>
                 <a class="dropdown-item" href="{{ route('employee.hospitalization.create') }}">Hospitalization</a>
                 <a class="dropdown-item" href="{{ route('employee.medication.create') }}">Medications</a>
@@ -73,10 +72,10 @@
         </span>
 
         @if (!empty($record))
-            <x-medical-history></x-medical-history>
-            <x-medication></x-medication>
-            <x-hospitalization></x-hospitalization>
-            <x-immunization></x-immunization>
+            <x-medical-history :id="$user->id"></x-medical-history>
+            <x-medication :id="$user->id"></x-medication>
+            <x-hospitalization :id="$user->id"></x-hospitalization>
+            <x-immunization :id="$user->id"></x-immunization>
         @else
             
         @endif
@@ -87,7 +86,7 @@
     <div class="col-md-4">  
         <div class="row">
             <div class="col-md-12 shadow bg-white rounded p-3 mx-2">
-                <x-labtestfile></x-labtestfile>
+                <x-labtestfile :id="$user->id"></x-labtestfile>
             </div>
         </div>
     </div>
@@ -97,7 +96,6 @@
 @endsection
 
 @section('js')
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <!-- Argon Scripts -->
     <!-- Core -->
@@ -113,8 +111,4 @@
     {{-- DataTable --}}
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
-
-    <script>
-        
-    </script>
 @endsection

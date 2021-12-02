@@ -8,9 +8,11 @@ use Illuminate\View\Component;
 class Immunization extends Component
 {
 
-    public function __construct()
+    public $id;
+    
+    public function __construct($id)
     {
-        //
+        $this->id = $id;
     }
 
     /**
@@ -20,7 +22,7 @@ class Immunization extends Component
      */
     public function render()
     {
-        $record = MedicalRecord::where('id','=',auth()->user()->id)->with('immunizations')->first();
+        $record = MedicalRecord::where('user_id','=',$this->id)->with('history')->first();
         return view('components.immunization', compact('record'));
     }
 }

@@ -18,6 +18,7 @@ class CreateMedicalHistoriesTable extends Migration
             $table->unsignedBigInteger('record_id');
             $table->foreign('record_id')->references('id')->on('medical_records');
             $table->string('illnesses');
+            $table->string('isOther');
             $table->timestamps();
         });
     }

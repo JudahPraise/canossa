@@ -20,6 +20,11 @@ class Hospitalization extends Model
 
     public function oDate()
     {
-        return \Carbon\Carbon::parse($this->o_date)->format('d/m/y');
+        if(!empty($this->o_date))
+        {
+            return \Carbon\Carbon::parse($this->o_date)->format('d/m/y');
+        }
+
+        return "N/A";
     }
 }
