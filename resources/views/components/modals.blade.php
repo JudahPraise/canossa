@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('employee.labtest.store') }}" method="POST" enctype="multipart/form-data" id="uploadFile">
+        <form action="{{ route('employee.labtest.store', $user_id) }}" method="POST" enctype="multipart/form-data" id="uploadFile">
           @csrf
           <div class="form-row d-flex flex-column">
             <div class="form-row mb-3">

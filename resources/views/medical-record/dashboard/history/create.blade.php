@@ -1,10 +1,10 @@
-@extends('employee.medical.create')
+@extends('medical-record.dashboard.create')
 
 @section('create-record-section')
 <x-medical-create-nav :id="$record->user_id"></x-medical-create-nav>
 
 <div class="row mb-3 w-100">
-    <form action="{{ !empty($record->history) ? route('employee.history.update', $record->user_id) : route('employee.history.store', $record->user_id) }}" method="POST" class="w-100">
+    <form action="{{ !empty($record->history) ? route('nurse.history.update', $record->user_id) : route('nurse.history.store', $record->user_id) }}" method="POST" class="w-100">
         @if (!empty($record->history))
             @method('PUT')
         @endif

@@ -63,7 +63,7 @@
                       </div>
                       <div class="col-md-3 mb-3">
                         <label for="condition">Condition</label>
-                        <input class="form-control" type="text" list="conditions" name="condition[]" id="condition"/>
+                        <input class="form-control" type="text" list="conditions" name="condition" id="condition"/>
                         <datalist id="conditions">
                           <option value="Hypertension">Hypertension</option>
                           <option value="Diabetes">Diabetes</option>

@@ -46,5 +46,8 @@
         @slot('addFile')
             {{ 'addFileModal' }}
         @endslot
+        @slot('user_id')
+            {{ $record->user_id }}
+        @endslot
     @endcomponent
 </div>

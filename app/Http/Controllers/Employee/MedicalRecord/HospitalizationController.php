@@ -6,6 +6,7 @@ use App\MedicalRecord;
 use App\Hospitalization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HospitalizationController extends Controller
 {
@@ -14,9 +15,16 @@ class HospitalizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('employee.medical.record-forms.hospitalization.create');
+        $record = MedicalRecord::select('user_id')->where('user_id','=',$id)->first();
+
+        if(Auth::guard('nurse')->check())
+        {
+            return view('medical-record.dashboard.hospitalization.create', compact('record'));
+        }
+
+        return view('employee.medical.record-forms.hospitalization.create', compact('record'));
     }
 
     /**
@@ -35,9 +43,9 @@ class HospitalizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('hospitalizations')->first();
+        $record = MedicalRecord::where('user_id','=',$id)->with('hospitalizations')->first();
 
         $hospitalization = new Hospitalization();
         $hospitalization->disease = $request->disease;
@@ -47,11 +55,12 @@ class HospitalizationController extends Controller
 
         $record->hospitalizations()->save($hospitalization);
 
-        if($record->hospitalizations->isEmpty()){
-            return redirect()->route('employee.medication.create')->with('success', 'Record save!');
+        if(Auth::guard('nurse')->check())
+        {
+            return redirect()->route('medical.show', $record->user_id )->with('update', 'Record saved!');
         }
 
-        return redirect()->route('record.index')->with('success', 'Record save!');
+        return redirect()->route('record.index')->with('success', 'Record saved!');
     }
 
     /**
@@ -87,12 +96,20 @@ class HospitalizationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Hospitalization::where('id','=',$id)->update([
-            'disease' => $request->disease,
-            'd_date' => $request->d_date,
-            'operation' => $request->operation,
-            'o_date' => $request->o_date,
-        ]);
+        $hospitalization = Hospitalization::where('id','=',$id)->first();
+        $hospitalization->disease = $request->disease;
+        $hospitalization->d_date = $request->d_date;
+        $hospitalization->operation = $request->operation;
+        $hospitalization->o_date = $request->o_date;
+
+        $hospitalization->update();
+
+        $record = MedicalRecord::select('user_id')->where('id','=',$hospitalization->record_id)->first();
+
+        if(Auth::guard('nurse')->check())
+        {
+            return redirect()->route('medical.show', $record->user_id )->with('update', 'Record updated!');
+        }
 
         return redirect()->back()->with('udpate', 'Record updated!');
     }
@@ -105,7 +122,15 @@ class HospitalizationController extends Controller
      */
     public function destroy($id)
     {
-        Hospitalization::where('id','=',$id)->first()->delete();
+        $hospitalization = Hospitalization::where('id','=',$id)->first();
+        $hospitalization->delete();
+        
+        $record = MedicalRecord::select('user_id')->where('id','=',$hospitalization->record_id)->first();
+
+        if(Auth::guard('nurse')->check())
+        {
+            return redirect()->route('medical.show', $record->user_id )->with('delete', 'Record deleted!');
+        }
         return redirect()->back()->with('delete', 'Record deleted!');
     }
 }

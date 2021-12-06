@@ -7,6 +7,7 @@ use App\EmployeeMedication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MedicationController extends Controller
 {
@@ -15,9 +16,17 @@ class MedicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('employee.medical.record-forms.medication.create');
+        $record = MedicalRecord::select('user_id')->where('user_id','=',$id)->first();
+        
+        if(Auth::guard('nurse')->check())
+        {
+            // dd($record->user_id);
+            return view('medical-record.dashboard.medication.create', compact('record'));
+        }
+
+        return view('employee.medical.record-forms.medication.create', compact('record'));
     }
 
     /**
@@ -36,9 +45,9 @@ class MedicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('medications')->first();
+        $record = MedicalRecord::where('user_id','=',$id)->with('medications')->first();
 
         $medicines = [];
 
@@ -57,7 +66,12 @@ class MedicationController extends Controller
 
         EmployeeMedication::insert($medicines);
 
-        return redirect()->route('record.index')->with('success', 'Record save!');
+        if(Auth::guard('nurse')->check())
+        {
+            return redirect()->route('medical.show', $record->user_id )->with('success', 'Record saved!');
+        }
+
+        return redirect()->route('record.index')->with('success', 'Record saved!');
     }
 
     /**
@@ -99,6 +113,13 @@ class MedicationController extends Controller
 
         $medicine->update();
 
+        
+        if(Auth::guard('nurse')->check())
+        {
+            $user = MedicalRecord::select('user_id')->where('id','=',$medicine->record_id)->first();
+            return redirect()->route('medical.show', $user->user_id )->with('update', 'Record updated!');
+        }
+
         return redirect()->route('record.index')->with('update', 'Record updated!');
     }
 
@@ -112,6 +133,14 @@ class MedicationController extends Controller
     {
         $medicine = EmployeeMedication::where('id','=',$id)->first();
         $medicine->delete();
+
+        
+        if(Auth::guard('nurse')->check())
+        {
+            $record = MedicalRecord::select('user_id')->where('id','=',$medicine->record_id)->first();
+            return redirect()->route('medical.show', $record->user_id )->with('delete', 'Record deleted!');
+        }
+
         return redirect()->route('record.index')->with('delete', 'Record deleted!');
     }
 }

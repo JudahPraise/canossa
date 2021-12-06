@@ -7,6 +7,7 @@ use App\MedicalHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MedicalHistoryController extends Controller
 {
@@ -15,10 +16,20 @@ class MedicalHistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('history')->first();
-        return view('employee.medical.record-forms.history.create', compact('record'));
+        $histories = MedicalHistory::where('record_id','=',$id)->get();
+        $otherHistories = $histories->where('isOther','=','true');
+        $record = MedicalRecord::where('user_id','=',$id)->first();
+
+        // dd($record);
+
+        if(Auth::guard('nurse')->check())
+        {
+            return view('medical-record.dashboard.history.create', compact('histories','otherHistories', 'record'));
+        }
+
+        return view('employee.medical.record-forms.history.create', compact('histories','otherHistories', 'record'));
     }
 
     /**
@@ -37,9 +48,9 @@ class MedicalHistoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('history')->first();
+        $record = MedicalRecord::where('user_id','=',$id)->with('history')->first();
 
         $illnesses = [];
 
@@ -58,7 +69,12 @@ class MedicalHistoryController extends Controller
         MedicalHistory::where('record_id','=',$record->id)->delete();
         MedicalHistory::insert($illnesses);
 
-        return redirect()->route('record.index')->with('success', 'Record save!');
+        if(Auth::guard('nurse')->check())
+        {
+            return redirect()->route('medical.show', $record->user_id )->with('success', 'Record saved!');
+        }
+
+        return redirect()->route('record.index')->with('success', 'Record saved!');
     }
 
     /**
@@ -82,7 +98,14 @@ class MedicalHistoryController extends Controller
     {
         $histories = MedicalHistory::where('record_id','=',$id)->get();
         $otherHistories = $histories->where('isOther','=','true');
-        return view('employee.medical.record-forms.history.create', compact('histories', 'otherHistories'));
+        $record = MedicalRecord::select('user_id')->where('id','=',$id)->first();
+
+        if(Auth::guard('nurse')->check())
+        {
+            return view('medical-record.dashboard.history.create', compact('record', 'histories', 'otherHistories'));
+        }
+
+        return view('employee.medical.record-forms.history.create', compact('record','histories', 'otherHistories'));
     }
 
     /**
@@ -94,6 +117,8 @@ class MedicalHistoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $record = MedicalRecord::select('id','user_id')->where('user_id','=',$id)->first();
+
         $illnesses = [];
 
         foreach($request->illnesses as $item => $key)
@@ -110,7 +135,13 @@ class MedicalHistoryController extends Controller
         MedicalHistory::where('record_id','=',$id)->delete();
         MedicalHistory::insert($illnesses);
 
-        return redirect()->route('record.index')->with('success', 'Record save!');
+        
+        if(Auth::guard('nurse')->check())
+        {
+            return redirect()->route('medical.show', $record->user_id )->with('update', 'Record updated!');
+        }
+
+        return redirect()->route('record.index' )->with('update', 'Record updated!');
     }
 
     /**
@@ -121,7 +152,15 @@ class MedicalHistoryController extends Controller
      */
     public function destroy($id)
     {
-        MedicalHistory::where('id','=',$id)->first()->delete();
+        $record = MedicalHistory::where('id','=',$id)->first();
+        $record->delete();
+
+        
+        if(Auth::guard('nurse')->check())
+        {
+            $user = MedicalRecord::select('user_id')->where('id','=',$record->record_id)->first();
+            return redirect()->route('medical.show', $user->user_id )->with('delete', 'Record deleted!');
+        }
         return redirect()->route('record.index')->with('delete', 'Record deleted!');
     }
 }

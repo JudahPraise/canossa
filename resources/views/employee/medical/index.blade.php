@@ -17,8 +17,9 @@
 
 @section('employee-home')
 @component('components.alerts')@endcomponent
-<div class="row d-flex justify-content-center p-2">
-    <div class="col-md-3 shadow bg-white rounded p-3 m-1 d-flex flex-column justify-content-center">
+<div class="row d-flex justify-content-center p-2 mx-2">
+    {{-- Avatar --}}
+    <div class="col-md-3 m-2 shadow bg-white rounded p-3 d-flex flex-column justify-content-center">
         <div class="row avatar-upload d-flex justify-content-center">
             <x-avatar :id="$user->id" :image="$user->image"  />
         </div>
@@ -27,7 +28,8 @@
             <p>{{ auth()->user()->department }} | {{ auth()->user()->role }}</p>
         </div>
     </div>
-    <div class="col-md-8 shadow bg-white rounded p-3 m-1">
+    {{-- Personal Information --}}
+    <div class="col-md-8 m-2 shadow bg-white rounded p-3">
         <div class="form-row m-3">
             <div class="col-md-4 mb-2">
                 <p style="font-size: .8rem">Gender</p>
@@ -58,32 +60,29 @@
         </div>
     </div>
 </div>
-<div class="row p-3 d-flex justify-content-center align-items-start">
-    <div class="col-md-7 shadow bg-white rounded">
+<div class="row d-flex justify-content-center p-2 mx-2">
+    {{-- Records --}}
+    <div class="col-md-7 m-2 shadow bg-white rounded">
         <span class="w-100 d-flex justify-content-between align-items-center">
             <h2 class="m-3">Medical Record</h2>
             <p class="font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">Add Record</p>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('employee.history.create') }}">Personal History</a>
-                <a class="dropdown-item" href="{{ route('employee.hospitalization.create') }}">Hospitalization</a>
-                <a class="dropdown-item" href="{{ route('employee.medication.create') }}">Medications</a>
-                <a class="dropdown-item" href="{{ route('employee.immunization.create') }}">Immunization</a>
+                <a class="dropdown-item" href="{{ route('employee.history.create', auth()->user()->id) }}">Personal History</a>
+                <a class="dropdown-item" href="{{ route('employee.hospitalization.create', auth()->user()->id) }}">Hospitalization</a>
+                <a class="dropdown-item" href="{{ route('employee.medication.create', auth()->user()->id) }}">Medications</a>
+                <a class="dropdown-item" href="{{ route('employee.immunization.create', auth()->user()->id) }}">Immunization</a>
             </div>
         </span>
-
-        @if (!empty($record))
+        <div class="container">
             <x-medical-history :id="$user->id"></x-medical-history>
             <x-medication :id="$user->id"></x-medication>
             <x-hospitalization :id="$user->id"></x-hospitalization>
             <x-immunization :id="$user->id"></x-immunization>
-        @else
-            
-        @endif
-
+        </div>
     </div>
 
     {{-- Labtest --}}
-    <div class="col-md-4">  
+    <div class="col-md-4 m-2">  
         <div class="row">
             <div class="col-md-12 shadow bg-white rounded p-3 mx-2">
                 <x-labtestfile :id="$user->id"></x-labtestfile>

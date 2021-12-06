@@ -20,10 +20,10 @@ class MedicalRecordController extends Controller
      */
     public function index()
     {
-        $user = User::where('id','=',auth()->user()->id)->with('personal')->first();
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests','hospitalizations','medications','immunizations','history')->first();
+        $user = User::where('id','=',auth()->user()->id)->with('personal', 'records')->first();
+        // $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests','hospitalizations','medications','immunizations','history')->first();
         // dd($record->medications);
-        return view('employee.medical.index', compact('user', 'record'));
+        return view('employee.medical.index', compact('user'));
     }
 
     /**

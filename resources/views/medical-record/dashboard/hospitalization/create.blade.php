@@ -1,6 +1,7 @@
-@extends('employee.medical.create')
+@extends('medical-record.dashboard.create')
 
 @section('create-record-section')
+
 <x-medical-create-nav :id="$record->user_id"></x-medical-create-nav>
 
 <div class="row d-flex flex-column px-3 w-100">

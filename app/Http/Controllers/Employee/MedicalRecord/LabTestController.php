@@ -36,13 +36,13 @@ class LabTestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-       $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('labtests')->first();
+       $record = MedicalRecord::where('user_id','=',$id)->with('user','labtests')->first();
         
         $labtest = new LabTest();  
 
-        $labtest->user_id = auth()->user()->id;
+        $labtest->user_id = $id;
         $labtest->type = $request->input('type');
 
         $date = Carbon::now();
@@ -50,7 +50,7 @@ class LabTestController extends Controller
         if($request->hasFile('file')){
 
             $file = $request->file('file');
-            $filename = auth()->user()->lname."_".$date->toDateString();
+            $filename = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
             $file = $filename.'.'.$extension;
             $request->file->storeAs('labtests', $file, 'public');

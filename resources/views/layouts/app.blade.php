@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="{{ asset('css/scrollbar.css') }}">
     <link rel="shortcut icon" href = "{{ asset('img/favicon.ico') }}"/>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -61,6 +62,8 @@
     <script type="text/javascript" src="{{ asset('core-ui/js/tooltips.js') }}"></script>
     <script type="text/javascript" src="{{ asset('core-ui/js/coreui.bundle.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('core-ui/js/coreui-utils.js') }}"></script>
+    <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     {{-- <script type="text/javascript" src="{{ asset('core-ui/js/main.js') }}"></script> --}}
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>

@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\LabTest;
 use Illuminate\View\Component;
 
 class ShowLabtest extends Component
@@ -11,8 +12,8 @@ class ShowLabtest extends Component
 
     public function __construct($file, $modal)
     {
-        $this->file = $file;
         $this->modal = $modal;
+        $this->file = $file;
     }
     /**
      * Get the view / contents that represent the component.
@@ -21,6 +22,7 @@ class ShowLabtest extends Component
      */
     public function render()
     {
-        return view('components.show-labtest');
+        $labtest = LabTest::where('id','=',$this->modal)->first();
+        return view('components.show-labtest', compact('labtest'));
     }
 }

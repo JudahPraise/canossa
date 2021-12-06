@@ -1,4 +1,4 @@
-@extends('employee.layouts.home')
+@extends('medical-record.layouts.home')
 
 @section('css')
     <!-- Fonts -->
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/buttons.css') }}">
 @endsection
 
-@section('employee-home')
+@section('medical-home')
 @component('components.alerts')@endcomponent
 <div class="container p-3">
 

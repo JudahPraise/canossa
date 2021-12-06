@@ -9,7 +9,7 @@
   
   <div class="c-body">
 
-    <main class="c-main pt-0"  style="background-color: #F3F3F3">
+    <main class="c-main pt-0">
 
       @yield('home') 
 

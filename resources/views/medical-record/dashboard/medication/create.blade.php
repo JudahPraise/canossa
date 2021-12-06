@@ -1,4 +1,4 @@
-@extends('employee.medical.create')
+@extends('medical-record.dashboard.create')
 
 @section('create-record-section')
 

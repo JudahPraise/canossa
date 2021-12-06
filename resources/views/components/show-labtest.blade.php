@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <img style="width: 100%" src="{{ asset('storage/labtests/'.$file) }}"  alt="" srcset="" id="fileImage">
+        <img style="width: 100%" src="{{ asset('storage/labtests/'.$labtest->file) }}"  alt="" srcset="" id="fileImage">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

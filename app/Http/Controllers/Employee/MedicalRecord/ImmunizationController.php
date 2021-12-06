@@ -6,6 +6,7 @@ use App\Immunization;
 use App\MedicalRecord;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ImmunizationController extends Controller
 {
@@ -14,9 +15,15 @@ class ImmunizationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $record = MedicalRecord::where('id','=',auth()->user()->id)->with('immunizations')->first();
+        $record = MedicalRecord::where('user_id','=',$id)->with('immunizations')->first();
+
+        if(Auth::guard('nurse')->check())
+        {
+            return view('medical-record.dashboard.immunization.create', compact('record'));
+        }
+
         return view('employee.medical.record-forms.immunization.create', compact('record'));
     }
 
@@ -36,9 +43,9 @@ class ImmunizationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $record = MedicalRecord::where('user_id','=',auth()->user()->id)->with('immunizations')->first();
+        $record = MedicalRecord::where('user_id','=',$id)->with('immunizations')->first();
 
         $immunizations = [];
 
@@ -54,7 +61,12 @@ class ImmunizationController extends Controller
 
         $record->immunizations()->insert($immunizations);
 
-        return redirect()->route('record.index')->with('success', 'Record save!');
+        if(Auth::guard('nurse')->check())
+        {
+            return redirect()->route('medical.show', $record->user_id )->with('success', 'Record saved!');
+        }
+
+        return redirect()->route('record.index')->with('success', 'Record saved!');
 
     }
 
@@ -89,12 +101,21 @@ class ImmunizationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Immunization::where('id','=',$id)->update([
-            'vaccine_recieved' => $request->vaccine_recieved,
-            'status' => $request->status,
-            'brand' => $request->brand,
-            'date' => $request->date,
-        ]);
+        $immunization = Immunization::where('id','=',$id)->first();
+
+        $immunization->vaccine_recieved = $request->vaccine_recieved;
+        $immunization->status = $request->status;
+        $immunization->brand = $request->brand;
+        $immunization->date = $request->date;
+
+        $immunization->update();
+
+        
+        if(Auth::guard('nurse')->check())
+        {
+            $record = MedicalRecord::select('user_id')->where('id','=',$immunization->record_id)->first();
+            return redirect()->route('medical.show', $record->user_id )->with('update', 'Record updated!');
+        }
 
         return redirect()->back()->with('update', 'Record updated!');
     }
@@ -107,7 +128,15 @@ class ImmunizationController extends Controller
      */
     public function destroy($id)
     {
-        Immunization::where('id','=',$id)->first()->delete();
+        $immunization = Immunization::where('id','=',$id)->first();
+        $immunization->delete();
+        
+        if(Auth::guard('nurse')->check())
+        {
+            $record = MedicalRecord::select('user_id')->where('id','=',$immunization->record_id)->first();
+            return redirect()->route('medical.show', $record->user_id )->with('delete', 'Record deleted!');
+        }
+
         return redirect()->back()->with('delete', 'Record deleted!');
     }
 }
