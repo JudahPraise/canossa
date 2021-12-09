@@ -18,7 +18,7 @@
             @forelse ($users as $data)
                 <div class="col">
                     <a class="card" href="{{ route('medical.show', $data->id) }}">
-                        <img src="{{ asset('img/medical-cover.jpg') }}" class="card__image" alt="" />
+                        <img src="{{ asset('img/for-sliders/image-7.jpg') }}" class="card__image" alt="" />
                         <div class="card__overlay">
                             <div class="card__header">
                               @if (!empty($data->user->image))
@@ -34,18 +34,17 @@
                             </div>
 
                             <p class="card__description d-flex flex-column mt-2">
-                              @if(!empty($data->history->illnesses))
+                              @if(!empty($data->history))
                                   <span class="d-flex flex-column">
                                       <strong class="font-weight-bold text-muted" style="font-size: .8rem">Medical History</strong>
                                       <span>
-                                          @foreach($data->history->illnesses as $history)
+                                          @foreach($data->history as $history)
                                               @if ($loop->index < 3)
                                                 <span class="badge badge-pill badge-primary mb-3" style="font-size: 1rem">
-                                                    {{ $history }}
+                                                    {{ $history->illnesses }}
                                                 </span>
                                               @endif
                                           @endforeach
-                                          <i class="far fa-eye mx-1 text-success" ></i>
                                       </span>
                                   </span>
                               @endif
@@ -61,10 +60,10 @@
                               @endif
                             </p>
                         </div>
-                      </a> 
-                      @if(!empty($data->latestLabtest))
-                      <x-showlabtest :file="$data->latestLabtest->file" :modal="$data->latestLabtest->id"></x-showlabtest>
-                      @endif
+                        @if(!empty($data->latestLabtest))
+                        <x-showlabtest :file="$data->latestLabtest->file" :modal="$data->latestLabtest->id"></x-showlabtest>
+                        @endif
+                    </a> 
                 </div>
             @empty
             @endforelse

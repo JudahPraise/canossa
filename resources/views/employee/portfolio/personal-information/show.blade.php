@@ -72,29 +72,29 @@
                 <div class="row row-cols-2 row-cols-md-4 mt-3">
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">PRC</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->prc }}</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->prc) ? $personal->prc : 'N/A' }}</strong>
                     </div>
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">GSIS</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->gsis }}</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->gsis) ? $personal->gsis : 'N/A' }}</strong>
                     </div>
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">SSS</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->sss }}</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->sss) ? $personal->sss : 'N/A' }}</strong>
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-md-4 mt-3">
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">Pag-IBIG</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->pag_ibig }}</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->pag_ibig) ? $personal->pag_ibig : 'N/A' }}</strong>
                     </div>
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">Driver's License</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->driver_license }}</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->driver_license) ? $personal->driver_license : 'N/A' }}</strong>
                     </div>
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">PhilHealth</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->phil_health }}</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->phil_health) ? $personal->phil_health : 'N/A' }}</strong>
                     </div>
                 </div>
             </div>

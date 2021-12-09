@@ -2,15 +2,14 @@
 
 @section('create-record-section')
 <x-medical-create-nav :id="$record->user_id"></x-medical-create-nav>
-<div class="row mb-3 w-100">
-    <form action="{{ route('employee.immunization.store', $record->user_id) }}" method="POST" class="w-100">
+<div class="row mb-3 mx-1">
+    <form class="w-100" action="{{ route('employee.immunization.store', $record->user_id) }}" method="POST" class="w-100">
         @csrf
         <div class="form-row mb-3 d-flex justify-content-between align-items-center">
             <span class="d-flex flex-column flex-lg-row">
                 <h3>Immunization Status</h3>
                 <small class="font-italic text-muted ml-2"><span class="text-danger mr-1">*</span>check if you recieved the following vaccines</small>
             </span>
-            <button type="submit" class="nav-link btn" style="background-color: blue; color: white;">Save</button>
         </div>
         @forelse ($record->immunizations as $vaccine)
             <div class="form-group mb-3">
@@ -64,6 +63,7 @@
                     <p>empty</p>
                 @endif
             </div>
+            
         @empty
             <div class="form-row mb-3">
                 <div class="form-row mb-3 w-100">
@@ -112,6 +112,7 @@
                 </div>
             </div>
         @endforelse
+        <button type="submit" class="nav-link btn float-right" style="background-color: blue; color: white;">Save</button>
     </form>
 </div>
 @endsection

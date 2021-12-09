@@ -8,26 +8,27 @@
     {{-- @foreach ($record as $data) --}}
         <div class="list-group px-3 w-100">
             @forelse($record->labtests as $labtest)
-                <div class="list-group-item list-group-item-action d-flex justify-content-between p-3">
-                    <span class="d-flex" style="font-size: 1rem">
-                        <span class="d-flex justify-content-center align-items-center">
+                <div class="list-group-item list-group-item-action d-flex flex-column justify-content-between p-3" data-toggle="modal" data-target="{{ "#showFile".$labtest->id }}">
+                    <div class="row">
+                        <div class="col-1">
                             <i class="far fa-file-alt mr-3" style="font-size: 1.2rem"></i>
-                        </span>
-                        <span class="d-flex flex-column justify-content-center">
+                        </div>
+                        <div class="col-7" style="white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;">
                             {{  $labtest->file }}
-                            <small class="text-muted">{{  $labtest->updated_at->diffForHumans() }}</small>
-                        </span>
-                    </span>
-                    <span class="d-flex align-items-center" style="font-size: 1.1rem">
-                        <a href="" class="text-primary" data-toggle="modal" 
-                        data-target="{{ "#showFile".$labtest->id }}"><i class="far fa-eye mx-1"></i></a>
-                        <a href="{{ route('employee.labtest.download', $labtest->id) }}" class="text-success"><i class="far fa-arrow-alt-circle-down mx-1"></i></a>
-                        <a href="" class="text-danger" data-toggle="modal" data-target="{{ "#delete".$labtest->id }}"><i class="far fa-trash-alt mx-1"></i></a>
-                    </span>
+                        </div>
+                        <div class="col-3 d-flex">
+                            <a href="" class="text-primary" data-toggle="modal" data-target="{{ "#showFile".$labtest->id }}"><i class="far fa-eye mx-1"></i></a>
+                            <a href="{{ route('employee.labtest.download', $labtest->id) }}" class="text-success"><i class="far fa-arrow-alt-circle-down mx-1"></i></a>
+                            <a href="" class="text-danger" data-toggle="modal" data-target="{{ "#delete".$labtest->id }}"><i class="far fa-trash-alt mx-1"></i></a>
+                        </div>
+                    </div>
+                    <small class="text-muted">{{  $labtest->updated_at->diffForHumans() }}</small>
                 </div>
 
-                <x-showlabtest :file="$labtest->file" :modal="$labtest->id"></x-showlabtest>
-                <x-deletelabtest :file="$labtest->id"></x-deletelabtest>
+                <x-showlabtest :file="$labtest->file" :modal="$labtest->id" />
+                <x-deletelabtest :file="$labtest->id" />
             @empty
                 <div class="container">
                     <div class="row py-2">

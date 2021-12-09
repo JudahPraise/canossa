@@ -87,7 +87,7 @@
                   <option>AB-</option>
               </select> 
           </div>
-      </div>
+        </div>
         <hr>
         <h3>Contact Information</h3>
         {{-- Address --}}

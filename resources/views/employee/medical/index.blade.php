@@ -40,7 +40,7 @@
                 <strong style="font-size: 1.1rem">{{ auth()->user()->dob }}</strong>
             </div>
             <div class="col-md-4 mb-2">
-                <p style="font-size: .8rem">Date of birth</p>
+                <p style="font-size: .8rem">Age</p>
                 <strong style="font-size: 1.1rem">{{ auth()->user()->getAge() }}</strong>
             </div>
         </div>
@@ -84,7 +84,10 @@
     {{-- Labtest --}}
     <div class="col-md-4 m-2">  
         <div class="row">
-            <div class="col-md-12 shadow bg-white rounded p-3 mx-2">
+            <div class="col-md-12 shadow bg-white rounded p-3 mx-2 mb-3">
+                <x-labtest-schedule-view />
+            </div>
+            <div class="col-md-12 shadow bg-white rounded p-3 mx-2 mb-3">
                 <x-labtestfile :id="$user->id"></x-labtestfile>
             </div>
         </div>

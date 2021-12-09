@@ -22,8 +22,6 @@ class MedicalHistoryController extends Controller
         $otherHistories = $histories->where('isOther','=','true');
         $record = MedicalRecord::where('user_id','=',$id)->first();
 
-        // dd($record);
-
         if(Auth::guard('nurse')->check())
         {
             return view('medical-record.dashboard.history.create', compact('histories','otherHistories', 'record'));

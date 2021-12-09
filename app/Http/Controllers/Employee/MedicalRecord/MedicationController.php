@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Employee\MedicalREcord;
 
+use App\Medication;
 use App\MedicalRecord;
 use App\EmployeeMedication;
 use Illuminate\Http\Request;
@@ -50,6 +51,7 @@ class MedicationController extends Controller
         $record = MedicalRecord::where('user_id','=',$id)->with('medications')->first();
 
         $medicines = [];
+        $newMed = [];
 
         foreach($request->name as $item => $key)
         {
@@ -62,8 +64,22 @@ class MedicationController extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
+
+            $medicine = Medication::where('name', '=',$request->name[$item])->first();
+
+            if ($medicine === null) {
+                $newMed[] = ([
+                    'name' => $request->name[$item],
+                    'condition' => $request->condition[$item],
+                    'strength' => !empty($request->strength[$item]) ? $request->strength[$item] : '',
+                    'frequency' => !empty($request->frequency[$item]) ? $request->frequency[$item] : '',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
         }
 
+        Medication::insert($newMed);
         EmployeeMedication::insert($medicines);
 
         if(Auth::guard('nurse')->check())
@@ -112,6 +128,14 @@ class MedicationController extends Controller
         $medicine->frequency = $request->frequency;
 
         $medicine->update();
+
+        $medication = Medication::where('name', '=',$request->name)->first();
+        $medication->name = $request->name;
+        $medication->condition = $request->condition;
+        $medication->strength = $request->strength;
+        $medication->frequency = $request->frequency;
+
+        $medication->update();
 
         
         if(Auth::guard('nurse')->check())

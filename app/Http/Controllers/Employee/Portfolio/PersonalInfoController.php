@@ -43,13 +43,6 @@ class PersonalInfoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $weight = $request->weight;
-        $initialHeight = $request->height;
-        
-        $height = $initialHeight * $initialHeight;
-
-        $bmi = $weight / $height;
 
         $personal = PersonalInformation::create([
             'user_id' => auth()->user()->id,
@@ -119,13 +112,6 @@ class PersonalInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $weight = $request->weight;
-        $initialHeight = $request->height;
-        
-        $height = $initialHeight * $initialHeight;
-
-        $bmi = $weight / $height;
 
         $personal = PersonalInformation::where('user_id','=',$id)->update([
             'user_id' => auth()->user()->id,

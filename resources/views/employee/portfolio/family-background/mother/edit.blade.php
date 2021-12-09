@@ -22,17 +22,17 @@
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="occupation">Occupation</label>
-                <input type="text" class="form-control" name="occupation" value="{{ $mother->occupation }}" id="occupation" required>
+                <input type="text" class="form-control" name="occupation" value="{{ $mother->occupation }}" id="occupation">
               </div>
               <div class="col-md-6 mb-3">
                 <label for="employer_business_name">Employer business name</label>
-                <input type="text" class="form-control" name="employer_business_name" value="{{ $mother->employer_business_name }}" id="employer_business_name" required>
+                <input type="text" class="form-control" name="employer_business_name" value="{{ $mother->employer_business_name }}" id="employer_business_name">
               </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                   <label for="business_address">Business address</label>
-                  <input type="text" class="form-control" name="business_address" value="{{ $mother->business_address }}" id="business_address" required>
+                  <input type="text" class="form-control" name="business_address" value="{{ $mother->business_address }}" id="business_address">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="tel_no">Telephone Number</label>
@@ -40,7 +40,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-phone"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="tel_no" value="{{ $mother->tel_no }}" id="tel_no" required>
+                        <input type="text" class="form-control" name="tel_no" value="{{ $mother->tel_no }}" id="tel_no">
                     </div>
                 </div>
               </div>

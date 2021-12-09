@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    $('.table').DataTable( {
+    $('.table').DataTable({
         responsive:true,
         columnDefs: [
 		            { responsivePriority: 1, targets: 0 },
@@ -9,7 +9,6 @@ $( document ).ready(function() {
         bInfo: false,
         bLengthChange: false,
         bPaginate: false,
-
     });
     $('.hospitalization-edit').each(function(){
         $(this).click(function(event){

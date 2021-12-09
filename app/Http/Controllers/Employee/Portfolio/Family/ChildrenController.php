@@ -58,7 +58,7 @@ class ChildrenController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect()->route('children.show', Auth::user()->id);
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**

@@ -18,9 +18,6 @@
       <div class="col-md-6">
         <h1>Dashboard</h1>
       </div>
-      <div class="col-md-6 d-flex justify-content-end">
-        {{-- <input type="text" placeholder="Search" id="myInput" onkeyup="myFunction()"> --}}
-      </div>
     </div>
       <!-- Card stats -->
     <div class="row ">
@@ -126,10 +123,7 @@
                       <input class="form-control" placeholder="Search" type="text" id="myInput" onkeyup="myFunction()">
                     </div>
                   </div>
-                </form>
-                <a class="btn btn-icon btn-success text-white d-flex" type="button" data-toggle="modal" data-target="#registerEmployee" id="addEmployee">
-                  <span class="btn-inner--icon"><i class="fas fa-plus mr-2"></i></span>Register
-                </a>
+                </form>D
               </div>
             </div>
           </div>

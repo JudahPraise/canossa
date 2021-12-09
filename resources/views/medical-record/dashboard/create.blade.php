@@ -16,7 +16,7 @@
 @component('components.alerts')@endcomponent
 <div class="container p-3">
 
-    @yield('create-record-section')
+    @yield('create-section')
 
 </div>
 

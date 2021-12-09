@@ -1,6 +1,6 @@
 @extends('medical-record.dashboard.create')
 
-@section('create-record-section')
+@section('create-section')
 
 <x-medical-create-nav :id="$record->user_id"></x-medical-create-nav>
 

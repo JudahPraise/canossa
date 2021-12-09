@@ -71,11 +71,11 @@
                 <a class="dropdown-item" href="{{ route('nurse.immunization.create', $record->user_id) }}">Immunization</a>
             </div>
         </span>
-        <div class="container">
-            <x-medical-history :id="$record->user_id"></x-medical-history>
-            <x-medication :id="$record->user_id"></x-medication>
-            <x-hospitalization :id="$record->user_id"></x-hospitalization>
-            <x-immunization :id="$record->user_id"></x-immunization>
+        <div>
+            <x-medical-history :id="$record->user_id" />
+            <x-medication :id="$record->user_id" />
+            <x-hospitalization :id="$record->user_id" />
+            <x-immunization :id="$record->user_id" />
         </div>
     </div>
 
@@ -83,7 +83,7 @@
   <div class="col-md-4 m-2">  
       <div class="row">
           <div class="col-md-12 shadow bg-white rounded p-3 mx-2">
-              <x-labtestfile :id="$record->user_id"></x-labtestfile>
+              <x-labtestfile :id="$record->user_id" />
           </div>
       </div>
   </div>
@@ -100,6 +100,7 @@
     <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
     <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
     <script src="{{ asset('js/nurse-medical-record-index.js') }}"></script>
 

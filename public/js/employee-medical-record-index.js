@@ -9,7 +9,6 @@ $( document ).ready(function() {
         bInfo: false,
         bLengthChange: false,
         bPaginate: false,
-
     });
     $('.hospitalization-edit').each(function(){
         $(this).click(function(event){

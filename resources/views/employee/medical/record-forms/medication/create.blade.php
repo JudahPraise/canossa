@@ -4,7 +4,7 @@
 
 <x-medical-create-nav :id="$record->user_id"></x-medical-create-nav>
 
-<div class="row d-flex flex-column px-3 w-100">
+<div class="row d-flex flex-column mx-1 w-100">
   <form action="{{ route('employee.medication.store', $record->user_id) }}" method="POST">
     @csrf
     <div class="form-row mb-3 d-flex justify-content-between align-items-center">

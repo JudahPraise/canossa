@@ -3,14 +3,14 @@
 @section('create-record-section')
 <x-medical-create-nav :id="$record->user_id"></x-medical-create-nav>
 
-<div class="row d-flex flex-column px-3 w-100">
-   <form action="{{ route('employee.hospitalization.store', $record->user_id) }}" method="POST">
+<div class="row d-flex flex-column px-3">
+   <form class="w-100" action="{{ route('employee.hospitalization.store', $record->user_id) }}" method="POST">
     @csrf
         <div class="form-row mb-3 d-flex justify-content-between align-items-center">
             <h3>Hospitalization Create</h3>
             <button type="submit" class="nav-link btn" style="background-color: blue; color: white;">Save</button>
         </div>
-        <div class="form-row mb-3">
+        <div class="form-row mb-3 w-100">
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Disease</label>
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-row mb-3">
+        <div class="form-row mb-3 w-100">
             <div class="col-6">
                 <div class="form-group mb-2">
                     <label for="">Operation</label>

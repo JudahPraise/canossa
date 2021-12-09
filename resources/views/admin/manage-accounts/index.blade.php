@@ -6,10 +6,10 @@
     <!-- Icons -->
     <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     <!-- Argon CSS -->
-    <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/breakpoints.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('vendor/datatables/datatables.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('vendor/datatables/responsive.bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
 
 @endsection
 
@@ -45,9 +45,9 @@
                 </div>
               </div>
             </form>
-            <a class="btn btn-icon btn-success text-white d-flex" type="button" data-toggle="modal" data-target="#registerEmployee" id="addEmployee">
+            <button class="btn btn-icon btn-success text-white d-flex" type="button" data-toggle="modal" data-target="#registerEmployee" id="addEmployee">
               <span class="btn-inner--icon"><i class="fas fa-plus mr-2"></i></span>Register
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -65,7 +65,9 @@
           <tbody>
             @forelse ($employees as $employee)
               <tr class="border">
-                <td>{{ $employee->fullName()}}</td>
+                <td>
+                  <a href="{{ route('employee.show', $employee->id) }}">{{ $employee->fullName()}}</a>
+                </td>
                 <td>{{ $employee->employee_id }}</td>
                 @if (!empty($employee->department))
                   <td>{{ $employee->role }}</td>
@@ -289,7 +291,9 @@
 
   </script>
 
-      
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     {{-- DataTable --}}
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>

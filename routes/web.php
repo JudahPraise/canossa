@@ -340,6 +340,18 @@ Route::prefix('medical-record')->group(function(){
         });
     });
 
+    Route::prefix('/medication')->group(function(){
+        Route::get('/', 'Medical\MedicationController@index')->name('medication.index');
+        Route::post('/store', 'Medical\MedicationController@store')->name('medication.store');
+        Route::put('/update/{id}', 'Medical\MedicationController@update')->name('medication.update');
+        Route::delete('/delete/{id}', 'Medical\MedicationController@destroy')->name('medication.delete');
+    });
+
+
+    Route::prefix('/labtest-schedule')->group(function(){
+        Route::post('/store', 'LabtestSchedController@store')->name('labtestSchedule.store');
+    });
+
 
 
 });

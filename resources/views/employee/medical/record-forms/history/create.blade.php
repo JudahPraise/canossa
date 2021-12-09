@@ -3,7 +3,7 @@
 @section('create-record-section')
 <x-medical-create-nav :id="$record->user_id"></x-medical-create-nav>
 
-<div class="row mb-3 w-100">
+<div class="row mb-3 mx-1 w-100">
     <form action="{{ !empty($record->history) ? route('employee.history.update', $record->user_id) : route('employee.history.store', $record->user_id) }}" method="POST" class="w-100">
         @if (!empty($record->history))
             @method('PUT')
@@ -14,7 +14,6 @@
                 <h3>Personal History</h3>
                 <small class="font-italic text-muted ml-2"><span class="text-danger mr-1">*</span>check if you have been ill of the following</small>
             </span>
-            <button type="submit" class="nav-link btn" style="background-color: blue; color: white;">{{ Route::currentRouteName('employee.history.edit') ? 'Update' : 'Save' }}</button>
         </div>
 
         <div class="row mb-3">
@@ -149,30 +148,31 @@
                 </fieldset>
             </div>
         </div>
-        <div class="row d-flex flex-column justify-content-center ml-1 inputs_div w-25">
+        <div class="row d-flex flex-column justify-content-center ml-1 inputs_div w-100 mb-3">
             <div class="form-row d-flex align-items-center">
                 <label class="w-100 d-flex justify-content-between" for="otherIllness">Other
-                    <button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add ml-2" type="button">
+                    <button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add mr-2" type="button">
                         <i class="fas fa-plus"></i>
                     </button>
                 </label>
             </div>
             @if (!empty($otherHistories))
                 @foreach ($otherHistories as $other)
-                    <div class="form-row d-flex justify-content-between align-items-start">
-                        <fieldset>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="otherIllness" name="illnesses[]" value="{{ $other->illnesses }}">
-                                <input class="form-check-input" type="text" name="isOther[]" value="true" hidden>
-                            </div>
-                        </fieldset>
-                        <button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove ml-2 mt-2" type="button">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
+                <div class="form-row d-flex justify-content-between align-items-start w-100">
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="otherIllness" name="illnesses[]" value="{{ $other->illnesses }}">
+                            <input class="form-check-input" type="text" name="isOther[]" value="true" hidden>
+                        </div>
+                    </fieldset>
+                    <button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove mt-2" type="button">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
                 @endforeach
             @endif
         </div>
+        <button type="submit" class="nav-link btn float-right" style="background-color: blue; color: white;">{{ Route::currentRouteName('employee.history.edit') ? 'Update' : 'Save' }}</button>
     </form>
 </div>
 @endsection
@@ -181,7 +181,7 @@
 <script>
   $(document).ready(function () {
     $(this).on("click", ".add", function(){
-        var html = '<div class="form-row d-flex justify-content-between align-items-start"><fieldset><div class="form-group"><input type="text" class="form-control" id="otherIllness" name="illnesses[]"><input class="form-check-input" type="text" name="isOther[]" value="true" hidden></div></fieldset><button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove ml-2 mt-2" type="button"><i class="fas fa-minus"></i></button></div>'
+        var html = '<div class="form-row d-flex justify-content-between align-items-start w-100"><fieldset><div class="form-group"><input type="text" class="form-control" id="otherIllness" name="illnesses[]"><input class="form-check-input" type="text" name="isOther[]" value="true" hidden></div></fieldset><button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove mt-2" type="button"><i class="fas fa-minus"></i></button></div>'
         $('.inputs_div').append(html);
     });
     $(this).on("click", ".remove", function(){
