@@ -8,7 +8,7 @@
     {{-- @foreach ($record as $data) --}}
         <div class="list-group px-3 w-100">
             @forelse($record->labtests as $labtest)
-                <div class="list-group-item list-group-item-action d-flex flex-column justify-content-between p-3" data-toggle="modal" data-target="{{ "#showFile".$labtest->id }}">
+                <div class="list-group-item list-group-item-action d-flex flex-column justify-content-between p-3">
                     <div class="row">
                         <div class="col-1">
                             <i class="far fa-file-alt mr-3" style="font-size: 1.2rem"></i>

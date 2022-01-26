@@ -137,7 +137,7 @@
             const assignBtn = document.getElementById('assignBtn');
 
             const searchEmployees = async searchText => {
-                const res = await fetch('{{ route('admin.getEmployees') }}');
+                const res = await fetch('/admin/admins/getEmployees');
                 const employees = await res.json();
                 
                 let matches = employees.filter(employee => {
@@ -149,7 +149,7 @@
                     matches = [];
                     matchList.innerHTML = '';
                 }
-    
+                // console.log(res);    
                 outputHtml(matches);
             };
     
@@ -170,6 +170,7 @@
             }
     
             search.addEventListener('input', () => searchEmployees(search.value));
+            
             selectDepartment.addEventListener('change', function(){
                 var id = parseInt(this.value, 10);
                  const adminId = document.getElementById('adminId').value = generateId(id);

@@ -72,10 +72,21 @@
                         {{ \Carbon\Carbon::parse($announcement->date_from)->format('m/d/Y') }}
                       </td>
                       <td>
-                        <button class="btn btn-icon btn-sm btn-primary" type="button" data-toggle="modal" data-target="#showModal">
+                        {{-- <button class="btn btn-icon btn-sm btn-primary" type="button" data-toggle="modal" data-target="#showModal">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                        </button>
-                        <button class="btn btn-icon btn-sm btn-info" type="button" data-toggle="modal" data-target="#editModal">
+                        </button> --}}
+                        <button class="btn btn-icon btn-sm btn-info ann-data" type="button" data-toggle="modal" data-target="#editModal"
+                        data-id="{{ $announcement->id }}"
+                        data-title="{{ $announcement->announcement_title }}"
+                        data-employees="{{ $announcement->affected_employees }}"
+                        data-datefrom="{{ $announcement->date_from }}"
+                        data-timefrom="{{ $announcement->time_from }}"
+                        data-dateto="{{ $announcement->date_to }}"
+                        data-timeto="{{ $announcement->time_to }}"
+                        data-description="{{ $announcement->announcement_description }}"
+                        data-link="{{ $announcement->link }}"
+                        data-attachment="{{ $announcement->attachment }}"
+                        >
                             <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
                         </button>
                         <button class="btn btn-icon btn-sm btn-danger" type="button" onclick="event.preventDefault();
@@ -262,7 +273,22 @@
     </div>
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
+
+
+@endsection
+
+@section('js')
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
+    <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
+    <!-- Argon JS -->
+    <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
+
     <script type="application/javascript">
         $(document).ready(function () {
 
@@ -288,17 +314,4 @@
             });
         });
     </script>
-
-@endsection
-
-@section('js')
-    <!-- Argon Scripts -->
-    <!-- Core -->
-    <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
-    <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
-    <!-- Argon JS -->
-    <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
 @endsection

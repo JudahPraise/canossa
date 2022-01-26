@@ -28,7 +28,7 @@
                 <div class="card__content">
                   <p class="grid has-no-col-padding">
                     <small class="column">
-                      @if (auth()->user()->education->elementary)
+                      @if (auth()->user()->education->elem)
                         {{ auth()->user()->education->elem->updated_at->diffForhumans() }}
                       @else
                         No data yet
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="col mb-3">
-            @if (empty(auth()->user()->education->elementary))
+            @if (empty(auth()->user()->education->elem))
                 <div class="stack-top">
                   <span class="d-flex flex-column align-items-center">
                     <span><i class="fas fa-lock mb-3" style="color: white; font-size: 3rem"></i></span>
@@ -73,7 +73,7 @@
         <div class="col mb-3">
           @if (empty(auth()->user()->education->secondary))
             <div class="stack-top">
-              <span class="d-flex flex-column align-items-cen        ter">
+              <span class="d-flex flex-column align-items-center">
                 <span><i class="fas fa-lock mb-3" style="color: white; font-size: 3rem"></i></span>
                 {{-- <small class="mb-3" style="color: white; font-size: 1rem">You're civil status is {{ auth()->user()->personal()->civil_status }}</small> --}}
               </span>

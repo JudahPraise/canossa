@@ -27,6 +27,7 @@ class AdminsController extends Controller
     public function getEmployees(Request $request)
     {    
         $data = User::select('lname','fname','mname','extname','id','role', 'category')->where("lname","LIKE","%{$request->employee_name}%")->where('category','=','Regular')->get();
+        // dd($data);
         return response()->json($data);
     }  
 

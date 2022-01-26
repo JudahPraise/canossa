@@ -189,10 +189,10 @@
                   <input type="text" name="password" class="form-control" id="password" style="font-weight: bold; color: black; font-size: 1.2rem">
                 </div>
               </div>
-              <div class="col-md-2 mb-3" id="qrContainer">
+              {{-- <div class="col-md-2 mb-3" id="qrContainer"> --}}
                  {{-- TODO: QR Code Function --}}
                 <input type="text" name="qr_token" id="qrTokenInput" hidden>
-              </div>
+              {{-- </div> --}}
             </div>
           </div>
           <div class="modal-footer">
@@ -248,19 +248,19 @@
 
     generate.addEventListener("click", function(){
 
-      var tag = document.createElement('div');
-      tag.setAttribute('id', 'qrcode');
-      var qrContainer =  document.getElementById('qrContainer').append(tag);
+      // var tag = document.createElement('div');
+      // tag.setAttribute('id', 'qrcode');
+      // var qrContainer =  document.getElementById('qrContainer').append(tag);
       var emp_pass = Math.random().toString(36).slice(-8);
       var qr_token = generateToken() + generateToken();
-      var qrcode = new QRCode(document.getElementById("qrcode"), {  
-	      text: qr_token, 
-	      width: 100, 
-	      height: 100,  
-	      colorDark : "#000000",  
-	      colorLight : "#ffffff", 
-	      correctLevel : QRCode.CorrectLevel.H
-      }); 
+      // var qrcode = new QRCode(document.getElementById("qrcode"), {  
+	    //   text: qr_token, 
+	    //   width: 100, 
+	    //   height: 100,  
+	    //   colorDark : "#000000",  
+	    //   colorLight : "#ffffff", 
+	    //   correctLevel : QRCode.CorrectLevel.H
+      // }); 
 
       document.getElementById('qrTokenInput').value = qr_token;
       document.getElementById('password').value = emp_pass;

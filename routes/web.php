@@ -43,6 +43,7 @@ Route::prefix('admin')->group(function(){
     //Account
     Route::prefix('/account')->group(function(){
         Route::get('/{id}', 'Admin\AccountController@index')->name('admin.account.index');
+        Route::put('/update/{id}', 'Admin\AccountController@update')->name('admin.account.update');
     });
     //Announcements
     Route::prefix('/announcements')->group(function(){

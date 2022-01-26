@@ -9,12 +9,12 @@
   <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
-  <link rel="stylesheet" href="{{ asset('css/card.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('css/card.css') }}"> --}}
 @endsection
 
 @section('medical-home')
     <div class="container-fluid p-3">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"  id="destPopuler">
+        {{-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"  id="destPopuler">
             @forelse ($users as $data)
                 <div class="col">
                     <a class="card" href="{{ route('medical.show', $data->id) }}">
@@ -22,7 +22,7 @@
                         <div class="card__overlay">
                             <div class="card__header">
                               @if (!empty($data->user->image))
-                                  <img  class="card__thumb" src="{{ asset( 'storage/images/'.$employee->image) }}" >
+                                  <img  class="card__thumb" src="{{ asset( 'storage/images/'.$data->user->image) }}" >
                               @else
                                   <img  class="card__thumb" src="{{ $data->user->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}">
                               @endif
@@ -65,6 +65,32 @@
                         @endif
                     </a> 
                 </div>
+            @empty
+            @endforelse
+        </div> --}}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"  id="destPopuler">
+            @forelse ($users as $data)
+                <a href="{{ route('medical.show', $data->id) }}" class="emp">
+                    <div class="col mb-2">
+                        <div class="card"> 
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-3 d-flex justify-content-center">
+                                        @if (!empty($data->user->image))
+                                        <img  class="card__thumb" src="{{ asset( 'storage/images/'.$data->user->image) }}" >
+                                        @else
+                                            <img  class="card__thumb" src="{{ $data->user->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}">
+                                        @endif
+                                    </div>
+                                    <div class="col-8 d-flex flex-column justify-content-center">
+                                        <p class="p-0" style="font-size: 1vw; font-weight: bold">{{ $data->user->shortName() }}</p>
+                                        <p class="m-0 p-0 mb-2">{{ $data->user->role }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             @empty
             @endforelse
         </div>

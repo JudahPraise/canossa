@@ -63,8 +63,8 @@
           <div class="card-body">
             <div class="row">
               <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">Staff</h5>
-                <span class="h2 font-weight-bold mb-0">{{ $staffs }}</span>
+                <h5 class="card-title text-uppercase text-muted mb-0">Nurse</h5>
+                <span class="h2 font-weight-bold mb-0">{{ $nurse }}</span>
               </div>
               <div class="col-auto">
                 <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -123,7 +123,7 @@
                       <input class="form-control" placeholder="Search" type="text" id="myInput" onkeyup="myFunction()">
                     </div>
                   </div>
-                </form>D
+                </form>
               </div>
             </div>
           </div>
@@ -142,8 +142,8 @@
                   <td class="d-flex align-items-center">
                      <div class="media align-items-center mr-2">
                       @if(!empty($employee->image))
-                        <a href="#" class="avatar rounded-circle">
-                          <img src="{{ asset( 'storage/images/'.$employee->image) }}" style="height: 20px; overflow: hidden;">
+                        <a href="#">
+                          <img src="{{ asset( 'storage/images/'.$employee->image) }}" class="avatar rounded-circle" style="height: 50px; overflow: hidden;">
                         </a>
                       @else
                         <a href="#">

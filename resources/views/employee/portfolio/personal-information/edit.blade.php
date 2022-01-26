@@ -36,9 +36,8 @@
           <div class="col-md-3 mb-3">
             <label for="sex">Sex</label>
             <select class="custom-select" name="sex" id="sex" required>
-              <option selected value="{{ $personal->sex }}">{{ $personal->sex }}</option>
-              <option>Male</option>
-              <option>Female</option>
+              <option  {{ $personal->sex == 'Male' ? 'selected' : '' }}>Male</option>
+              <option  {{ $personal->sex == 'Female' ? 'selected' : '' }}>Female</option>
             </select>
           </div>
           <div class="col-md-3 mb-3">
@@ -48,12 +47,11 @@
           <div class="col-md-3 mb-3">
             <label for="civil_status">Civil Status</label>
             <select class="custom-select" name="civil_status" required>
-              <option selected value="{{ $personal->civil_status }}">{{ $personal->civil_status }}</option>
-              <option>Married</option>
-              <option>Widowed</option>
-              <option>Separated</option>
-              <option>Divorced</option>
-              <option>Single</option>
+              <option {{ $personal->civil_status == 'Married' ? 'selected' : '' }}>Married</option>
+              <option {{ $personal->civil_status == 'Widowed' ? 'selected' : '' }}>Widowed</option>
+              <option {{ $personal->civil_status == 'Separated' ? 'selected' : '' }}>Separated</option>
+              <option {{ $personal->civil_status == 'Divorced' ? 'selected' : '' }}>Divorced</option>
+              <option {{ $personal->civil_status == 'Single' ? 'selected' : '' }}>Single</option>
             </select>
           </div>
         </div>
@@ -70,16 +68,15 @@
           </div>
           <div class="col-md-4 mb-2">
               <label for="">Blood Type</label>
-              <select class="custom-select" id="validationDefault04" name="blood_type" value="{{ $personal->blood_type }}">
-                  <option disabled selected>Choose...</option>
-                  <option>A</option>
-                  <option>O</option>
-                  <option>B</option>
-                  <option>AB</option>
-                  <option>A-</option>
-                  <option>O-</option>
-                  <option>B-</option>
-                  <option>AB-</option>
+              <select class="custom-select" id="validationDefault04" name="blood_type">
+                  <option {{ $personal->blood_type == 'A' ? 'selected' : '' }}>A</option>
+                  <option {{ $personal->blood_type == 'O' ? 'selected' : '' }}>O</option>
+                  <option {{ $personal->blood_type == 'B' ? 'selected' : '' }}>B</option>
+                  <option {{ $personal->blood_type == 'AB' ? 'selected' : '' }}>AB</option>
+                  <option {{ $personal->blood_type == 'A-' ? 'selected' : '' }}>A-</option>
+                  <option {{ $personal->blood_type == 'O-' ? 'selected' : '' }}>O-</option>
+                  <option {{ $personal->blood_type == 'B-' ? 'selected' : '' }}>B-</option>
+                  <option {{ $personal->blood_type == 'AB-' ? 'selected' : '' }}>AB-</option>
               </select> 
           </div>
         </div>

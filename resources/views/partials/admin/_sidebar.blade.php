@@ -48,14 +48,6 @@
         Manage Accounts
       </a>
     </li>
-    <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="{{ route('admin.feedback.index') }}">
-        <svg class="c-sidebar-nav-icon">
-          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-speech') }}"></use>
-        </svg>
-        Feedback
-      </a>
-    </li>
     <li class="c-sidebar-nav-item mt-auto">
       <a class="c-sidebar-nav-link c-sidebar-nav-link-danger" onclick="document.getElementById('logoutForm2').submit()">
         <svg class="c-sidebar-nav-icon">

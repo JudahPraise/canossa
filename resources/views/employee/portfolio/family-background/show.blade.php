@@ -20,8 +20,8 @@
             <div class="card-body w-100">
                 <div class="row px-2 d-flex align-items-center justify-content-between">
                         <strong style="font-weight: bold; color: black; font-size: 1.3rem">Spouse</strong>
-                        <a href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.edit', $family->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                        <a href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.edit', auth()->user()->id ) : route('spouse.create') }}" class="btn btn-sm btn-icon mr-2 {{ !empty(auth()->user()->family->spouse) ? 'btn-info' : 'btn-success' }}" type="button">
+                            <span class="btn-inner--icon"><i class="fas {{ !empty(auth()->user()->family->spouse) ? 'fa-edit' : 'fa-plus' }}"></i></span>
                         </a>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 mt-3">
@@ -102,8 +102,8 @@
                 <hr>
                 <div class="row px-2 d-flex justify-content-between align-items-cent">
                         <strong style="font-weight: bold; color: black; font-size: 1.3rem">Mother</strong>
-                        <a href="{{ !empty(auth()->user()->family->mother) ? route('mother.edit', $family->mother->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                        <a href="{{ !empty(auth()->user()->family->mother) ? route('mother.edit', auth()->user()->id ) : route('mother.create') }}" class="btn btn-sm btn-icon mr-2 {{ !empty(auth()->user()->family->mother) ? 'btn-info' : 'btn-success' }}" type="button">
+                            <span class="btn-inner--icon"><i class="fas {{ !empty(auth()->user()->family->mother) ? 'fa-edit' : 'fa-plus' }}"></i></span>
                         </a>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 mt-3">
@@ -156,8 +156,8 @@
                 <hr>
                 <div class="row px-2 d-flex justify-content-between align-items-center">
                         <strong style="font-weight: bold; color: black; font-size: 1.3rem">Father</strong>
-                        <a href="{{ !empty(auth()->user()->family->father) ? route('father.edit', $family->father->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                        <a href="{{ !empty(auth()->user()->family->father) ? route('father.edit', auth()->user()->id ) : route('father.create') }}" class="btn btn-sm btn-icon mr-2 {{ !empty(auth()->user()->family->father) ? 'btn-info' : 'btn-success' }}" type="button">
+                            <span class="btn-inner--icon"><i class="fas {{ !empty(auth()->user()->family->father) ? 'fa-edit' : 'fa-plus' }}"></i></span>
                         </a>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 mt-3">

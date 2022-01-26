@@ -15,7 +15,7 @@
     @component('components.alerts')@endcomponent
     <div class="container break-container">
         <div class="row px-3 mb-3 d-flex justify-content-between">
-          <h2 class="mb-3">Update Account Information</h3>
+          <h2 class="mb-3">Manage Admins</h3>
           <button class="btn btn-sm btn-success"><a href="{{ route('admin.create') }}" class="text-white">Add Admin </a></button>
         </div>
         <div class="table-responsive">

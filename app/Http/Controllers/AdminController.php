@@ -28,8 +28,9 @@ class AdminController extends Controller
         $teachers = $employees->where('role','=','Teacher')->count();
         $staffs = $employees->where('role','=','Staff')->count();
         $maintenance = $employees->where('role','=','Maintenance')->count();
+        $nurse = $employees->where('role','=','Nurse')->count();
         $category = 'All';
-        return view('admin.home.dashboard', compact(['employees', 'staffs', 'maintenance', 'teachers']))->with('category', $category);
+        return view('admin.home.dashboard', compact(['employees', 'staffs', 'maintenance', 'teachers', 'nurse']))->with('category', $category);
     }
 
     public function getCategory(Request $request)

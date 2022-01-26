@@ -54,7 +54,7 @@ class FatherController extends Controller
             'updated_at' => Carbon::now()
         ]);
         
-        return redirect()->route('family.index', 'card');
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**
@@ -65,9 +65,10 @@ class FatherController extends Controller
      */
     public function show($id)
     {
-        $family = Family::where('user_id','=',$id)->with('father')->first();
-        $father = $family->father->first();
-        return view('employee.portfolio.family-background.father.show', compact('father'));
+        // $family = Family::where('user_id','=',$id)->with('father')->first();
+        // $father = $family->father->first();
+        // return view('employee.portfolio.family-background.father.show', compact('father'));
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**
@@ -79,8 +80,8 @@ class FatherController extends Controller
     public function edit($id)
     {
         $family = Family::where('user_id','=',$id)->with('father')->first();
-        $father = $family->father->first();
-        return view('employee.portfolio.family-background.father.edit', compact('father'));
+        // dd($family->father);
+        return view('employee.portfolio.family-background.father.edit', compact('family'));
     }
 
     /**
@@ -107,7 +108,7 @@ class FatherController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect()->route('father.show', Auth::user()->id);
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**

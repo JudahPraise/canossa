@@ -70,6 +70,16 @@ class RegisterController extends Controller
         $employee->department = $request->input('department');
         $employee->qr_token = $request->input('qr_token');
         $employee->password = Hash::make($request->input('password'));
+        if($request->input('sex') == 'M')
+        {
+            $employee->image = 'default-male.svg';
+        }
+        else
+        {
+            $employee->image = 'default-female.svg';
+
+        }
+        $employee->password = Hash::make($request->input('password'));
 
         $employee->save();
 

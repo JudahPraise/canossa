@@ -38,7 +38,7 @@
               <strong style="font-size: 1.1rem">{{ $record->user->dob }}</strong>
           </div>
           <div class="col-md-4 mb-2">
-              <p style="font-size: .8rem">Date of birth</p>
+              <p style="font-size: .8rem">Age</p>
               <strong style="font-size: 1.1rem">{{ $record->user->getAge() }}</strong>
           </div>
       </div>

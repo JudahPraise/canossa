@@ -54,7 +54,7 @@ class MotherController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect()->route('family.index', 'card');
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**
@@ -65,9 +65,10 @@ class MotherController extends Controller
      */
     public function show($id)
     {
-        $family = Family::where('user_id','=',$id)->with('mother')->first();
-        $mother = $family->mother->first();
-        return view('employee.portfolio.family-background.mother.show', compact('mother'));
+        // $family = Family::where('user_id','=',$id)->with('mother')->first();
+        // $mother = $family->mother->first();
+        // return view('employee.portfolio.family-background.mother.show', compact('mother'));
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**
@@ -79,8 +80,7 @@ class MotherController extends Controller
     public function edit($id)
     {
         $family = Family::where('user_id','=',$id)->with('mother')->first();
-        $mother = $family->mother->first();
-        return view('employee.portfolio.family-background.mother.edit', compact('mother'));
+        return view('employee.portfolio.family-background.mother.edit', compact('family'));
     }
 
     /**
@@ -107,7 +107,7 @@ class MotherController extends Controller
             'updated_at' => Carbon::now()
         ]);
         
-        return redirect()->route('mother.show', Auth::user()->id);
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**

@@ -52,51 +52,54 @@
                 <tr>
                   <th scope="col">Name</th>
                   <th></th>
+                  <th scope="col">Send to</th>
                   <th scope="col">Subject</th>
                   <th scope="col"></th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody class="list">
-                @forelse (Auth::guard('admin')->user()->notifications as $notification)
-                  @if ($notification->notifiable_type === 'App\Admin')
+                @forelse ($messages as $message)
                     <tr class="message" data-toggle="modal" data-target="#showMessage" 
-                    data-markasread="{{ $notification->id }}"
-                    data-sender="{{ $notification->data['sender'] }}"
-                    data-subject="{{ $notification->data['subject'] }}"
-                    data-message="{{ $notification->data['message'] }}"
-                    data-attachment="{{ $notification->data['attachment'] }}">
+                    data-markasread="{{ $message->id }}"
+                    data-sender="{{ $message->sender }}"
+                    data-subject="{{ $message->subject }}"
+                    data-message="{{ $message->message }}"
+                    data-attachment="{{ $message->attachment }}">
                       <th scope="row">
                         <div class="media align-items-center">
-  
                             <a href="#" class="avatar rounded-circle mr-3">
-                              <img src="{{ asset('storage/images/'.$notification->data['sender_image']) }}" style=" height: 50px; overflow: hidden;">
+                              <img src="{{ asset('storage/images/'.$message->sender_image) }}" style=" height: 50px; overflow: hidden;">
                             </a>
                         </div>
                       </th>
                       <td>
-                        <strong style="font-size: .9rem">{{ $notification->data['sender'] }}</strong><br>
-                        <small style="font-size: .9rem">{{ $notification->data['message'] }}</small>
+                        <strong style="font-size: .9rem">{{ $message->sender }}</strong><br>
+                        <small style="font-size: .9rem">{{ $message->message }}</small>
                       </td>
                       <td class="budget">
-                        {{ $notification->data['subject'] }}
+                        {{ $message->send_to }}
+                      </td>
+                      <td class="budget">
+                        {{ $message->subject }}
                       </td>
                       <td>
-                        {{ $notification->created_at->diffForHumans() }}
+                        {{ $message->created_at->diffForHumans() }}
                       </td>
                       <td class="message">
                         <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#showMessage" 
-                        data-markasread="{{ $notification->id }}"
-                        data-sender="{{ $notification->data['sender'] }}"
-                        data-subject="{{ $notification->data['subject'] }}"
-                        data-message="{{ $notification->data['message'] }}"
-                        data-attachment="{{ $notification->data['attachment'] }}">View Message</button>
-                        <button class="btn btn-sm btn-info text-white" data-toggle="modal"  id="replyTo"
-                        data-target="#replyModal" 
-                        data-sendto="{{ $notification->data['sender'] }}" >Reply</button>
+                        data-markasread="{{ $message->id }}"
+                        data-sender="{{ $message->sender }}"
+                        data-subject="{{ $message->subject }}"
+                        data-message="{{ $message->message }}"
+                        data-attachment="{{ $message->attachment }}">View Message</button>
+                        @if ($message->sender_type != 'Admin')
+                            <button class="btn btn-sm btn-info text-white" data-toggle="modal"  id="replyTo"
+                            data-target="#replyModal" 
+                            data-sendto="{{ $message->sender }}" >Reply</button>
+                        @endif
                       </td>
                     </tr>
-                  @endif
                 @empty
                   <tr class="text-center">
                     <td colspan="5"><small>No message yet</small></td>
@@ -156,7 +159,7 @@
                     <select id="inputState" class="form-control" name="send_to">
                       <option selected value="">Choose...</option>
                       @foreach ($users as $user)
-                        <option>{{ $user->name }}</option>
+                        <option value={{ $user->employee_id }}>{{ $user->fullName() }}</option>
                       @endforeach
                     </select>
                 </div>
