@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         $user->password = Hash::make('password');
         $user->role = 'Teacher';
         $user->department = 'College';
-        $user->image = '';
+        $user->image = 'default-male.svg';
         $user->category = "Regular";
         $user->qr_token = "q0m59krrf9nm92wzinbuek";
 

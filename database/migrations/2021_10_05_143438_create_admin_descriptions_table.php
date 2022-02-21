@@ -16,7 +16,7 @@ class CreateAdminDescriptionsTable extends Migration
         Schema::create('admin_descriptions', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->string('admin_id')->nullable();
+            $table->string('admin_id', 32)->nullable();
             $table->timestamps();
         });
     }

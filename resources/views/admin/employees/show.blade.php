@@ -83,11 +83,6 @@
                             <a href="#" onclick="document.getElementById('imageUpload').click()">
                               <img src="{{ asset( 'storage/images/'.$employee->image) }}" class="rounded-circle" style="height: 150px; width: 200px; overflow: hidden;">
                             </a>
-                            @if(empty($employee->image))
-                                <a href="#" onclick="document.getElementById('imageUpload').click()">
-                                    <img src="{{ asset($employee->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 144px; width: 200px; overflow: hidden;">
-                                </a>
-                            @endif
                         </div>
                     </div>
                   </div>

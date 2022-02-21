@@ -29,49 +29,6 @@
                 </form>
             </div>
         </div>
-        {{-- <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4" id="destPopuler">
-            @forelse ($employees as $employee)
-            <div class="col mb-4">
-                <div class="card p-0">
-                    <img class="card-img-top" src="{{ asset('img/cover.jpg') }}" alt="Card image cap">
-                    <div class="card-profile-image avatar-upload">
-                       @if (!empty($employee->image))
-                            <a href="#">
-                                <img src="{{ asset('storage/images/'.$employee->image) }}" class="rounded-circle" style="height: 140px; width: 200px; overflow: hidden;">
-                            </a>
-                       @else
-                            <a href="#">
-                                <img src="{{ asset($employee->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 140px; width: 200px; overflow: hidden;">
-                            </a>
-                       @endif
-                    </div>
-                    <div class="card-body mt-4">
-                        <div class="row d-flex flex-column m-2" style="height: 10rem">
-                            <div class="col">
-                                <div class="card-profile-stats d-flex justify-content-center">
-                                    <div class="text-center">
-                                        <h3>
-                                          {{ $employee->fullName() }}
-                                        </h3>
-                                        <h5>
-                                            {{ $employee->role }}
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <a href="{{ route('employee.show', $employee->id) }}" class="btn btn-sm btn-primary">View profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @empty
-                <div class="container w-100 text-center">
-                    <p>No employees yet</p>
-                </div>
-            @endforelse
-        </div> --}}
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"  id="destPopuler">
             @forelse ($employees as $employee)
                 <a href="{{ route('employee.show', $employee->id) }}" class="emp">
@@ -80,11 +37,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-3 d-flex justify-content-center">
-                                        @if (!empty($employee->image))
-                                            <img src="{{ asset( 'storage/images/'.$employee->image) }}" width="100">
-                                        @else
-                                            <img src="{{ $employee->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}" width="80">
-                                        @endif
+                                        <img src="{{ asset( 'storage/images/'.$employee->image) }}" width="100">
                                     </div>
                                     <div class="col-8 d-flex flex-column justify-content-center">
                                         <p class="p-0" style="font-size: 1vw; font-weight: bold">{{ $employee->fullName() }}</p>

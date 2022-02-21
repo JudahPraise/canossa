@@ -23,7 +23,10 @@
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" name="password" id="exampleInputPassword1">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+          <a href="{{ route('forgotpass.index.nurse') }}" class="ml-2 mb-3" style="font-size: 0.8rem">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary text-uppercase">login</button>
       </form>
     </div>
   </div>

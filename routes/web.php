@@ -20,6 +20,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Forgot Password Employee
+Route::get('/employee/forgot-password', 'EmployeePasswordRequestController@employeeIndex')->name('employeeIndex');
+Route::post('/employee/forgot-password/send-request', 'EmployeePasswordRequestController@sendRequestEmployee')->name('forgotpass.request');
+Route::get('/employee/forgot-password/request-sent', 'EmployeePasswordRequestController@requestSentEmployee')->name('forgotpass.request.sent');
+
+// Forgot Password Admin
+Route::get('/admin/forgot-password', 'AdminPasswordRequestController@index')->name('forgotpass.index.admin');
+Route::post('/admin/forgot-password/send-request', 'AdminPasswordRequestController@sendRequestAdmin')->name('forgotpass.request.admin');
+Route::get('/admin/forgot-password/request-sent', 'AdminPasswordRequestController@requestSentAdmin')->name('forgotpass.request.sent.admin');
+
+//Forgot Password Nurse
+Route::get('/nurse/forgot-password', 'NursePasswordRequestController@index')->name('forgotpass.index.nurse');
+
+
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Admin\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
@@ -39,6 +53,9 @@ Route::prefix('admin')->group(function(){
         Route::get('/getEmployees','Admin\AdminsController@getEmployees')->name('admin.getEmployees');
         Route::get('/getEmployee/{id}', 'Admin\AdminsController@getEmployee')->name('admin.getEmployee');
         Route::post('/assign-as-admin', 'Admin\AdminsController@assignAdmin')->name('admin.assign');
+        Route::get('/change-user/{position}','Admin\AdminsController@changeUser')->name('admin.changeUser');
+        Route::get('/getEmployee/{id}/{position}', 'Admin\AdminsController@selectUser')->name('admin.selectUser');
+        Route::put('/update-user/{position}', 'Admin\AdminsController@updateUser')->name('admin.updateUser');
     });
     //Account
     Route::prefix('/account')->group(function(){
@@ -74,6 +91,11 @@ Route::prefix('admin')->group(function(){
     //Resigned Employee
     Route::get('/resigned/{id}', 'ResignController@resign')->name('resigned');
     Route::get('/retrieved/{id}', 'ResignController@retrieve')->name('retrieve');
+
+    // Password Reset
+    Route::get('/password-reset', 'Admin\PasswordResetController@index')->name('passwordreset.index');
+    Route::post('/password-reset/confirm/{id}', 'Admin\PasswordResetController@passwordConfirm')->name('passwordreset.confirm');
+    // Route::get('/password-reset/create', 'Admin\PasswordResetController@create')->name('passwordreset.update');
 
 });
 
@@ -352,7 +374,5 @@ Route::prefix('medical-record')->group(function(){
     Route::prefix('/labtest-schedule')->group(function(){
         Route::post('/store', 'LabtestSchedController@store')->name('labtestSchedule.store');
     });
-
-
 
 });

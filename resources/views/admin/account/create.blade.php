@@ -14,107 +14,90 @@
 @section('home')
     @component('components.alerts')@endcomponent
     <div class="container break-container">
-        <h2 class="mb-3">Assign Administrator</h3>
-        <div class="form-group position-relative">
-            <div class="input-group input-group-alternative w-100">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+        <div class="container px-2">
+            <h3>Employee Information</h3>
+            <div class="row row-cols-md-2">
+                <div class="col-8">
+                    <span>Name</span>
+                    <h3>{{ $employee->fullName() }}</h3>
+                    <span>Employee ID</span>
+                    <h3>{{ $employee->employee_id }}</h3>
                 </div>
-                <input class="form-control" id="search" placeholder="Enter employee name..." autocomplete="off">
+                <div class="col-4">
+                    <div class="col d-flex justify-content-end align-items-center">
+                        @if (!empty($employee->image))
+                            <img src="{{ asset( 'storage/images/'.$employee->image) }}" width="130">
+                        @else
+                            <img src="{{ $employee->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}" width="100">
+                        @endif
+                    </div>
+                </div>
             </div>
-            <div id="matchList" class="list-group position-absolute w-100" style="z-index: 1"></div>
-        </div>
-        @if (!empty($employee))
-            <div class="container px-2">
-                <h3>Employee Information</h3>
-                <div class="row row-cols-md-2">
-                    <div class="col-8">
-                        <span>Name</span>
-                        <h3>{{ $employee->fullName() }}</h3>
-                        <span>Employee ID</span>
-                        <h3>{{ $employee->employee_id }}</h3>
+            <hr>
+            <form onsubmit="return false">
+                @csrf
+                <h3>Account Information</h3>
+                <input value="{{ $employee->id }}" id="empId" hidden>
+                <div class="form-row mb-3">
+                    <div class="col">
+                        <label for="formGroupExampleInput">Example label</label>
+                        <input type="text" class="form-control" placeholder="Admin ID" id="adminId" style="font-weight: bold; color: black;">
                     </div>
-                    <div class="col-4">
-                        <div class="col d-flex justify-content-end align-items-center">
-                            @if (!empty($employee->image))
-                                <img src="{{ asset( 'storage/images/'.$employee->image) }}" width="130">
-                            @else
-                                <img src="{{ $employee->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}" width="100">
-                            @endif
+                    <div class="col">
+                        <label for="selectDepartment">Position</label>
+                        <select class="form-control" id="selectDepartment">
+                            <option  disabled selected>Select position...</option>
+                            @foreach ($descriptions as $description)
+                                <option value="{{ $description->id }}" {{ $admins->contains('dep_pos', $description->description ) ? 'disabled' : ''}}>{{ $description->description }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row mb-3">
+                    <label for="admPass">Password</label>
+                    <div class="input-group is-invalid">
+                        <input type="text" class="form-control" id="adminPass" placeholder="Password" style="font-weight: bold; color: black;" required>
+                        <div class="input-group-append">
+                           <button type="button" class="btn btn-success" type="button" id="generatePassword">Generate</button>
                         </div>
                     </div>
                 </div>
-                <hr>
-                <form onsubmit="return false">
-                    @csrf
-                    <h3>Account Information</h3>
-                    <input value="{{ $employee->id }}" id="empId" hidden>
-                    <div class="form-row mb-3">
-                        <div class="col">
-                            <label for="formGroupExampleInput">Example label</label>
-                            <input type="text" class="form-control" placeholder="Admin ID" id="adminId" style="font-weight: bold; color: black;">
-                        </div>
-                        <div class="col">
-                            <label for="selectDepartment">Department</label>
-                            <select class="form-control" id="selectDepartment">
-                                <option  disabled selected>Select department...</option>
-                                @foreach ($descriptions as $description)
-                                    <option value="{{ $description->id }}">{{ $description->description }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                <div class="row w-100 d-flex justify-content-center p-3">
+                    <button class="btn btn-primary text-center" data-toggle="modal" data-target="#confirmModal" id="assignBtn">Assign as Administrator</button>
+                </div>
+            </form>
+            <!-- Confirm Modal -->
+            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="confirmModalLabel">Confirm Password</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
-                    <div class="form-row mb-3">
-                        <label for="admPass">Password</label>
-                        <div class="input-group is-invalid">
-                            <input type="text" class="form-control" id="adminPass" placeholder="Password" style="font-weight: bold; color: black;" required>
-                            <div class="input-group-append">
-                               <button type="button" class="btn btn-success" type="button" id="generatePassword">Generate</button>
+                    <div class="modal-body">
+                        {{-- <h2>Are you sure you want to assign {{ $employee->name }} as administrator from medical records?</h2> --}}
+                        <form id="confirmForm" action="{{ route('admin.assign') }}" method="POST">
+                            @csrf
+                            <input type="text" hidden name="admin_id" id="adm_Id">
+                            <input type="text" hidden name="admin_pass" id="adm_Pass">
+                            <input type="text" hidden name="employee_id" id="emp_Id">
+                            <input type="text" hidden name="admin_pos" id="adm_pos">
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">Password</label>
+                              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    <div class="row w-100 d-flex justify-content-center p-3">
-                        <button class="btn btn-primary text-center" data-toggle="modal" data-target="#confirmModal" id="assignBtn">Assign as Administrator</button>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" onclick="document.getElementById('confirmForm').submit()">Confirm</button>
                     </div>
-                </form>
-                <!-- Confirm Modal -->
-                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="confirmModalLabel">Confirm Password</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                            {{-- <h2>Are you sure you want to assign {{ $employee->name }} as administrator from medical records?</h2> --}}
-                            <form id="confirmForm" action="{{ route('admin.assign') }}" method="POST">
-                                @csrf
-                                <input type="text" hidden name="admin_id" id="adm_Id">
-                                <input type="text" hidden name="admin_pass" id="adm_Pass">
-                                <input type="text" hidden name="employee_id" id="emp_Id">
-                                <input type="text" hidden name="admin_pos" id="adm_pos">
-                                <div class="form-group">
-                                  <label for="exampleInputPassword1">Password</label>
-                                  <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" onclick="document.getElementById('confirmForm').submit()">Confirm</button>
-                        </div>
-                      </div>
-                    </div>
+                  </div>
                 </div>
             </div>
-        @else
-        <div class="row d-flex flex-column align-items-center justify-content-center mt-5">
-            <img src="{{ asset('SVG/search.svg') }}" width="100">
-            <p class="pt-3">Waiting to search!</p>
         </div>
-        @endif
     </div>
 @endsection
 
@@ -135,41 +118,6 @@
             const selectDepartment = document.getElementById('selectDepartment');
             const generatePassword = document.getElementById('generatePassword');
             const assignBtn = document.getElementById('assignBtn');
-
-            const searchEmployees = async searchText => {
-                const res = await fetch('/admin/admins/getEmployees');
-                const employees = await res.json();
-                
-                let matches = employees.filter(employee => {
-                    const regex = new RegExp(`^${searchText}`, 'gi');
-                    return employee.lname.match(regex) || employee.fname.match(regex);
-                });
-    
-                if(searchText.length === 0){
-                    matches = [];
-                    matchList.innerHTML = '';
-                }
-                // console.log(res);    
-                outputHtml(matches);
-            };
-    
-            const outputHtml = matches => {
-                if(matches.length > 0){
-                    const html = matches
-                    .map(
-                        match => `
-                        <a href="/admin/admins/getEmployee/${match.id}" class="list-group-item list-group-item-action" >
-                            <h3>${match.lname}, ${match.fname}, ${match.mname}</h3> 
-                            <span class="text-black-50">Role: <span class="text-primary mr-2">${match.role}</span> Department: <span class="text-primary">${match.category}</span></span> 
-                        </a>
-                        `
-                    ).join('');
-    
-                    matchList.innerHTML = html;
-                }
-            }
-    
-            search.addEventListener('input', () => searchEmployees(search.value));
             
             selectDepartment.addEventListener('change', function(){
                 var id = parseInt(this.value, 10);

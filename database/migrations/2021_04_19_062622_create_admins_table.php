@@ -17,8 +17,8 @@ class CreateAdminsTable extends Migration
 
             $table->id();
             $table->string('name');
-            $table->string('employee_id');
-            $table->string('admin_id');
+            $table->string('employee_id', 32);
+            $table->string('admin_id', 32);
             $table->string('password');
             $table->string('user_id')->nullable();
             $table->string('dep_pos');

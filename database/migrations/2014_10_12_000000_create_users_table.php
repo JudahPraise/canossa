@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('extname')->nullable();
             $table->string('sex');
             $table->date('dob');
-            $table->string('employee_id');
+            $table->string('employee_id', 32);
             $table->string('password');
             $table->string('role');
             $table->string('department')->nullable();

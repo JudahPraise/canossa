@@ -168,4 +168,9 @@ class User extends Authenticatable
         }
     }
 
+    public function passwordRequest()
+    {
+        return $this->hasOne(PasswordRequest::class);
+    }
+
 }

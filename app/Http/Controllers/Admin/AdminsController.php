@@ -20,14 +20,15 @@ class AdminsController extends Controller
 
     public function create()
     {
-        return view('admin.account.create');
+        $employees = User::all();
+        $admins = Admin::all();
+        return view('admin.account.employees_table', compact('employees', 'admins'));
     }
 
     // AJAX request
     public function getEmployees(Request $request)
     {    
         $data = User::select('lname','fname','mname','extname','id','role', 'category')->where("lname","LIKE","%{$request->employee_name}%")->where('category','=','Regular')->get();
-        // dd($data);
         return response()->json($data);
     }  
 
@@ -35,11 +36,12 @@ class AdminsController extends Controller
     {
         $employee = User::where('id','=',$id)->first();
         $descriptions = AdminDescription::all();
+        $admins = Admin::select('dep_pos')->get();
         
         if (Admin::where('employee_id',$employee->employee_id)->exists()) {
             return redirect()->back()->with('update', sprintf('%s is already administrator', $employee->employee_id));
         }
-        return view('admin.account.create', compact(['employee', 'descriptions']));
+        return view('admin.account.create', compact(['employee', 'descriptions', 'admins']));
         
     }
 
@@ -51,25 +53,6 @@ class AdminsController extends Controller
             $employee = User::where('id','=',$request->employee_id)->first();
             $fullname = $employee->lname.','.$employee->fname.','.$employee->mname.','.$employee->extname;
             $admins = Admin::where('desc_id','=',$get_description->admin_id)->first();
-
-            if(!empty($admins)){
-
-                AdminDescription::where('description','=',$request->admin_pos)->update([
-                    'admin_id' => $request->admin_id,
-                ]);
-
-                $admin = Admin::where('desc_id','=',$get_description->id)->first();
-
-                $admin->name = $fullname;
-                $admin->employee_id = $employee->employee_id;
-                $admin->admin_id = $request->admin_id;
-                $admin->user_id = $request->employee_id;
-                $admin->password = Hash::make($request->admin_pass);
-
-                $admin->update();
-                
-                return redirect()->route('admin.accounts')->with('update', sprintf('%s user is successfully updated', $request->admin_pos));
-            }
 
             AdminDescription::where('description','=',$request->admin_pos)->update([
                 'admin_id' => $request->admin_id,
@@ -89,6 +72,43 @@ class AdminsController extends Controller
         }
 
        return redirect()->back()->with('delete', 'Wrong Password!');
+    }
+
+    public function changeUser($position)
+    {
+         $employees = User::all();
+        $admins = Admin::all();
+        $adminPosition = AdminDescription::where('description','=',$position)->first();
+        return view('admin.account.change-user-table', compact('employees', 'admins','adminPosition'));
+    }
+
+    public function selectUser($id, $position)
+    {
+        $employee = User::where('id','=',$id)->first();
+        $description = AdminDescription::where('description','=',$position)->first();
+        return view('admin.account.update-user', compact(['employee', 'description']));
+    }
+
+    public function updateUser(Request $request, $position)
+    {
+        $employee = User::where('id','=',$request->employee_id)->first();
+        $fullname = $employee->lname.','.$employee->fname.','.$employee->mname.','.$employee->extname;
+
+        AdminDescription::where('description','=',$request->admin_pos)->update([
+            'admin_id' => $request->admin_id,
+        ]);
+
+        $admin = Admin::where('dep_pos','=',$position)->first();
+
+        $admin->name = $fullname;
+        $admin->employee_id = $employee->employee_id;
+        $admin->admin_id = $request->admin_id;
+        $admin->user_id = $request->employee_id;
+        $admin->password = Hash::make($request->admin_pass);
+
+        $admin->update();
+        
+        return redirect()->route('admin.accounts')->with('update', sprintf('%s user is successfully updated', $request->admin_pos));
     }
 
 }

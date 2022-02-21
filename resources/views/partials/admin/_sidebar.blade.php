@@ -48,6 +48,14 @@
         Manage Accounts
       </a>
     </li>
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('passwordreset.index') }}">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-lock-unlocked') }}"></use>
+        </svg>
+        Password Reset
+      </a>
+    </li>
     <li class="c-sidebar-nav-item mt-auto">
       <a class="c-sidebar-nav-link c-sidebar-nav-link-danger" onclick="document.getElementById('logoutForm2').submit()">
         <svg class="c-sidebar-nav-icon">
