@@ -15,9 +15,9 @@ body {
 #message {
   position: fixed;
   z-index: 12;
-  top: 3rem;
+  bottom: 3rem;
   right: 1rem;
-  width: 25rem;
+  width: 20rem;
   height: 5rem;
   padding: 20px;
   background-color: #343434;

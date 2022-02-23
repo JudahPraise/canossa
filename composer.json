@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.4",
         "simplesoftwareio/simple-qrcode": "~4",
+        "spatie/laravel-backup": "^6.16",
         "spatie/laravel-cookie-consent": "^2.12"
     },
     "require-dev": {

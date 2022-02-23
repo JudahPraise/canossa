@@ -65,17 +65,23 @@
                 <div class="row d-flex justify-content-between align-items-center px-2">
                     <strong style="font-weight: bold; color: black; font-size: 1.3rem">Secondary</strong>
                     <div class="d-flex align-items-center">
-                        <a href="{{  !empty(auth()->user()->education->sec) ? route('sec.edit', $education->sec->id ) : route('sec.create') }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                        </a>
-                        <form action="{{ !empty(auth()->user()->education->sec) ? route('sec.delete', $education->sec->id) : "#" }}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-icon btn-danger" type="button">
-                                <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                            </button>
-                        </form>
+                        @if(!empty(auth()->user()->education->elem))
+                            <a href="{{ !empty(auth()->user()->education->sec) ? route('sec.edit', $education->sec->id ) : route('sec.create') }}" class="btn btn-sm btn-icon mr-2 {{ !empty(auth()->user()->education->sec) ? 'btn-info' : 'btn-success' }}" type="button">
+                                <span class="btn-inner--icon"><i class="fas {{ !empty(auth()->user()->education->sec) ? 'fa-edit ' : 'fa-plus' }}"></i></span>
+                            </a>
+                            @if (!empty(auth()->user()->education->sec))
+                                 <form action="{{ !empty(auth()->user()->education->sec) ? route('sec.delete', $education->sec->id) : "#" }}" method="POST">
+                                     @method('DELETE')
+                                     @csrf
+                                     <button type="submit" class="btn btn-sm btn-icon btn-danger" type="button">
+                                         <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
+                                     </button>
+                                 </form>
+                            @endif
+                        @endif
                     </div>
+                    @if (empty(auth()->user()->education->elementary))
+                    @endif
                 </div>
                 @if (!empty(auth()->user()->education->sec))
                     <div class="row row-cols-2 row-cols-md-4 mt-3">
@@ -109,16 +115,20 @@
                 <div class="row d-flex justify-content-between align-items-center px-2">
                     <strong style="font-weight: bold; color: black; font-size: 1.3rem">College</strong>
                     <div class="d-flex align-items-center">
-                        <a href="{{ !empty(auth()->user()->education->col) ? route('col.edit', $education->col->id ) : route('col.create') }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                        </a>
-                        <form action="{{ !empty(auth()->user()->education->col) ? route('col.delete', $education->col->id) : '#' }}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-icon btn-danger" type="button">
-                                <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                            </button>
-                        </form>
+                        @if(!empty(auth()->user()->education->sec))
+                            <a href="{{ !empty(auth()->user()->education->col) ? route('col.edit', $education->col->id ) : route('col.create') }}" class="btn btn-sm btn-icon mr-2 {{ !empty(auth()->user()->education->col) ? 'btn-info' : 'btn-success' }}" type="button">
+                                <span class="btn-inner--icon"><i class="fas {{ !empty(auth()->user()->education->col) ? 'fa-edit ' : 'fa-plus' }}"></i></span>
+                            </a>
+                            @if (!empty(auth()->user()->education->col))
+                                 <form action="{{ !empty(auth()->user()->education->col) ? route('col.delete', $education->col->id) : "#" }}" method="POST">
+                                     @method('DELETE')
+                                     @csrf
+                                     <button type="submit" class="btn btn-sm btn-icon btn-danger" type="button">
+                                         <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
+                                     </button>
+                                 </form>
+                            @endif
+                        @endif
                     </div>
                 </div>
                 @if (!empty(auth()->user()->education->col))
@@ -157,9 +167,11 @@
                 <div class="row d-flex justify-content-between align-items-center px-2">
                     <strong style="font-weight: bold; color: black; font-size: 1.3rem">Graduate Studies</strong>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('grad.create') }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                        </a>
+                        @if (!empty(auth()->user()->education->col))
+                            <a href="{{ route('grad.create') }}" class="btn btn-sm btn-icon btn-success mr-2" type="button">
+                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                            </a>
+                        @endif
                     </div>
                 </div>
                 @if (!empty(auth()->user()->education->grad->first()))

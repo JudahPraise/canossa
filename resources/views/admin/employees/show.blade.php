@@ -21,7 +21,7 @@
             <div class="container-fluid d-flex align-items-center">
               <div class="row p-3 w-100">
                 <div class="col-lg-7 col-md-10">
-                    <h1 class="display-2 text-white">{{ $employee->name }}</h1>
+                    <h1 class="display-2 text-white">{{ $employee->fullName() }}</h1>
                     <h2 class="text-white mt-0">{{ $employee->employee_id }}</h2>
                     <small class="text-white mt-0" style="font-size: 1rem">{{ $employee->department }}</small>
                     <small class="text-white mt-0" style="font-size: 1rem">{{ $employee->role }}</small><br>
@@ -83,11 +83,6 @@
                             <a href="#" onclick="document.getElementById('imageUpload').click()">
                               <img src="{{ asset( 'storage/images/'.$employee->image) }}" class="rounded-circle" style="height: 150px; width: 200px; overflow: hidden;">
                             </a>
-                            @if(empty($employee->image))
-                                <a href="#" onclick="document.getElementById('imageUpload').click()">
-                                    <img src="{{ asset($employee->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 144px; width: 200px; overflow: hidden;">
-                                </a>
-                            @endif
                         </div>
                     </div>
                   </div>

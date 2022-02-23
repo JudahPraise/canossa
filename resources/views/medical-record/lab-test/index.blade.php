@@ -9,109 +9,55 @@
   <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('vendor/datatables/datatables.min.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ asset('vendor/datatables/responsive.bootstrap.min.css') }}" type="text/css">
 @endsection
 
 @section('medical-home')
 
-<div class="container-fluid p-4">
+<div class="container-fluid p-3">
   @component('components.alerts')@endcomponent
-  <div class="row w-100 m-0">
-    <div class="card w-100">
-      <div class="card-header border-0">
-        <div class="row align-items-center">
-          <div class="col">
-            <h3 class="mb-0">Lab Tests</h3>
-          </div>
-          <div class="col  d-flex justify-content-end">
-            <input type="text" class="form-control form-control-alternative w-50" placeholder="Search employee" type="text" id="myInput" onkeyup="myFunction()">
-          </div>
-        </div>
+  <div class="row d-flex justify-content-center p-1 mx-2">
+    <div class="col-md-7 m-2 shadow bg-white rounded">
+      <div class="row align-items-center m-2">
+          <h3 class="mb-0">Lab Tests</h3>
       </div>
-
-      <div class="table-responsive">
-        <!-- Projects table -->
-        <table class="table align-items-center table-flush" id="myTable">
-          <thead class="thead-light">
+      <div class="table-responsive" style="overflow: hidden">
+        <table class="table table-borderless dt-responsive nowrap" id="hosTable" width="100%">
+          <thead>
             <tr>
-              <th scope="col">ID</th>
               <th scope="col">Name</th>
+              <th scope="col">ID</th>
               <th scope="col">Document</th>
               <th scope="col">Last Updated</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            @forelse ($employees as $employee)
-              <tr id="document">
-                <th scope="row">
-                  {{ $employee->employee_id }}
-                </th>
-                <td>
-                  {{ $employee->name }}
-                </td>
-                <td>
-                  {{ !empty($employee->labtest) ? $employee->labTest->file : 'N/A' }}
-                </td>
-                <td>
-                  {{ !empty($employee->labtest) ? Carbon\Carbon::parse($employee->labTest->created_at)->format('M d, Y') : 'N/A' }}
-                </td>
-                <td>
-                  @if (!empty($employee->labtest))
-                    <button class="btn btn-icon btn-primary btn-sm" type="button">
-                      <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                    </button>
-                    <button class="btn btn-icon btn-success btn-sm uploadBtn" type="button" data-toggle="modal" data-target="#uploadModal" data-id="{{ $employee->id }}">
-                      <span class="btn-inner--icon"><i class="fas fa-cloud-upload-alt"></i></span>
-                    </button>
-                  @else
-                    <button class="btn btn-icon btn-success btn-sm uploadBtn" type="button" data-toggle="modal" data-target="#uploadModal" data-id="{{ $employee->id }}">
-                      <span class="btn-inner--icon"><i class="fas fa-cloud-upload-alt"></i></span>
-                    </button>
-                  @endif
-                  <!-- Upload Modal -->
-                  <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Upload File</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="formUpload" class="d-flex flex-column w-100" method="POST" enctype="multipart/form-data">
-                                  @csrf
-                                  <div class="form-row mb-3">
-                                    <label for="validationCustom01">Type of Document</label>
-                                    <select class="custom-select" id="validationDefault04" name="type">
-                                      <option>Lab Test</option>
-                                    </select>   
-                                  </div>
-                                  <div class="form-row mb-3">
-                                    <label for="validationCustom01">Document</label>
-                                    <div class="file-drop-area mb-3 w-100">
-                                      <span class="fake-btn">Choose files</span>
-                                      <span class="file-msg">or drag and drop files here</span>
-                                      <input class="file-input" type="file" name="file" multiple>
-                                    </div>
-                                  </div>
-                                  <button class="btn btn-sm btn-primary" type="submit" value="Submit Form">Upload File</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </td>
-              </tr>
-            @empty
-              <tr class="text-center">
-                <td colspan="5">No documents</td>
-              </tr>
-            @endforelse
+            @foreach ($labtests as $labtest)
+                <tr>
+                  <td>
+                    <a href="{{ route('medical.show', $labtest->record->user->id) }}">{{ $labtest->record->user->fullName() }}</a>
+                  </td>
+                  <td>{{ $labtest->record->user->employee_id }}</td>
+                  <td>{{ $labtest->file }}</td>
+                  <td>{{ !empty($labtest) ? Carbon\Carbon::parse($labtest->created_at)->format('M d, Y') : 'N/A' }}</td>
+                  <td>
+                    <a href="" class="text-primary" data-toggle="modal" data-target="{{ "#showFile".$labtest->id }}"><i class="far fa-eye mx-1"></i></a>
+                    <a href="" class="text-danger" data-toggle="modal" data-target="{{ "#delete".$labtest->id }}"><i class="far fa-trash-alt mx-1"></i></a>
+                  </td>
+                  <x-showlabtest :file="$labtest->file" :modal="$labtest->id"></x-showlabtest>
+                  <x-deletelabtest :file="$labtest->id"></x-deletelabtest>
+                </tr>
+            @endforeach
           </tbody>
         </table>
-        <div class="row d-flex justify-content-end w-100 p-2">
-          {{ $employees->links() }}
+      </div>
+    </div>
+    <div class="col-md-4 m-2">  
+      <div class="row">
+        <div class="col-md-12 shadow bg-white rounded p-3 mx-2">
+          <x-labtest-schedule-view />
         </div>
       </div>
     </div>
@@ -121,37 +67,29 @@
 @endsection
 
 @section('js')
-  <script>
-    function myFunction() {
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }       
-      }
-    }
-  </script>
-  <script>
-    $('.uploadBtn').each(function() {
-      $(this).click(function(event){
-        $('#formUpload').attr("action", "/medical-record/lab-tests/upload/"+$(this).data('id')+"")
-        // console.log($(this).data('id'));
-      })
-    });
-  </script>
+
   <!-- Script -->
   <script>
-  
+    $( document ).ready(function() {
+      $('.table').DataTable( {
+          responsive:true,
+          columnDefs: [
+		              { responsivePriority: 1, targets: 0 },
+		              { responsivePriority: 2, targets: 1 }
+		          ],
+              "pageLength": 15,
+              "pagingType": "numbers",
+          searching: true,
+          bInfo: false,
+          bLengthChange: false,
+          // bPaginate: true,
+      });
+      $('.uploadBtn').each(function() {
+        $(this).click(function(event){
+          $('#formUpload').attr("action", "/medical-record/lab-tests/upload/"+$(this).data('id')+"")
+        })
+      });
+    });
     var $fileInput = $('.file-input');
     var $droparea = $('.file-drop-area');
       
@@ -190,4 +128,7 @@
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
+    {{-- DataTable --}}
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
 @endsection

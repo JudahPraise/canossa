@@ -11,8 +11,12 @@ class LabTestController extends Controller
 {
     public function index()
     {
-        $employees = User::with('labTest')->paginate(15);
-        return view('medical-record.lab-test.index', compact('employees'));
+        $labtests = LabTest::with('record.user')->get();
+        // foreach($labtests as $labtest)
+        // {
+        //     dd($labtest);
+        // }
+        return view('medical-record.lab-test.index', compact('labtests'));
     }
 
     public function store(Request $request, $id){

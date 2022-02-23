@@ -49,11 +49,11 @@
       </a>
     </li>
     <li class="c-sidebar-nav-item">
-      <a class="c-sidebar-nav-link" href="{{ route('admin.feedback.index') }}">
+      <a class="c-sidebar-nav-link" href="{{ route('passwordreset.index') }}">
         <svg class="c-sidebar-nav-icon">
-          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-speech') }}"></use>
+          <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-lock-unlocked') }}"></use>
         </svg>
-        Feedback
+        Password Reset
       </a>
     </li>
     <li class="c-sidebar-nav-item mt-auto">
@@ -62,7 +62,7 @@
           <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
         </svg>
         Logout
-        <form action="{{ route('admin.logout') }}" method="POST" id="logoutForm2">@csrf</form>
+        <form action="{{ route('admin.logout') }}" method="GET" id="logoutForm2">@csrf</form>
       </a>
     </li>
   </ul>

@@ -8,18 +8,24 @@
         @csrf
         {{-- Full Name --}}
         <div class="form-row">
-          <div class="col-md-4 mb-3">
+          <div class="{{ !empty(Auth::user()->extname) ? 'col-md-4 mb-3' : 'col-md-4 mb-3' }}">
             <label for="first_name">First name</label>
-            <input type="text" class="form-control" name="first_name" id="first_name" value="{{ $personal->first_name }}" required>
+            <input type="text" class="form-control" name="first_name" value="{{ Auth::user()->fname }}" id="first_name" required>
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="{{ !empty(Auth::user()->extname) ? 'col-md-2 mb-3' : 'col-md-4 mb-3' }}">
             <label for="middle_name">Middle name</label>
-            <input type="text" class="form-control" name="middle_name" id="middle_name" value="{{ $personal->middle_name }}" required>
+            <input type="text" class="form-control" name="middle_name" value="{{ Auth::user()->mname }}" id="middle_name" required>
           </div>
-          <div class="col-md-4 mb-3">
+          <div class="{{ !empty(Auth::user()->extname) ? 'col-md-4 mb-3' : 'col-md-4 mb-3' }}">
             <label for="surname">Last name</label>
-            <input type="text" class="form-control" name="surname" id="surname" value="{{ $personal->surname }}" required>
+            <input type="text" class="form-control" name="surname" value="{{ Auth::user()->lname }}" id="surname" required>
           </div>
+          @if (!empty(Auth::user()->extname))
+            <div class="col-md-2 mb-3">
+              <label for="extname">Last name</label>
+              <input type="text" class="form-control" name="extname" value="{{ Auth::user()->extname }}" id="extname" required>
+            </div>
+          @endif
         </div>
         {{-- Status --}}
         <div class="form-row">
@@ -30,9 +36,8 @@
           <div class="col-md-3 mb-3">
             <label for="sex">Sex</label>
             <select class="custom-select" name="sex" id="sex" required>
-              <option selected value="{{ $personal->sex }}">{{ $personal->sex }}</option>
-              <option>Male</option>
-              <option>Female</option>
+              <option  {{ $personal->sex == 'Male' ? 'selected' : '' }}>Male</option>
+              <option  {{ $personal->sex == 'Female' ? 'selected' : '' }}>Female</option>
             </select>
           </div>
           <div class="col-md-3 mb-3">
@@ -42,36 +47,41 @@
           <div class="col-md-3 mb-3">
             <label for="civil_status">Civil Status</label>
             <select class="custom-select" name="civil_status" required>
-              <option selected value="{{ $personal->civil_status }}">{{ $personal->civil_status }}</option>
-              <option>Married</option>
-              <option>Widowed</option>
-              <option>Separated</option>
-              <option>Divorced</option>
-              <option>Single</option>
+              <option {{ $personal->civil_status == 'Married' ? 'selected' : '' }}>Married</option>
+              <option {{ $personal->civil_status == 'Widowed' ? 'selected' : '' }}>Widowed</option>
+              <option {{ $personal->civil_status == 'Separated' ? 'selected' : '' }}>Separated</option>
+              <option {{ $personal->civil_status == 'Divorced' ? 'selected' : '' }}>Divorced</option>
+              <option {{ $personal->civil_status == 'Single' ? 'selected' : '' }}>Single</option>
             </select>
           </div>
         </div>
-        {{-- Physical --}}
         <div class="form-row">
-            <div class="col-md-4 mb-3">
-              <label for="height">Height</label>
-              <input type="number" step="any" class="form-control" name="height" id="height" value="{{ $personal->height }}" required>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="weight">Weight</label>
-              <input type="number" step="any" class="form-control" name="weight" id="weight" value="{{ $personal->weight }}" required>
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="blood_type">Blood Type</label>
-                <select class="custom-select" name="blood_type" id="blood_type" value="{{ $personal->blood_type }}" required>
-                  <option selected value="{{ $personal->blood_type }}">{{ $personal->blood_type }}</option>
-                  <option>A</option>
-                  <option>B</option>
-                  <option>O</option>
-                  <option>AB</option>
-                </select>
-            </div>
+          <div class="col-md-4 mb-2">
+              <label for="">Height</label>
+              <input type="number" step="0.01" class="form-control" id="height" name="height" value="{{ $personal->height }}">
+              <small class="font-italic text-muted"><span class="text-danger mr-1">*</span>in ft</small>
+          </div>
+          <div class="col-md-4 mb-2">
+              <label>Weight</label>
+              <input type="number" step="0.01" class="form-control" id="weight" name="weight" value="{{ $personal->weight }}">
+              <small class="font-italic text-muted"><span class="text-danger mr-1">*</span>in kl</small>
+          </div>
+          <div class="col-md-4 mb-2">
+              <label for="">Blood Type</label>
+              <select class="custom-select" id="validationDefault04" name="blood_type">
+                  <option {{ $personal->blood_type == 'A' ? 'selected' : '' }}>A</option>
+                  <option {{ $personal->blood_type == 'O' ? 'selected' : '' }}>O</option>
+                  <option {{ $personal->blood_type == 'B' ? 'selected' : '' }}>B</option>
+                  <option {{ $personal->blood_type == 'AB' ? 'selected' : '' }}>AB</option>
+                  <option {{ $personal->blood_type == 'A-' ? 'selected' : '' }}>A-</option>
+                  <option {{ $personal->blood_type == 'O-' ? 'selected' : '' }}>O-</option>
+                  <option {{ $personal->blood_type == 'B-' ? 'selected' : '' }}>B-</option>
+                  <option {{ $personal->blood_type == 'AB-' ? 'selected' : '' }}>AB-</option>
+              </select> 
+          </div>
         </div>
+        <hr>
+        <h3>Contact Information</h3>
         {{-- Address --}}
         <div class="form-row">
             <div class="col-md-6 mb-3">
@@ -91,7 +101,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="tel_number" id="tel_number" value="{{ $personal->tel_number }}" required>
+                    <input type="text" class="form-control" name="tel_number" id="tel_number" value="{{ $personal->tel_number }}">
                 </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -100,7 +110,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-mobile"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="cell_number" id="cell_number" value="{{ $personal->cell_number }}" required>
+                    <input type="text" class="form-control" name="cell_number" id="cell_number" value="{{ $personal->cell_number }}">
                 </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -109,37 +119,39 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
                     </div>
-                    <input type="email" class="form-control" name="email_address" id="email_address" value="{{ $personal->email_address }}" required>
+                    <input type="email" class="form-control" name="email_address" id="email_address" value="{{ $personal->email_address }}">
                 </div>
             </div>
         </div>
+        <hr>
         {{-- ID's --}}
+        <h3>Government ID's</h3>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="prc">PRC</label>
-                <input type="text" class="form-control" name="prc" id="prc" value="{{ $personal->prc }}" required>
+                <input type="text" class="form-control" name="prc" id="prc" value="{{ $personal->prc }}" >
             </div>
             <div class="col-md-4 mb-3">
                 <label for="gsis">GSIS</label>
-                <input type="text" class="form-control" name="gsis" id="gsis" value="{{ $personal->gsis }}" required>
+                <input type="text" class="form-control" name="gsis" id="gsis" value="{{ $personal->gsis }}" >
             </div>
             <div class="col-md-4 mb-3">
                 <label for="sss">SSS</label>
-                <input type="text" class="form-control" name="sss" id="sss" value="{{ $personal->sss }}" required>
+                <input type="text" class="form-control" name="sss" id="sss" value="{{ $personal->sss }}" >
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="pag_ibig">Pag-IBIG</label>
-                <input type="text" class="form-control" name="pag_ibig" id="pag_ibig" value="{{ $personal->pag_ibig }}" required>
+                <input type="text" class="form-control" name="pag_ibig" id="pag_ibig" value="{{ $personal->pag_ibig }}" >
             </div>
             <div class="col-md-4 mb-3">
                 <label for="driver_license">Drivers License</label>
-                <input type="text" class="form-control" name="driver_license" id="driver_license" value="{{ $personal->driver_license }}" required>
+                <input type="text" class="form-control" name="driver_license" id="driver_license" value="{{ $personal->driver_license }}" >
             </div>
             <div class="col-md-4 mb-3">
                 <label for="phil_health">PhilHealth</label>
-                <input type="text" class="form-control" name="phil_health" id="phil_health" value="{{ $personal->phil_health }}" required>
+                <input type="text" class="form-control" name="phil_health" id="phil_health" value="{{ $personal->phil_health }}" >
             </div>
         </div>
         <button type="submit" value="Submit Form" class="btn btn-sm btn-primary mb-3">Update</button>

@@ -21,13 +21,16 @@ class SettingsController extends Controller
 
         User::where('id','=',$id)->update([
 
-            'name' => $request->input('name'),
+            'fname' =>  $request->input('fname'),
+            'mname' =>  $request->input('mname'),
+            'lname' =>  $request->input('lname'),
+            'extname' =>  $request->input('extname'),
+            'employee_id' =>  $request->input('employee_id'),
             'department' => $request->input('department'),
             'role' => $request->input('role'),
-            'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
         ]);
 
-        return redirect()->route('admin.logout');
+        return redirect()->back()->with('update', 'Account information updated!');
     }
 }

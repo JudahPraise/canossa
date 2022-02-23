@@ -18,9 +18,17 @@
   <li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link" href="{{ route('labtest.index') }}">
       <svg class="c-sidebar-nav-icon">
-        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-beaker') }}"></use>
+        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-medical-cross') }}"></use>
       </svg>
       Lab Tests
+    </a>
+  </li>
+  <li class="c-sidebar-nav-item">
+    <a class="c-sidebar-nav-link" href="{{ route('medication.index') }}">
+      <svg class="c-sidebar-nav-icon">
+        <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-beaker') }}"></use>
+      </svg>
+      Medications
     </a>
   </li>
   <li class="c-sidebar-nav-item mt-auto">

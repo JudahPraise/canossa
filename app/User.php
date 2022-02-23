@@ -29,8 +29,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = 
-    ['for_emp_id','fname', 'mname', 'sname', 'extname', 'sex', 'dob', 'employee_id', 'password', 'role', 'department', 'image','category',
+    ['for_emp_id','fname', 'mname', 'lname', 'extname', 'sex', 'dob', 'employee_id', 'password', 'role', 'department', 'image','category',
     'qr_token'];
+
 
 
     /**
@@ -51,23 +52,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function diagnosis()
-    {
-        return $this->hasOne(Diagnosis::class, 'user_id')->latest();
-    }
-
-    public function illness()
-    {
-        return $this->hasOne(PersonalHistory::class, 'user_id')->latest();
-    }
-
     public function documents(){
         return $this->hasMany(Document::class);
-    }
-
-    public function labTest(){
-        return $this->hasOne(LabTest::class)->latest();
     }
 
     public function schedules(){
@@ -114,6 +100,11 @@ class User extends Authenticatable
         return $this->hasOne(Feedback::class, 'user_id');
     }
 
+    public function records()
+    {
+        return $this->hasOne(MedicalRecord::class);
+    }
+
     public function getAge() {
         $format = '%y years, %m months';
 
@@ -133,6 +124,53 @@ class User extends Authenticatable
         }
 
         return $this->lname.','.' '.$this->fname.','.' '.$this->mname.' '.$this->extname.'.';
+    }
+
+    public function shortName()
+    {
+        if($this->extname === null){
+            return $this->lname.','.' '.$this->fname;
+        }
+
+        return $this->lname.','.' '.$this->fname;
+    }
+
+    public function height()
+    { 
+        if(!empty($this->personal->height))
+        {
+            return $this->personal->height.' '."ft";
+        }else
+        {
+            return 'not set';
+        }
+    }
+
+    public function weight()
+    {
+        if(!empty($this->personal->weight))
+        {
+            return $this->personal->weight.' '."kl";
+        }else
+        {
+            return 'not set';
+        }
+    }
+
+    public function bloodType()
+    {
+        if(!empty($this->personal->blood_type))
+        {
+            return $this->personal->blood_type;
+        }else
+        {
+            return 'not set';
+        }
+    }
+
+    public function passwordRequest()
+    {
+        return $this->hasOne(PasswordRequest::class);
     }
 
 }

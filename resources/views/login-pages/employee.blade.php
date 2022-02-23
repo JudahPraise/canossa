@@ -25,7 +25,7 @@
                  <form class="login-form text-center" action="{{ route('employee.login.submit') }}" method="POST">
                     @csrf
                      <div class="container d-flex align-items-center d-lg-none d-sm-block mb-4">
-                         <img src="./images/circle-logo.png" alt="" height="60" width="60">
+                         <img src="{{ asset('img/circle-logo.png') }}" alt="" height="60" width="60">
                          <h1 class="ml-2 mt-1" style="font-weight: bolder; color: #0179C7;">CHRMIS</h1>
                      </div>
                      <div class="container mb-4">
@@ -46,12 +46,8 @@
                      <div class="form-group">
                          <input type="password" name="password" class="form-control rounded-pill form-control-lg bg-transparent" placeholder="Password" required>
                      </div>
-                     <div class="form group form-check">
-                         <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-                         <label class="form-check-label" for="exampleCheck1">I understand and agree with the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy.</a></label>
-                       </div>
+                     <a href="{{ route('employeeIndex') }}" class="float-left ml-2 mb-3" style="font-size: 0.8rem">Forgot password?</a>
                      <button type="submit" class="btn mt-4 rounded-pill btn-lg btn-custom btn-block text-uppercase">Log in</button>
-                     <!-- <p class="mt-3 font-weight-normal">Don't have an account? <a href="#"><strong>Register Now</strong></a></p> -->
                      <p class="mt-5 mb-3 text-muted">© 2021-2022</p>
                  </form>
              </div>

@@ -43,27 +43,19 @@ class PersonalInfoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $weight = $request->weight;
-        $initialHeight = $request->height;
-        
-        $height = $initialHeight * $initialHeight;
-
-        $bmi = $weight / $height;
 
         $personal = PersonalInformation::create([
             'user_id' => auth()->user()->id,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'surname' => $request->surname, 
-            'name_extension' => $request->name_extension,
+            'name_extension' => $request->extname,
             'date_of_birth' => $request->date_of_birth,
             'sex' => $request->sex,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civil_status,
             'height' => $request->height,
             'weight' => $request->weight,
-            'bmi' => $bmi,
             'blood_type' => $request->blood_type,
             'address' => $request->address,
             'zip_code' => $request->zip_code,
@@ -79,7 +71,10 @@ class PersonalInfoController extends Controller
         ]);
 
         User::where('id','=',Auth::user()->id)->update([
-            'name' => $personal->fullName()
+            'fname' => $request->input('first_name'),       
+            'lname' => $request->input('middle_name'),       
+            'mname' => $request->input('surname'),       
+            'extname' => $request->input('extname'), 
         ]);
 
         return redirect()->route('personal.index')->with('success', 'Personal Information store successfully!');
@@ -118,26 +113,18 @@ class PersonalInfoController extends Controller
     public function update(Request $request, $id)
     {
 
-        $weight = $request->weight;
-        $initialHeight = $request->height;
-        
-        $height = $initialHeight * $initialHeight;
-
-        $bmi = $weight / $height;
-
         $personal = PersonalInformation::where('user_id','=',$id)->update([
             'user_id' => auth()->user()->id,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
             'surname' => $request->surname,
-            'name_extension' => $request->name_extension, 
+            'name_extension' => $request->extname, 
             'date_of_birth' => $request->date_of_birth,
             'sex' => $request->sex,
             'citizenship' => $request->citizenship,
             'civil_status' => $request->civil_status,
             'height' => $request->height,
             'weight' => $request->weight,
-            'bmi' => $bmi,
             'blood_type' => $request->blood_type,
             'address' => $request->address,
             'zip_code' => $request->zip_code,
@@ -153,7 +140,10 @@ class PersonalInfoController extends Controller
         ]);
 
         User::where('id','=',Auth::user()->id)->update([
-            'name' => $request->surname.','.' '.$request->first_name.','.' '.$request->middle_name
+            'fname' => $request->input('first_name'),       
+            'lname' => $request->input('middle_name'),       
+            'mname' => $request->input('surname'),       
+            'extname' => $request->input('extname'), 
         ]);
 
         return redirect()->route('personal.index')->with('update', 'Personal Information updated successfully!');

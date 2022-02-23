@@ -39,6 +39,16 @@ class SecondaryController extends Controller
      */
     public function store(Request $request)
     {
+        // $elem_year_graduated = EducationalBackground::where('user_id','=',Auth::user()->id)->with('elem')->first();
+        // dd($elem_year_graduated->elem->sy_graduated <= $request->sy_graduated);
+
+        // if($request->sy_graduated <= $elem_year_graduated->elem->sy_graduated)
+        // {
+            
+        //     return dd('sinungaling');
+
+        // }
+
         Secondary::create([
             'educ_id' => Auth::user()->education->id,
             'name_of_school' => $request->name_of_school,
@@ -51,7 +61,8 @@ class SecondaryController extends Controller
             'secondary' => true
         ]);
 
-        return redirect()->route('educ.show', Auth::user()->id);
+        return redirect()->route('educ.show', Auth::user()->id)->with('success', 'Record saved!');
+
     }
 
     /**

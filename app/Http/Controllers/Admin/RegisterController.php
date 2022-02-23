@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,11 +15,25 @@ class RegisterController extends Controller
 
     public function index()
     {
-        $employees = User::orderBy('lname', 'ASC')->paginate(10);
+        $employees = User::where('category','Regular')->orWhere('category','Part Time')->orderBy('lname', 'ASC')->get();
+        // dd($employees);
         $count = User::all()->count();
-        return view('admin.manage-accounts.index', compact('employees', 'count'));
+        $category = 'All';
+        return view('admin.manage-accounts.index', compact('employees', 'count'))->with('category', $category);
     }
 
+    public function getCategory(Request $request)
+    {
+        if($request->category === 'All'){
+
+            return redirect()->route('accounts.index');
+
+        }
+        $employees = User::where('category','=',$request->category)->orderBy('lname', 'ASC')->get();
+        $count = User::all()->count();
+        $category = $request->category;
+        return view('admin.manage-accounts.index', compact('employees', 'count'))->with('category', $category);
+    }
     /**
      * Get a validator for an incoming registration request.
      *
@@ -51,7 +66,19 @@ class RegisterController extends Controller
         $employee->sex = $request->input('sex');    
         $employee->dob = $request->input('dob');    
         $employee->role = $request->input('role');    
+        $employee->category = $request->input('category');    
         $employee->department = $request->input('department');
+        $employee->qr_token = $request->input('qr_token');
+        $employee->password = Hash::make($request->input('password'));
+        if($request->input('sex') == 'M')
+        {
+            $employee->image = 'default-male.svg';
+        }
+        else
+        {
+            $employee->image = 'default-female.svg';
+
+        }
         $employee->password = Hash::make($request->input('password'));
 
         $employee->save();
@@ -70,7 +97,14 @@ class RegisterController extends Controller
             'graduate_study' => null
         ]);
 
-        $data = "Hello World";
+        $now = Carbon::now()->format('Y');
+        $nextYear = Carbon::now()->addYear()->format('Y');
+
+        $employee->records()->create([
+            'user_id' => $employee->id,
+            'year_from' => $now,
+            'year_to' => $nextYear
+        ]);
 
         // dd($data);
 

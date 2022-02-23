@@ -20,8 +20,8 @@
             <div class="card-body w-100">
                 <div class="row px-2 d-flex align-items-center justify-content-between">
                         <strong style="font-weight: bold; color: black; font-size: 1.3rem">Spouse</strong>
-                        <a href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.edit', $family->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                        <a href="{{ !empty(auth()->user()->family->spouse) ? route('spouse.edit', auth()->user()->id ) : route('spouse.create') }}" class="btn btn-sm btn-icon mr-2 {{ !empty(auth()->user()->family->spouse) ? 'btn-info' : 'btn-success' }}" type="button">
+                            <span class="btn-inner--icon"><i class="fas {{ !empty(auth()->user()->family->spouse) ? 'fa-edit' : 'fa-plus' }}"></i></span>
                         </a>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 mt-3">
@@ -36,7 +36,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Occupation</small>
                         @if (!empty(auth()->user()->family->spouse))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->spouse->occupation }}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{!empty($family->spouse->occupation) ? $family->spouse->occupation : 'N/A'}}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -46,7 +46,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Employer business name</small>
                         @if (!empty(auth()->user()->family->spouse))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->spouse->employer_business_name}}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{!empty($family->spouse->employer_business_name) ? $family->spouse->employer_business_name : 'N/A'}}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -54,7 +54,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Business address</small>
                         @if (!empty(auth()->user()->family->spouse))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->spouse->business_address }}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{!empty($family->spouse->business_address) ? $family->spouse->business_address : 'N/A'}}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -65,7 +65,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Telephone number</small>
                         @if (!empty(auth()->user()->family->spouse))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->spouse->tel_no}}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{!empty($family->spouse->tel_no) ? $family->spouse->tel_no : 'N/A'}}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -102,8 +102,8 @@
                 <hr>
                 <div class="row px-2 d-flex justify-content-between align-items-cent">
                         <strong style="font-weight: bold; color: black; font-size: 1.3rem">Mother</strong>
-                        <a href="{{ !empty(auth()->user()->family->mother) ? route('mother.edit', $family->mother->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                        <a href="{{ !empty(auth()->user()->family->mother) ? route('mother.edit', auth()->user()->id ) : route('mother.create') }}" class="btn btn-sm btn-icon mr-2 {{ !empty(auth()->user()->family->mother) ? 'btn-info' : 'btn-success' }}" type="button">
+                            <span class="btn-inner--icon"><i class="fas {{ !empty(auth()->user()->family->mother) ? 'fa-edit' : 'fa-plus' }}"></i></span>
                         </a>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 mt-3">
@@ -118,7 +118,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Occupation</small>
                         @if (!empty(auth()->user()->family->mother))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->mother->occupation }}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ !empty($family->mother->occupation) ? $family->mother->occupation : 'N/A' }}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -128,7 +128,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Employer business name</small>
                         @if (!empty(auth()->user()->family->mother))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->mother->employer_business_name}}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ !empty($family->mother->employer_business_name) ? $family->mother->employer_business_name : 'N/A' }}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -136,7 +136,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Business address</small>
                         @if (!empty(auth()->user()->family->mother))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->mother->business_address }}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ !empty($family->mother->business_address) ? $family->mother->business_address : 'N/A' }}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -147,7 +147,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Telephone number</small>
                         @if (!empty(auth()->user()->family->mother))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->mother->tel_no}}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ !empty($family->mother->tel_no) ? $family->mother->tel_no : 'N/A' }}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -156,8 +156,8 @@
                 <hr>
                 <div class="row px-2 d-flex justify-content-between align-items-center">
                         <strong style="font-weight: bold; color: black; font-size: 1.3rem">Father</strong>
-                        <a href="{{ !empty(auth()->user()->family->father) ? route('father.edit', $family->father->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                        <a href="{{ !empty(auth()->user()->family->father) ? route('father.edit', auth()->user()->id ) : route('father.create') }}" class="btn btn-sm btn-icon mr-2 {{ !empty(auth()->user()->family->father) ? 'btn-info' : 'btn-success' }}" type="button">
+                            <span class="btn-inner--icon"><i class="fas {{ !empty(auth()->user()->family->father) ? 'fa-edit' : 'fa-plus' }}"></i></span>
                         </a>
                 </div>
                 <div class="row row-cols-1 row-cols-md-2 mt-3">
@@ -172,7 +172,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Occupation</small>
                         @if (!empty(auth()->user()->family->father))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->father->occupation }}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ !empty($family->father->occupation) ? $family->father->occupation : 'N/A' }}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -182,7 +182,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Employer business name</small>
                         @if (!empty(auth()->user()->family->father))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->father->employer_business_name}}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ !empty($family->father->employer_business_name) ? $family->father->employer_business_name : 'N/A' }}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -190,7 +190,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Business address</small>
                         @if (!empty(auth()->user()->family->father))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->father->business_address }}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ !empty($family->father->business_address) ? $family->father->business_address : 'N/A' }}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif
@@ -201,7 +201,7 @@
                     <div class="col mb-3 d-flex flex-column">
                         <small style="font-size: .8rem">Telephone number</small>
                         @if (!empty(auth()->user()->family->father))
-                            <strong style="color: black; font-size: 1.3rem">{{ $family->father->tel_no}}</strong>
+                            <strong style="color: black; font-size: 1.3rem">{{ !empty($family->father->tel_no) ? $family->father->tel_no : 'N/A' }}</strong>
                         @else
                             <strong style="color: black; font-size: 1.3rem">Not set</strong>
                         @endif

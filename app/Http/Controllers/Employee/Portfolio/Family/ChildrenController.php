@@ -58,7 +58,7 @@ class ChildrenController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect()->route('children.show', Auth::user()->id);
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**
@@ -69,10 +69,11 @@ class ChildrenController extends Controller
      */
     public function show($id)
     {
-        $family = Family::where('user_id','=',$id)->with('children')->get();
-        $children = $family->children;
+        // $family = Family::where('user_id','=',$id)->with('children')->get();
+        // $children = $family->children;
         // dd($children);
-        return view('employee.portfolio.family-background.children.show', compact('children'));
+        // return view('employee.portfolio.family-background.children.show', compact('children'));
+        return redirect()->route('family.show', Auth::user()->id);
     }
 
     /**

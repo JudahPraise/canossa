@@ -235,7 +235,7 @@
                   data-link="{{ $notification->data['link'] }}"
                   data-attachment="{{ $notification->data['attachment'] }}"
                   data-toggle="modal" data-target="#showAnnouncement"
-                  style="width: 300px; white-space: nowrap;
+                  style="white-space: nowrap;
                   overflow: hidden;">
                     <h4 class="card-title m-0 font-weight-800 {{ $notification->read_at === null ? 'text-white' : '' }}">{{ $notification->data['announcement_title']  }}</h4>
                     <p class="m-0 {{ $notification->read_at === null ? 'text-white' : '' }}" style="text-overflow: ellipsis; white-space: nowrap;
@@ -309,33 +309,14 @@
               <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-settings') }}"></use>
             </svg> Settings
           </a>
-          @if (!empty(auth()->user()->feedback))
-            <a class="dropdown-item" href="{{ route('feedback.index') }}">
-              <svg class="c-icon mr-2">
-                <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-speech') }}"></use>
-              </svg> Feedback
-            </a>
-          @else
-            <a class="dropdown-item" data-toggle="modal" data-target="#feedback2Modal">
-              <svg class="c-icon mr-2">
-                <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-speech') }}"></use>
-              </svg> Feedback
-            </a>
-          @endif
-          @if (!empty(auth()->user()->feedback) || auth()->user()->status === 'resigned')
-            <a class="dropdown-item" onclick="document.getElementById('logoutForm').submit()">
-              <svg class="c-icon mr-2">
-                <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
-              </svg> Logout
-              <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
-            </a>
-          @else
-            <a class="dropdown-item" data-toggle="modal" data-target="#feedbackModal">
-              <svg class="c-icon mr-2">
-                <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
-              </svg> Logout
-            </a>
-          @endif
+
+          <a class="dropdown-item" onclick="document.getElementById('logoutForm').submit()">
+            <svg class="c-icon mr-2">
+              <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
+            </svg> Logout
+            <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf</form>
+          </a>
+
         </div>
       </li>
       {{-- End Profile Icon --}}

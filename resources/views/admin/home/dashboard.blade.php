@@ -1,14 +1,15 @@
 @extends('admin.layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/orbitcss/css/orbit.css">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
-    <link rel="stylesheet" href="{{ asset('argon/vendor/nucleo/css/nucleo.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('argon/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}" type="text/css">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{ asset('argon/css/argon.css?v=1.2.0') }}" type="text/css">
+    {{-- DataTable --}}
+    <link rel="stylesheet" href="{{ asset('vendor/datatables/datatables.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('vendor/datatables/responsive.bootstrap.min.css') }}" type="text/css">
 @endsection
 
 @section('home')
@@ -17,14 +18,11 @@
       <div class="col-md-6">
         <h1>Dashboard</h1>
       </div>
-      <div class="col-md-6 d-flex justify-content-end">
-        {{-- <input type="text" placeholder="Search" id="myInput" onkeyup="myFunction()"> --}}
-      </div>
     </div>
       <!-- Card stats -->
-    <div class="row p-3">
-      <div class="col-xl-3 col-md-6 mb-3">
-        <div class="card card-stats pressable-day">
+    <div class="row ">
+      <div class="col-xl-3 col-md-6">
+        <div class="card card-stats pressable-day p-3">
           <!-- Card body -->
           <div class="card-body">
             <div class="row">
@@ -41,8 +39,8 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 mb-3">
-        <div class="card card-stats pressable-day">
+      <div class="col-xl-3 col-md-6">
+        <div class="card card-stats pressable-day p-3">
           <!-- Card body -->
           <div class="card-body">
             <div class="row">
@@ -59,14 +57,14 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 mb-3">
-        <div class="card card-stats  pressable-day">
+      <div class="col-xl-3 col-md-6">
+        <div class="card card-stats  pressable-day p-3">
           <!-- Card body -->
           <div class="card-body">
             <div class="row">
               <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">Staff</h5>
-                <span class="h2 font-weight-bold mb-0">{{ $staffs }}</span>
+                <h5 class="card-title text-uppercase text-muted mb-0">Nurse</h5>
+                <span class="h2 font-weight-bold mb-0">{{ $nurse }}</span>
               </div>
               <div class="col-auto">
                 <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -77,8 +75,8 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 mb-3">
-        <div class="card card-stats pressable-day">
+      <div class="col-xl-3 col-md-6">
+        <div class="card card-stats pressable-day p-3">
           <!-- Card body -->
           <div class="card-body">
             <div class="row">
@@ -96,17 +94,28 @@
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col">
         <div class="card">
           <!-- Card header -->
           <div class="card-header border-0 row d-flex align-items-center">
-              <div class="col-6 col-md-6 m-0">
+            <div class="row w-100">
+              <div class="col-md-12 col-lg-2 p-2 d-flex align-items-center justify-content-start">
                 <h2 class="mb-0">Employees</h2>
               </div>
-              <div class="col-6 col-md-6 d-flex justify-content-sm-end p-0">
-                <form class="navbar-search-light form-inline" id="navbar-search-main">
-                  <div class="form-group mb-0  w-100">
+              <div class="col-md-6 col-lg-5 p-2 d-flex align-items-center justify-content-end">
+                <form action="{{ route('accounts.fetch.category') }}" id="categoryForm" class="break-input">
+                  <select class="form-control input-group input-group-alternative " name="category" onchange="document.getElementById('categoryForm').submit()">
+                    <option  {{ route('accounts.index') ? 'selected' : '' }}  value="All">All</option>
+                    <option {{ $category === 'Regular' ? 'selected' : '' }}  value="Regular">Regular Employees</option>
+                    <option {{ $category === 'Part Time' ? 'selected' : '' }}  value="Part Time">Part Time Employees</option>
+                  </select>
+                </form>
+              </div>
+              <div class="col-md-6 col-lg-5 p-2 d-flex align-items-center justify-content-end">
+                <form class="navbar-search-light form-inline mr-2 w-100" id="navbar-search-main">
+                  <div class="form-group mb-0 w-100">
                     <div class="input-group input-group-alternative w-100">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-search"></i></span>
@@ -116,63 +125,73 @@
                   </div>
                 </form>
               </div>
-          </div>
-          <!-- Light table -->
-          <div class="table-responsive">
-            <table class="table align-items-center table-flush" id="myTable">
-              <thead class="thead-light">
-                <tr>
-                  <th></th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Role</th>
-                  <th>Email</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody class="list">
-                @forelse ($employees as $employee)
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        @if(!empty($employee->image))
-                          <a href="#" class="avatar rounded-circle mr-3">
-                            <img src="{{ asset( 'storage/images/'.$employee->image) }}" style=" height: 50px; overflow: hidden;">
-                          </a>
-                        @else
-                          <a href="#">
-                            <img src="{{ asset($employee->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 50px; overflow: hidden;">
-                          </a>
-                        @endif
-                      </div>
-                    </th>
-                    <td>{{ $employee->fullName() }}</td>
-                    <td class="budget">
-                      {{ $employee->role }}
-                    </td>
-                    <td>
-                      {{ $employee->email }}
-                    </td>
-                    <td>
-                      <a class="btn btn-sm btn-primary" href="{{ route('employee.show', $employee->id) }}">View Profile</a>
-                    </td>
-                  </tr>
-                @empty  
-                    <tr class="text-center">
-                      <td colspan="5">No employees yet</td>
-                    </tr>
-                @endforelse
-              </tbody>
-            </table>
-            <div class="row d-flex justify-content-end w-100">
-              {{ $employees->links() }}
             </div>
           </div>
+          <!-- Light table -->
+          <table class="table table-striped table-bordered dt-responsive nowrap " id="myTable" style="width:100%">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @forelse ($employees as $employee)
+                <tr>
+                  <td class="d-flex align-items-center">
+                     <div class="media align-items-center mr-2">
+                      @if(!empty($employee->image))
+                        <a href="#">
+                          <img src="{{ asset( 'storage/images/'.$employee->image) }}" class="avatar rounded-circle" style="height: 50px; overflow: hidden;">
+                        </a>
+                      @else
+                        <a href="#">
+                          <img src="{{ asset($employee->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 50px; overflow: hidden;">
+                        </a>
+                      @endif
+                    </div>
+                    <p style="font-weight: bold">{{ $employee->fullName() }}</p>  
+                  </td>
+                  <td class="budget">
+                    {{ $employee->role }}
+                  </td>
+                  <td>
+                    <a class="btn btn-sm btn-primary" href="{{ route('employee.show', $employee->id) }}">View Profile</a>
+                  </td>
+                </tr>
+              @empty  
+                  <tr class="text-center">
+                    <td colspan="5">No employees yet</td>
+                  </tr>
+              @endforelse
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 
-<script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script>
+  
+    $(document).ready( function () {
+        $('#myTable').DataTable( {
+            responsive:true,
+            searching: false,
+            pagingType: 'simple_numbers',
+            oLanguage: {
+              oPaginate: {
+                sNext: '<span class="pagination-fa"><i class="fa fa-chevron-right" ></i></span>',
+                sPrevious: '<span class="pagination-fa"><i class="fa fa-chevron-left" ></i></span>'
+              }
+            },
+            lengthMenu: [[5], [5]],
+            bInfo: true,
+            bLengthChange: false,
+        } );
+    } );
+
   function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
@@ -195,14 +214,8 @@
 
 @endsection
 
-@section('js')
-    <!-- Argon Scripts -->
-    <!-- Core -->
-    <script src="{{ asset('argon/vendor/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('argon/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('argon/vendor/js-cookie/js.cookie.j') }}s"></script>
-    <script src="{{ asset('argon/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
-    <!-- Argon JS -->
-    <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
+@section('js')  
+    {{-- DataTable --}}
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.responsive.min.js') }}"></script>
 @endsection

@@ -49,7 +49,7 @@ class ElementaryController extends Controller
         EducationalBackground::where('user_id','=',Auth::user()->id)->update([
             'elementary' => true
         ]);
-
+        
         return redirect()->route('educ.show', Auth::user()->id);
     }
 

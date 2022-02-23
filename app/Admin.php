@@ -30,7 +30,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = 
-    ['name','admin_id','employee_id','password','user_id','image',];
+    ['name','admin_id','employee_id','password','user_id','image','dep_pos','desc_id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -49,4 +49,15 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function passwordRequest()
+    {
+        return $this->hasOne(PasswordRequest::class);
+    }
+
+    
+    public function fullName()
+    {
+        return $this->name;
+    }
 }
