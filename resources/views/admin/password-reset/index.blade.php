@@ -12,7 +12,7 @@
 @endsection
 
 @section('home')
-
+@component('components.alerts')@endcomponent
 <div class="container w-75">
 
     <h1>Password Request</h1>
@@ -25,6 +25,7 @@
               <th scope="col">Category</th>
               <th scope="col">Status</th>
               <th scope="col">Change by</th>
+              <th scope="col">Updated at</ths>
               <th scope="col">Action</th>
             </tr>
          </thead>
@@ -35,9 +36,10 @@
                <td>{{ $request->employee_id  }}</td>
                <td>{{ $request->category }}</td>
                <td>{{ $request->status }}</td>
-               <td></td>
+               <td>{{ $request->change_by }}</td>
+               <td>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $request->updated_at)->format('Y-m-d') }}</td>
                <td>
-                 <button class="btn btn-success btn-sm btn-changepass" data-id="{{ $request->id }}" data-toggle="modal" data-target="#confirmModalPasswordReset">Change Password</button>
+                 <button class="btn btn-sm btn-changepass {{ $request->status == 'pending' ? 'btn-success' : 'btn-light' }}" {{ $request->status == 'pending' ? '' : 'disabled' }} data-id="{{ $request->id }}" data-toggle="modal" data-target="#confirmModalPasswordReset">{{ $request->status == 'pending' ? 'Change Password' : 'Done' }}</button>
                </td>
              </tr>
            @endforeach

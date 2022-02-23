@@ -38,7 +38,7 @@
     <hr>
 
     <!-- Confirm Modal -->
-    <div class="modal fade" id="confirmModalPasswordReset" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmModalPasswordUpdate" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -48,13 +48,15 @@
             </button>
           </div>
           <div class="modal-body">
-              {{-- <form id="confirmForm" action="{{ route('passwordreset.confirm') }}" method="POST"> --}}
-                  {{-- @csrf --}}
+              <form id="confirmForm" action="{{ route('passwordreset.update', ['id' => $request->id, 'category' => $request->category]) }}" method="POST">
+                @method("PUT")
+                  @csrf
+                  <input type="text" id="updatedPassword" name="newPassword" hidden>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                   </div>
-              {{-- </form> --}}
+              </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -63,6 +65,21 @@
         </div>
       </div>
     </div>
+
+    <form onsubmit="return false">
+      <div class="form-row mb-3">
+        <label for="admPass">Password</label>
+        <div class="input-group is-invalid">
+            <input type="text" class="form-control" id="newPass" placeholder="Password" style="font-weight: bold; color: black;" required>
+            <div class="input-group-append">
+               <button type="button" class="btn btn-success" type="button" id="generatePassword">Generate</button>
+            </div>
+        </div>
+      </div>
+      <div class="row w-100 d-flex justify-content-center p-3">
+          <button class="btn btn-primary text-center" data-toggle="modal" data-target="#confirmModalPasswordUpdate" id="updateBtn">Update Password</button>
+      </div>
+    </form>
 </div>
 
 @endsection
@@ -77,4 +94,18 @@
     <script src="{{ asset('argon/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
     <!-- Argon JS -->
     <script src="{{ asset('argon/js/argon.js?v=1.2.0') }}"></script>
+
+    <script>
+      const generatePassword = document.getElementById('generatePassword');
+      const updateBtn = document.getElementById('updateBtn');
+
+      generatePassword.addEventListener('click', function (){
+        var gen_pass = Math.random().toString(36).slice(-8);
+        document.getElementById('newPass').value = gen_pass;
+      });
+
+      updateBtn.addEventListener('click', function() {
+        document.getElementById('updatedPassword').value = document.getElementById('newPass').value;
+      })
+    </script>
 @endsection

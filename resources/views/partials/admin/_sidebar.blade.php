@@ -62,7 +62,7 @@
           <use xlink:href="{{ asset('core-ui/sprites/free.svg#cil-exit-to-app') }}"></use>
         </svg>
         Logout
-        <form action="{{ route('admin.logout') }}" method="POST" id="logoutForm2">@csrf</form>
+        <form action="{{ route('admin.logout') }}" method="GET" id="logoutForm2">@csrf</form>
       </a>
     </li>
   </ul>

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PasswordRequest extends Model
 {
-    protected $fillable = ['employee_id', 'admin_id', 'dob', 'category', 'status', 'name'];
+    protected $fillable = ['employee_id', 'admin_id', 'dob', 'category', 'status', 'name','change_by'];
 
     public function user()
     {

@@ -71,7 +71,7 @@ class AdminsController extends Controller
             return redirect()->route('admin.accounts')->with('success', sprintf('You assigned %s as administrator', $employee->employee_id));
         }
 
-       return redirect()->back()->with('delete', 'Wrong Password!');
+        return redirect()->back()->with('warning', 'Wrong password');
     }
 
     public function changeUser($position)

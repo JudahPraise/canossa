@@ -6,6 +6,7 @@ use App\User;
 use App\Admin;
 use App\PasswordRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminPasswordRequestController extends Controller
 {
@@ -22,6 +23,12 @@ class AdminPasswordRequestController extends Controller
         if($admin)
         {
             $user = User::where('employee_id','=',$admin->employee_id)->first();
+            $hasRequest = PasswordRequest::where([['admin_id','=',$admin->admin_id], ['category','=','admin'], ['status','=','pending']])->first();
+            
+            if($hasRequest)
+            {
+                return view('login-pages.admin-pending-message');
+            }
 
             if($user->dob === $request->dob)
             {
@@ -31,7 +38,8 @@ class AdminPasswordRequestController extends Controller
                     'employee_id' => $user->employee_id,
                     'dob' => $request->dob,
                     'category' => 'admin', 
-                    'status' => 'pending'
+                    'status' => 'pending',
+                    'change_by' => 'N\A'
                 ]);
 
                 return redirect()->route('forgotpass.request.sent.admin');
@@ -51,6 +59,39 @@ class AdminPasswordRequestController extends Controller
     {
         return view('login-pages.admin-forgot-password-sent');
     }
+    
+    public function changePassword($id)
+    {
+        $password_request = PasswordRequest::where('id','=',$id)->first();
+        $admin = Admin::where('admin_id','=',$password_request->admin_id)->first();
+        return view('login-pages.admin-change-password', compact('admin', 'password_request'));
+    }
 
+    public function updatePassword(Request $request, $id, $reqid)
+    {
+        $admin = Admin::where('id','=',$id)->first();
+        $user = User::where('employee_id','=',$admin->employee_id)->first();
+        
+        if($user->dob != $request->dob)
+        {
+            session()->flash('invalid', 'Employee does not exist!');
+            return redirect()->back();
+        }
+
+        $request->validate([
+            'password' => 'required|confirmed|min:6'
+        ]);
+
+        $admin->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        $password_request = PasswordRequest::where('id','=',$reqid)->update([
+            'status' => 'changed',
+            'change_by' => $admin->name." "."|"." ".$admin->admin_id
+        ]);
+
+        return redirect()->route('admin.logout');
+    }
 
 }

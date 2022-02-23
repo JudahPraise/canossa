@@ -21,6 +21,7 @@ class CreatePasswordRequestsTable extends Migration
             $table->date('dob');
             $table->string('category');
             $table->string('status');
+            $table->string('change_by');
             $table->timestamps();
         });
     }

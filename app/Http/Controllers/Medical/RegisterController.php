@@ -45,6 +45,6 @@ class RegisterController extends Controller
             return redirect()->back()->with('update', sprintf('%s already have access to medical records', $employee->name));
         }
 
-        return redirect()->back()->with('delete', 'Password did not match!');  
+        return redirect()->back()->with('warning', 'Wrong password');
     }
 }

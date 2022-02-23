@@ -20,24 +20,31 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Forgot Password Employee
-Route::get('/employee/forgot-password', 'EmployeePasswordRequestController@employeeIndex')->name('employeeIndex');
-Route::post('/employee/forgot-password/send-request', 'EmployeePasswordRequestController@sendRequestEmployee')->name('forgotpass.request');
-Route::get('/employee/forgot-password/request-sent', 'EmployeePasswordRequestController@requestSentEmployee')->name('forgotpass.request.sent');
 
-// Forgot Password Admin
-Route::get('/admin/forgot-password', 'AdminPasswordRequestController@index')->name('forgotpass.index.admin');
-Route::post('/admin/forgot-password/send-request', 'AdminPasswordRequestController@sendRequestAdmin')->name('forgotpass.request.admin');
-Route::get('/admin/forgot-password/request-sent', 'AdminPasswordRequestController@requestSentAdmin')->name('forgotpass.request.sent.admin');
+Route::group(['middleware' => 'prevent-back-history'],function(){
+    // Forgot Password Employee
+    Route::get('/employee/forgot-password', 'EmployeePasswordRequestController@employeeIndex')->name('employeeIndex');
+    Route::post('/employee/forgot-password/send-request', 'EmployeePasswordRequestController@sendRequestEmployee')->name('forgotpass.request');
+    Route::get('/employee/forgot-password/request-sent', 'EmployeePasswordRequestController@requestSentEmployee')->name('forgotpass.request.sent');
+    Route::get('/employee/change-password/{id}', 'EmployeePasswordRequestController@changePassword')->name('changepass.index');
+    Route::put('/employee/change-password/submit/{id}/{reqid}', 'EmployeePasswordRequestController@updatePassword')->name('changepass.update');
 
-//Forgot Password Nurse
-Route::get('/nurse/forgot-password', 'NursePasswordRequestController@index')->name('forgotpass.index.nurse');
+    // Forgot Password Admin
+    Route::get('/admin/forgot-password', 'AdminPasswordRequestController@index')->name('forgotpass.index.admin');
+    Route::post('/admin/forgot-password/send-request', 'AdminPasswordRequestController@sendRequestAdmin')->name('forgotpass.request.admin');
+    Route::get('/admin/forgot-password/request-sent', 'AdminPasswordRequestController@requestSentAdmin')->name('forgotpass.request.sent.admin');
+    Route::get('/admin/change-password/{id}', 'AdminPasswordRequestController@changePassword')->name('changepass.index.admin');
+    Route::put('/admin/change-password/submit/{id}/{reqid}', 'AdminPasswordRequestController@updatePassword')->name('changepass.update.admin');
+
+    //Forgot Password Nurse
+    Route::get('/nurse/forgot-password', 'NursePasswordRequestController@index')->name('forgotpass.index.nurse');
+});
 
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Admin\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\AdminLoginController@login')->name('admin.login.submit');
-    Route::post('/logout', 'Admin\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/logout', 'Admin\AdminLoginController@logout')->name('admin.logout');
     Route::post('/password-confirm', 'Admin\ConfirmPasswordController@confirm')->name('admin.password.confirm.submit');
     Route::get('/password-confirm', 'Admin\ConfirmPasswordController@showConfirmForm')->name('admin.password.confirm');
     Route::post('/password-email', 'Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email'); //? Forgot Password Enter Email Submit
@@ -95,7 +102,7 @@ Route::prefix('admin')->group(function(){
     // Password Reset
     Route::get('/password-reset', 'Admin\PasswordResetController@index')->name('passwordreset.index');
     Route::post('/password-reset/confirm/{id}', 'Admin\PasswordResetController@passwordConfirm')->name('passwordreset.confirm');
-    // Route::get('/password-reset/create', 'Admin\PasswordResetController@create')->name('passwordreset.update');
+    Route::put('/password-reset/update/{id}/{category}', 'Admin\PasswordResetController@update')->name('passwordreset.update');
 
 });
 
