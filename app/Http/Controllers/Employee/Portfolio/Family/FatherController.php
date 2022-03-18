@@ -54,7 +54,7 @@ class FatherController extends Controller
             'updated_at' => Carbon::now()
         ]);
         
-        return redirect()->route('family.show', Auth::user()->id);
+        return redirect()->route('family.show', Auth::user()->id)->with('success', 'Record saved successfully!');
     }
 
     /**
@@ -108,7 +108,7 @@ class FatherController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect()->route('family.show', Auth::user()->id);
+        return redirect()->route('family.show', Auth::user()->id)->with('update', 'Record updated successfully!');
     }
 
     /**

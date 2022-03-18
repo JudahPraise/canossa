@@ -138,7 +138,7 @@
               </small>
             </p>
             <a href="{{ route('educ.index', 'card') }}" class="is-hover-underline has-text-black">
-              <h4  style="font-weight: bold">Voluntary Works</h4>
+              <h4  style="font-weight: bold">Civic Works</h4>
             </a>
           </div>
         </div>

@@ -11,69 +11,19 @@
                 <small class="font-italic text-muted ml-2"><span class="text-danger mr-1">*</span>check if you recieved the following vaccines</small>
             </span>
         </div>
-        @forelse ($record->immunizations as $vaccine)
             <div class="form-group mb-3">
-                @if($vaccine->vaccine_recieved === "Covid-19")
-                    <div class="row mb-3">
-                        <div class="col-md-3 d-flex flex-column mb-2">
-                            <label for="">Vaccine</label>
-                            <label><input class="healthProblem" type="checkbox" name="vaccine_recieved[]" value="Flu"> Flu Vaccine</label>
-                        </div>
-                        <div class="col-md-3 d-flex flex-column mb-2">
-                             <label for="">Status</label>
-                            <select class="custom-select" id="validationDefault04" name="status[]">
-                                <option disabled selected>Choose...</option>
-                                <option value="1st Dose">1st Dose</option>
-                                <option value="Fully Vaccinated">Fully Vaccinated</option>
-                            </select> 
-                        </div>
-                        <div class="col-md-3 d-flex flex-column mb-2">
-                             <label for="">Brand</label>
-                            <input type="text" class="form-control"  name="brand[]">
-                        </div>
-                        <div class="col-md-3 d-flex flex-column mb-2">
-                            <label>Date</label>
-                            <input type="date" class="form-control"  name="date[]">
-                        </div>
-                    </div>
-                @elseif ($vaccine->vaccine_recieved === "Flu")
-                    <div class="form-row mb-3">
-                        <div class="col-md-3 d-flex flex-column mb-2">
-                            <label for="">Vaccine</label>
-                            <label><input class="healthProblem" type="checkbox" name="vaccine_recieved[]" value="Covid-19"> Covid-19</label>
-                        </div>
-                        <div class="col-md-3 d-flex flex-column mb-2">
-                            <label for="">Status</label>
-                            <select class="custom-select" id="validationDefault04" name="status[]">
-                                <option disabled selected>Choose...</option>
-                                <option value="1st Dose">1st Dose</option>
-                                <option value="Fully Vaccinated">Fully Vaccinated</option>
-                            </select> 
-                        </div>
-                        <div class="col-md-3 d-flex flex-column mb-2">
-                            <label for="">Brand</label>
-                            <input type="text" class="form-control" name="brand[]">
-                        </div>
-                        <div class="col-md-3 d-flex flex-column mb-2">
-                            <label>Date</label>
-                            <input type="date" class="form-control" name="date[]">
-                        </div>
-                    </div>
-                @elseif($vaccine->vaccine_recieved === "Flu")
-                    <p>empty</p>
-                @endif
-            </div>
-            
-        @empty
-            <div class="form-row mb-3">
-                <div class="form-row mb-3 w-100">
+                <div class="row mb-3">
                     <div class="col-md-3 d-flex flex-column mb-2">
                         <label for="">Vaccine</label>
-                        <label><input class="healthProblem" type="checkbox" name="vaccine_recieved[]" value="Flu"> Flu Vaccine</label>
+                        <select class="custom-select" id="validationDefault04" name="vaccine_recieved">
+                            <option disabled selected>Choose...</option>
+                            <option value="Flu">Flu</option>
+                            <option value="Covid - 19">Covid - 19</option>
+                        </select> 
                     </div>
                     <div class="col-md-3 d-flex flex-column mb-2">
-                         <label for="">Status</label>
-                        <select class="custom-select" id="validationDefault04" name="status[]">
+                        <label for="">Status</label>
+                        <select class="custom-select" id="validationDefault04" name="status">
                             <option disabled selected>Choose...</option>
                             <option value="1st Dose">1st Dose</option>
                             <option value="Fully Vaccinated">Fully Vaccinated</option>
@@ -81,37 +31,14 @@
                     </div>
                     <div class="col-md-3 d-flex flex-column mb-2">
                          <label for="">Brand</label>
-                        <input type="text" class="form-control"  name="brand[]">
+                        <input type="text" class="form-control"  name="brand">
                     </div>
                     <div class="col-md-3 d-flex flex-column mb-2">
                         <label>Date</label>
-                        <input type="date" class="form-control"  name="date[]">
-                    </div>
-                </div>
-                <div class="form-row mb-3 w-100">
-                    <div class="col-md-3 d-flex flex-column mb-2">
-                        <label for="">Vaccine</label>
-                        <label><input class="healthProblem" type="checkbox" name="vaccine_recieved[]" value="Covid-19"> Covid-19</label>
-                    </div>
-                    <div class="col-md-3 d-flex flex-column mb-2">
-                        <label for="">Status</label>
-                        <select class="custom-select" id="validationDefault04" name="status[]">
-                            <option disabled selected>Choose...</option>
-                            <option value="1st Dose">1st Dose</option>
-                            <option value="Fully Vaccinated">Fully Vaccinated</option>
-                        </select> 
-                    </div>
-                    <div class="col-md-3 d-flex flex-column mb-2">
-                        <label for="">Brand</label>
-                        <input type="text" class="form-control" name="brand[]">
-                    </div>
-                    <div class="col-md-3 d-flex flex-column mb-2">
-                        <label>Date</label>
-                        <input type="date" class="form-control" name="date[]">
+                        <input type="date" class="form-control"  name="date">
                     </div>
                 </div>
             </div>
-        @endforelse
         <button type="submit" class="nav-link btn float-right" style="background-color: blue; color: white;">Save</button>
     </form>
 </div>

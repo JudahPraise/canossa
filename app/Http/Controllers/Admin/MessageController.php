@@ -13,8 +13,7 @@ class MessageController extends Controller
     public function index(){
     
         $users = User::all();
-        // dd($users);
-        $messages = Message::where('sender_type','=','Admin')->get();
+        $messages = Message::where('sender_type','=','Employee')->get();
         return view('admin.messages.index', compact('users', 'messages'));
 
 

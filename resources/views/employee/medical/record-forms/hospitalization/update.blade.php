@@ -1,6 +1,7 @@
 @extends('employee.medical.create')
 
 @section('create-record-section')
+@component('components.alerts')@endcomponent
 <div class="row d-flex flex-column w-100">
     <h3>Hospitalization Update</h3>
     <div class="form-row mb-3">

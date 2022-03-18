@@ -1,6 +1,7 @@
 @extends('employee.medical.create')
 
 @section('create-record-section')
+@component('components.alerts')@endcomponent
 <x-medical-create-nav :id="$record->user_id"></x-medical-create-nav>
 
 <div class="row d-flex flex-column px-3">

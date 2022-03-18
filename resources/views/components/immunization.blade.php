@@ -61,11 +61,7 @@
                   <div class="form-row mb-3 w-100">
                       <div class="col-md-3 d-flex flex-column mb-2">
                           <label for="">Vaccine</label>
-                          <select class="custom-select" id="vaccine" name="vaccine_recieved">
-                              <option disabled>Choose...</option>
-                              <option value="Covid-19">Covid-19</option>
-                              <option value="Flu">Flu</option>
-                          </select> 
+                          <input class="form-control" type="text" id="vaccine" name="vaccine_recieved">
                       </div>
                       <div class="col-md-3 d-flex flex-column mb-2">
                           <label for="">Status</label>

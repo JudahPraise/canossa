@@ -59,7 +59,7 @@ class WorkExperienceController extends Controller
 
         WorkExperience::insert($experiences);
 
-        return redirect()->route('work.show', Auth::user()->id);
+        return redirect()->route('work.show', Auth::user()->id)->with('success', 'Record saved successfully!');
     }
 
     /**
@@ -112,7 +112,7 @@ class WorkExperienceController extends Controller
 
         WorkExperience::insert($experiences);
 
-        return redirect()->route('work.show', Auth::user()->id);
+        return redirect()->route('work.show', Auth::user()->id)->with('update', 'Record updated successfully!');
     }
 
     /**
@@ -124,6 +124,6 @@ class WorkExperienceController extends Controller
     public function destroy($id)
     {
         WorkExperience::where('id','=',$id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('delete', 'Record deleted successfully!');
     }
 }

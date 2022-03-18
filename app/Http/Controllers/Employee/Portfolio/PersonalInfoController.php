@@ -43,6 +43,14 @@ class PersonalInfoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'prc' => 'unique:personal_information,prc',
+            'gsis' => 'unique:personal_information,gsis',
+            'sss' => 'unique:personal_information,sss',
+            'pag_ibig' => 'unique:personal_information,pag_ibig',
+            'driver_license' => 'unique:personal_information,driver_license',
+            'phil_health' => 'unique:personal_information,phil_health',
+        ]);
 
         $personal = PersonalInformation::create([
             'user_id' => auth()->user()->id,
@@ -77,7 +85,7 @@ class PersonalInfoController extends Controller
             'extname' => $request->input('extname'), 
         ]);
 
-        return redirect()->route('personal.index')->with('success', 'Personal Information store successfully!');
+        return redirect()->route('personal.index')->with('success', 'Record saved successfully!');
     }
 
     /**
@@ -113,6 +121,15 @@ class PersonalInfoController extends Controller
     public function update(Request $request, $id)
     {
 
+        $request->validate([
+            'prc' => 'unique:personal_information,prc,'.$id.',user_id',
+            'gsis' => 'unique:personal_information,gsis,'.$id.',user_id',
+            'sss' => 'unique:personal_information,sss,'.$id.',user_id',
+            'pag_ibig' => 'unique:personal_information,pag_ibig,'.$id.',user_id',
+            'driver_license' => 'unique:personal_information,driver_license,'.$id.',user_id',
+            'phil_health' => 'unique:personal_information,phil_health,'.$id.',user_id',
+        ]);
+
         $personal = PersonalInformation::where('user_id','=',$id)->update([
             'user_id' => auth()->user()->id,
             'first_name' => $request->first_name,
@@ -146,7 +163,7 @@ class PersonalInfoController extends Controller
             'extname' => $request->input('extname'), 
         ]);
 
-        return redirect()->route('personal.index')->with('update', 'Personal Information updated successfully!');
+        return redirect()->route('personal.index')->with('update', 'Record updated successfully!');
     }
 
     /**

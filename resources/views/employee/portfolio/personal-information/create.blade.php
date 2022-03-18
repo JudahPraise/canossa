@@ -48,43 +48,43 @@
           </div>
           <div class="col-md-3 mb-3">
             <label for="citizenship">Citizenship</label>
-            <input type="text" class="form-control" name="citizenship" id="citizenship" required>
+            <input type="text" class="form-control" name="citizenship" id="citizenship" value="{{ old('citizenship') }}" required>
           </div>
           <div class="col-md-3 mb-3">
             <label for="civil_status">Civil Status</label>
-            <select class="custom-select" name="civil_status" id="civil_status" required>
-              <option selected disabled value="">Choose...</option>
-              <option>Married</option>
-              <option>Widowed</option>
-              <option>Separated</option>
-              <option>Divorced</option>
-              <option>Single</option>
+            <select class="custom-select" name="civil_status" id="civil_status" value="{{ old('civil_status') }}" required>
+              <option value="">Choose...</option>
+              <option {{ old('civil_status') === 'Married' ? 'selected' : ''  }}>Married</option>
+              <option {{ old('civil_status') === 'Widowed' ? 'selected' : ''  }}>Widowed</option>
+              <option {{ old('civil_status') === 'Separated' ? 'selected' : ''  }}>Separated</option>
+              <option {{ old('civil_status') === 'Divorced' ? 'selected' : ''  }}>Divorced</option>
+              <option {{ old('civil_status') === 'Single' ? 'selected' : ''  }}>Single</option>
             </select>
           </div>
         </div>
         <div class="form-row">
           <div class="col-md-4 mb-2">
               <label for="">Height</label>
-              <input type="number" step="0.01" class="form-control" id="height" name="height">
+              <input type="number" step="0.01" class="form-control" id="height" name="height" value="{{ old('height') }}">
               <small class="font-italic text-muted"><span class="text-danger mr-1">*</span>in ft</small>
           </div>
           <div class="col-md-4 mb-2">
               <label>Weight</label>
-              <input type="number" step="0.01" class="form-control" id="weight" name="weight">
+              <input type="number" step="0.01" class="form-control" id="weight" name="weight" value="{{ old('weight') }}">
               <small class="font-italic text-muted"><span class="text-danger mr-1">*</span>in kl</small>
           </div>
           <div class="col-md-4 mb-2">
               <label for="">Blood Type</label>
-              <select class="custom-select" id="validationDefault04" name="blood_type">
-                  <option disabled selected>Choose...</option>
-                  <option>A</option>
-                  <option>O</option>
-                  <option>B</option>
-                  <option>AB</option>
-                  <option>A-</option>
-                  <option>O-</option>
-                  <option>B-</option>
-                  <option>AB-</option>
+              <select class="custom-select" id="validationDefault04" name="blood_type" value="{{ old('blood_type') }}">
+                  <option value="">Choose...</option>
+                  <option {{ old('blood_type') === "A" ? 'selected' : '' }}>A</option>
+                  <option {{ old('blood_type') === "O" ? 'selected' : '' }}>O</option>
+                  <option {{ old('blood_type') === "B" ? 'selected' : '' }}>B</option>
+                  <option {{ old('blood_type') === "AB" ? 'selected' : '' }}>AB</option>
+                  <option {{ old('blood_type') === "A-" ? 'selected' : '' }}>A-</option>
+                  <option {{ old('blood_type') === "O-" ? 'selected' : '' }}>O-</option>
+                  <option {{ old('blood_type') === "B-" ? 'selected' : '' }}>B-</option>
+                  <option {{ old('blood_type') === "AB-" ? 'selected' : '' }}>AB-</option>
               </select> 
           </div>
         </div>
@@ -94,11 +94,11 @@
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" name="address" id="address" required>
+                <input type="text" class="form-control" name="address" id="address" value="{{ old('address') }}" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="zip_code">Zip</label>
-                <input type="text" class="form-control" name="zip_code" id="zip_code" required>
+                <input type="text" class="form-control" name="zip_code" id="zip_code" value="{{ old('zip_code') }}" required>
             </div>
         </div>
         {{-- Contact Info --}}
@@ -109,7 +109,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="tel_number" id="tel_number">
+                    <input type="text" class="form-control" name="tel_number" id="tel_number" value="{{ old('tel_number') }}">
                 </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -118,7 +118,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-mobile"></i></span>
                     </div>
-                    <input type="text" class="form-control" name="cell_number" id="cell_number">
+                    <input type="text" class="form-control" name="cell_number" id="cell_number" value="{{ old('cell_number') }}">
                 </div>
             </div>
             <div class="col-md-4 mb-3">
@@ -127,7 +127,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
                     </div>
-                    <input type="email" class="form-control" name="email_address" id="email_address" required>
+                    <input type="email" class="form-control" name="email_address" id="email_address" value="{{ old('email_address') }}" required>
                 </div>
             </div>
         </div>
@@ -137,29 +137,61 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="prc">PRC</label>
-                <input type="text" class="form-control" name="prc" id="prc">
+                <input type="text" class="form-control @error('prc') is-invalid @enderror" name="prc" value="{{ old('prc') }}" id="prc">
+                @error('prc')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
-            <div class="col-md-4 mb-3">
+            {{-- <div class="col-md-4 mb-3">
                 <label for="gsis">GSIS</label>
-                <input type="text" class="form-control" name="gsis" id="gsis">
-            </div>
+                <input type="text" class="form-control @error('gsis') is-invalid @enderror" name="gsis" value="{{ old('gsis') }}" id="gsis">
+                 @error('gsis')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div> --}}
             <div class="col-md-4 mb-3">
                 <label for="sss">SSS</label>
-                <input type="text" class="form-control" name="sss" id="sss">
+                <input type="text" class="form-control @error('sss') is-invalid @enderror" name="sss" value="{{ old('sss') }}" id="sss">
+                @error('sss')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="pag_ibig">Pag-IBIG</label>
-                <input type="text" class="form-control" name="pag_ibig" id="pag_ibig">
+                <input type="text" class="form-control @error('pag_ibig') is-invalid @enderror" name="pag_ibig" value="{{ old('pag_ibig') }}" id="pag_ibig">
+                @error('pag_ibig')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
                 <label for="driver_license">Drivers License</label>
-                <input type="text" class="form-control" name="driver_license" id="driver_license" >
+                <input type="text" class="form-control @error('driver_license') is-invalid @enderror" name="driver_license" value="{{ old('driver_license') }}" id="driver_license" >
+                @error('driver_license')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
             </div>
             <div class="col-md-4 mb-3">
-                <label for="phil_health">PhilHealth</label>
-                <input type="text" class="form-control" name="phil_health" id="phil_health">
+               <div class="form-group">
+                  <label for="phil_health">PhilHealth</label>
+                  <input type="text" class="form-control @error('phil_health') is-invalid @enderror" name="phil_health" value="{{ old('phil_health') }}" id="phil_health">
+                  @error('phil_health')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+               </div>
             </div>
         </div>
         <button type="submit" value="Submit Form" class="btn btn-sm btn-primary mb-3">Submit</button>

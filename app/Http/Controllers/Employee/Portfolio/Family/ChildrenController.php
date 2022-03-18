@@ -58,7 +58,7 @@ class ChildrenController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect()->route('family.show', Auth::user()->id);
+        return redirect()->route('family.show', Auth::user()->id)->with('success', 'Record saved successfully!');
     }
 
     /**
@@ -118,7 +118,7 @@ class ChildrenController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect()->route('children.show', Auth::user()->id);
+        return redirect()->route('children.show', Auth::user()->id)->with('update', 'Record updated successfully!');
     }
 
     /**
@@ -130,6 +130,6 @@ class ChildrenController extends Controller
     public function destroy($id)
     {
         $child = Children::where('id', $id)->first()->delete();
-        return redirect()->route('children.show', Auth::user()->id);
+        return redirect()->route('children.show', Auth::user()->id)->with('delete', 'Record deleted successfully!');
     }
 }

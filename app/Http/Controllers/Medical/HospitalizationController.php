@@ -21,7 +21,7 @@ class HospitalizationController extends Controller
 
         $hospital->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Record saved successfully!');
     }
 
     public function update(Request $request, $id)
@@ -37,6 +37,7 @@ class HospitalizationController extends Controller
 
         $hospital->update();
 
-        return redirect()->back();
+        return redirect()->back()->with('update', 'Record updated successfully!');
+
     }
 }

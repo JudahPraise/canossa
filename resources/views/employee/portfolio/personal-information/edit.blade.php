@@ -127,32 +127,64 @@
         {{-- ID's --}}
         <h3>Government ID's</h3>
         <div class="form-row">
-            <div class="col-md-4 mb-3">
-                <label for="prc">PRC</label>
-                <input type="text" class="form-control" name="prc" id="prc" value="{{ $personal->prc }}" >
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="gsis">GSIS</label>
-                <input type="text" class="form-control" name="gsis" id="gsis" value="{{ $personal->gsis }}" >
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="sss">SSS</label>
-                <input type="text" class="form-control" name="sss" id="sss" value="{{ $personal->sss }}" >
-            </div>
+          <div class="col-md-4 mb-3">
+              <label for="prc">PRC</label>
+              <input type="text" class="form-control @error('prc') is-invalid @enderror" name="prc" value="{{ old('prc') == " " ? " " : $personal->prc }}" id="prc">
+              @error('prc')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+          </div>
+          {{-- <div class="col-md-4 mb-3">
+              <label for="gsis">GSIS</label>
+              <input type="text" class="form-control @error('gsis') is-invalid @enderror" name="gsis" value="{{ old('gsis') == " " ? " " : $personal->gsis }}" id="gsis">
+               @error('gsis')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+          </div> --}}
+          <div class="col-md-4 mb-3">
+              <label for="sss">SSS</label>
+              <input type="text" class="form-control @error('sss') is-invalid @enderror" name="sss" value="{{ old('sss') == " " ? " " : $personal->sss }}" id="sss">
+              @error('sss')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+          </div>
         </div>
         <div class="form-row">
-            <div class="col-md-4 mb-3">
-                <label for="pag_ibig">Pag-IBIG</label>
-                <input type="text" class="form-control" name="pag_ibig" id="pag_ibig" value="{{ $personal->pag_ibig }}" >
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="driver_license">Drivers License</label>
-                <input type="text" class="form-control" name="driver_license" id="driver_license" value="{{ $personal->driver_license }}" >
-            </div>
-            <div class="col-md-4 mb-3">
+          <div class="col-md-4 mb-3">
+              <label for="pag_ibig">Pag-IBIG</label>
+              <input type="text" class="form-control @error('pag_ibig') is-invalid @enderror" name="pag_ibig" value="{{ old('pag_ibig') == " " ? " " : $personal->pag_ibig }}" id="pag_ibig">
+              @error('pag_ibig')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+          </div>
+          <div class="col-md-4 mb-3">
+              <label for="driver_license">Drivers License</label>
+              <input type="text" class="form-control @error('driver_license') is-invalid @enderror" name="driver_license" value="{{ old('driver_license') == " " ? " " : $personal->driver_license }}" id="driver_license" >
+              @error('driver_license')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+          </div>
+          <div class="col-md-4 mb-3">
+             <div class="form-group">
                 <label for="phil_health">PhilHealth</label>
-                <input type="text" class="form-control" name="phil_health" id="phil_health" value="{{ $personal->phil_health }}" >
-            </div>
+                <input type="text" class="form-control @error('phil_health') is-invalid @enderror" name="phil_health" value="{{ old('phil_health') == " " ? " " : $personal->phil_health }}" id="phil_health">
+                @error('phil_health')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+             </div>
+          </div>
         </div>
         <button type="submit" value="Submit Form" class="btn btn-sm btn-primary mb-3">Update</button>
       </form>

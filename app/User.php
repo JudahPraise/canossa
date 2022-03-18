@@ -30,7 +30,7 @@ class User extends Authenticatable
      */
     protected $fillable = 
     ['for_emp_id','fname', 'mname', 'lname', 'extname', 'sex', 'dob', 'employee_id', 'password', 'role', 'department', 'image','category',
-    'qr_token'];
+    'qr_token', 'full_name'];
 
 
 

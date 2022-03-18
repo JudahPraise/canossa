@@ -21,73 +21,82 @@
     </div>
       <!-- Card stats -->
     <div class="row ">
-      <div class="col-xl-3 col-md-6">
+      <div class="col-xl-4 col-md-6">
         <div class="card card-stats pressable-day p-3">
           <!-- Card body -->
           <div class="card-body">
-            <div class="row">
-              <div class="col">
+              <div class="row">
                 <h5 class="card-title text-uppercase text-muted mb-0">Total No. of Employees</h5>
-                <span class="h2 font-weight-bold mb-0">{{ $employees->count() }}</span>
               </div>
-              <div class="col-auto">
+              <div class="row d-flex justify-content-between align-items-center">
+                <span class="h2 font-weight-bold mb-0">{{ $employees->count() }}</span>
                 <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
                   <i class="fas fa-users fa-2x"></i>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6">
+      <div class="col-xl-2 col-md-6">
         <div class="card card-stats pressable-day p-3">
           <!-- Card body -->
           <div class="card-body">
             <div class="row">
-              <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">Teachers</h5>
-                <span class="h2 font-weight-bold mb-0">{{ $teachers }}</span>
-              </div>
-              <div class="col-auto">
-                <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                  <i class="fas fa-chalkboard-teacher fa-2x"></i>
-                </div>
+              <h5 class="card-title text-uppercase text-muted mb-0">Teachers</h5>
+            </div>
+            <div class="row d-flex justify-content-between align-items-center">
+              <span class="h2 font-weight-bold mb-0">{{ $teachers }}</span>
+              <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                <i class="fas fa-chalkboard-teacher fa-2x"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6">
+      <div class="col-xl-2 col-md-6">
         <div class="card card-stats  pressable-day p-3">
           <!-- Card body -->
           <div class="card-body">
             <div class="row">
-              <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">Nurse</h5>
-                <span class="h2 font-weight-bold mb-0">{{ $nurse }}</span>
-              </div>
-              <div class="col-auto">
-                <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                  <i class="fas fa-id-card-alt fa-2x"></i>
-                </div>
+              <h5 class="card-title text-uppercase text-muted mb-0">Nurse</h5>
+            </div>
+            <div class="row d-flex justify-content-between align-items-center">
+              <span class="h2 font-weight-bold mb-0">{{ $nurse }}</span>
+              <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                {{-- <i class="fas fa-id-card-alt fa-2x"></i> --}}
+                <i class="fa-solid fa-user-doctor"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6">
+      <div class="col-xl-2 col-md-6">
         <div class="card card-stats pressable-day p-3">
           <!-- Card body -->
           <div class="card-body">
             <div class="row">
-              <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0">Maintenance</h5>
-                <span class="h2 font-weight-bold mb-0">{{ $maintenance }}</span>
+              <h5 class="card-title text-uppercase text-muted mb-0">Staff</h5>
+            </div>
+            <div class="row d-flex justify-content-between align-items-center">
+              <span class="h2 font-weight-bold mb-0">{{ $staffs }}</span>
+              <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                <i class="fas fa-clipboard-check fa-2x"></i>
               </div>
-              <div class="col-auto">
-                <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                  <i class="fas fa-clipboard-check fa-2x"></i>
-                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-6">
+        <div class="card card-stats pressable-day p-3">
+          <!-- Card body -->
+          <div class="card-body">
+            <div class="row">
+              <h5 class="card-title text-uppercase text-muted mb-0">Maintenance</h5>
+            </div>
+            <div class="row d-flex justify-content-between align-items-center">
+              <span class="h2 font-weight-bold mb-0">{{ $maintenance }}</span>
+              <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                <i class="fas fa-clipboard-check fa-2x"></i>
               </div>
             </div>
           </div>

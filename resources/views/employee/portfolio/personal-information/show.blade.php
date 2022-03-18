@@ -74,10 +74,10 @@
                         <strong style="font-size: 1rem">PRC</strong>
                         <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->prc) ? $personal->prc : 'N/A' }}</strong>
                     </div>
-                    <div class="col mb-3 d-flex flex-column">
+                    {{-- <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">GSIS</strong>
                         <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->gsis) ? $personal->gsis : 'N/A' }}</strong>
-                    </div>
+                    </div> --}}
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">SSS</strong>
                         <strong style="color: black; font-size: 1.3rem">{{ !empty($personal->sss) ? $personal->sss : 'N/A' }}</strong>

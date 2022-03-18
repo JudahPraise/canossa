@@ -26,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        session()->flash('cookie');
         return redirect()->route('schedule.index');
     }
 }

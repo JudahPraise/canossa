@@ -47,19 +47,13 @@ class ImmunizationController extends Controller
     {
         $record = MedicalRecord::where('user_id','=',$id)->with('immunizations')->first();
 
-        $immunizations = [];
-
-        foreach ($request->vaccine_recieved as $item => $key) {
-            $immunizations[] = ([
-                'record_id' => $record->id,
-                'vaccine_recieved' => $request->vaccine_recieved[$item],
-                'status' => $request->status[$item],
-                'brand' => !empty($request->brand[$item]) ? $request->brand[$item] : '',
-                'date' => $request->date[$item],
-            ]);
-        }
-
-        $record->immunizations()->insert($immunizations);
+        Immunization::create([
+            'record_id' => $record->id,
+            'vaccine_recieved' => $request->vaccine_recieved,
+            'status' => $request->status,
+            'brand' => $request->brand,
+            'date' => $request->date
+        ]);
 
         if(Auth::guard('nurse')->check())
         {

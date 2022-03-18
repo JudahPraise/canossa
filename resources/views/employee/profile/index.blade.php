@@ -170,34 +170,34 @@
                                     <div class="pl-lg-3">
                                         <div class="row row-cols-2 row-cols-md-4 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Date of Birth</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->date_of_birth }}</strong>
+                                                <small style="font-size: 1rem">Date of Birth</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->date_of_birth }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Sex</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->sex }}</strong>
+                                                <small style="font-size: 1rem">Sex</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->sex }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Citizenship</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->citizenship }}</strong>
+                                                <small style="font-size: 1rem">Citizenship</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->citizenship }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Civil Status</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->civil_status }}</strong>
+                                                <small style="font-size: 1rem">Civil Status</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->civil_status }}</strong>
                                             </div>
                                         </div>
                                         <div class="row row-cols-2 row-cols-md-4 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Height</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->height }}</strong>
+                                                <small style="font-size: 1rem">Height</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->height }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Weight</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->weight }}</strong>
+                                                <small style="font-size: 1rem">Weight</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->weight }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Blood Type</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->blood_type }}</strong>
+                                                <small style="font-size: 1rem">Blood Type</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->blood_type }}</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -207,26 +207,26 @@
                                     <div class="pl-lg-3">
                                         <div class="row row-cols-2 row-cols-md-2 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Address</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->address }}</strong>
+                                                <small style="font-size: 1rem">Address</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->address }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Zip</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->zip_code }}</strong>
+                                                <small style="font-size: 1rem">Zip</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->zip_code }}</strong>
                                             </div>
                                         </div>
                                         <div class="row row-cols-2 row-cols-md-4 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Telephone Number</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->tel_number }}</strong>
+                                                <small style="font-size: 1rem">Telephone Number</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->tel_number }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Cellphone number</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->cell_number }}</strong>
+                                                <small style="font-size: 1rem">Cellphone number</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->cell_number }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Email address</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->email_address }}</strong>
+                                                <small style="font-size: 1rem">Email address</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->email_address }}</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -236,30 +236,30 @@
                                     <div class="pl-lg-2">
                                         <div class="row row-cols-2 row-cols-md-4 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">PRC</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->prc }}</strong>
+                                                <small style="font-size: 1rem">PRC</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->prc }}</strong>
                                             </div>
+                                            {{-- <div class="col mb-3 d-flex flex-column">
+                                                <small style="font-size: 1rem">GSIS</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->gsis }}</strong>
+                                            </div> --}}
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">GSIS</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->gsis }}</strong>
-                                            </div>
-                                            <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">SSS</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->sss }}</strong>
+                                                <small style="font-size: 1rem">SSS</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->sss }}</strong>
                                             </div>
                                         </div>
                                         <div class="row row-cols-2 row-cols-md-4 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Pag-IBIG</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->pag_ibig }}</strong>
+                                                <small style="font-size: 1rem">Pag-IBIG</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->pag_ibig }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Driver's License</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->driver_license }}</strong>
+                                                <small style="font-size: 1rem">Driver's License</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->driver_license }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">PhilHealth</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $employee->personal->phil_health }}</strong>
+                                                <small style="font-size: 1rem">PhilHealth</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $employee->personal->phil_health }}</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -295,28 +295,28 @@
                                 @if (!empty(auth()->user()->family->spouse))
                                     <div class="row row-cols-1 row-cols-md-2 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Name</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->spouse->spouseFullname() }}</strong>
+                                            <small style="font-size: 1rem">Name</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->spouse->spouseFullname() }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Occupation</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->spouse->occupation }}</strong>
+                                            <small style="font-size: 1rem">Occupation</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->spouse->occupation }}</strong>
                                         </div>
                                     </div>
                                     <div class="row row-cols-1 row-cols-md-2">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Employer business name</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->spouse->employer_business_name}}</strong>
+                                            <small style="font-size: 1rem">Employer business name</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->spouse->employer_business_name}}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Business address</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->spouse->business_address }}</strong>
+                                            <small style="font-size: 1rem">Business address</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->spouse->business_address }}</strong>
                                         </div>
                                     </div>
                                     <div class="row row-cols-1 row-cols-md-1">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Telephone number</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->spouse->tel_no}}</strong>
+                                            <small style="font-size: 1rem">Telephone number</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->spouse->tel_no}}</strong>
                                         </div>
                                     </div>
                                 @else
@@ -347,12 +347,12 @@
                                 @forelse ($family->children as $child)
                                     <div class="row row-cols-1 row-cols-md-2 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Name</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $child->name }}</strong>
+                                            <small style="font-size: 1rem">Name</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $child->name }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Date of birth</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $child->date_of_birth }}</strong>
+                                            <small style="font-size: 1rem">Date of birth</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $child->date_of_birth }}</strong>
                                         </div>
                                     </div>
                                 @empty
@@ -383,28 +383,28 @@
                                 @if (!empty(auth()->user()->family->mother))
                                     <div class="row row-cols-1 row-cols-md-2 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Name</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->mother->motherFullname() }}</strong>
+                                            <small style="font-size: 1rem">Name</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->mother->motherFullname() }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Occupation</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->mother->occupation }}</strong>
+                                            <small style="font-size: 1rem">Occupation</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->mother->occupation }}</strong>
                                         </div>
                                     </div>
                                     <div class="row row-cols-1 row-cols-md-2">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Employer business name</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->mother->employer_business_name}}</strong>
+                                            <small style="font-size: 1rem">Employer business name</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->mother->employer_business_name}}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Business address</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->mother->business_address }}</strong>
+                                            <small style="font-size: 1rem">Business address</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->mother->business_address }}</strong>
                                         </div>
                                     </div>
                                     <div class="row row-cols-1 row-cols-md-1">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Telephone number</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->mother->tel_no}}</strong>
+                                            <small style="font-size: 1rem">Telephone number</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->mother->tel_no}}</strong>
                                         </div>
                                     </div>
                                 @else
@@ -435,28 +435,28 @@
                                 @if (!empty(auth()->user()->family->father))
                                     <div class="row row-cols-1 row-cols-md-2 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Name</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->father->fatherFullname() }}</strong>
+                                            <small style="font-size: 1rem">Name</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->father->fatherFullname() }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Occupation</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->father->occupation }}</strong>
+                                            <small style="font-size: 1rem">Occupation</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->father->occupation }}</strong>
                                         </div>
                                     </div>
                                     <div class="row row-cols-1 row-cols-md-2">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Employer business name</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->father->employer_business_name}}</strong>
+                                            <small style="font-size: 1rem">Employer business name</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->father->employer_business_name}}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Business address</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->father->business_address }}</strong>
+                                            <small style="font-size: 1rem">Business address</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->father->business_address }}</strong>
                                         </div>
                                     </div>
                                     <div class="row row-cols-1 row-cols-md-1">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Telephone number</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $family->father->tel_no}}</strong>
+                                            <small style="font-size: 1rem">Telephone number</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $family->father->tel_no}}</strong>
                                         </div>
                                     </div>
                                 @else
@@ -496,23 +496,23 @@
                                 @if (!empty(auth()->user()->education->elem))
                                     <div class="row row-cols-2 row-cols-md-4 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Name of school</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $educ->elem->name_of_school }}</strong>
+                                            <small style="font-size: 1rem">Name of school</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $educ->elem->name_of_school }}</strong>
                                         </div>
                                         @if(!empty($educ->elem->level_units_earned))
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Level units earned</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $educ->elem->level_units_earned }}</strong>
+                                                <small style="font-size: 1rem">Level units earned</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $educ->elem->level_units_earned }}</strong>
                                             </div>
                                         @endif
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Year graduated</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $educ->elem->sy_graduated }}</strong>
+                                            <small style="font-size: 1rem">Year graduated</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $educ->elem->sy_graduated }}</strong>
                                         </div>
                                         @if(!empty($educ->elem->academic_award))
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Academic award</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $educ->elem->academic_reward }}</strong>
+                                                <small style="font-size: 1rem">Academic award</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $educ->elem->academic_reward }}</strong>
                                             </div>
                                         @endif
                                     </div>
@@ -549,23 +549,23 @@
                                 @if (!empty(auth()->user()->education->sec))
                                     <div class="row row-cols-2 row-cols-md-4 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Name of school</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $educ->sec->name_of_school }}</strong>
+                                            <small style="font-size: 1rem">Name of school</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $educ->sec->name_of_school }}</strong>
                                         </div>
                                         @if(!empty($educ->sec->level_units_earned))
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Level units earned</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $educ->sec->level_units_earned }}</strong>
+                                                <small style="font-size: 1rem">Level units earned</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $educ->sec->level_units_earned }}</strong>
                                             </div>
                                         @endif
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Year graduated</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $educ->sec->sy_graduated }}</strong>
+                                            <small style="font-size: 1rem">Year graduated</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $educ->sec->sy_graduated }}</strong>
                                         </div>
                                         @if(!empty($educ->sec->academic_award))
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Academic award</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $educ->sec->academic_reward }}</strong>
+                                                <small style="font-size: 1rem">Academic award</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $educ->sec->academic_reward }}</strong>
                                             </div>
                                         @endif
                                     </div>
@@ -602,27 +602,27 @@
                                 @if (!empty(auth()->user()->education->col))
                                     <div class="row row-cols-2 row-cols-md-4 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Name of school</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $educ->col->name_of_school }}</strong>
+                                            <small style="font-size: 1rem">Name of school</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $educ->col->name_of_school }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Course</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $educ->col->course_degree }}</strong>
+                                            <small style="font-size: 1rem">Course</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $educ->col->course_degree }}</strong>
                                         </div>
                                         @if(!empty($educ->col->level_units_earned))
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Level units earned</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $educ->col->level_units_earned }}</strong>
+                                                <small style="font-size: 1rem">Level units earned</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $educ->col->level_units_earned }}</strong>
                                             </div>
                                         @endif
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Year graduated</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $educ->col->sy_graduated }}</strong>
+                                            <small style="font-size: 1rem">Year graduated</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $educ->col->sy_graduated }}</strong>
                                         </div>
                                         @if(!empty($educatio->col->academic_award))
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Academic award</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $educ->col->academic_reward }}</strong>
+                                                <small style="font-size: 1rem">Academic award</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $educ->col->academic_reward }}</strong>
                                             </div>
                                         @endIf
                                     </div>
@@ -659,31 +659,31 @@
                                 @forelse ($educ->grad as $grad)
                                     <div class="row row-cols-2 row-cols-md-5 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Name of school</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $grad->name_of_school }}</strong>
+                                            <small style="font-size: 1rem">Name of school</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $grad->name_of_school }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Degree</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $grad->degree }}</strong>
+                                            <small style="font-size: 1rem">Degree</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $grad->degree }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Course</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $grad->course }}</strong>
+                                            <small style="font-size: 1rem">Course</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $grad->course }}</strong>
                                         </div>
                                         @if(!empty($grad->level_units_earned))
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Level units earned</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $grad->level_units_earned }}</strong>
+                                                <small style="font-size: 1rem">Level units earned</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $grad->level_units_earned }}</strong>
                                             </div>
                                         @endif
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Year graduated</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $grad->sy_graduated }}</strong>
+                                            <small style="font-size: 1rem">Year graduated</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $grad->sy_graduated }}</strong>
                                         </div>
                                         @if(!empty($grad->academic_award))
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">Academic award</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $grad->academic_reward }}</strong>
+                                                <small style="font-size: 1rem">Academic award</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $grad->academic_reward }}</strong>
                                             </div>
                                         @endIf
                                     </div>
@@ -719,16 +719,16 @@
                                 @forelse ($employee->experiences as $experience)
                                     <div class="row row-cols-2 row-cols-md-5 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Duration</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $experience->duration }}</strong>
+                                            <small style="font-size: 1rem">Duration</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $experience->duration }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Work Description</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $experience->work_description }}</strong>
+                                            <small style="font-size: 1rem">Work Description</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $experience->work_description }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Work Place</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $experience->work_place }}</strong>
+                                            <small style="font-size: 1rem">Work Place</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $experience->work_place }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
                                             <form  class="mr-2" action="{{ route('work.delete', $experience->id) }}" method="POST">
@@ -772,20 +772,20 @@
                                 @forelse ($employee->trainings as $training)
                                     <div class="row row-cols-2 row-cols-md-5 mt-3">
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Title</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $training->training_title }}</strong>
+                                            <small style="font-size: 1rem">Title</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $training->training_title }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Date</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $training->training_date }}</strong>
+                                            <small style="font-size: 1rem">Date</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $training->training_date }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Sponsor</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $training->training_sponsor }}</strong>
+                                            <small style="font-size: 1rem">Sponsor</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $training->training_sponsor }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex flex-column">
-                                            <small style="font-size: .8rem">Certificate</small>
-                                            <strong style="color: black; font-size: .8rem">{{ $training->training_certificate }}</strong>
+                                            <small style="font-size: 1rem">Certificate</small>
+                                            <strong style="color: black; font-size: 1rem">{{ $training->training_certificate }}</strong>
                                         </div>
                                         <div class="col mb-3 d-flex align-items-center">
                                             <form  class="mr-2" action="{{ route('work.delete', $training->id) }}" method="POST">
@@ -833,20 +833,20 @@
                                     @foreach ($employee->voluntary_works as $voluntary)
                                         <div class="row row-cols-2 row-cols-md-5 mt-3">
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">NAME OF ORGANIZATION</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $voluntary->name_address }}</strong>
+                                                <small style="font-size: 1rem">NAME OF ORGANIZATION</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $voluntary->name_address }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">PERIOD OF ATTENDANCE</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $voluntary->duration }}</strong>
+                                                <small style="font-size: 1rem">PERIOD OF ATTENDANCE</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $voluntary->duration }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">NUMBER OF HOURS</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $voluntary->no_hours }}</strong>
+                                                <small style="font-size: 1rem">NUMBER OF HOURS</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $voluntary->no_hours }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex flex-column">
-                                                <small style="font-size: .8rem">NATURE OF WORK</small>
-                                                <strong style="color: black; font-size: .8rem">{{ $voluntary->position }}</strong>
+                                                <small style="font-size: 1rem">NATURE OF WORK</small>
+                                                <strong style="color: black; font-size: 1rem">{{ $voluntary->position }}</strong>
                                             </div>
                                             <div class="col mb-3 d-flex align-items-center">
                                                 <form  class="mr-2" action="{{ route('voluntary.delete', $voluntary->id) }}" method="POST">

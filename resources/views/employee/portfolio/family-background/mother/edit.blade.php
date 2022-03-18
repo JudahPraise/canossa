@@ -8,15 +8,15 @@
             <div class="form-row">
               <div class="col-md-4 mb-3">
                 <label for="firstname">First name</label>
-                <input type="text" class="form-control" name="firstname" value="{{ $mother->firstname }}" id="firstname" required>
+                <input type="text" class="form-control" name="firstname" value="{{ $family->mother->firstname }}" id="firstname" required>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="middlename">Middle name</label>
-                <input type="text" class="form-control" name="middlename" value="{{ $mother->middlename }}" id="middlename" required>
+                <input type="text" class="form-control" name="middlename" value="{{ $family->mother->middlename }}" id="middlename" required>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="surname">Last name</label>
-                <input type="text" class="form-control" name="surname" value="{{ $mother->surname }}" id="surname" required>
+                <input type="text" class="form-control" name="surname" value="{{ $family->mother->surname }}" id="surname" required>
               </div>
             </div>
             <div class="form-row">

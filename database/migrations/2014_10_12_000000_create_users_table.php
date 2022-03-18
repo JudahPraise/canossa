@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->mediumText('image')->nullable();
             $table->string('status')->default('active');
             $table->string('labtest')->nullable();
+            $table->string('full_name')->nullable();
             $table->rememberToken();    
             $table->timestamps();
 

@@ -31,7 +31,6 @@
                 <i class="fas fa-times-circle mr-2 text-white" style="font-size: 2rem"></i>
             </div>
             <div class="col-10">
-                <h4>Failed!</h4>
                 <span style="font-size: 1rem">{{ session('error') }}</span>
             </div>
         </div>

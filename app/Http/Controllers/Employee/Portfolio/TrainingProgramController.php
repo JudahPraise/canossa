@@ -43,24 +43,27 @@ class TrainingProgramController extends Controller
     public function store(Request $request)
     {
 
-        $training = new TrainingProgram();
 
-        $training->user_id = Auth::user()->id;
-        $training->training_date = $request->input('training_date');
-        $training->training_title = $request->input('training_title');
-        $training->training_sponsor = $request->input('training_sponsor');
 
         if($request->hasFile('training_certificate')){
+            $training = new TrainingProgram();
+
+            $training->user_id = Auth::user()->id;
+            $training->training_date = $request->input('training_date');
+            $training->training_title = $request->input('training_title');
+            $training->training_sponsor = $request->input('training_sponsor');
 
             $file = $request->file('training_certificate');
             $filename = $file->getClientOriginalName();
             $request->training_certificate->storeAs('documents', $filename, 'public');
             $training->training_certificate = $filename;
+
+            $training->save();
+
+            return redirect()->route('training.show', Auth::user()->id)->with('success', 'Record saved successfully!');
         }
 
-        $training->save();
-
-        return redirect()->route('training.show', Auth::user()->id)->with('success', 'Training Program saved successfully!');
+        return redirect()->back()->with('error', 'Training certificate must be uploaded');
     }   
 
     /**
@@ -114,7 +117,12 @@ class TrainingProgramController extends Controller
 
         $training->update();
 
-        return redirect()->route('training.show', Auth::user()->id)->with('update', 'Training Program updated successfully!');
+        return redirect()->route('training.show', Auth::user()->id)->with('update', 'Record updated successfully!');
+    }
+
+    public function download($id){
+        $training = TrainingProgram::where('id','=',$id)->first();
+        return response()->download(storage_path("app/public/documents/{$training->training_certificate}"));
     }
 
     /**
@@ -128,6 +136,6 @@ class TrainingProgramController extends Controller
         $training = TrainingProgram::where('id','=',$id)->first();
         $training->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('delete', 'Record deleted successfully!');
     }
 }

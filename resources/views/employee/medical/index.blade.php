@@ -65,11 +65,11 @@
     <div class="col-md-7 m-2 shadow bg-white rounded">
         <span class="w-100 d-flex justify-content-between align-items-center">
             <h2 class="m-3">Medical Record</h2>
-            <p class="font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">Add Record</p>
+            <p class="font-weight-bold btn-sm btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">Add Record</p>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('employee.history.create', auth()->user()->id) }}">Personal History</a>
-                <a class="dropdown-item" href="{{ route('employee.hospitalization.create', auth()->user()->id) }}">Hospitalization</a>
+                <a class="dropdown-item" href="{{ route('employee.history.create', auth()->user()->id) }}">Medical History</a>
                 <a class="dropdown-item" href="{{ route('employee.medication.create', auth()->user()->id) }}">Medications</a>
+                <a class="dropdown-item" href="{{ route('employee.hospitalization.create', auth()->user()->id) }}">Hospitalization</a>
                 <a class="dropdown-item" href="{{ route('employee.immunization.create', auth()->user()->id) }}">Immunization</a>
             </div>
         </span>

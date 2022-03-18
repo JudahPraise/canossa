@@ -39,9 +39,19 @@ class GraduateStudyController extends Controller
      */
     public function store(Request $request)
     {
+
         $graduate_studies = [];
 
         foreach($request->name_of_school as $item => $key){
+
+            $col_year_graduated = EducationalBackground::where('user_id','=',Auth::user()->id)->with('col')->first();
+            if($request->sy_graduated[$item] <= $col_year_graduated->col->sy_graduated)
+            {
+                
+                return redirect()->back()->with('error', 'Year graduated is not accurate');
+    
+            }
+
             $graduate_studies[] = ([
                 'educ_id'=> Auth::user()->education->id,
                 'name_of_school'=> $request->name_of_school[$item],
@@ -61,7 +71,7 @@ class GraduateStudyController extends Controller
             'graduate_study' => true
         ]);
 
-        return redirect()->route('educ.show', Auth::user()->id);
+        return redirect()->route('educ.show', Auth::user()->id)->with('success', 'Record saved successfully!');
     }
 
     /**
@@ -96,11 +106,24 @@ class GraduateStudyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        GraduateStudy::where('educ_id','=',$id)->delete();
 
         $graduate_studies = [];
 
         foreach($request->name_of_school as $item => $key){
+            
+            $col_year_graduated = EducationalBackground::where('user_id','=',Auth::user()->id)->with('col')->first();
+            if($request->sy_graduated[$item] <= $col_year_graduated->col->sy_graduated)
+            {
+                $grad = GraduateStudy::where('educ_id','=',$id)->get();
+                return redirect()->back()->with('error', 'Year graduated is not accurate')->with(compact('grad'));
+    
+            }
+
+            GraduateStudy::where('educ_id','=',$id)->delete();
+            EducationalBackground::where('user_id','=',Auth::user()->id)->update([
+                'graduate_study' => false
+            ]);
+
             $graduate_studies[] = ([
                 'educ_id'=> Auth::user()->education->id,
                 'name_of_school'=> $request->name_of_school[$item],
@@ -120,7 +143,7 @@ class GraduateStudyController extends Controller
             'graduate_study' => true
         ]);
 
-        return redirect()->route('educ.show', Auth::user()->id);
+        return redirect()->route('educ.show', Auth::user()->id)->with('update', 'Record updated successfully!');
     }
 
     /**
@@ -132,6 +155,6 @@ class GraduateStudyController extends Controller
     public function destroy($id)
     {
         $grad = GraduateStudy::where('id','=',$id)->first()->delete();
-        return redirect()->back();
+        return redirect()->back()->with('delete', 'Record deleted successfully!');
     }
 }

@@ -59,7 +59,7 @@ class VoluntaryWorksController extends Controller
 
         VoluntaryWork::insert($voluntaries);
 
-        return redirect()->route('voluntary.show', Auth::user()->id);
+        return redirect()->route('voluntary.show', Auth::user()->id)->with('success', 'Record saved successfully!');
     }
 
     /**
@@ -113,7 +113,7 @@ class VoluntaryWorksController extends Controller
 
         VoluntaryWork::insert($voluntaries);
 
-        return redirect()->route('voluntary.show', Auth::user()->id);
+        return redirect()->route('voluntary.show', Auth::user()->id)->with('update', 'Record updated successfully!');
     }
 
     /**
@@ -125,6 +125,6 @@ class VoluntaryWorksController extends Controller
     public function destroy($id)
     {
         VoluntaryWork::where('id','=',$id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('delete', 'Record deleted successfully!');
     }
 }

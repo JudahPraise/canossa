@@ -13,7 +13,9 @@
 
 @section('employee-home')
 <div class="container-fluid m-0">
-
+  @component('components.alerts')
+    
+  @endcomponent
   <div class="row">
       @yield('portfolio')
   </div>

@@ -87,6 +87,7 @@ Route::prefix('admin')->group(function(){
     Route::prefix('/messages')->group(function(){
         Route::get('/', 'Admin\MessageController@index')->name('message.index');
         Route::post('/send', 'MessageController@send')->name('send');
+        Route::post('/reply', 'MessageController@reply')->name('reply');
     });
     //Employees
     Route::prefix('/employees')->group(function(){
@@ -231,6 +232,7 @@ Route::prefix('employee')->group(function(){
             Route::get('/show/{id}', 'Employee\Portfolio\TrainingProgramController@show')->name('training.show');
             Route::put('/update/{id}', 'Employee\Portfolio\TrainingProgramController@update')->name('training.update');
             Route::delete('/delete/{id}', 'Employee\Portfolio\TrainingProgramController@destroy')->name('training.delete');
+            Route::get('/download-certificate/{id}', 'Employee\Portfolio\TrainingProgramController@download')->name('training.download');
         });
         //Voluntary Work
         Route::prefix('/voluntary-work')->group(function(){

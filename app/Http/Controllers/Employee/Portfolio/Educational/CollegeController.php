@@ -38,6 +38,14 @@ class CollegeController extends Controller
      */
     public function store(Request $request)
     {
+        $sec_year_graduated = EducationalBackground::where('user_id','=',Auth::user()->id)->with('sec')->first();
+        if($request->sy_graduated <= $sec_year_graduated->sec->sy_graduated)
+        {
+            
+            return redirect()->back()->with('error', 'Year graduated is not accurate');
+
+        }
+
         College::create([
             'educ_id' => Auth::user()->education->id,
             'name_of_school' => $request->name_of_school,
@@ -52,7 +60,7 @@ class CollegeController extends Controller
             'college' => true
         ]);
 
-        return redirect()->route('educ.show', Auth::user()->id);
+        return redirect()->route('educ.show', Auth::user()->id)->with('success', 'Record saved successfully!');
     }
 
     /**
@@ -87,6 +95,14 @@ class CollegeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $sec_year_graduated = EducationalBackground::where('user_id','=',Auth::user()->id)->with('sec')->first();
+        if($request->sy_graduated <= $sec_year_graduated->sec->sy_graduated)
+        {
+            
+            return redirect()->back()->with('error', 'Year graduated is not accurate');
+
+        }
+
         College::where('id','=',$id)->update([
             'educ_id' => Auth::user()->education->id,
             'name_of_school' => $request->name_of_school,
@@ -101,7 +117,7 @@ class CollegeController extends Controller
             'college' => true
         ]);
 
-        return redirect()->route('educ.show', Auth::user()->id);
+        return redirect()->route('educ.show', Auth::user()->id)->with('update', 'Record updated successfully!');
     }
 
     /**
@@ -112,6 +128,9 @@ class CollegeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $college = College::where('id','=',$id)->first();
+        $college->delete();
+        
+        return redirect()->back()->with('delete', 'Record deleted successfully!');
     }
 }

@@ -33,7 +33,7 @@ class ScheduleController extends Controller
 
         $schedule->save();
         
-        return redirect()->route('schedule.index');
+        return redirect()->route('schedule.index')->with('success', 'Record saved successfully!');
 
     }
 
@@ -50,14 +50,14 @@ class ScheduleController extends Controller
 
         $schedule->update();
         
-        return redirect()->route('schedule.index');
+        return redirect()->route('schedule.index')->with('update', 'Record updated successfully!');
 
     }
 
     public function delete($id){
 
         $schedule = Schedule::where('id','=',$id)->first()->delete();
-        return redirect()->route('schedule.index');
+        return redirect()->route('schedule.index')->with('delete', 'Record deleted successfully!');
 
     }
 

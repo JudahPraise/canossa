@@ -1,8 +1,9 @@
-<div class="row mx-2 d-flex justify-content-between">
+<div class="row mx-2 d-flex justify-content-between align-items-center">
     <p class="font-weight-bold">Files/Documents</p>
-    <a href="" data-toggle="modal" data-target="#addFileModal">
+    {{-- <a href="" class="btn btn-sm btn-success" data-toggle="modal" data-target="#addFileModal">
         <p class="font-weight-bold"><i class="far fa-file-alt mr-2"></i>Add File</p>
-    </a>
+    </a> --}}
+    <p class="font-weight-bold btn-sm btn-success" data-toggle="modal" data-target="#addFileModal" style="cursor: pointer">Add File</p>
 </div>
 <div class="row d-flex justify-content-center">
     {{-- @foreach ($record as $data) --}}

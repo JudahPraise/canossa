@@ -42,9 +42,8 @@
                                 </div>
                             </div>
                             <div class="col-8 col-md-8">
-                                <strong style="font-size: 2rem">{{ auth()->user()->name }}</strong><br>
+                                <strong style="font-size: 2rem">{{ $employee->fullName() }}</strong><br>
                                 <small class="font-weight-bold" style="font-size: .9rem">{{ !empty($employee->personal->address) ? $employee->personal->address : 'No data' }}</small>
-                                <small class="font-weight-bold" style="font-size: .9rem">{{ $employee->email }}</small><br>
                                 <small class="font-weight-bold" style="font-size: .9rem">{{ !empty($employee->personal->cell_number) ? $employee->personal->cell_number : 'No data' }}</small>
                             </div>
                         </div>
@@ -53,10 +52,10 @@
                             <strong class="text-center w-100">Educational Background</strong>
                             <div class="row row-cols-2 row-cols-md-2 w-100 mt-3">
                                 <div class="col">
-                                    <strong>Primary</strong>
+                                    <strong>Elementary</strong>
                                 </div>
                                 <div class="col">
-                                    @if(!empty(auth()->user()->educ->elementary))
+                                    @if(!empty($educ->elem))
                                         <strong>{{ $educ->elem->name_of_school }}</strong><br>
                                         <strong>{{ $educ->elem->level }}</strong><br>
                                         <strong>{{ !empty($educ->elem->sy_graduated) ? $educ->elem->sy_graduated : $educ->elem->level_units_earned }}</strong>
@@ -70,7 +69,7 @@
                                     <strong>Secondary</strong>
                                 </div>
                                 <div class="col">
-                                    @if(!empty(auth()->user()->educ->secondary))
+                                    @if(!empty($educ->sec))
                                         <strong>{{ $educ->sec->name_of_school }}</strong><br>
                                         <strong>{{ $educ->sec->level }}</strong><br>
                                         <strong>{{ !empty($educ->elem->sy_graduated) ? $educ->sec->sy_graduated : $educ->sec->level_units_earned }}</strong>
@@ -84,7 +83,7 @@
                                     <strong>Tertiary</strong>
                                 </div>
                                 <div class="col">
-                                    @if(!empty(auth()->user()->educ->college))
+                                    @if(!empty($educ->col))
                                         <strong>{{ $educ->col->name_of_school }}</strong><br>
                                         <strong>{{ $educ->col->level }}</strong><br>
                                         <strong>{{ !empty($educ->col->sy_graduated) ? $educ->col->sy_graduated : $educ->col->level_units_earned }}</strong>
@@ -180,7 +179,7 @@
                         <hr>
                         @if (!empty(auth()->user()->voluntary_works))
                             <div class="row d-flex flex-column w-100 pl-3 mt-3">
-                                <strong class="text-center w-100">Voluntary Works</strong>
+                                <strong class="text-center w-100">Civic Works</strong>
                                 <div class="row row-cols-4 mt-3 d-flex justify-content-center">
                                     <div class="col-md-3 d-flex justify-content-start"><strong>Name of Organization</strong></div>
                                     <div class="col-md-3 d-flex justify-content-end"><strong>Period of Attendance</strong></div>

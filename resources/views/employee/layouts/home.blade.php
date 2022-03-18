@@ -3,7 +3,7 @@
 @section('home')
 <div class="container-fluid p-0">
   
-  @include('components.cookie')
+  @component('components.cookie')@endcomponent
 
   @yield('employee-home')
   

@@ -17,11 +17,11 @@ class MessageController extends Controller
         $message = new Message();
         if(Auth::guard('admin')->check()){
             $message->sender_image = Auth::guard('admin')->user()->image;
-            $message->sender = Auth::guard('admin')->user()->name;
+            $message->sender = Auth::guard('admin')->user()->fullName();
             $message->sender_type = 'Admin';
         }elseif(Auth::guard('web')->check()){
             $message->sender_image = Auth::guard('web')->user()->image;
-            $message->sender = Auth::guard('web')->user()->name;
+            $message->sender = Auth::guard('web')->user()->fullName();
             $message->sender_type = 'Employee';
         }
         $message->send_to = $request->input('send_to');
@@ -41,6 +41,7 @@ class MessageController extends Controller
             if($request->send_to === 'Admin'){
                 $employee = Admin::all();
             }else{
+
                 $employee = User::where('employee_id','=', $request->input('send_to'))->first();
             }
 
@@ -56,7 +57,7 @@ class MessageController extends Controller
 
         $message->save();
         Notification::send($employee, new MessageNotification(Message::latest('id')->first()));
-        return redirect()->back();
+        return redirect()->back()->with('sent', 'Message sent successfully!');
 
     }
 
@@ -67,9 +68,11 @@ class MessageController extends Controller
         if(Auth::guard('admin')->check()){
             $message->sender_image = Auth::guard('admin')->user()->image;
             $message->sender = Auth::guard('admin')->user()->name;
+            $message->sender_type = 'Admin';
         }elseif(Auth::guard('web')->check()){
             $message->sender_image = Auth::guard('web')->user()->image;
-            $message->sender = Auth::guard('web')->user()->name;
+            $message->sender = Auth::guard('web')->user()->fullName();
+            $message->sender_type = 'Employee';
         }
         $message->send_to = $request->input('send_to');
         $message->send_to_all = $request->input('send_to_all');
@@ -88,14 +91,14 @@ class MessageController extends Controller
             if($request->send_to === 'Admin'){
                 $employee = Admin::all();
             }else{
-                $employee = User::where('name','=',$message->send_to)->first();
+                $employee = User::where('full_name','=',$request->input('send_to'))->first();
             }
 
         }
 
         $message->save();
         Notification::send($employee, new MessageNotification(Message::latest('id')->first()));
-        return redirect()->back();
+        return redirect()->back()->with('sent', 'Message sent successfully!');
 
     }
 }

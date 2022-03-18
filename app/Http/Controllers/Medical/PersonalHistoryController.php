@@ -17,6 +17,6 @@ class PersonalHistoryController extends Controller
 
         $illness->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Record save successfully!');
     }
 }

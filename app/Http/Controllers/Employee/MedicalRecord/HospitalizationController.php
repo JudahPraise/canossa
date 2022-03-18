@@ -111,7 +111,7 @@ class HospitalizationController extends Controller
             return redirect()->route('medical.show', $record->user_id )->with('update', 'Record updated!');
         }
 
-        return redirect()->route('record.index')->with('udpate', 'Record updated!');
+        return redirect()->route('record.index')->with('update', 'Record updated!');
     }
 
     /**

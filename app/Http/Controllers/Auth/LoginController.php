@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use App\PasswordRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -79,7 +80,9 @@ class LoginController extends Controller
                 $password_request->update([
                     'status' => 'retrieved'
                 ]);
-
+                $user = User::where('employee_id','=',$request->employee_id)->first();
+                $user->full_name = $user->fullName();
+                $user->update();
                 return redirect()->intended(route('home'));
             }
 
@@ -92,6 +95,9 @@ class LoginController extends Controller
             {
                 //* If requested a password and the status is changed
                 //* If successful, then redirect to their intended location
+                $user = User::where('employee_id','=',$request->employee_id)->first();
+                $user->full_name = $user->fullName();
+                $user->update();
                 return redirect()->intended(route('home'));
             }
 

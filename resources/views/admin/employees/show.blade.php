@@ -108,7 +108,7 @@
                                   <div class="col-md-12 mb-3">
                                       <label for="validationDefault01">Send To</label>
                                       <select id="inputState" class="form-control" name="send_to">
-                                        <option selected value="{{ $employee->name }}">{{ $employee->name }}</option>
+                                        <option selected value="{{ $employee->employee_id }}">{{ $employee->fullName() }}</option>
                                       </select>
                                   </div>
                                 </div>
@@ -293,10 +293,10 @@
                                                 <strong style="font-size: 1rem">PRC</strong>
                                                 <strong style="color: black; font-size: 1rem">{{ $employee->personal->prc }}</strong>
                                             </div>
-                                            <div class="col mb-3 d-flex flex-column">
+                                            {{-- <div class="col mb-3 d-flex flex-column">
                                                 <strong style="font-size: 1rem">GSIS</strong>
                                                 <strong style="color: black; font-size: 1rem">{{ $employee->personal->gsis }}</strong>
-                                            </div>
+                                            </div> --}}
                                             <div class="col mb-3 d-flex flex-column">
                                                 <strong style="font-size: 1rem">SSS</strong>
                                                 <strong style="color: black; font-size: 1rem">{{ $employee->personal->sss }}</strong>

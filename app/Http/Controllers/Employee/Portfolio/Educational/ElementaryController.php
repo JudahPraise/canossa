@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Employee\Portfolio\Educational;
 
+use App\User;
 use App\Elementary;
 use Illuminate\Http\Request;
 use App\EducationalBackground;
@@ -38,6 +39,14 @@ class ElementaryController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::where('id','=',Auth::user()->id)->first();
+        if($request->sy_graduated <= $user->dob)
+        {
+            
+            return redirect()->back()->with('error', 'Year graduated is not accurate');
+
+        }
+
         Elementary::create([
             'educ_id' => Auth::user()->education->id,
             'name_of_school' => $request->name_of_school,
@@ -85,6 +94,14 @@ class ElementaryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = User::where('id','=',Auth::user()->id)->first();
+        if($request->sy_graduated <= $user->dob)
+        {
+            
+            return redirect()->back()->with('error', 'Year graduated is not accurate');
+
+        }
+        
         Elementary::where('id','=',$id)->update([
             'educ_id' => Auth::user()->education->id,
             'name_of_school' => $request->name_of_school,

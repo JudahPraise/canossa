@@ -21,16 +21,22 @@
                 <div class="row d-flex justify-content-between align-items-center px-2">
                     <strong style="font-weight: bold; color: black; font-size: 1.3rem">Elementary</strong>
                     <div class="d-flex align-items-center">
-                        <a href="{{ !empty(auth()->user()->education->elem) ? route('elem.edit', $education->elem->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
-                        </a>
-                        <form action="{{ !empty(auth()->user()->education->elem) ? route('elem.delete', $education->elem->id) : '#' }}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-icon btn-danger" type="button">
-                                <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                            </button>
-                        </form>
+                        @if (!empty(auth()->user()->education->elem))
+                            <a href="{{ !empty(auth()->user()->education->elem) ? route('elem.edit', $education->elem->id ) : '#' }}" class="btn btn-sm btn-icon btn-info mr-2" type="button">
+                                <span class="btn-inner--icon"><i class="fas fa-edit"></i></span>
+                            </a>
+                            <form action="{{ !empty(auth()->user()->education->elem) ? route('elem.delete', $education->elem->id) : '#' }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-icon btn-danger" type="button">
+                                    <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
+                                </button>
+                            </form>
+                        @else
+                            <a href="{{ route('elem.create') }}" class="btn btn-sm btn-icon mr-2 btn-success" type="button">
+                                <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                            </a>
+                        @endif
                     </div>
                 </div>
                 @if (!empty(auth()->user()->education->elem))

@@ -154,7 +154,7 @@
             <form class="w-100" enctype="multipart/form-data"  action="{{ route('send') }}" method="POST">
               @csrf
               <div class="form-row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-12 mb-3">
                     <label for="validationDefault01">Send To</label>
                     <select id="inputState" class="form-control" name="send_to">
                       <option selected value="">Choose...</option>
@@ -162,16 +162,6 @@
                         <option value={{ $user->employee_id }}>{{ $user->fullName() }}</option>
                       @endforeach
                     </select>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="inputState">Send To All</label>
-                  <select id="inputState" class="form-control" name="send_to_all">
-                    <option selected value="">Choose...</option>
-                    <option>All</option>
-                    <option>Teacher</option>
-                    <option>Staff</option>                                    
-                    <option>Maintenance</option>
-                  </select>
                 </div>
               </div>
               <div class="form-row">
@@ -217,7 +207,7 @@
           </div>
           <div class="modal-body">
             <div class="modal-body">
-              <form class="w-100" enctype="multipart/form-data" id="replyForm" action="{{ route('send') }}" method="POST">
+              <form class="w-100" enctype="multipart/form-data" id="replyForm" action="{{ route('reply') }}" method="POST">
                 @csrf
                 <div class="form-row mb-3">
                   <div class="col-md-12 mb-3">
@@ -273,9 +263,7 @@
               $('#replyTo').attr('data-sendto', $(this).data("sender"))
             })
             $('#replyTo').click(function(event){
-              $('#reply').text($(this).data('sendto'))
               $('#sendTo').text($(this).data('sendto'))
-              $('#sendTo').val($(this).data('sendto'))
             });
           });
   
