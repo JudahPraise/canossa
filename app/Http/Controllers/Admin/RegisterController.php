@@ -58,19 +58,19 @@ class RegisterController extends Controller
     {
         $employee = new User();
 
-        $employee->fname = $request->input('fname');       
-        $employee->lname = $request->input('lname');       
-        $employee->mname = $request->input('mname');       
-        $employee->extname = $request->input('extname');       
-        $employee->employee_id = $request->input('employee_id');    
-        $employee->sex = $request->input('sex');    
-        $employee->dob = $request->input('dob');    
-        $employee->role = $request->input('role');    
-        $employee->category = $request->input('category');    
-        $employee->department = $request->input('department');
-        $employee->qr_token = $request->input('qr_token');
-        $employee->password = Hash::make($request->input('password'));
-        if($request->input('sex') == 'M')
+        $employee->fname = $request->fname;       
+        $employee->lname = $request->lname;       
+        $employee->mname = $request->mname;       
+        $employee->extname = $request->extname;       
+        $employee->employee_id = $request->employee_id;    
+        $employee->sex = $request->sex;    
+        $employee->dob = $request->dob;    
+        $employee->role = $request->role;    
+        $employee->category = $request->category;    
+        $employee->department = $request->department;
+        $employee->qr_token = $request->qr_token;
+        $employee->password = Hash::make($request->password);
+        if($request->sex == 'M')
         {
             $employee->image = 'default-male.svg';
         }
@@ -79,7 +79,7 @@ class RegisterController extends Controller
             $employee->image = 'default-female.svg';
 
         }
-        $employee->password = Hash::make($request->input('password'));
+        $employee->password = Hash::make($request->password);
 
         $employee->save();
 

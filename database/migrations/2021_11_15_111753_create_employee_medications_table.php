@@ -19,7 +19,7 @@ class CreateEmployeeMedicationsTable extends Migration
             $table->foreign('record_id')->references('id')->on('medical_records');
             $table->string('name');
             $table->string('condition');
-            $table->integer('strength')->nullable();
+            $table->string('strength')->nullable();
             $table->string('frequency')->nullable();
             $table->timestamps();
         });

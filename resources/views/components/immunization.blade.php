@@ -59,27 +59,29 @@
                 @csrf
                 <div class="form-row mb-3">
                   <div class="form-row mb-3 w-100">
-                      <div class="col-md-3 d-flex flex-column mb-2">
-                          <label for="">Vaccine</label>
-                          <input class="form-control" type="text" id="vaccine" name="vaccine_recieved">
-                      </div>
-                      <div class="col-md-3 d-flex flex-column mb-2">
-                          <label for="">Status</label>
-                          <select class="custom-select" id="status" name="status">
-                              <option disabled>Choose...</option>
-                              <option value="1st Dose">1st Dose</option>
-                              <option value="Fully Vaccinated">Fully Vaccinated</option>
-                          </select> 
-                      </div>
-                      <div class="col-md-3 d-flex flex-column mb-2">
-                          <label for="">Brand</label>
-                          <input type="text" class="form-control" name="brand" id="brand">
-                      </div>
-                      <div class="col-md-3 d-flex flex-column mb-2">
-                          <label>Date</label>
-                          <input type="date" class="form-control" name="date" id="date">
-                      </div>
+                    <div class="col-md-3 d-flex flex-column mb-2">
+                      <label for="">Vaccine</label>
+                      <input type="text" class="form-control" id="vaccine" name="vaccine_recieved">
                   </div>
+                  <div class="col-md-3 d-flex flex-column mb-2">
+                      <label for="">Status</label>
+                      <select class="custom-select" id="status" name="status">
+                          <option disabled selected>Choose...</option>
+                          <option value="1st Dose">1st Dose</option>
+                          <option value="Fully Vaccinated">Fully Vaccinated</option>
+                          <option value="1st Dose Booster Shot">1st Dose Booster Shot</option>
+                          <option value="2nd Dose Booster Shot">2nd Dose Booster Shot</option>
+                      </select> 
+                  </div>
+                  <div class="col-md-3 d-flex flex-column mb-2">
+                      <label for="">Brand</label>
+                      <input type="text" class="form-control" name="brand" id="brand">
+                  </div>
+                  <div class="col-md-3 d-flex flex-column mb-2">
+                      <label>Date</label>
+                      <input type="date" class="form-control" name="date" id="date">
+                  </div>
+                </div>
               </div>
             </form>
           </div>

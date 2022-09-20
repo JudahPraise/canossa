@@ -17,7 +17,7 @@ class CreateMedicationsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('condition');
-            $table->integer('strength')->nullable();
+            $table->string('strength')->nullable();
             $table->string('frequency')->nullable();
             $table->timestamps();
         });

@@ -44,11 +44,11 @@
                                 <input type='file' name="image" id="imageUpload" accept=".png, .jpg, .jpeg" onchange="document.getElementById('uploadForm').submit()" hidden/>
                             </form>
                             <a href="#" onclick="document.getElementById('imageUpload').click()">
-                              <img src="{{ asset( 'storage/images/'.$employee->image) }}" class="rounded-circle" style="height: 150px; width: 200px; overflow: hidden;">
+                              <img src="{{ asset('img/'.$employee->image) }}" class="rounded-circle" style="height: 150px; width: 200px; overflow: hidden;">
                             </a>
                             @if(empty(auth()->user()->image))
                                 <a href="#" onclick="document.getElementById('imageUpload').click()">
-                                    <img src="{{ asset(auth()->user()->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 144px; width: 200px; overflow: hidden;">
+                                    <img src="{{ asset('img/'.$employee->image) }}" class="rounded-circle" style="height: 144px; width: 200px; overflow: hidden;">
                                 </a>
                             @endif
                         </div>

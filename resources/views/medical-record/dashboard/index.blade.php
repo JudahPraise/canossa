@@ -77,9 +77,9 @@
                                 <div class="row">
                                     <div class="col-3 d-flex justify-content-center">
                                         @if (!empty($data->user->image))
-                                        <img  class="card__thumb" src="{{ asset( 'storage/images/'.$data->user->image) }}" >
+                                        <img  class="card__thumb" src="{{ asset('img/'.$data->user->image) }}" >
                                         @else
-                                            <img  class="card__thumb" src="{{ $data->user->sex === 'F' ? asset('img/default-female.svg') : asset('img/default-male.svg') }}">
+                                            <img  class="card__thumb" src="{{ asset('img/'.$data->user->image) }}">
                                         @endif
                                     </div>
                                     <div class="col-8 d-flex flex-column justify-content-center">

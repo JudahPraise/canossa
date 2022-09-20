@@ -34,7 +34,6 @@ class CreateUsersTable extends Migration
             $table->string('full_name')->nullable();
             $table->rememberToken();    
             $table->timestamps();
-
         });
     }
 

@@ -57,14 +57,12 @@
         </div>
         <div class="form-row">
           <div class="col-md-4 mb-2">
-              <label for="">Height</label>
-              <input type="number" step="0.01" class="form-control" id="height" name="height" value="{{ $personal->height }}">
-              <small class="font-italic text-muted"><span class="text-danger mr-1">*</span>in ft</small>
+            <label for="">Height</label>
+            <input type="text" class="form-control" id="height" name="height" value="{{ old('height') }}" placeholder="1.65 m, 165 cm, 5'5 ft">
           </div>
           <div class="col-md-4 mb-2">
               <label>Weight</label>
-              <input type="number" step="0.01" class="form-control" id="weight" name="weight" value="{{ $personal->weight }}">
-              <small class="font-italic text-muted"><span class="text-danger mr-1">*</span>in kl</small>
+              <input type="text" class="form-control" id="weight" name="weight" value="{{ old('weight') }}" placeholder="40 kg">
           </div>
           <div class="col-md-4 mb-2">
               <label for="">Blood Type</label>

@@ -15,11 +15,7 @@
                 <div class="row mb-3">
                     <div class="col-md-3 d-flex flex-column mb-2">
                         <label for="">Vaccine</label>
-                        <select class="custom-select" id="validationDefault04" name="vaccine_recieved">
-                            <option disabled selected>Choose...</option>
-                            <option value="Flu">Flu</option>
-                            <option value="Covid - 19">Covid - 19</option>
-                        </select> 
+                        <input type="text" class="form-control" name="vaccine_recieved">
                     </div>
                     <div class="col-md-3 d-flex flex-column mb-2">
                         <label for="">Status</label>
@@ -27,10 +23,12 @@
                             <option disabled selected>Choose...</option>
                             <option value="1st Dose">1st Dose</option>
                             <option value="Fully Vaccinated">Fully Vaccinated</option>
+                            <option value="1st Dose Booster Shot">1st Dose Booster Shot</option>
+                            <option value="2nd Dose Booster Shot">2nd Dose Booster Shot</option>
                         </select> 
                     </div>
                     <div class="col-md-3 d-flex flex-column mb-2">
-                         <label for="">Brand</label>
+                        <label for="">Brand</label>
                         <input type="text" class="form-control"  name="brand">
                     </div>
                     <div class="col-md-3 d-flex flex-column mb-2">

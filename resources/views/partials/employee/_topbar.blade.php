@@ -280,11 +280,11 @@
       <li class="c-header-nav-item has-dropdown">
         @if (!empty(auth()->user()->image))
           <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <div class="c-avatar"><img class="c-avatar-img" src="{{ asset( 'storage/images/'.Auth::user()->image) }}" style=" height: 40px; overflow: hidden;"></div>
+            <div class="c-avatar"><img class="c-avatar-img" src="{{ asset('img/'.Auth::user()->image) }}" style=" height: 40px; overflow: hidden;"></div>
           </a>
         @else
           <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <div class="c-avatar"><img class="c-avatar-img" src="{{ asset(auth()->user()->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" style=" height: 40px; overflow: hidden;"></div>
+            <div class="c-avatar"><img class="c-avatar-img" src="{{ asset('img/'.Auth::user()->image) }}" style=" height: 40px; overflow: hidden;"></div>
           </a>
         @endif
         <div class="dropdown-menu dropdown-menu-right pt-0">

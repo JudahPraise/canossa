@@ -121,12 +121,12 @@
                 <input type="text" name="lname" class="form-control" id="validationDefault01" required>
               </div>
               <div class="col-md-4 mb-3">
-                <label for="validationDefault01">First name</label>
-                <input type="text" name="fname" class="form-control" id="validationDefault01" required>
+                <label for="validationDefault02">First name</label>
+                <input type="text" name="fname" class="form-control" id="validationDefault02" required>
               </div>
               <div class="col-md-2 mb-3">
-                <label for="validationDefault01">M.I.</label>
-                <input type="text" name="mname" class="form-control" id="validationDefault01">
+                <label for="validationDefault03">M.I.</label>
+                <input type="text" name="mname" class="form-control" id="validationDefault03">
               </div>
               <div class="col-md-2 mb-3">
                 <label for="validationDefault04">Suffix</label>

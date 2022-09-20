@@ -39,15 +39,19 @@
           </datalist>
         </div>
         <div class="col-md-2 mb-3 mr-2">
-          <label for="strength">Stregnth</label>
-          <input type="number" class="form-control med" id="strength" name="strength[]">
+          <label for="strength">Strength</label>
+          <input type="text" class="form-control med" id="strength" name="strength[]" placeholder="5 mg">
         </div>
         <div class="col-md-3 mb-3 mr-2">
           <label for="frequency">Frequency</label>
           <select class="form-control" id="frequency" name="frequency[]">
             <option disabled selected>Choose ...</option>
-            <option>Once a day</option>
-            <option>Twice a day</option>
+            <option value="Every 6 hours">Every 6 hours</option>
+            <option value="Every 8 hours">Every 8 hours</option>
+            <option value="Every 12 hours">Every 12 hours</option>
+            <option value="Once a day">Once a day</option>
+            <option value="Twice a day">Twice a day</option>
+            <option value="Thrice a day">Thrice a day</option>
           </select>
         </div>
         <button class="btn btn-primary btn-sm btn-fab btn-icon btn-round add" type="button">
@@ -87,7 +91,7 @@
 <script>
   $(document).ready(function () {
     $(this).on("click", ".add", function(){
-        var html = '<div class="form-row d-flex align-items-center"><div class="col-md-3 mb-3 mr-2"><label for="name">Name</label><input type="text" class="form-control med" name="name[]" id="name"></div><div class="col-md-3 mb-3 mr-2"><label for="condition">Condition</label><input class="form-control" type="text" list="conditions" name="condition[]" id="condition"/><datalist id="conditions"><option value="Hypertension">Hypertension</option><option value="Diabetes">Diabetes</option><option value="Asthma">Asthma</option><option value="Allergy (Food, Medicine)">Allergy (Food, Medicine)</option><option value="Hepatitis">Hepatitis</option><option value="Urinary Tract Infection">Urinary Tract Infection</option><option value="Typhoid">Typhoid</option><option value="Anemia">Anemia</option><option value="Food Supplement">Food Supplement</option></datalist></div><div class="col-md-2 mb-3 mr-2"><label for="strength">Stregnth</label><input type="number" class="form-control med" id="strength" name="strength[]"></div><div class="col-md-3 mb-3 mr-2"><label for="frequency">Frequency</label><select class="form-control" id="frequency" name="frequency[]"><option disabled selected>Choose ...</option><option>Once a day</option><option>Twice a day</option></select></div><button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove" type="button"><i class="fas fa-minus"></i></button></div>'
+        var html = '<div class="form-row d-flex align-items-center"><div class="col-md-3 mb-3 mr-2"><label for="name">Name</label><input type="text" class="form-control med" name="name[]" id="name"></div><div class="col-md-3 mb-3 mr-2"><label for="condition">Condition</label><input class="form-control" type="text" list="conditions" name="condition[]" id="condition"/><datalist id="conditions"><option value="Hypertension">Hypertension</option><option value="Diabetes">Diabetes</option><option value="Asthma">Asthma</option><option value="Allergy (Food, Medicine)">Allergy (Food, Medicine)</option><option value="Hepatitis">Hepatitis</option><option value="Urinary Tract Infection">Urinary Tract Infection</option><option value="Typhoid">Typhoid</option><option value="Anemia">Anemia</option><option value="Food Supplement">Food Supplement</option></datalist></div><div class="col-md-2 mb-3 mr-2"><label for="strength">Strength</label><input type="text" class="form-control med" id="strength" name="strength[]" placeholder="5 mg"></div><div class="col-md-3 mb-3 mr-2"><label for="frequency">Frequency</label><select class="form-control" id="frequency" name="frequency[]"><option disabled selected>Choose ...</option><option value="Every 6 hours">Every 6 hours</option><option value="Every 8 hours">Every 8 hours</option><option value="Every 12 hours">Every 12 hours</option><option value="Once a day">Once a day</option><option value="Twice a day">Twice a day</option><option value="Thrice a day">Thrice a day</option></select></div><button class="btn btn-danger btn-sm btn-fab btn-icon btn-round remove" type="button"><i class="fas fa-minus"></i></button></div>'
         // console.log('get');
         $('.inputs_div').append(html);
         // console.log('hello');

@@ -152,11 +152,11 @@
                      <div class="media align-items-center mr-2">
                       @if(!empty($employee->image))
                         <a href="#">
-                          <img src="{{ asset( 'storage/images/'.$employee->image) }}" class="avatar rounded-circle" style="height: 50px; overflow: hidden;">
+                          <img src="{{ asset('img/'.$employee->image) }}" class="avatar rounded-circle" style="height: 50px; overflow: hidden;">
                         </a>
                       @else
                         <a href="#">
-                          <img src="{{ asset($employee->sex === 'M' ? 'img/default-male.svg' : 'img/default-female.svg') }}" class="rounded-circle" style="height: 50px; overflow: hidden;">
+                          <img src="{{ asset('img/'.$employee->image) }}" class="rounded-circle" style="height: 50px; overflow: hidden;">
                         </a>
                       @endif
                     </div>

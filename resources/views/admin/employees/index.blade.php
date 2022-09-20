@@ -37,7 +37,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-3 d-flex justify-content-center">
-                                        <img src="{{ asset( 'storage/images/'.$employee->image) }}" width="100">
+                                        <img src="{{ asset('img/'.$employee->image) }}" width="100">
                                     </div>
                                     <div class="col-8 d-flex flex-column justify-content-center">
                                         <p class="p-0" style="font-size: 1vw; font-weight: bold">{{ $employee->fullName() }}</p>
