@@ -30,11 +30,11 @@
                 <div class="row row-cols-2 row-cols-md-4 mt-3">
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">Height</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->height.' '."ft" }}</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ $personal->height }}</strong>
                     </div>
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">Weight</strong>
-                        <strong style="color: black; font-size: 1.3rem">{{ $personal->weight.' '."kl" }}</strong>
+                        <strong style="color: black; font-size: 1.3rem">{{ $personal->weight }}</strong>
                     </div>
                     <div class="col mb-3 d-flex flex-column">
                         <strong style="font-size: 1rem">Blood Type</strong>
