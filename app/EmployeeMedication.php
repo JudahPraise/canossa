@@ -18,6 +18,6 @@ class EmployeeMedication extends Model
     }
 
     public function mg(){
-        return $this->strength.' '.'mg';
+        return $this->strength;
     }
 }
